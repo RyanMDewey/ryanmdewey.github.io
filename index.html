@@ -1,173 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ryan Dewey – Systems Architect</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ryan Dewey – Architect of Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0a0a0a;
-      --text: #f5f5f5;
-      --accent: #00ffe1;
-      --muted: #888;
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
     }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Courier New', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+    html, body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0a0a0f;
+      color: #eaeaea;
+      height: 100vh;
+      overflow-x: hidden;
     }
-
+    canvas#particles-js {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
     header {
       text-align: center;
-      padding: 4rem 2rem 2rem;
+      padding: 5rem 1rem 2rem;
     }
-
-    h1 {
+    header h1 {
       font-size: 3rem;
-      margin: 0;
-      color: var(--accent);
-      letter-spacing: 1px;
+      color: #00ffe1;
     }
-
-    p.tagline {
-      color: var(--muted);
-      font-size: 1.2rem;
+    header p {
+      color: #999;
+      font-size: 1.1rem;
       margin-top: 0.5rem;
     }
-
     section {
-      max-width: 800px;
-      width: 100%;
-      padding: 2rem;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 2rem;
     }
-
     .section-title {
-      font-size: 1.5rem;
-      border-bottom: 1px solid var(--accent);
+      font-size: 1.8rem;
       margin-bottom: 1rem;
+      color: #00ffe1;
+      border-bottom: 1px solid #222;
     }
-
-    .project {
+    .entry {
       margin-bottom: 1.5rem;
     }
-
-    .project-title {
+    .entry-title {
       font-weight: bold;
-      color: var(--accent);
+      font-size: 1.1rem;
     }
-
-    .project-desc {
-      color: var(--muted);
+    .entry-sub {
+      font-size: 0.9rem;
+      color: #aaa;
     }
-
-    .skills {
+    .entry-desc {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+    .skills-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 1rem;
     }
-
     .skill {
-      background: #111;
-      border: 1px solid var(--accent);
+      border: 1px solid #00ffe1;
       padding: 0.4rem 0.8rem;
-      border-radius: 4px;
+      border-radius: 5px;
       font-size: 0.9rem;
+      background: #111;
     }
-
     footer {
-      margin-top: auto;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: var(--muted);
       text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      margin: 4rem 0;
     }
-
     a {
-      color: var(--accent);
+      color: #00ffe1;
       text-decoration: none;
     }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
   </style>
 </head>
 <body>
+  <div id="particles-js"></div>
+
   <header>
     <h1>Ryan Dewey</h1>
-    <p class="tagline">Systems Architect · AI Developer · Creator of Nexus</p>
+    <p>Architect of Intelligence · AI Developer · Cybersecurity Futurist</p>
   </header>
 
   <section>
     <div class="section-title">🧠 About Me</div>
     <p>
-      I'm a full-stack systems architect focused on building intelligent, ethical, and high-performance software. From compiler design to AI-driven trading bots, I build things that push boundaries — blending raw performance, futuristic design, and clean architecture.
+      Forward-thinking systems architect with deep expertise in cybersecurity, AI/ML/RL, compiler design, and blockchain. I build ethical, high-performance systems across all layers — from bare-metal NEON kernels to sentient IDEs. I believe in shaping tech that enhances humanity, not exploits it.
     </p>
   </section>
 
   <section>
-    <div class="section-title">🚀 Projects</div>
-
-    <div class="project">
-      <div class="project-title">Oracle – Autonomous Trading AI</div>
-      <div class="project-desc">
-        Self-evolving trading system with reinforcement learning and live market strategy adjustment.
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-title">Nexus IDE – Sentient-Centric Dev Environment</div>
-      <div class="project-desc">
-        A fully self-hosted AI-powered IDE for simulation, agent design, and live compiler experimentation.
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-title">Sentient Compiler – ORC Language Runtime</div>
-      <div class="project-desc">
-        Custom compiler for high-efficiency AI logic with NEON-accelerated backends and introspective optimization.
-      </div>
+    <div class="section-title">🛠 Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill">C++</div><div class="skill">Python</div><div class="skill">Java</div>
+      <div class="skill">Rust</div><div class="skill">SC</div><div class="skill">ASM</div>
+      <div class="skill">TensorFlow</div><div class="skill">PyTorch</div>
+      <div class="skill">Solidity</div><div class="skill">Smart Contracts</div>
+      <div class="skill">AI/ML/RL</div><div class="skill">Quantum Computing</div>
+      <div class="skill">Kubernetes</div><div class="skill">Docker</div>
+      <div class="skill">AWS / Azure / GCP</div><div class="skill">GitHub Actions</div>
+      <div class="skill">Burp Suite</div><div class="skill">Wireshark</div><div class="skill">SIEM</div>
     </div>
   </section>
 
   <section>
-    <div class="section-title">🛠 Skills</div>
-    <div class="skills">
-      <div class="skill">Rust</div>
-      <div class="skill">Python</div>
-      <div class="skill">Next.js</div>
-      <div class="skill">FastAPI</div>
-      <div class="skill">LLVM</div>
-      <div class="skill">ARM NEON</div>
-      <div class="skill">TensorFlow</div>
-      <div class="skill">Docker</div>
-      <div class="skill">LaTeX</div>
-      <div class="skill">PostgreSQL</div>
-      <div class="skill">Linux</div>
-      <div class="skill">Git</div>
+    <div class="section-title">💼 Experience</div>
+
+    <div class="entry">
+      <div class="entry-title">Cyber Security Analyst – Angelo State University</div>
+      <div class="entry-sub">June 2024 – Oct 2024 · San Angelo, TX</div>
+      <div class="entry-desc">Monitored and analyzed security events, conducted vulnerability assessments, and investigated threats using SIEM tools and malware analysis methods.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Assistant General Manager – Steak Express</div>
+      <div class="entry-sub">Jan 2019 – Present · San Angelo, TX</div>
+      <div class="entry-desc">Led operations, managed staff, optimized inventory, and implemented strategic plans to enhance business performance.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Desktop Technician – Angelo State University</div>
+      <div class="entry-sub">Sept 2020 – Jan 2021 · San Angelo, TX</div>
+      <div class="entry-desc">Installed and supported hardware/software, resolved network issues, and deployed system images to workstations.</div>
     </div>
   </section>
 
   <section>
-    <div class="section-title">📬 Contact</div>
+    <div class="section-title">🎓 Education</div>
+    <div class="entry">
+      <div class="entry-title">B.S. Cybersecurity & B.S. Computer Science</div>
+      <div class="entry-sub">Angelo State University · Graduated Dec 2024</div>
+    </div>
+    <div class="entry">
+      <div class="entry-title">Associate of Science in Computer Science</div>
+      <div class="entry-sub">Howard College · Graduated Jan 2021</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">📄 Resume & Links</div>
     <p>
-      <a href="https://github.com/RyanMDewey" target="_blank">GitHub</a> •
-      <a href="https://www.linkedin.com/in/ryan-dewey-b486a11ab" target="_blank">LinkedIn</a> •
+      <a href="Ryan_Dewey_Resume(2).PDF" download>📥 Download My Resume (PDF)</a><br/><br/>
+      <a href="https://github.com/RyanMDewey" target="_blank">GitHub</a> |
+      <a href="https://www.linkedin.com/in/ryan-dewey-b486a11ab" target="_blank">LinkedIn</a> |
       <a href="mailto:ryanmichaeldewey@gmail.com">Email Me</a>
     </p>
   </section>
 
   <footer>
-    © 2025 Ryan Dewey • Built with purpose, not templates.
+    Built by Ryan Dewey · © 2025
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 1000 } },
+        color: { value: "#00ffe1" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 120,
+          color: "#00ffe1",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1.2,
+          direction: "none",
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.5 } },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>
