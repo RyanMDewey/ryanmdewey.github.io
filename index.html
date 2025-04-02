@@ -541,9 +541,9 @@ $1padding-top: 10rem;
     text-shadow: 0 0 6px rgba(0,255,255,0.3);
   }
   @media (max-width: 768px) {
-  header, section, footer {
-    padding: 3rem 1.2rem;
-    margin: 2rem auto;
+  #navbar {
+    top: 2rem !important;
+    transform: translateY(-50%) scale(0.7);
   }
 
   #navbar {
@@ -551,7 +551,8 @@ $1padding-top: 10rem;
   }
 
   .skills-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: columns;
     gap: 1rem;
   }
 
@@ -560,13 +561,12 @@ $1padding-top: 10rem;
   }
 
   h1 {
-    font-size: 2.2rem;
+    font-size: 2.2rem !important;
   }
 
   .tagline {
-    font-size: 1rem;
+    font-size: 0.9rem !important;
     text-align: center;
-    line-height: 1.4;
   }
 
   #nexus-terminal {
@@ -595,7 +595,6 @@ $1padding-top: 10rem;
 
   <div id="nexus-terminal">
   <div id="terminal-clock-static" style="position: absolute; top: 1rem; right: 1rem; font-size: 0.85rem; font-weight: bold; text-align: right; background: rgba(0,0,0,0.2); padding: 0.4rem 0.8rem; border-radius: 6px; text-shadow: 0 0 6px currentColor; color: #00ffe1; animation: terminalGlow 4s ease-in-out infinite alternate;"></div>
-    <div id="terminal-clock" style="position: absolute; top: 1rem; right: 1rem; color: #00ffe1; font-size: 0.85rem; font-weight: bold; text-align: right; text-shadow: 0 0 4px #ffaa00;"></div>
     <div id="terminal-output"></div>
     <input type="text" id="terminal-input" placeholder="Type your query to Nexus...">
   </div>
