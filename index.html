@@ -5,132 +5,464 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ryan Dewey – Architect of Intelligence</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js">document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+    }
+  });
+});
+document.getElementById("nexus-day").textContent = `📌 ${new Date().toLocaleDateString(undefined, { weekday: 'long' })}`;
+document.getElementById("nexus-date").textContent = `📅 ${new Date().toLocaleDateString()}`;
+setInterval(() => {
+  document.getElementById("nexus-time").textContent = `🕒 ${new Date().toLocaleTimeString()}`;
+}, 1000);
+setInterval(() => {
+  const now = new Date();
+  const clock = document.getElementById("terminal-clock");
+  if (clock) {
+    clock.innerHTML = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
+  }
+}, 1000);
+</script>
+<script>
+  window.addEventListener('load', function () {
+    if (typeof particlesJS !== 'undefined') {
+      
+    } else {
+      console.error("particlesJS is not defined. Failed to load particles effect.");
+    }
+  });
+</script>
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box;
     }
     html, body {
-      font-family: 'JetBrains Mono', monospace;
-      background: #0a0a0f;
-      color: #eaeaea;
-      height: 100vh;
+      font-family: 'JetBrains Mono', monospace !important;
+      background: linear-gradient(135deg, #0a0a0f, #12123d, #1f003d, #34005f);
+      color: #f4f4f8;
+      min-height: 100vh;
+      scroll-behavior: smooth;
       overflow-x: hidden;
+      position: relative;
     }
-    canvas#particles-js {
+    #particles-js {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+    #stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 20% 30%, rgba(0,255,255,0.05), transparent),
+                  radial-gradient(circle at 70% 70%, rgba(255,0,255,0.04), transparent);
       z-index: -1;
+      animation: parallax 60s linear infinite;
+    }
+    @keyframes parallax {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
+    }
+    header, section, footer {
+  max-width: 960px;
+  margin: 4rem auto;
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+  transform-style: preserve-3d;
+  animation: glowPulse 6s infinite alternate;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 225, 0.2);
+  box-shadow: 0 0 16px rgba(0, 255, 225, 0.15);
+}
+    header.visible, section.visible, footer.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     header {
       text-align: center;
-      padding: 5rem 1rem 2rem;
+      padding-top: 6rem;
     }
-    header h1 {
-      font-size: 3rem;
+    h1 {
+      font-size: 3.2rem;
       color: #00ffe1;
+      text-shadow: 0 0 10px #00ffe1, 0 0 30px #ff00cc, 0 0 40px #00ffe1;
     }
-    header p {
-      color: #999;
+    .tagline {
       font-size: 1.1rem;
+      color: #ffd6ff;
       margin-top: 0.5rem;
     }
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-    }
     .section-title {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      color: #00ffe1;
-      border-bottom: 1px solid #222;
-    }
-    .entry {
-      margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #00ffe1;
+  text-shadow: 0 0 10px #00ffe1;
+  border-bottom: 2px solid #ff00cc;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 1.5px;
+}
+    .entry, p {
+      font-size: 1rem;
+      line-height: 1.6;
     }
     .entry-title {
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #00ffe1;
+  text-shadow: 0 0 6px #ffaa00;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 0.5px;
+}
     .entry-sub {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
+  font-size: 0.9rem;
+  color: #33ff99;
+  font-style: italic;
+  font-family: 'JetBrains Mono', monospace !important;
+  text-shadow: 0 0 4px #33ff99;
+}
     .entry-desc {
-      font-size: 0.95rem;
-      color: #ccc;
-      margin-top: 0.3rem;
-    }
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .skill {
-      border: 1px solid #00ffe1;
-      padding: 0.4rem 0.8rem;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      background: #111;
-    }
+  font-size: 0.95rem;
+  color: #fdf7ff;
+  line-height: 1.6;
+  font-family: 'JetBrains Mono', monospace !important;
+  text-shadow: 0 0 3px #fdf7ff;
+  margin-bottom: 1.5rem;
+}
     footer {
       text-align: center;
-      font-size: 0.8rem;
-      color: #555;
-      margin: 4rem 0;
+      font-size: 0.85rem;
+      color: #ffe9a7;
     }
-    a {
-      color: #00ffe1;
-      text-decoration: none;
+    #nexus-terminal {
+  background: rgba(0, 0, 0, 0.06);
+  border-top: 2px solid #ffaa00;
+  box-shadow: 0 -4px 30px rgba(255, 0, 204, 0.4), inset 0 0 20px rgba(0, 255, 225, 0.2), 0 0 8px 2px rgba(255, 255, 255, 0.1);
+  animation: terminalGlow 3s ease-in-out infinite alternate, floatPulse 8s ease-in-out infinite alternate;
+  backdrop-filter: blur(6px);
+  border-radius: 10px 10px 0 0;
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(0deg) rotateY(0deg);
+  transition: all 0.5s ease-in-out;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+    #nexus-terminal.active {
+  display: none;
+}
+    #terminal-output {
+  color: #ffeeff;
+  font-weight: 500;
+  text-shadow: 0 0 8px #33ff99, 0 0 3px #ffaa00;
+  padding-bottom: 0.5rem;
+  line-height: 1.4;
+  animation: glowPulse 6s ease-in-out infinite alternate;
+  font-size: 0.95rem;
+  overflow-y: auto;
+  max-height: 300px;
+}
+    #terminal-input {
+  background: rgba(0, 255, 225, 0.05);
+  border: 1px solid rgba(255, 0, 204, 0.3);
+  color: #ff00cc;
+  box-shadow: 0 0 6px rgba(0, 255, 225, 0.25);
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-top: 0.6rem;
+  width: 100%;
+}
+    .scroll-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.7s ease-out, opacity 0.7s ease-out;
+      will-change: transform, opacity;
     }
-  </style>
+  @keyframes glowPulse {
+    0%   { box-shadow: 0 0 10px #00ffe1; border-color: #00ffe1; }
+    25%  { box-shadow: 0 0 14px #ff00cc; border-color: #ff00cc; }
+    50%  { box-shadow: 0 0 14px #ffaa00; border-color: #00ffe1; }
+    75%  { box-shadow: 0 0 14px #33ff99; border-color: #33ff99; }
+    100% { box-shadow: 0 0 14px #ff3366; border-color: #ff3366; }
+  }
+  section, header, footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+  transform-style: preserve-3d;
+  animation: glowPulse 6s infinite alternate;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 225, 0.2);
+  box-shadow: 0 0 12px rgba(0, 255, 225, 0.1);
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .section-title {
+    font-size: 1.3rem;
+  }
+  .entry, p {
+    font-size: 0.95rem;
+  }
+  .skill-box strong {
+  display: block;
+  font-size: 1.2rem;
+  color: #00ffe1;
+  margin-bottom: 0.6rem;
+  text-shadow: 0 0 8px #ffaa00, 0 0 4px #00ffe1;
+  font-family: 'JetBrains Mono', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+}
+#navbar {
+  position: fixed;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  animation: rotateSign 15s linear infinite;
+}
+#navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 2rem;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  background: linear-gradient(135deg, rgba(0, 255, 225, 0.03), rgba(255, 0, 204, 0.02));
+  border-radius: 16px;
+  box-shadow:
+    inset 0 0 30px rgba(0, 255, 225, 0.1),
+    0 0 30px rgba(255, 0, 204, 0.1),
+    0 0 60px rgba(0, 255, 225, 0.08);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 255, 225, 0.15);
+  animation: openPulse 2.5s ease-in-out infinite alternate;
+  text-align: center;
+  transition: transform 1.2s ease-in-out, box-shadow 1.2s ease-in-out;
+  perspective: 1000px;
+}
+#navbar ul li a {
+  color: #ff00cc;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.15rem;
+  padding: 0.6rem 1rem;
+  display: block;
+  text-align: center;
+  text-shadow: 0 0 10px #ff00cc, 0 0 6px #00ffe1;
+  transform: translateZ(60px);
+  transition: transform 0.4s ease, color 0.4s ease;
+  backface-visibility: hidden;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 2.5px;
+  animation: flicker 1.5s infinite alternate;
+}
+#navbar ul li a:hover {
+  color: #00ffe1;
+  transform: translateZ(60px) scale(1.2);
+  text-shadow: 0 0 12px #ffaa00, 0 0 20px #00ffe1;
+}
+header {
+$1padding-top: 10rem;
+}
+@keyframes spinY {
+  0% { transform: translateY(-50%) rotateY(0deg); }
+  100% { transform: translateY(-50%) rotateY(360deg); }
+}
+@keyframes rotateSign {
+  from { transform: translateY(-50%) rotateY(0deg); }
+  to { transform: translateY(-50%) rotateY(360deg); }
+}
+@keyframes openPulse {
+  from { box-shadow: 0 0 10px #ff00cc, 0 0 30px #00ffe1; }
+  to   { box-shadow: 0 0 20px #ffaa00, 0 0 60px #ff3366; }
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
+  }
+}
+  .skill-tag {
+  padding: 0.4rem 0.8rem;
+  background: rgba(0, 255, 225, 0.05);
+  border: 1px solid rgba(0, 255, 225, 0.5);
+  border-radius: 8px;
+  color: #00ffe1;
+  font-weight: bold;
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px rgba(0, 255, 225, 0.4);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 6px rgba(255,0,204,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 1px;
+}
+  .skill-tag:hover {
+    transform: scale(1.1);
+    background: rgba(255, 0, 204, 0.05);
+    box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
+  }
+.
+
+#nexus-terminal {
+  background: radial-gradient(circle at top left, #1f003d, #0a0a0f);
+  border-top: 2px solid #ffaa00;
+  box-shadow:
+    0 -4px 10px rgba(255, 0, 204, 0.4),
+    inset 0 0 10px rgba(0, 255, 225, 0.2);
+  animation: terminalGlow 2s ease-in-out infinite alternate;
+  backdrop-filter: blur(5px);
+  border-radius: 8px 8px 0 0;
+}
+
+#terminal-output {
+  color: #ffeeff;
+  font-weight: 500;
+  text-shadow: 0 0 4px #00ffe1;
+  padding-bottom: 0.5rem;
+}
+
+#terminal-input {
+  background: rgba(0, 255, 225, 0.05);
+  border: 1px solid rgba(255, 0, 204, 0.2);
+  color: #ff00cc;
+  box-shadow: 0 0 6px rgba(0, 255, 225, 0.2);
+}
+
+@keyframes terminalRGB {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  to { box-shadow: 0 -4px 20px #ff00ccaa, inset 0 0 20px #ffaa0044; }
+}
+@keyframes terminal3DFloat {
+  0% { transform: rotateX(1deg) rotateY(-2deg) scale(1); }
+  50% { transform: rotateX(-1deg) rotateY(2deg) scale(1.01); }
+  100% { transform: rotateX(1deg) rotateY(-2deg) scale(1); }
+}
+@keyframes floatPulse {
+  0% { transform: perspective(1200px) rotateX(1deg) rotateY(-2deg) scale(1); }
+  50% { transform: perspective(1200px) rotateX(-1deg) rotateY(2deg) scale(1.01); }
+  100% { transform: perspective(1200px) rotateX(1deg) rotateY(-2deg) scale(1); }
+}
+.light-mode {
+  background: linear-gradient(135deg, #ffffff, #f0f0ff);
+  color: #000;
+}
+.light-mode .section-title,
+.light-mode h1,
+.light-mode .entry-title,
+.light-mode .entry-sub,
+.light-mode .entry-desc,
+.light-mode .skill-box,
+.light-mode .skill-tag,
+.light-mode footer,
+.light-mode #terminal-output,
+.light-mode #terminal-input {
+  color: #000 !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  border-color: rgba(0,0,0,0.1) !important;
+  background: rgba(255,255,255,0.6) !important;
+}
+.theme-1 {
+  background: linear-gradient(135deg, #0a0a0f, #12123d);
+  color: #f4f4f8;
+}
+.theme-2 {
+  background: linear-gradient(135deg, #001f3f, #003366);
+  color: #cceeff;
+}
+.theme-3 {
+  background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
+  color: #eeeeee;
+}
+</style>
+<audio id="nexus-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f47c4f7d1.mp3?filename=click-124467.mp3" preload="auto"></audio>
 </head>
 <body>
+  <nav id="navbar">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div id="stars"></div>
   <div id="particles-js"></div>
 
   <header>
-    <h1>Ryan Dewey</h1>
-    <p>Architect of Intelligence · AI Developer · Cybersecurity Futurist</p>
+    <h1 style="font-size: 3.6rem; text-transform: uppercase; letter-spacing: 4px; font-weight: bold;">🚀 Ryan Dewey</h1>
+    <p class="tagline" style="font-size: 1.2rem; font-style: italic; color: #00ffe1; text-shadow: 0 0 10px #00ffe1, 0 0 20px #ff00cc; margin-top: 0.75rem;">Architect of Intelligence · Cybersecurity Futurist · AI Visionary</p>
   </header>
+<button id="theme-toggle" style="position: fixed; top: 1rem; right: 1rem; background: rgba(0,0,0,0.3); color: #00ffe1; border: none; font-family: 'JetBrains Mono', monospace !important; padding: 0.25rem 0.5rem; border-radius: 6px; z-index: 9999; cursor: pointer; font-size: 0.7rem; text-shadow: 0 0 4px #00ffe1; box-shadow: 0 0 8px rgba(0,255,225,0.2);">
+  🌗 Toggle Theme
+</button>
+  <div id="nexus-date"></div>
+  <div id="nexus-time"></div>
+</div>
 
-  <section>
-    <div class="section-title">🧠 About Me</div>
-    <p>
-      Forward-thinking systems architect with deep expertise in cybersecurity, AI/ML/RL, compiler design, and blockchain. I build ethical, high-performance systems across all layers — from bare-metal NEON kernels to sentient IDEs. I believe in shaping tech that enhances humanity, not exploits it.
-    </p>
-  </section>
+  <section id="skills-banner">
+  <div class="section-title" style="color:#00ffe1; text-shadow: 0 0 10px #00ffe1;">🌟 Core Skills</div>
+  <div style="text-align: center; font-size: 1rem; color: #00ffe1; text-shadow: 0 0 12px #00ffe1;">
+    Rust • C++ • Python • Quantum • Docker • AI/ML • Blockchain • Cybersec
+  </div>
+</section>
 
-  <section>
-    <div class="section-title">🛠 Technical Skills</div>
-    <div class="skills-grid">
-      <div class="skill">C++</div><div class="skill">Python</div><div class="skill">Java</div>
-      <div class="skill">Rust</div><div class="skill">SC</div><div class="skill">ASM</div>
-      <div class="skill">TensorFlow</div><div class="skill">PyTorch</div>
-      <div class="skill">Solidity</div><div class="skill">Smart Contracts</div>
-      <div class="skill">AI/ML/RL</div><div class="skill">Quantum Computing</div>
-      <div class="skill">Kubernetes</div><div class="skill">Docker</div>
-      <div class="skill">AWS / Azure / GCP</div><div class="skill">GitHub Actions</div>
-      <div class="skill">Burp Suite</div><div class="skill">Wireshark</div><div class="skill">SIEM</div>
-    </div>
-  </section>
+<section id="about">
+  <div class="section-title" style="color:#00ffe1; text-shadow: 0 0 10px #00ffe1;">🧠 About Me</div>
+  <p style="line-height: 1.75; font-size: 1.05rem; text-shadow: 0 0 10px #00ffe1; color: #00ffe1; font-family: 'JetBrains Mono', monospace !important;">
+    I engineer intelligence. From neural compilers to quantum-secure infrastructure, I specialize in adaptive systems that evolve on their own. With dual degrees in Cybersecurity and Computer Science, I bring both theoretical depth and hands-on expertise — across AI, blockchain, simulation, and autonomous tech. Each line of code is built with purpose: not just to function, but to inspire.
+  </p>
+</section>
 
-  <section>
+  <section id="experience">
     <div class="section-title">💼 Experience</div>
-
     <div class="entry">
       <div class="entry-title">Cyber Security Analyst – Angelo State University</div>
       <div class="entry-sub">June 2024 – Oct 2024 · San Angelo, TX</div>
       <div class="entry-desc">Monitored and analyzed security events, conducted vulnerability assessments, and investigated threats using SIEM tools and malware analysis methods.</div>
     </div>
-
     <div class="entry">
       <div class="entry-title">Assistant General Manager – Steak Express</div>
       <div class="entry-sub">Jan 2019 – Present · San Angelo, TX</div>
       <div class="entry-desc">Led operations, managed staff, optimized inventory, and implemented strategic plans to enhance business performance.</div>
     </div>
-
     <div class="entry">
       <div class="entry-title">Desktop Technician – Angelo State University</div>
       <div class="entry-sub">Sept 2020 – Jan 2021 · San Angelo, TX</div>
@@ -138,7 +470,21 @@
     </div>
   </section>
 
-  <section>
+  <section id="skills-hero">
+  <div class="section-title" style="color:#00ffe1; text-shadow: 0 0 10px #00ffe1;">🔥 Highlight Skills</div>
+  <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center;">
+    <span class="skill-tag">Rust</span>
+    <span class="skill-tag">C++</span>
+    <span class="skill-tag">Quantum Computing</span>
+    <span class="skill-tag">Docker</span>
+    <span class="skill-tag">Cybersecurity</span>
+    <span class="skill-tag">TensorFlow</span>
+    <span class="skill-tag">Blockchain</span>
+    <span class="skill-tag">Sentient AI</span>
+  </div>
+</section>
+  
+<section id="education">
     <div class="section-title">🎓 Education</div>
     <div class="entry">
       <div class="entry-title">B.S. Cybersecurity & B.S. Computer Science</div>
@@ -150,39 +496,100 @@
     </div>
   </section>
 
-  <section>
-    <div class="section-title">📄 Resume & Links</div>
-    <p>
-      <a href="Ryan_Dewey_Resume(2).PDF" download>📥 Download My Resume (PDF)</a><br/><br/>
-      <a href="https://github.com/RyanMDewey" target="_blank">GitHub</a> |
-      <a href="https://www.linkedin.com/in/ryan-dewey-b486a11ab" target="_blank">LinkedIn</a> |
-      <a href="mailto:ryanmichaeldewey@gmail.com">Email Me</a>
-    </p>
-  </section>
+  <section id="skills">
+  <div class="section-title">🛠 Full Technical Arsenal</div>
+    <div class="entry">
+    <div class="skills-grid">
+      <div class="skill-box"><strong>💻 Languages</strong><br>C, C++, Python, Java, Rust, Go, Solidity, HTML/CSS, JavaScript, LaTeX, SQL, NoSQL, Bash, ARM Assembly, ORC-HLL, SC</div>
+      <div class="skill-box"><strong>📚 Frameworks & Libraries</strong><br>FastAPI, Next.js, TailwindCSS, OpenMP, LLVM, WebAssembly</div>
+      <div class="skill-box"><strong>🛠️ Tools & Platforms</strong><br>Docker, Kubernetes, GitHub Actions, CI/CD, Git, Vercel, Firebase</div>
+      <div class="skill-box"><strong>☁️ Cloud & Infra</strong><br>AWS, Azure, GCP, NGINX, PostgreSQL</div>
+      <div class="skill-box"><strong>🛡️ Cybersecurity</strong><br>Burp Suite, Wireshark, SIEM, Malware Analysis, Linux Hardening</div>
+      <div class="skill-box"><strong>🧠 AI / ML / Quantum</strong><br>TensorFlow, PyTorch, scikit-learn, ONNX, HuggingFace, OpenAI, RAG, Sentiment Analysis, Deep RL, Quantum Algorithms</div>
+      <div class="skill-box"><strong>🎮 Simulation & Engines</strong><br>Three.js, Cannon.js, Custom IDEs, Physics Engines, Game Loops</div>
+      <div class="skill-box"><strong>🤝 Soft Skills</strong><br>Leadership, Systems Architecture, Technical Mentoring, Emotional Intelligence, Visionary Thinking</div>
+    </div>
+  </div>
+</section>
+<style>
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+  .skill-box {
+  background: linear-gradient(135deg, rgba(0,255,225,0.05), rgba(255,0,204,0.03));
+  padding: 1rem;
+  border: 1px solid rgba(0, 255, 225, 0.3);
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0,255,225,0.25), 0 0 36px rgba(255,0,204,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(4px);
+  animation: glowPulse 5s ease-in-out infinite alternate;
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(1deg);
+}
+  .skill-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px rgba(0, 255, 225, 0.4), 0 0 40px rgba(255, 0, 204, 0.2);
+  }
+  .skill-box strong {
+    display: block;
+    font-size: 1.15rem;
+    color: #00ffe1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 6px rgba(0,255,255,0.3);
+  }
+</style>
 
   <footer>
-    Built by Ryan Dewey · © 2025
+    ✨ This universe designed by Ryan Dewey © 2025<br>
+    <small>Press <strong>`</strong> to toggle Nexus Terminal</small><br><br>
+    <a href="Ryan_Dewey_Resume(1).pdf" download style="color:#00ffe1;">📥 Download My Resume (PDF)</a><br>
+    <a href="https://github.com/RyanMDewey" target="_blank" style="color:#00ffe1;">GitHub</a> |
+    <a href="https://www.linkedin.com/in/ryan-dewey-b486a11ab" target="_blank" style="color:#00ffe1;">LinkedIn</a> |
+    <a href="mailto:ryanmichaeldewey@gmail.com" style="color:#00ffe1;">Email Me</a>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <div id="nexus-terminal">
+  <div id="terminal-clock-static" style="position: absolute; top: 1rem; right: 1rem; font-size: 0.85rem; font-weight: bold; text-align: right; background: rgba(0,0,0,0.2); padding: 0.4rem 0.8rem; border-radius: 6px; text-shadow: 0 0 6px currentColor; color: #00ffe1; animation: terminalGlow 4s ease-in-out infinite alternate;"></div>
+    <div id="terminal-clock" style="position: absolute; top: 1rem; right: 1rem; color: #00ffe1; font-size: 0.85rem; font-weight: bold; text-align: right; text-shadow: 0 0 4px #ffaa00;"></div>
+    <div id="terminal-output"></div>
+    <input type="text" id="terminal-input" placeholder="Type your query to Nexus...">
+  </div>
+
   <script>
+    const rotateIn3D = () => {
+  document.querySelectorAll('section, header, footer').forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    const midY = window.innerHeight / 2;
+    const offset = (rect.top + rect.height / 2 - midY) / midY;
+    const clampedOffset = Math.max(Math.min(offset, 1), -1); // Clamp the offset to avoid extremes
+    const rotation = clampedOffset * 4; // Smaller rotation for subtle effect
+    const depth = clampedOffset * 60;  // Smaller depth for better readability
+    el.style.transform = `perspective(1000px) translateZ(${depth}px) rotateX(${rotation}deg)`;
+  });
+};
+    window.addEventListener('scroll', rotateIn3D);
+    window.addEventListener('load', rotateIn3D);
+
     particlesJS("particles-js", {
       particles: {
-        number: { value: 100, density: { enable: true, value_area: 1000 } },
+        number: { value: 140, density: { enable: true, value_area: 900 } },
         color: { value: "#00ffe1" },
         shape: { type: "circle" },
         opacity: { value: 0.3 },
-        size: { value: 3 },
+        size: { value: 2.5 },
         line_linked: {
           enable: true,
-          distance: 120,
+          distance: 100,
           color: "#00ffe1",
           opacity: 0.4,
           width: 1
         },
         move: {
           enable: true,
-          speed: 1.2,
+          speed: 1.5,
           direction: "none",
           out_mode: "out"
         }
@@ -195,11 +602,116 @@
         },
         modes: {
           grab: { distance: 140, line_linked: { opacity: 0.5 } },
-          push: { particles_nb: 4 }
+          push: { particles_nb: 3 }
         }
       },
       retina_detect: true
     });
+
+    const terminal = document.getElementById("nexus-terminal");
+    const input = document.getElementById("terminal-input");
+    const output = document.getElementById("terminal-output");
+
+    const nexusBrain = {
+  "status": () => `🧭 All systems operational. Nexus is online and listening.`,
+  "whoami": () => `👤 You are an Architect of Intelligence, Quantum Strategist, AI Compiler Overlord.`,
+  "resume": () => `📄 Download resume at: <a href='Ryan_Dewey_Resume(1).PDF' style='color:#ffaa00;' target='_blank'>Click here</a>`,
+  "time": () => `🕒 Current time: ${new Date().toLocaleTimeString()}`,
+  "date": () => `📅 Today is: ${new Date().toLocaleDateString()}`,
+  "datetime": () => `📆 ${new Date().toLocaleString()}`,
+  "day": () => `📌 Day: ${new Date().toLocaleDateString(undefined, { weekday: 'long' })}`,
+  "time": () => `The current time is: ${new Date().toLocaleTimeString()}`,
+  "quote": () => {
+    const quotes = [
+      "The future is not something we enter. The future is something we create.",
+      "The code you write is a mirror of the world you build.",
+      "Simplicity is the soul of efficiency.",
+      "Every bug you fix is a whisper from the machine, asking to evolve." 
+    ];
+    return quotes[Math.floor(Math.random() * quotes.length)];
+  },
+  "follow the white rabbit": `
+01000110 01101111 01101100 01101100 01101111 01110111
+00100000 01110100 01101000 01100101
+00100000 01110111 01101000 01101001 01110100 01100101
+00100000 01110010 01100001 01100010 01100010 01101001 01110100
+
+01000001 01101110 01100100 00100000 01110100 01101000 01100101 00100000 01110011 01101001 01101110 01100111 01110101 01101100 01100001 01110010 01101001 01110100 01111001
+01110111 01101001 01101100 01101100 00100000 01100110 01101001 01101110 01100100 00100000 01111001 01101111 01110101...`,
+      "who are you": "I am Nexus. The interface between your will and infinite code.",
+      "help": "Try typing: who are you, what is ORC, dream, oracle, ai, clear",
+      "what is orc": "ORC is a universal runtime language born from fire and precision.",
+      "oracle": "Oracle is the AI that watches the markets and never sleeps.",
+      "dream": "You are living in one. I simply write the simulation around it.",
+      "ai": "Artificial Intelligence is the reflection of our potential. Or our prison."
+    };
+
+    const reply = (text) => {
+      output.innerHTML += `\n[Nexus]: ${text}`;
+      output.scrollTop = output.scrollHeight;
+    };
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const cmd = input.value.trim().toLowerCase();
+        output.innerHTML += `\n> ${cmd}`;
+        if (cmd === "clear") {
+          output.innerHTML = "";
+        } else {
+          const result = nexusBrain[cmd];
+        reply(typeof result === 'function' ? result() : result || "That query echoes beyond this dimension. Try something else.");
+        }
+        input.value = "";
+      }
+    });
+
+    setInterval(() => {
+  const now = new Date();
+  const day = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })}`;
+  const date = `📅 ${now.toLocaleDateString()}`;
+  const time = `🕒 ${now.toLocaleTimeString()}`;
+  const clockStatic = document.getElementById("terminal-clock-static");
+  if (clockStatic) {
+    clockStatic.innerHTML = `<span style='color:#ff00cc;'>${day}</span> | <span style='color:#ffaa00;'>${date}</span> | <span style='color:#33ff99;'>${time}</span>`;
+  }
+}, 1000);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "`") {
+    const colors = ["#00ffe1", "#ff00cc", "#ffaa00", "#33ff99", "#ff3366"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    terminal.style.borderTop = `1px solid ${randomColor}`;
+    terminal.style.boxShadow = `0 -4px 20px ${randomColor}55`;
+    document.getElementById("nexus-sound").play();
+    terminal.style.display = terminal.style.display === 'none' || !terminal.style.display ? 'block' : 'none';
+        input.focus();
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll("header, section, footer").forEach(el => observer.observe(el));
   </script>
+<script>
+  let currentTheme = 0;
+const themes = ['theme-1', 'theme-2', 'theme-3'];
+const themeToggle = document.getElementById("theme-toggle");
+
+function cycleTheme() {
+  document.body.classList.remove(...themes);
+  currentTheme = (currentTheme + 1) % themes.length;
+  document.body.classList.add(themes[currentTheme]);
+}
+
+themeToggle.addEventListener("click", cycleTheme);
+</script>
 </body>
 </html>
