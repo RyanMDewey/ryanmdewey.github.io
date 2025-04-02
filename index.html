@@ -541,9 +541,9 @@ $1padding-top: 10rem;
     text-shadow: 0 0 6px rgba(0,255,255,0.3);
   }
   @media (max-width: 768px) {
-  #navbar {
-    top: 55%
-    transform: translateY(-50%) scale(0.75);
+  #navbar, header, section, footer {
+    margin: 2rem 1rem;
+    padding: 2.5rem 1.25rem;
   }
 
   .skills-grid {
@@ -566,17 +566,25 @@ $1padding-top: 10rem;
   }
 
   #nexus-terminal {
-    position: relative;
+    margin: 2rem 1rem;
   }
 
   #terminal-clock-static {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.8rem;
-    z-index: 10;
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-  }
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 10;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.25rem 0.6rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: #00ffe1;
+  border-radius: 6px;
+  white-space: nowrap;
+  max-width: fit-content;
+  pointer-events: none;
+  text-align: right;
+}
 
   .skill-box {
     font-size: 0.95rem;
@@ -593,13 +601,10 @@ $1padding-top: 10rem;
     <a href="mailto:ryanmichaeldewey@gmail.com" style="color:#00ffe1;">Email Me</a>
   </footer>
 
-  <div id="nexus-terminal"{
-    position: relative;
-    }
+  <div id="nexus-terminal">
   <div id="terminal-clock-static" style="position: absolute; top: 1rem; right: 1rem; font-size: 0.85rem; font-weight: bold; text-align: right; background: rgba(0,0,0,0.2); padding: 0.4rem 0.8rem; border-radius: 6px; text-shadow: 0 0 6px currentColor; color: #00ffe1; animation: terminalGlow 4s ease-in-out infinite alternate;"></div>
     <div id="terminal-output"></div>
     <input type="text" id="terminal-input" placeholder="Type your query to Nexus...">
-  </div>
 
   <script>
     const rotateIn3D = () => {
@@ -727,6 +732,7 @@ document.addEventListener("keydown", (e) => {
     terminal.style.boxShadow = `0 -4px 20px ${randomColor}55`;
     document.getElementById("nexus-sound").play();
     terminal.style.display = terminal.style.display === 'none' || !terminal.style.display ? 'block' : 'none';
+    input.style.display = terminal.style.display === 'none' ? 'none' : 'block';
         input.focus();
       }
     });
