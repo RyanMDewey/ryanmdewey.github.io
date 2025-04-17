@@ -311,10 +311,18 @@ $1padding-top: 10rem;
     opacity: 0.4;
   }
 }
+  @keyframes glowPulse {
+  0%   { box-shadow: 0 0 10px #00ffe1; border-color: #00ffe1; }
+  25%  { box-shadow: 0 0 14px #ff00cc; border-color: #ff00cc; }
+  50%  { box-shadow: 0 0 14px #ffaa00; border-color: #ffaa00; }
+  75%  { box-shadow: 0 0 14px #33ff99; border-color: #33ff99; }
+  100% { box-shadow: 0 0 14px #ff3366; border-color: #ff3366; }
+}
   .skill-tag {
   display: inline-block;
   white-space: nowrap;
   padding: 0.4rem 0.8rem;
+  margin: 0.3rem;
   background: rgba(0, 255, 225, 0.05);
   border: 1px solid rgba(0, 255, 225, 0.5);
   border-radius: 8px;
@@ -327,12 +335,23 @@ $1padding-top: 10rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-family: 'JetBrains Mono', monospace !important;
   letter-spacing: 1px;
+  animation: glowPluse 6s ease-in-out infinte;
+  transition: transform 0.3s ease;
 }
   .skill-tag:hover {
     transform: scale(1.1);
     background: rgba(255, 0, 204, 0.05);
     box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
   }
+    .icon {
+  display: inline-block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 6px #00ffe1);
+}
 
 #nexus-terminal {
   background: radial-gradient(circle at top left, #1f003d, #0a0a0f);
@@ -428,8 +447,8 @@ $1padding-top: 10rem;
   <div id="particles-js"></div>
 
   <header>
-    <h1 style="font-size: 3.6rem; text-transform: uppercase; letter-spacing: 4px; font-weight: bold;">🚀 Ryan Dewey</h1>
-    <p class="tagline" style="font-size: 1.2rem; font-style: italic; color: #00ffe1; text-shadow: 0 0 10px #00ffe1, 0 0 20px #ff00cc; margin-top: 0.75rem;">Architect of Intelligence · Cybersecurity Futurist · AI Visionary</p>
+    <h1 style="font-size: 3.6rem; text-transform: uppercase; letter-spacing: 4px; font-weight: bold;">Ryan Dewey</h1>
+    <p class="tagline" style="font-size: 1.2rem; font-style: italic; color: #00ffe1; text-shadow: 0 0 10px #00ffe1, 0 0 20px #ff00cc; margin-top: 0.75rem;">Designing systems that evolve, languages that learn, and futures that remember us.</p>
   </header>
 <button id="theme-toggle" style="position: fixed; top: 1rem; right: 1rem; background: rgba(0,0,0,0.3); color: #00ffe1; border: none; font-family: 'JetBrains Mono', monospace !important; padding: 0.25rem 0.5rem; border-radius: 6px; z-index: 9999; cursor: pointer; font-size: 0.7rem; text-shadow: 0 0 4px #00ffe1; box-shadow: 0 0 8px rgba(0,255,225,0.2);">
   🌗 Toggle Theme
@@ -446,14 +465,14 @@ $1padding-top: 10rem;
 </section>
 
 <section id="about">
-  <div class="section-title" style="color:#00ffe1; text-shadow: 0 0 10px #00ffe1;">🧠 About Me</div>
+  <div class="section-title" style="color:#00ffe1; text-shadow: 0 0 10px #00ffe1;">📖 About Me</div>
   <p style="line-height: 1.75; font-size: 1.05rem; text-shadow: 0 0 10px #00ffe1; color: #00ffe1; font-family: 'JetBrains Mono', monospace !important;">
     I don’t just write code — I design evolution. My work fuses artificial intelligence, quantum computing, human augmentation, and decentralized infrastructure into a single unified system. From building compilers that think to ledgers that defend themselves, I engineer frameworks that adapt, self-optimize, and scale beyond human input. Every layer I touch — from low-level hardware to high-level logic — is part of a living architecture aimed at reshaping how intelligence and autonomy exist in the world. This isn’t about tools. This is about rewriting the fabric of reality — one system at a time.
   </p>
 </section>
 
   <section id="experience">
-    <div class="section-title">💼 Experience</div>
+    <div class="section-title">🏆 Experience</div>
     <div class="entry">
       <div class="entry-title">Cyber Security Analyst – Angelo State University</div>
       <div class="entry-sub">June 2024 – Oct 2024 · San Angelo, TX</div>
@@ -506,7 +525,7 @@ $1padding-top: 10rem;
       <div class="skill-box"><strong>🛠️ Tools & Platforms</strong><br>Docker, Kubernetes, GitHub Actions, CI/CD, Git, Vercel, Firebase, Custom Compliers, Nexus IDE</div>
       <div class="skill-box"><strong>☁️ Cloud & Infra</strong><br>AWS, Azure, GCP, NGINX, PostgreSQL, Decentralized Systmes, Full-Stack Egineering, System Arcitecture</div>
       <div class="skill-box"><strong>🛡️ Cybersecurity</strong><br>Burp Suite, Wireshark, SIEM, Malware Analysis, Vulnerability Assesment, Linux Hardening, Zero-Trust Security, Zero-Knowledge Proofs</div>
-      <div class="skill-box"><strong>🧠 AI / ML / Quantum</strong><br>TensorFlow, PyTorch, scikit-learn, RAG Pipelines, Sentiment Analysis, Deep RL, Quantum Algorithms, AI Infastructure</div>
+      <div class="skill-box"><strong>🤖 AI / ML / Quantum</strong><br>TensorFlow, PyTorch, scikit-learn, RAG Pipelines, Sentiment Analysis, Deep RL, Quantum Algorithms, AI Infastructure</div>
       <div class="skill-box"><strong>🎮 Simulation & Engines</strong><br>Three.js, Cannon.js, Custom IDEs, Physics Engines, Game Loops, Low-Level Optimization, Real-Time Systems</div>
       <div class="skill-box"><strong>🚀 R&D Domains</strong><br>Human Augmentation, Compiler Design, Hardware Prototyping, Post-Silicon Logic, Photonic Gates, Language Architecture</div>
       <div class="skill-box"><strong>🤝 Leadership Soft Skills</strong><br>Technical Mentoring, Systems Architecture, Team Leadership, Emotional Intelligence, Visionary Thinking</div>
@@ -595,15 +614,20 @@ $1padding-top: 10rem;
 }
 </style>
 
+<section id="contact" style="text-align: center; scroll-margin-top: 100px;">
+  <h2 style="margin-bottom: 1rem; color: #00ffe1; text-shadow: 0 0 10px #00ffe1;">
+    📬 Get in Touch
+  </h2>
+
   <footer>
     ✨ This universe designed by Ryan Dewey © 2025<br>
     <small>Press <strong>`</strong> to toggle Nexus Terminal</small><br><br>
-    <a href="Ryan_Dewey_Resume(2).pdf" download style="color:#00ffe1;">📥 Download My Resume (PDF)</a><br>
-    <a href="https://github.com/RyanMDewey" target="_blank" style="color:#00ffe1;">GitHub</a> |
-    <a href="https://www.linkedin.com/in/ryan-dewey-b486a11ab" target="_blank" style="color:#00ffe1;">LinkedIn</a> |
-    <a href="mailto:ryanmichaeldewey@gmail.com" style="color:#00ffe1;">Email Me</a>
-  </footer>
-
+    <span class="icon" style="margin-right: 0.25rem;">📥</span><a href="Ryan_Dewey_Resume(2).pdf" download style="color:#00ffe1;">Download My Resume (PDF)</a><br>
+    <span class="icon" style="margin-right: 0.25rem;">🐙</span><a href="https://github.com/RyanMDewey" target="_blank" style="color:#00ffe1;">GitHub</a> |
+    <span class="icon" style="margin-left: 0.5rem; margin-right: 0.25rem;">💼</span><a href="https://www.linkedin.com/in/ryan-dewey-b486a11ab" target="_blank" style="color:#00ffe1;">LinkedIn</a> |
+    <span class="icon" style="margin-left: 0.5rem; margin-right: 0.25rem;">✉️</span><a href="mailto:ryanmichaeldewey@gmail.com" style="color:#00ffe1;">Email Me</a>
+</footer>
+  
   <div id="nexus-terminal">
   <div id="terminal-clock-static" style="position: absolute; top: 1rem; right: 1rem; font-size: 0.85rem; font-weight: bold; text-align: right; background: rgba(0,0,0,0.2); padding: 0.4rem 0.8rem; border-radius: 6px; text-shadow: 0 0 6px currentColor; color: #00ffe1; animation: terminalGlow 4s ease-in-out infinite alternate;"></div>
     <div id="terminal-output"></div>
