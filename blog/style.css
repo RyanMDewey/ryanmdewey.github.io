@@ -1,16 +1,40 @@
-body {
-  font-family: 'JetBrains Mono', monospace;
-  background-color: #0b0b0b;
-  color: #f4f4f4;
-  line-height: 1.6;
+#blog-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
 }
-a {
+
+.post-preview {
+  border: 1px solid #00ffcc88;
+  background: rgba(0, 255, 204, 0.02);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 12px rgba(0,255,204,0.05);
+}
+
+.post-preview:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0,255,204,0.25);
+}
+
+.post-preview h3 a {
   color: #00ffe1;
+  text-decoration: none;
+  font-size: 1.4rem;
 }
-a:hover {
-  color: #ffaa00;
+
+.post-preview .post-meta {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
 }
-h1, h2, h3 {
-  color: #00ffcc;
-  text-shadow: 0 0 6px #00ffcc;
+
+.post-snippet {
+  margin-top: 1rem;
+  color: #fdfdfd;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
