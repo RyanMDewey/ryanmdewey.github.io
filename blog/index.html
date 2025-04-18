@@ -35,6 +35,12 @@
     .post-snippet {
       margin-top: 0.5rem;
     }
+    .footer {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      text-align: center;
+      color: #00ffcc;
+    }
   </style>
 </head>
 <body>
@@ -42,6 +48,11 @@
   <p>Where I architect intelligence, decode quantum systems, and push code toward sentience.</p>
 
   <div id="blog-list"></div>
+
+  <div class="footer">
+    ✨ This universe designed by Ryan Dewey © 2025<br>
+    Powered by <strong>ORC</strong> • AI-Native Runtime • Hosted on GitHub Pages
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
@@ -51,7 +62,7 @@
       const files = await response.json();
 
       const posts = files
-        .filter(file => file.name.endsWith(".html") && file.name.match(/^\\d{4}-\\d{2}-\\d{2}/))
+        .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
         .map(file => {
           const name = file.name.replace(".html", "");
           const [year, month, day, ...titleParts] = name.split("-");
