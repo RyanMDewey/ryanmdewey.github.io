@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       title: "Building AI on Bare-Metal with NEON Kernels",
       date: "2025-04-18",
-      file: "2025-04-18-neon.md"
+      file: "2025-04-18-neon.html"
     },
     {
       title: "Designing the Lumina Language: Beyond Solidity",
       date: "2025-04-12",
-      file: "2025-04-12-lumina.md"
+      file: "2025-04-12-lumina.html"
     }
   ];
 
