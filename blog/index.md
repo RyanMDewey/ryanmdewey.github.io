@@ -5,7 +5,11 @@ permalink: /blog/
 ---
 
 <h1>🧠 Ryan Dewey’s Blog</h1>
-<p>Exploring AI, compilers, blockchain, quantum systems, and future tech.</p>
+<p>Where I architect intelligence, decode quantum systems, and push code toward sentience.</p>
+
+<div id="blog-list"></div>
+
+<script src="blog.js"></script>
 
 ## 📝 Recent Posts
 
