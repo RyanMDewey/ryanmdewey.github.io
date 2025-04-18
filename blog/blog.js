@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     },
     {
       title: "Designing the Lumina Language: Beyond Solidity",
-      date: "2025-04-12",
-      file: "2025-04-12-lumina.html"
+      date: "2025-04-18",
+      file: "2025-04-18-lumina.html"
     }
   ];
 
