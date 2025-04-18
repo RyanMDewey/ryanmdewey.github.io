@@ -72,14 +72,14 @@
         });
 
       for (let post of posts.sort((a, b) => new Date(b.date) - new Date(a.date))) {
-        const res = await fetch(`blog/${post.file}`);
+        const res = await fetch(`${post.file}`);
         const html = await res.text();
         const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
         const postElement = document.createElement("div");
         postElement.className = "post-preview";
         postElement.innerHTML = `
-          <h3><a href="blog/${post.file}">${post.title}</a></h3>
+          <h3><a href="${post.file}">${post.title}</a></h3>
           <p class="post-meta">${post.date}</p>
           <p class="post-snippet">${preview}</p>
         `;
