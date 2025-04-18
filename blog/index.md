@@ -1,14 +1,13 @@
 ---
 layout: default
-title: Blog
+title: Ryan's Blog
 permalink: /blog/
 ---
 
-# 📚 Ryan Dewey's Blog
+<h1>🧠 Ryan Dewey’s Blog</h1>
+<p>Exploring AI, compilers, blockchain, quantum systems, and future tech.</p>
 
-Welcome to my blog — where I explore AI, compilers, blockchain, and the future of sentient machines.
+## 📝 Recent Posts
 
-## Recent Posts
-
-- [Building AI on Bare-Metal with NEON Kernels](./2024-04-18-ai-on-neon.md)
-- [Designing the Lumina Language: Beyond Solidity](./2024-04-12-lumina-language.md)
+- [Building AI on Bare-Metal with NEON Kernels](2024-04-18-neon.md)
+- [Designing the Lumina Language: Beyond Solidity](2024-04-12-lumina.md)
