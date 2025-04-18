@@ -13,5 +13,5 @@ permalink: /blog/
 
 ## 📝 Recent Posts
 
-- [Building AI on Bare-Metal with NEON Kernels](./2025-04-18-neon.md)
-- [Designing the Lumina Language: Beyond Solidity](./2025-04-12-lumina-complier.md)
+- [Building AI on Bare-Metal with NEON Kernels](./2025-04-18-neon.html)
+- [Designing the Lumina Language: Beyond Solidity](./2025-04-12-lumina-complier.html)
