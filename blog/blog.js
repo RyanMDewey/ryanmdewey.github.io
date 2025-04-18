@@ -5,13 +5,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const posts = [
     {
       title: "Building AI on Bare-Metal with NEON Kernels",
-      date: "2024-05-18",
-      file: "2024-05-18-neon.md"
+      date: "2025-04-18",
+      file: "2025-04-18-neon.md"
     },
     {
       title: "Designing the Lumina Language: Beyond Solidity",
-      date: "2024-05-12",
-      file: "2024-05-12-lumina.md"
+      date: "2025-04-12",
+      file: "2025-04-12-lumina.md"
     }
   ];
 
