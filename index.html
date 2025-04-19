@@ -235,89 +235,6 @@ setInterval(() => {
   text-transform: uppercase;
   letter-spacing: 1.2px;
 }
-}
-#navbar {
-  position: fixed;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
-  animation: rotateSign 15s linear infinite;
-}
-#navbar ul {
-  list-style: none;
-  margin: 0;
-  padding: 2rem;
-  transform-style: preserve-3d;
-  transform: rotateY(0deg);
-  background: linear-gradient(135deg, rgba(0, 255, 225, 0.03), rgba(255, 0, 204, 0.02));
-  border-radius: 16px;
-  box-shadow:
-    inset 0 0 30px rgba(0, 255, 225, 0.1),
-    0 0 30px rgba(255, 0, 204, 0.1),
-    0 0 60px rgba(0, 255, 225, 0.08);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(0, 255, 225, 0.15);
-  animation: openPulse 2.5s ease-in-out infinite alternate;
-  text-align: center;
-  transition: transform 1.2s ease-in-out, box-shadow 1.2s ease-in-out;
-  perspective: 1000px;
-}
-#navbar ul li a {
-  color: #ff00cc;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.15rem;
-  padding: 0.6rem 1rem;
-  display: block;
-  text-align: center;
-  text-shadow: 0 0 10px #ff00cc, 0 0 6px #00ffe1;
-  transform: translateZ(60px);
-  transition: transform 0.4s ease, color 0.4s ease;
-  backface-visibility: hidden;
-  font-family: 'JetBrains Mono', monospace !important;
-  letter-spacing: 2.5px;
-  animation: flicker 1.5s infinite alternate;
-}
-#navbar ul li a:hover {
-  color: #00ffe1;
-  transform: translateZ(60px) scale(1.2);
-  text-shadow: 0 0 12px #ffaa00, 0 0 20px #00ffe1;
-}
-header {
-$1padding-top: 10rem;
-}
-@keyframes spinY {
-  0% { transform: translateY(-50%) rotateY(0deg); }
-  100% { transform: translateY(-50%) rotateY(360deg); }
-}
-@keyframes rotateSign {
-  from { transform: translateY(-50%) rotateY(0deg); }
-  to { transform: translateY(-50%) rotateY(360deg); }
-}
-@keyframes openPulse {
-  from { box-shadow: 0 0 10px #ff00cc, 0 0 30px #00ffe1; }
-  to   { box-shadow: 0 0 20px #ffaa00, 0 0 60px #ff3366; }
-}
-@keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    opacity: 1;
-  }
-  20%, 24%, 55% {
-    opacity: 0.4;
-  }
-}
-  @keyframes glowPulse {
-  0%   { box-shadow: 0 0 10px #00ffe1; border-color: #00ffe1; }
-  25%  { box-shadow: 0 0 14px #ff00cc; border-color: #ff00cc; }
-  50%  { box-shadow: 0 0 14px #ffaa00; border-color: #ffaa00; }
-  75%  { box-shadow: 0 0 14px #33ff99; border-color: #33ff99; }
-  100% { box-shadow: 0 0 14px #ff3366; border-color: #ff3366; }
-}
   .skill-tag {
   display: inline-block;
   white-space: nowrap;
@@ -434,15 +351,6 @@ $1padding-top: 10rem;
 <audio id="nexus-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f47c4f7d1.mp3?filename=click-124467.mp3" preload="auto"></audio>
 </head>
 <body>
-  <nav id="navbar">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
   <div id="stars"></div>
   <div id="particles-js"></div>
 
