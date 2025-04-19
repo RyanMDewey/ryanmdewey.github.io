@@ -13,6 +13,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     body {
       font-family: 'JetBrains Mono', monospace;
@@ -114,84 +115,83 @@
 
   <div class="footer">
     ✨ This universe designed by Ryan Dewey © 2025<br>
-    Powered by <strong>ORC</strong> • AI-Native Runtime • Hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a><br>
-    <a href="/blog/rss.xml" style="color:#00ffcc;">Subscribe via RSS</a>
+    Powered by <strong>ORC</strong> • AI-Native Runtime • Hosted on <a href="https://pages.github.com/" target="_blank" style="color:#00ffcc">GitHub Pages</a>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", async () => {
-    const blogContainer = document.getElementById("blog-list");
-    const tagContainer = document.getElementById("tag-filter");
-    const searchInput = document.getElementById("search-input");
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const blogContainer = document.getElementById("blog-list");
+      const tagContainer = document.getElementById("tag-filter");
+      const searchInput = document.getElementById("search-input");
 
-    const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/blog");
-    const files = await response.json();
+      const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/blog");
+      const files = await response.json();
 
-    const allPosts = await Promise.all(
-      files
-        .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
-        .map(async file => {
-          const name = file.name.replace(".html", "");
-          const [year, month, day, ...titleParts] = name.split("-");
-          const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-          const date = `${year}-${month}-${day}`;
-          const tags = titleParts.map(t => t.toLowerCase());
+      const allPosts = await Promise.all(
+        files
+          .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
+          .map(async file => {
+            const name = file.name.replace(".html", "");
+            const [year, month, day, ...titleParts] = name.split("-");
+            const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+            const date = `${year}-${month}-${day}`;
+            const tags = titleParts.map(t => t.toLowerCase());
 
-          const res = await fetch(`./${file.name}`);
-          const html = await res.text();
-          const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
+            const res = await fetch(`./${file.name}`);
+            const html = await res.text();
+            const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
-          return { title, date, file: file.name, tags, preview };
-        })
-    );
+            return { title, date, file: file.name, tags, preview };
+          })
+      );
 
-    function renderPosts(posts) {
-      blogContainer.innerHTML = "";
-      posts.forEach(post => {
-        const postElement = document.createElement("div");
-        postElement.className = "post-preview fade-in";
-        postElement.innerHTML = `
-          <h3><a href="./${post.file}">${post.title}</a></h3>
-          <p class="post-meta">${post.date}</p>
-          <p class="post-snippet">${post.preview}</p>
-        `;
-        blogContainer.appendChild(postElement);
+      function renderPosts(posts) {
+        blogContainer.innerHTML = "";
+        posts.forEach(post => {
+          const postElement = document.createElement("div");
+          postElement.className = "post-preview fade-in";
+          postElement.innerHTML = `
+            <h3><a href="./${post.file}">${post.title}</a></h3>
+            <p class="post-meta">${post.date}</p>
+            <p class="post-snippet">${post.preview}</p>
+          `;
+          blogContainer.appendChild(postElement);
 
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-        observer.observe(postElement);
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+          observer.observe(postElement);
+        });
+      }
+
+      const allTags = [...new Set(allPosts.flatMap(p => p.tags))];
+      allTags.forEach(tag => {
+        const btn = document.createElement("button");
+        btn.className = "tag-button";
+        btn.textContent = tag;
+        btn.onclick = () => {
+          document.querySelectorAll(".tag-button").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderPosts(allPosts.filter(p => p.tags.includes(tag)));
+        };
+        tagContainer.appendChild(btn);
       });
-    }
 
-    const allTags = [...new Set(allPosts.flatMap(p => p.tags))];
-    allTags.forEach(tag => {
-      const btn = document.createElement("button");
-      btn.className = "tag-button";
-      btn.textContent = tag;
-      btn.onclick = () => {
-        document.querySelectorAll(".tag-button").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderPosts(allPosts.filter(p => p.tags.includes(tag)));
-      };
-      tagContainer.appendChild(btn);
+      const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
+      searchInput.addEventListener("input", e => {
+        const result = fuse.search(e.target.value.trim());
+        renderPosts(e.target.value ? result.map(r => r.item) : allPosts);
+      });
+
+      renderPosts(allPosts);
     });
-
-    const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
-    searchInput.addEventListener("input", e => {
-      const result = fuse.search(e.target.value.trim());
-      renderPosts(e.target.value ? result.map(r => r.item) : allPosts);
-    });
-
-    renderPosts(allPosts);
-  });
-</script>
+  </script>
 </body>
 </html>
