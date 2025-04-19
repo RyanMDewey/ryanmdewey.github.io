@@ -128,34 +128,36 @@
       const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/blog");
       const files = await response.json();
 
-      const allPosts = files
-        .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
-        .map(file => {
-          const name = file.name.replace(".html", "");
-          const [year, month, day, ...titleParts] = name.split("-");
-          const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-          const date = `${year}-${month}-${day}`;
-          const tags = titleParts; // Use filename as tags for simplicity
-          return { title, date, file: file.name, tags };
-        });
+      const allPosts = await Promise.all(
+        files
+          .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
+          .map(async file => {
+            const name = file.name.replace(".html", "");
+            const [year, month, day, ...titleParts] = name.split("-");
+            const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+            const date = `${year}-${month}-${day}`;
+            const tags = titleParts.map(t => t.toLowerCase());
 
-      const renderPosts = (posts) => {
+            const res = await fetch(`blog/${file.name}`);
+            const html = await res.text();
+            const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
+
+            return { title, date, file: file.name, tags, preview };
+          })
+      );
+
+      function renderPosts(posts) {
         blogContainer.innerHTML = "";
-        posts.forEach(async post => {
-          const res = await fetch(`blog/${post.file}`);
-          const html = await res.text();
-          const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
-
+        posts.forEach(post => {
           const postElement = document.createElement("div");
-          postElement.className = "post-preview";
+          postElement.className = "post-preview fade-in";
           postElement.innerHTML = `
             <h3><a href="blog/${post.file}">${post.title}</a></h3>
             <p class="post-meta">${post.date}</p>
-            <p class="post-snippet">${preview}</p>
+            <p class="post-snippet">${post.preview}</p>
           `;
           blogContainer.appendChild(postElement);
 
-          // Intersection animation
           const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
@@ -164,12 +166,10 @@
               }
             });
           }, { threshold: 0.1 });
-
           observer.observe(postElement);
         });
-      };
+      }
 
-      // Build tag filter buttons
       const allTags = [...new Set(allPosts.flatMap(p => p.tags))];
       allTags.forEach(tag => {
         const btn = document.createElement("button");
@@ -183,10 +183,9 @@
         tagContainer.appendChild(btn);
       });
 
-      // Search functionality
-      const fuse = new Fuse(allPosts, { keys: ["title"] });
+      const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
       searchInput.addEventListener("input", e => {
-        const result = fuse.search(e.target.value);
+        const result = fuse.search(e.target.value.trim());
         renderPosts(e.target.value ? result.map(r => r.item) : allPosts);
       });
 
