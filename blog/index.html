@@ -139,7 +139,7 @@
           const date = `${year}-${month}-${day}`;
           const tags = titleParts.map(t => t.toLowerCase());
 
-          const res = await fetch(`blog/${file.name}`);
+          const res = await fetch(`./${file.name}`);
           const html = await res.text();
           const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
@@ -153,7 +153,7 @@
         const postElement = document.createElement("div");
         postElement.className = "post-preview fade-in";
         postElement.innerHTML = `
-          <h3><a href="blog/${post.file}">${post.title}</a></h3>
+          <h3><a href="./${post.file}">${post.title}</a></h3>
           <p class="post-meta">${post.date}</p>
           <p class="post-snippet">${post.preview}</p>
         `;
