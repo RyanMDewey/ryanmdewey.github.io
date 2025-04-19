@@ -347,10 +347,69 @@ setInterval(() => {
   background: linear-gradient(135deg, #0f0f0f, #1f1f1f);
   color: #eeeeee;
 }
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 255, 225, 0.1);
+  border-bottom: 1px solid rgba(0, 255, 225, 0.2);
+  padding: 0.6rem 1.2rem;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.site-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #00ffe1;
+  text-decoration: none;
+  text-shadow: 0 0 6px #00ffe1;
+  letter-spacing: 1.2px;
+}
+
+.nav-links a {
+  color: #f4f4f8;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #00ffe1;
+}
 </style>
 <audio id="nexus-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3f47c4f7d1.mp3?filename=click-124467.mp3" preload="auto"></audio>
 </head>
 <body>
+  
+<nav class="top-nav">
+  <div class="nav-container">
+    <div class="nav-left">
+      <a href="#" class="site-title">Ryan Dewey</a>
+    </div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="blog/index.html" target="_blank">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+  
   <div id="stars"></div>
   <div id="particles-js"></div>
 
