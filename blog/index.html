@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <style>
     body {
       font-family: 'JetBrains Mono', monospace;
@@ -22,9 +23,10 @@
       padding: 2rem;
       margin: 0;
     }
-    body.light-mode {
-      background-color: #f5f5f5;
-      color: #222;
+    h1 {
+      font-size: 2rem;
+      color: #00ffcc;
+      text-shadow: 0 0 6px #00ffcc;
     }
     nav {
       position: sticky;
@@ -37,28 +39,11 @@
       align-items: center;
       border-bottom: 1px solid #00ffcc55;
     }
-    body.light-mode nav {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: #00bfa5;
-    }
     nav a {
       color: #00ffcc;
       margin: 0 0.75rem;
       text-decoration: none;
       font-weight: bold;
-    }
-    body.light-mode nav a {
-      color: #00bfa5;
-    }
-    #progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 4px;
-      background: #00ffcc;
-      z-index: 9999;
-      transition: width 0.25s ease;
     }
     #search-input {
       padding: 0.3rem 0.6rem;
@@ -66,11 +51,6 @@
       border: 1px solid #00ffcc55;
       color: #00ffcc;
       border-radius: 4px;
-    }
-    body.light-mode #search-input {
-      background: #fff;
-      color: #00bfa5;
-      border-color: #00bfa566;
     }
     .post-preview {
       border: 1px solid #00ffcc55;
@@ -89,6 +69,8 @@
     .post-preview h3 a {
       color: #00ffe1;
       text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 700;
     }
     .post-meta {
       font-size: 0.85rem;
@@ -96,15 +78,16 @@
     }
     .post-snippet {
       margin-top: 0.5rem;
+      font-size: 0.95rem;
+      text-align: justify;
+      color: #ccc;
+      line-height: 1.6;
     }
     .footer {
       margin-top: 3rem;
       font-size: 0.85rem;
       text-align: center;
       color: #00ffcc;
-    }
-    body.light-mode .footer {
-      color: #00bfa5;
     }
     #tag-filter {
       margin: 1.5rem 0;
@@ -122,24 +105,13 @@
     .tag-button.active {
       background: #00ffcc33;
     }
-    body.light-mode .tag-button {
-      color: #00bfa5;
-      border-color: #00bfa588;
-      background: rgba(0, 191, 165, 0.1);
-    }
   </style>
 </head>
 <body>
-  <div id="progress-bar"></div>
   <nav>
     <div><a href="/">Home</a> <a href="/blog">Blog</a> <a href="/projects">Projects</a> <a href="/about">About</a></div>
     <input type="text" id="search-input" placeholder="Search posts...">
   </nav>
-  <div style="text-align: right; margin: 1rem 0;">
-    <button id="theme-toggle" style="padding: 0.4rem 0.8rem; background: #111; border: 1px solid #00ffcc88; color: #00ffcc; border-radius: 4px; cursor: pointer;">
-      🌗 Toggle Theme
-    </button>
-  </div>
 
   <h1>🧠 Ryan Dewey’s Blog</h1>
   <p>Where I architect intelligence, decode quantum systems, and push code toward sentience.</p>
@@ -154,26 +126,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <script>
-    // Scroll progress bar
-    window.addEventListener("scroll", () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      document.getElementById("progress-bar").style.width = `${scrollPercent}%`;
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById("theme-toggle");
-    themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("light-mode");
-      localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
-    });
-    if (localStorage.getItem("theme") === "light") {
-      document.body.classList.add("light-mode");
-    }
-
     document.addEventListener("DOMContentLoaded", async () => {
       const blogContainer = document.getElementById("blog-list");
       const tagContainer = document.getElementById("tag-filter");
@@ -189,7 +142,9 @@
             const name = file.name.replace(".html", "");
             const [year, month, day, ...titleParts] = name.split("-");
             const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-            const date = `${year}-${month}-${day}`;
+            const date = new Date(`${year}-${month}-${day}`).toLocaleDateString('en-US', {
+              year: 'numeric', month: 'short', day: 'numeric'
+            });
             const tags = titleParts.map(t => t.toLowerCase());
 
             const res = await fetch(`./${file.name}`);
@@ -200,13 +155,15 @@
           })
       );
 
+      let visibleCount = 4;
+
       function renderPosts(posts) {
         blogContainer.innerHTML = "";
-        posts.forEach(post => {
+        posts.slice(0, visibleCount).forEach(post => {
           const postElement = document.createElement("div");
           postElement.className = "post-preview fade-in";
           postElement.innerHTML = `
-            <h3><a href=./${post.file}">${post.title}</a></h3>
+            <h3><a href="./${post.file}">${post.title}</a></h3>
             <p class="post-meta">${post.date}</p>
             <p class="post-snippet">${post.preview}</p>
           `;
@@ -222,6 +179,17 @@
           }, { threshold: 0.1 });
           observer.observe(postElement);
         });
+
+        if (posts.length > visibleCount) {
+          const loadMore = document.createElement("button");
+          loadMore.textContent = "Load More Posts";
+          loadMore.className = "tag-button";
+          loadMore.onclick = () => {
+            visibleCount += 4;
+            renderPosts(posts);
+          };
+          blogContainer.appendChild(loadMore);
+        }
       }
 
       const allTags = [...new Set(allPosts.flatMap(p => p.tags))];
@@ -232,6 +200,7 @@
         btn.onclick = () => {
           document.querySelectorAll(".tag-button").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
+          visibleCount = 999;
           renderPosts(allPosts.filter(p => p.tags.includes(tag)));
         };
         tagContainer.appendChild(btn);
@@ -240,6 +209,7 @@
       const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
       searchInput.addEventListener("input", e => {
         const result = fuse.search(e.target.value.trim());
+        visibleCount = 999;
         renderPosts(e.target.value ? result.map(r => r.item) : allPosts);
       });
 
