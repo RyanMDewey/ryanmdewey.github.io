@@ -70,17 +70,17 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Inject comments via Utterances
-  const commentContainer = document.getElementById("comments");
-  if (commentContainer) {
-    const script = document.createElement("script");
-    script.src = "https://utteranc.es/client.js";
-    script.repo = "RyanMDewey/ryanmdewey.github.io";
-    script.issueTerm = "pathname";
-    script.label = "💬 Blog Comments";
-    script.theme = "icy-dark";
-    script.crossOrigin = "anonymous";
-    script.async = true;
-    commentContainer.appendChild(script);
-  }
+// Inject comments via Utterances
+const commentContainer = document.getElementById("comments");
+if (commentContainer) {
+  const script = document.createElement("script");
+  script.src = "https://utteranc.es/client.js";
+  script.setAttribute("repo", "RyanMDewey/ryanmdewey.github.io");
+  script.setAttribute("issue-term", "pathname");
+  script.setAttribute("label", "💬 Blog Comments");
+  script.setAttribute("theme", "icy-dark");
+  script.setAttribute("crossorigin", "anonymous");
+  script.async = true;
+  commentContainer.appendChild(script);
+}
 });
