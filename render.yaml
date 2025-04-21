@@ -1,6 +1,5 @@
 services:
-  - type: static
+  - type: web
     name: ryanmdewey-site
     env: static
-    buildCommand: ""
     staticPublishPath: .
