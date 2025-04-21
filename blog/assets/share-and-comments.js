@@ -37,6 +37,39 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Inject styles
+  const style = document.createElement("style");
+  style.textContent = `
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      color: #f4f4f4;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .share-btn:hover {
+      background: rgba(0, 255, 195, 0.12);
+      transform: translateY(-1px);
+    }
+    .share-btn svg {
+      vertical-align: middle;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Share buttons
   const container = document.getElementById("share-buttons");
   if (container) {
     const wrapper = document.createElement("div");
@@ -49,8 +82,10 @@ window.addEventListener("DOMContentLoaded", () => {
         a.onclick = (e) => {
           e.preventDefault();
           navigator.clipboard.writeText(window.location.href);
-          a.textContent = "✅ Copied!";
-          setTimeout(() => (a.innerHTML = `${getIcon(link.name)} ${link.name}`), 1500);
+          a.innerHTML = `✅ Copied!`;
+          setTimeout(() => {
+            a.innerHTML = `${getIcon(link.name)} ${link.name}`;
+          }, 1500);
         };
       } else {
         a.href = link.url;
@@ -62,6 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
     container.appendChild(wrapper);
   }
 
+  // Inject comments via Utterances
   const commentContainer = document.getElementById("comments");
   if (commentContainer) {
     const script = document.createElement("script");
