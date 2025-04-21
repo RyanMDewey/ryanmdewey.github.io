@@ -43,7 +43,7 @@ style.textContent = `
   .share-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0;
     margin-top: 1rem;
   }
   .share-btn {
