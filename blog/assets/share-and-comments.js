@@ -38,36 +38,40 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   // Inject styles
-  const style = document.createElement("style");
-  style.textContent = `
-    .share-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .share-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.4rem 0.8rem;
-      border-radius: 6px;
-      color: #f4f4f4;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    .share-btn:hover {
-      background: rgba(0, 255, 195, 0.12);
-      transform: translateY(-1px);
-    }
-    .share-btn svg {
-      vertical-align: middle;
-    }
-  `;
-  document.head.appendChild(style);
+const style = document.createElement("style");
+style.textContent = `
+  .share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #f4f4f4;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 0 6px rgba(0, 255, 195, 0.05);
+  }
+  .share-btn:hover {
+    background: rgba(0, 255, 195, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px rgba(0, 255, 195, 0.3);
+  }
+  .share-btn svg {
+    vertical-align: middle;
+    fill: #00ffc3;
+  }
+`;
+document.head.appendChild(style);
 
   // Share buttons
   const container = document.getElementById("share-buttons");
