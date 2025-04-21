@@ -37,27 +37,28 @@
     }
     .share-buttons {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
+      gap: 1rem;
       margin-top: 1rem;
-}
+    }
+
     .share-btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
       color: #f4f4f4;
-      transition: background 0.3s ease, transform 0.2s ease;
+      font-size: 0.9rem;
       text-decoration: none;
-}
+      transition: background 0.3s ease, transform 0.2s ease;
+     }
     .share-btn:hover {
-      background: rgba(0, 255, 195, 0.15);
+      background: rgba(0, 255, 195, 0.12);
       transform: translateY(-1px);
-}
+     }
     .share-link {
       font-weight: 500;
       font-size: 1rem;
