@@ -220,7 +220,7 @@
             const resultItem = document.createElement("div");
             resultItem.className = "search-result";
             resultItem.textContent = r.item.title;
-            resultItem.onclick = () => window.location.href = `blog/${r.item.file}`;
+            resultItem.onclick = () => window.location.href = r.item.file;
             searchResults.appendChild(resultItem);
           });
         } else {
