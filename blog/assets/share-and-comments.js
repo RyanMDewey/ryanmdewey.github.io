@@ -31,28 +31,29 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  const container = document.getElementById("share-buttons");
-  if (container) {
-    shareLinks.forEach(link => {
-      const a = document.createElement("a");
-      a.className = "share-btn";
-      a.innerText = `${link.icon} ${link.name}`;
-      a.href = link.url || "#";
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
+const container = document.getElementById("share-buttons");
+if (container) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "share-buttons";
+  shareLinks.forEach(link => {
+    const a = document.createElement("a");
+    a.href = link.url;
+    a.className = "share-btn";
+    a.target = "_blank";
+    a.innerHTML = `<span>${link.icon}</span> ${link.name}`;
+    wrapper.appendChild(a);
+  });
+  // Copy link button
+  const copyBtn = document.createElement("a");
+  copyBtn.href = "#";
+  copyBtn.className = "share-btn";
+  copyBtn.onclick = copyPageUrl;
+  copyBtn.innerHTML = `<span>📋</span>Copy Link`;
+  wrapper.appendChild(copyBtn);
 
-      if (link.action === "copy") {
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          navigator.clipboard.writeText(window.location.href)
-            .then(() => alert("Link copied!"))
-            .catch(() => alert("Copy failed."));
-        });
-      }
+  container.appendChild(wrapper);
+}
 
-      container.appendChild(a);
-    });
-  }
 
   // Utterances comment loader
   const commentContainer = document.getElementById("comments");
