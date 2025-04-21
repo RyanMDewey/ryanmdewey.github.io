@@ -167,9 +167,10 @@
             const html = await res.text();
             const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
-            // ✅ Extract category from <meta name="category">
-            const categoryMatch = html.match(/<meta name="category" content="(.+?)"/i);
-            const category = categoryMatch ? categoryMatch[1] : "Uncategorized";
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const metaTag = doc.querySelector('meta[name="category"]');
+            const category = metaTag ? metaTag.getAttribute("content") : "Uncategorized";
 
             return { title, date, file: file.name, preview, category };
           })
