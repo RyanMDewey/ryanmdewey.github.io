@@ -103,33 +103,19 @@
     .post-snippet {
       margin-top: 0.5rem;
     }
+    h2 {
+      margin-top: 2.5rem;
+      font-size: 1.3rem;
+      color: #00ffc3;
+      border-bottom: 1px solid #222;
+      padding-bottom: 0.3rem;
+    }
     .footer {
       margin-top: 3rem;
       font-size: 0.85rem;
       text-align: center;
       color: #888;
     }
-    .share-btn {
-    display: inline-block;
-    margin: 0.5rem 0.5rem 0 0;
-    padding: 0.5rem 1rem;
-    background: rgba(0,255,225,0.08);
-    border: 1px solid rgba(0,255,225,0.2);
-    border-radius: 8px;
-    color: #00ffe1;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    text-decoration: none;
-    text-shadow: 0 0 6px #00ffe1;
-    backdrop-filter: blur(3px);
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  .share-btn:hover {
-  background: rgba(0,255,225,0.15);
-  transform: scale(1.05);
-  box-shadow: 0 0 12px rgba(0,255,225,0.3);
-  }
   </style>
 </head>
 <body>
@@ -154,7 +140,7 @@
 
   <div class="footer">
     ✨ This universe designed by Ryan Dewey © 2025<br>
-    Powered by <strong>ORC</strong> • AI-Native Runtime • Hosted on <a href="https://pages.github.com/" target="_blank" style="color:#00ffe1">GitHub Pages</a>
+    Powered by <strong>Lumina</strong> • AI-Native Runtime • Hosted on <a href="https://pages.github.com/" target="_blank" style="color:#00ffe1">GitHub Pages</a>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
@@ -181,33 +167,52 @@
             const html = await res.text();
             const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
-            return { title, date, file: file.name, preview };
+            // ✅ Extract category from <meta name="category">
+            const categoryMatch = html.match(/<meta name="category" content="(.+?)"/i);
+            const category = categoryMatch ? categoryMatch[1] : "Uncategorized";
+
+            return { title, date, file: file.name, preview, category };
           })
       );
 
       const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
 
-      function renderPosts(posts) {
+      function renderPostsByCategory(posts) {
         blogContainer.innerHTML = "";
-        posts.forEach(post => {
-          const postElement = document.createElement("div");
-          postElement.className = "post-preview fade-in";
-          postElement.innerHTML = `
-            <h3><a href="./${post.file}">${post.title}</a></h3>
-            <p class="post-meta">Published: ${post.date}</p>
-            <p class="post-snippet">${post.preview}</p>
-          `;
-          blogContainer.appendChild(postElement);
 
-          const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.1 });
-          observer.observe(postElement);
+        const categories = [...new Set(posts.map(p => p.category))];
+
+        categories.forEach(category => {
+          const catHeader = document.createElement("h2");
+          catHeader.textContent = category;
+          blogContainer.appendChild(catHeader);
+
+          const section = document.createElement("div");
+          section.className = "category-group";
+
+          posts.filter(p => p.category === category).forEach(post => {
+            const postElement = document.createElement("div");
+            postElement.className = "post-preview fade-in";
+            postElement.innerHTML = `
+              <h3><a href="./${post.file}">${post.title}</a></h3>
+              <p class="post-meta">Published: ${post.date}</p>
+              <p class="post-snippet">${post.preview}</p>
+            `;
+            section.appendChild(postElement);
+
+            const observer = new IntersectionObserver(entries => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.1 });
+
+            observer.observe(postElement);
+          });
+
+          blogContainer.appendChild(section);
         });
       }
 
@@ -220,7 +225,7 @@
             const resultItem = document.createElement("div");
             resultItem.className = "search-result";
             resultItem.textContent = r.item.title;
-            resultItem.onclick = () => window.location.href = r.item.file;
+            resultItem.onclick = () => window.location.href = `./${r.item.file}`;
             searchResults.appendChild(resultItem);
           });
         } else {
@@ -232,7 +237,7 @@
         }
       });
 
-      renderPosts(allPosts);
+      renderPostsByCategory(allPosts);
     });
   </script>
 </body>
