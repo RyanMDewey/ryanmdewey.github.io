@@ -15,7 +15,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    body {
+    body
+    <p style="display: none;" id="fallback-category">AI</p>
+    {
       font-family: 'JetBrains Mono', monospace;
       background-color: #0b0b0b;
       color: #f4f4f4;
@@ -169,7 +171,7 @@
 
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, "text/html");
-            const metaTag = doc.querySelector('meta[name="category"]');
+            const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
             const category = metaTag ? metaTag.getAttribute("content") : "Uncategorized";
 
             return { title, date, file: file.name, preview, category };
