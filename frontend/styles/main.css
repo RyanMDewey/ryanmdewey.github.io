@@ -1,1 +1,97 @@
+/* ===== MAIN.CSS — Global Styling ===== */
 
+:root {
+  --neon-blue: #00ffe1;
+  --neon-pink: #ff00cc;
+  --neon-orange: #ffaa00;
+  --bg-dark: #0a0a0f;
+  --text-light: #f4f4f8;
+  --accent-glow: rgba(0, 255, 225, 0.3);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: radial-gradient(circle at center, var(--bg-dark), #0a001a 90%);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* ========== HERO ========== */
+
+.hero {
+  text-align: center;
+  padding: 6rem 2rem 2rem;
+}
+
+.glitch {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--neon-blue);
+  position: relative;
+  text-shadow: 0 0 8px var(--neon-blue), 0 0 20px var(--neon-pink);
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+  25% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
+  50% { text-shadow: 2px 0 var(--neon-orange), -2px 0 var(--neon-blue); }
+  75% { text-shadow: -2px 0 var(--neon-orange), 2px 0 var(--neon-blue); }
+  100% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+}
+
+.tagline {
+  font-size: 1.2rem;
+  color: #ffd6ff;
+  margin-top: 0.5rem;
+}
+
+/* ========== CLOCK ========== */
+
+.terminal-time {
+  font-size: 0.95rem;
+  margin-top: 1.2rem;
+  color: #33ff99;
+}
+
+/* ========== NAV BUTTONS ========== */
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.glow-btn {
+  background: rgba(0, 255, 225, 0.05);
+  color: var(--neon-blue);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 225, 0.2);
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 0 8px var(--accent-glow);
+  transition: all 0.3s ease;
+}
+
+.glow-btn:hover {
+  transform: scale(1.05);
+  background: rgba(255, 0, 204, 0.05);
+  box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
+}
+
+/* ========== FOOTER ========== */
+
+footer {
+  text-align: center;
+  font-size: 0.85rem;
+  margin: 4rem 0 2rem;
+  color: #666;
+}
