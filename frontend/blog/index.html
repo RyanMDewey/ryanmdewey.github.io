@@ -154,7 +154,7 @@
       const searchInput = document.getElementById("search-input");
       const searchResults = document.getElementById("search-results");
 
-      const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/blog");
+      const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
       const files = await response.json();
 
       const allPosts = await Promise.all(
