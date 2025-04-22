@@ -2,40 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Ryan Dewey</title>
-  <link href="styles/main.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ryan Dewey – Architect of Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #0a0a0f, #0a001a 90%);
+      font-family: 'JetBrains Mono', monospace;
+      color: #f4f4f8;
+      overflow-x: hidden;
+    }
+    .glitch {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #00ffe1;
+      position: relative;
+      text-shadow: 0 0 8px #00ffe1, 0 0 20px #ff00cc;
+      animation: glitch 1s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 #ff00cc, -2px 0 #00ffe1; }
+      25% { text-shadow: -2px 0 #ff00cc, 2px 0 #00ffe1; }
+      50% { text-shadow: 2px 0 #ffaa00, -2px 0 #00ffe1; }
+      75% { text-shadow: -2px 0 #ffaa00, 2px 0 #00ffe1; }
+      100% { text-shadow: 2px 0 #ff00cc, -2px 0 #00ffe1; }
+    }
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 2rem;
+    }
+    .tagline {
+      font-size: 1.2rem;
+      color: #ffd6ff;
+      margin-top: 0.5rem;
+    }
+    .terminal-time {
+      font-size: 0.95rem;
+      margin-top: 1.2rem;
+      color: #33ff99;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .glow-btn {
+      background: rgba(0, 255, 225, 0.05);
+      color: #00ffe1;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 225, 0.2);
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 0 8px rgba(0, 255, 225, 0.3);
+      transition: all 0.3s ease;
+    }
+    .glow-btn:hover {
+      transform: scale(1.05);
+      background: rgba(255, 0, 204, 0.05);
+      box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      margin: 4rem 0 2rem;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-  <nav class="top-nav">
-    <div class="nav-container">
-      <a class="site-title" href="index.html">Ryan Dewey</a>
-      <div class="nav-links">
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="skills.html">Skills</a>
-        <a href="resume.html">Resume</a>
-        <a href="contact.html">Contact</a>
-        <a href="/blog/">Blog</a>
-      </div>
-    </div>
-  </nav>
+  <div class="hero">
+    <h1 class="glitch">Ryan Dewey</h1>
+    <div class="tagline">Designing systems that evolve, languages that learn, and futures that remember us.</div>
+    <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
+  </div>
 
-  <section>
-    <div class="section-title">📖 About Me</div>
-    <p>I don’t just write code — I design evolution...</p>
-  </section>
+  <div class="section-grid">
+    <a class="glow-btn" href="about.html">About</a>
+    <a class="glow-btn" href="projects.html">Projects</a>
+    <a class="glow-btn" href="skills.html">Skills</a>
+    <a class="glow-btn" href="resume.html">Resume</a>
+    <a class="glow-btn" href="contact.html">Contact</a>
+    <a class="glow-btn" href="/blog/">Blog</a>
+  </div>
 
-  <section>
-    <div class="section-title">🏆 Experience</div>
-    <!-- experience entries here -->
-  </section>
+  <footer>
+    © 2025 Ryan Dewey | Architect of Intelligence
+  </footer>
 
-  <section>
-    <div class="section-title">🎓 Education</div>
-    <!-- education entries here -->
-  </section>
-
-  <footer>© 2025 Ryan Dewey</footer>
+  <script>
+    const clock = document.getElementById("terminal-clock");
+    setInterval(() => {
+      const now = new Date();
+      clock.textContent = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
+    }, 1000);
+  </script>
 </body>
 </html>
