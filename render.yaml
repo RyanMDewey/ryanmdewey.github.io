@@ -3,7 +3,7 @@ services:
     name: ryanmdewey-site
     env: static
     buildCommand: ./build.sh
-    staticPublishPath: public
+    staticPublishPath: .
     routes:
       - type: rewrite
         source: /blog/(.*)
