@@ -87,6 +87,36 @@ body {
   box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
 }
 
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(0, 255, 225, 0.2);
+}
+
+.site-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--neon-blue);
+  text-decoration: none;
+  text-shadow: 0 0 6px var(--neon-blue);
+}
+
+.nav-links a {
+  color: #f4f4f8;
+  text-decoration: none;
+  margin-left: 1.25rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: var(--neon-blue);
+}
+
 /* ========== FOOTER ========== */
 
 footer {
