@@ -2,4 +2,21 @@ services:
   - type: web
     name: ryanmdewey-site
     env: static
+    buildCommand: ""
     staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /blog/(.*)
+        destination: /blog/$1
+      - type: rewrite
+        source: /blog
+        destination: /blog/index.html
+      - type: rewrite
+        source: /projects
+        destination: /projects/index.html
+      - type: rewrite
+        source: /about
+        destination: /about/index.html
+      - type: rewrite
+        source: /
+        destination: /index.html
