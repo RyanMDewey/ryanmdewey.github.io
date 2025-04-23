@@ -2,8 +2,9 @@ services:
   - type: web
     name: ryanmdewey-site
     env: static
-    buildCommand: ""
-    staticPublishPath: .
+    rootDir: frontend         # Tells Render to only build/deploy from this folder
+    buildCommand: ""          # No build step needed (unless you later add one)
+    staticPublishPath: .      # Serve the HTML/CSS directly from here
     routes:
       - type: rewrite
         source: /blog/(.*)
@@ -12,11 +13,11 @@ services:
         source: /blog
         destination: /blog/index.html
       - type: rewrite
-        source: /about
-        destination: /about.html
-      - type: rewrite
         source: /projects
         destination: /projects.html
+      - type: rewrite
+        source: /about
+        destination: /about.html
       - type: rewrite
         source: /skills
         destination: /skills.html
