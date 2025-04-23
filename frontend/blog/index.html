@@ -157,7 +157,7 @@
       const searchInput = document.getElementById("search-input");
       const searchResults = document.getElementById("search-results");
 
-      const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/blog");
+      const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
       const files = await response.json();
 
       const allPosts = await Promise.all(
@@ -169,7 +169,7 @@
             const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
             const date = `${year}-${month}-${day}`;
 
-            const res = await fetch(`/blog/${file.name}`);
+            const res = await fetch(`./${file.name}`);
             const html = await res.text();
             
             // Strip all HTML tags and count words
