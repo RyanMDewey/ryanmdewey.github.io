@@ -9,18 +9,34 @@
 </head>
 <body>
 
-  <nav class="top-nav">
-    <div class="nav-container">
-      <a class="site-title" href="index.html">Home Page</a>
-      <div class="nav-links">
-        <a href="/about.html">About</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/skills.html">Skills</a>
-        <a href="/resume.html">Resume</a>
-        <a href="/frontend/blog/">Blog</a>
-      </div>
-    </div>
-  </nav>
+  <script>
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
+
+    const navLinks = [
+      { name: 'About', href: '/about.html' },
+      { name: 'Projects', href: '/projects.html' },
+      { name: 'Skills', href: '/skills.html' },
+      { name: 'Resume', href: '/resume.html' },
+      { name: 'Contact', href: '/contact.html' },
+      { name: 'Blog', href: '/frontend/blog/' }
+    ];
+
+    const nav = document.createElement('div');
+    nav.className = 'nav-links';
+
+    navLinks.forEach(link => {
+      const isActive = currentPage === link.href.split('/').pop() || currentPath === link.href;
+      if (!isActive) {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.name;
+        nav.appendChild(a);
+      }
+    });
+
+    document.getElementById('dynamic-nav')?.appendChild(nav);
+  </script>
 
   <div class="hero">
     <h1 class="glitch">Contact</h1>
