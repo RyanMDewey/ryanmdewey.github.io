@@ -90,6 +90,12 @@
       border-radius: 6px;
       cursor: pointer;
     }
+    .terminal-time {
+    font-size: 0.85rem;
+    margin-left: 1.2rem;
+    color: #33ff99;
+    white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -105,6 +111,7 @@
       <a href="/frontend/contact.html">Contact</a>
       <a href="/frontend/blog/">Blog</a>
     </div>
+    <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
   </nav>
 
   <header>
@@ -174,6 +181,11 @@
       },
       retina_detect: true
     });
+    const clock = document.getElementById("terminal-clock");
+    setInterval(() => {
+      const now = new Date();
+      clock.textContent = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
+    }, 1000);
   </script>
 </body>
 </html>
