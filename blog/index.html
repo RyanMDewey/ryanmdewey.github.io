@@ -203,7 +203,7 @@
             postElement.className = "post-preview fade-in";
             postElement.innerHTML = `
               <h3><a href="./${post.file}">${post.title}</a></h3>
-              <p class="post-meta">Published: ${post.date}</p>
+              <p class="post-meta">Published: ${post.date} | ~${Math.ceil(post.preview.split(" ").length / 200)} min read</p>
               <p class="post-snippet">${post.preview}</p>
             `;
             section.appendChild(postElement);
