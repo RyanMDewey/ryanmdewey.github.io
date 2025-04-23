@@ -5,34 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ryan Dewey – Architect of Intelligence</title>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <style>
+    :root {
+      --neon-blue: #00ffe1;
+      --text-light: #f4f4f8;
+      --bg-dark: #0a0a0f;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background: radial-gradient(circle at center, var(--bg-dark), #0a001a 90%);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+    #stars, #particles-js {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid var(--neon-blue);
+    }
+    .nav-links a {
+      margin: 0 1rem;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+    .nav-links a:hover {
+      color: var(--neon-blue);
+    }
+    header, footer {
+      max-width: 960px;
+      margin: 4rem auto;
+      padding: 4rem 2rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 255, 225, 0.15);
+      box-shadow: 0 0 12px rgba(0, 255, 225, 0.05);
+      transform: translateY(30px);
+      opacity: 0;
+      transition: all 0.6s ease-out;
+    }
+    header.visible, footer.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    h1 {
+      font-size: 3rem;
+      color: var(--neon-blue);
+      text-align: center;
+    }
+    .tagline {
+      text-align: center;
+      margin-top: 0.75rem;
+      font-size: 1.2rem;
+      color: #ffd6ff;
+    }
+    footer {
+      text-align: center;
+      color: #999;
+      font-size: 0.85rem;
+    }
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.3);
+      color: var(--neon-blue);
+      border: none;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <div class="hero">
-    <h1 class="glitch">Ryan Dewey</h1>
-    <div class="tagline">Designing systems that evolve, languages that learn, and futures that remember us.</div>
-    <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
-  </div>
+  <div id="stars"></div>
+  <div id="particles-js"></div>
 
-  <div class="section-grid">
-    <a class="glow-btn" href="about.html">About</a>
-    <a class="glow-btn" href="projects.html">Projects</a>
-    <a class="glow-btn" href="skills.html">Skills</a>
-    <a class="glow-btn" href="resume.html">Resume</a>
-    <a class="glow-btn" href="contact.html">Contact</a>
-    <a class="glow-btn" href="/frontend/blog/">Blog</a>
-  </div>
+  <nav class="top-nav">
+    <div class="nav-links">
+      <a href="/frontend/about.html">About</a>
+      <a href="/frontend/projects.html">Projects</a>
+      <a href="/frontend/skills.html">Skills</a>
+      <a href="/frontend/resume.html">Resume</a>
+      <a href="/frontend/contact.html">Contact</a>
+      <a href="/frontend/blog/">Blog</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Ryan Dewey</h1>
+    <p class="tagline">Designing systems that evolve, languages that learn, and futures that remember us.</p>
+  </header>
+
+  <button id="theme-toggle">🌗 Toggle Theme</button>
+  <div id="terminal-clock-static"></div>
 
   <footer>
-    © 2025 Ryan Dewey | Architect of Intelligence
+    ✨ This universe designed by Ryan Dewey © 2025
   </footer>
 
   <script>
-    const clock = document.getElementById("terminal-clock");
-    setInterval(() => {
-      const now = new Date();
-      clock.textContent = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
-    }, 1000);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('header, footer').forEach(el => observer.observe(el));
+
+    const themeToggle = document.getElementById("theme-toggle");
+    const themes = ['theme-1', 'theme-2', 'theme-3'];
+    let currentTheme = 0;
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.remove(...themes);
+      currentTheme = (currentTheme + 1) % themes.length;
+      document.body.classList.add(themes[currentTheme]);
+    });
+
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ffe1" },
+        shape: { type: "circle" },
+        opacity: { value: 0.2 },
+        size: { value: 2.5 },
+        line_linked: {
+          enable: true,
+          distance: 100,
+          color: "#00ffe1",
+          opacity: 0.3,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1.2,
+          direction: "none",
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          grab: { distance: 140, line_linked: { opacity: 0.4 } },
+          push: { particles_nb: 2 }
+        }
+      },
+      retina_detect: true
+    });
   </script>
 </body>
 </html>
