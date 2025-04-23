@@ -9,6 +9,11 @@
 </head>
 <body>
 
+  <!-- 🔧 Dynamic Nav Injection Target -->
+  <div class="top-nav">
+    <div class="nav-container" id="dynamic-nav"></div>
+  </div>
+  
   <script>
     const currentPath = window.location.pathname;
     const currentPage = currentPath.split('/').pop() || 'index.html';
