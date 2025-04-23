@@ -13,10 +13,10 @@ services:
         destination: /blog/index.html
       - type: rewrite
         source: /projects
-        destination: /projects/index.html
+        destination: /projects.html
       - type: rewrite
         source: /about
-        destination: /about/index.html
+        destination: /about.html
       - type: rewrite
         source: /
         destination: /index.html
