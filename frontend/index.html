@@ -96,6 +96,14 @@
     color: #33ff99;
     white-space: nowrap;
     }
+    @media (max-width: 768px) {
+   .terminal-time {
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 1rem auto;
+    display: block;
+    }
+    }
   </style>
 </head>
 <body>
@@ -111,7 +119,6 @@
       <a href="/contact.html">Contact</a>
       <a href="/blog/">Blog</a>
     </div>
-    <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
   </nav>
 
   <header>
@@ -125,7 +132,9 @@
   <footer>
     ✨ This universe designed by Ryan Dewey © 2025
   </footer>
-
+  
+  <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
+  
   <script>
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
