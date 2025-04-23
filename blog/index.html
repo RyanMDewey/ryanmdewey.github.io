@@ -172,6 +172,13 @@
 
             const res = await fetch(`/blog/${file.name}`);
             const html = await res.text();
+            
+            // Strip all HTML tags and count words
+            const textOnly = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+            const wordCount = textOnly.split(' ').length;
+            const readTime = Math.ceil(wordCount / 200);
+            
+            // Grab preview snippet (first <p>)
             const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
             const parser = new DOMParser();
@@ -179,7 +186,7 @@
             const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
             const category = metaTag ? (metaTag.getAttribute("content") || metaTag.textContent.trim()) : "Uncategorized";
 
-            return { title, date, file: file.name, preview, category };
+            return { title, date, file: file.name, preview, category, readTime };
           })
       );
 
@@ -203,7 +210,8 @@
             postElement.className = "post-preview fade-in";
             postElement.innerHTML = `
               <h3><a href="./${post.file}">${post.title}</a></h3>
-              <p class="post-meta">Published: ${post.date} | ~${Math.ceil(post.preview.split(" ").length / 200)} min read</p>
+              const res = await fetch(`/blog/${file.name}`);
+              <p class="post-meta">Published: ${post.date} | ~${post.readTime} min read</p>
               <p class="post-snippet">${post.preview}</p>
             `;
             section.appendChild(postElement);
