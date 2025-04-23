@@ -169,7 +169,7 @@
             const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
             const date = `${year}-${month}-${day}`;
 
-            const res = await fetch(`/frontend/blog/${file.name}`);
+            const res = await fetch(`./${file.name}`);
             const html = await res.text();
             
             // Strip all HTML tags and count words
