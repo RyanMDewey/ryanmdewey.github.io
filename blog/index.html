@@ -210,8 +210,7 @@
             postElement.className = "post-preview fade-in";
             postElement.innerHTML = `
               <h3><a href="./${post.file}">${post.title}</a></h3>
-              const res = await fetch(`/blog/${file.name}`);
-              <p class="post-meta">Published: ${post.date} | ~${post.readTime} min read</p>
+              <p class="post-meta">Published: ${post.date} | ⏱️ ~${post.readTime} min read</p>
               <p class="post-snippet">${post.preview}</p>
             `;
             section.appendChild(postElement);
