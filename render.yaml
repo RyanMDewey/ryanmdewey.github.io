@@ -11,7 +11,7 @@ services:
         destination: /blog/$1
       - type: rewrite
         source: /blog
-        destination: /blog/index.html
+        destination: /frontend/blog/index.html
       - type: rewrite
         source: /projects
         destination: /projects.html
