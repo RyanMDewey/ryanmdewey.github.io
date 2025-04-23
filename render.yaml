@@ -12,11 +12,20 @@ services:
         source: /blog
         destination: /blog/index.html
       - type: rewrite
+        source: /about
+        destination: /about.html
+      - type: rewrite
         source: /projects
         destination: /projects.html
       - type: rewrite
-        source: /about
-        destination: /about.html
+        source: /skills
+        destination: /skills.html
+      - type: rewrite
+        source: /resume
+        destination: /resume.html
+      - type: rewrite
+        source: /contact
+        destination: /contact.html
       - type: rewrite
         source: /
         destination: /index.html
