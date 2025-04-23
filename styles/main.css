@@ -95,20 +95,20 @@ body {
   backdrop-filter: blur(8px);
   padding: 1rem 2rem;
   border-bottom: 1px solid rgba(0, 255, 225, 0.2);
+  display: flex;
+  justify-content: center;
 }
 
-.site-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--neon-blue);
-  text-decoration: none;
-  text-shadow: 0 0 6px var(--neon-blue);
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .nav-links a {
   color: #f4f4f8;
   text-decoration: none;
-  margin-left: 1.25rem;
   font-weight: 500;
   font-size: 0.95rem;
 }
@@ -124,4 +124,27 @@ footer {
   font-size: 0.85rem;
   margin: 4rem 0 2rem;
   color: #666;
+}
+
+/* ========== MOBILE ADJUSTMENTS ========== */
+@media (max-width: 768px) {
+  .glitch {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+    background: rgba(0, 255, 225, 0.06);
+    border-radius: 4px;
+    box-shadow: 0 0 6px rgba(0, 255, 225, 0.1);
+  }
+
+  .nav-links a:hover {
+    background: rgba(255, 0, 204, 0.08);
+  }
 }
