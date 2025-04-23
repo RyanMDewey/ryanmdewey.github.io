@@ -125,12 +125,11 @@
   <nav class="top-nav">
   <div class="nav-container">
     <div class="nav-links">
-      <a href="about.html">About</a>
-      <a href="projects.html">Projects</a>
-      <a href="skills.html">Skills</a>
-      <a href="resume.html">Resume</a>
-      <a href="contact.html">Contact</a>
-      <a href="/blog/">Blog</a>
+      <a href="../about.html">About</a>
+      <a href="../projects.html">Projects</a>
+      <a href="../skills.html">Skills</a>
+      <a href="../resume.html">Resume</a>
+      <a href="../contact.html">Contact</a>
     </div>
     <div id="search-container">
       <input type="text" id="search-input" placeholder="Search posts...">
@@ -210,7 +209,7 @@
             postElement.className = "post-preview fade-in";
             postElement.innerHTML = `
               <h3><a href="./${post.file}">${post.title}</a></h3>
-              <p class="post-meta">Published: ${post.date} | ⏱️ ~${post.readTime} min read</p>
+              <p class="post-meta">Published: ${post.date} | ~${post.readTime} min read</p>
               <p class="post-snippet">${post.preview}</p>
             `;
             section.appendChild(postElement);
