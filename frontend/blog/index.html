@@ -116,6 +116,12 @@
       text-align: center;
       color: #888;
     }
+    .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    }     
   </style>
 </head>
 <body>
@@ -123,20 +129,43 @@
   <p style="display: none;" id="fallback-category">AI</p>
 
   <nav class="top-nav">
-  <div class="nav-container">
-    <div class="nav-links">
-      <a href="../about.html">About</a>
-      <a href="../projects.html">Projects</a>
-      <a href="../skills.html">Skills</a>
-      <a href="../resume.html">Resume</a>
-      <a href="../contact.html">Contact</a>
-    </div>
+    <div class="nav-container" id="dynamic-nav"></div>
+  </nav>
+
+  <script>
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
+
+    const navLinks = [
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about.html' },
+      { name: 'Projects', href: '/projects.html' },
+      { name: 'Skills', href: '/skills.html' },
+      { name: 'Resume', href: '/resume.html' },
+      { name: 'Contact', href: '/contact.html' },
+      { name: 'Blog', href: '/frontend/blog/' }
+    ];
+
+    const nav = document.createElement('div');
+    nav.className = 'nav-links';
+
+    navLinks.forEach(link => {
+      const isActive = currentPage === link.href.split('/').pop() || currentPath === link.href;
+      if (!isActive) {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.name;
+        nav.appendChild(a);
+      }
+    });
+
+    document.getElementById('dynamic-nav')?.appendChild(nav);
+  </script>
     <div id="search-container">
       <input type="text" id="search-input" placeholder="Search posts...">
       <div id="search-results"></div>
     </div>
   </div>
-</nav>
 
   <h1>🧠 Ryan Dewey’s Blog</h1>
   <p>Where I architect intelligence, decode quantum systems, and push code toward sentience.</p>
