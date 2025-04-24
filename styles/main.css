@@ -140,6 +140,31 @@ footer {
   color: #666;
 }
 
+/* ========== THEME SWITCHING ========== */
+.theme-1 {
+  --neon-blue: #00ffe1;
+  --bg-dark: #0a0a0f;
+  --text-light: #f4f4f8;
+  background: radial-gradient(circle at center, var(--bg-dark), #0a001a 90%);
+  color: var(--text-light);
+}
+
+.theme-2 {
+  --neon-blue: #ffaa00;
+  --bg-dark: #1a001a;
+  --text-light: #fff0f5;
+  background: radial-gradient(circle at center, var(--bg-dark), #1a001a 90%);
+  color: var(--text-light);
+}
+
+.theme-3 {
+  --neon-blue: #00ccff;
+  --bg-dark: #001a1a;
+  --text-light: #e0ffff;
+  background: radial-gradient(circle at center, var(--bg-dark), #001a1a 90%);
+  color: var(--text-light);
+}
+
 /* ========== MOBILE ADJUSTMENTS ========== */
 @media (max-width: 768px) {
   .glitch {
