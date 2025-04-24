@@ -52,11 +52,16 @@
     const themeToggle = document.getElementById("theme-toggle");
     const themes = ['theme-1', 'theme-2', 'theme-3'];
     let currentTheme = 0;
+  
+    // Initialize with default theme
+    document.body.classList.add(themes[currentTheme]);
+  
     themeToggle.addEventListener("click", () => {
       document.body.classList.remove(...themes);
       currentTheme = (currentTheme + 1) % themes.length;
       document.body.classList.add(themes[currentTheme]);
     });
+  </script>
 
     // Particles.js background
     particlesJS("particles-js", {
