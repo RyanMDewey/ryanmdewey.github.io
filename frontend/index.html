@@ -4,124 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ryan Dewey – Architect of Intelligence</title>
+  <link rel="stylesheet" href="styles/main.css" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <style>
-    :root {
-      --neon-blue: #00ffe1;
-      --text-light: #f4f4f8;
-      --bg-dark: #0a0a0f;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: radial-gradient(circle at center, var(--bg-dark), #0a001a 90%);
-      color: var(--text-light);
-      overflow-x: hidden;
-    }
-    #stars, #particles-js {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-    .top-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid rgba(0, 255, 225, 0.2);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-      }
-    
-    .nav-links a {
-      color: #f4f4f8;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      }
-
-    .nav-links a:hover {
-      color: var(--neon-blue);
-      }
-    header, footer {
-      max-width: 960px;
-      margin: 4rem auto;
-      padding: 4rem 2rem;
-      background: rgba(255, 255, 255, 0.02);
-      border-radius: 12px;
-      border: 1px solid rgba(0, 255, 225, 0.15);
-      box-shadow: 0 0 12px rgba(0, 255, 225, 0.05);
-      transform: translateY(30px);
-      opacity: 0;
-      transition: all 0.6s ease-out;
-    }
-    header.visible, footer.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    h1 {
-      font-size: 3rem;
-      color: var(--neon-blue);
-      text-align: center;
-    }
-    .tagline {
-      text-align: center;
-      margin-top: 0.75rem;
-      font-size: 1.2rem;
-      color: #ffd6ff;
-    }
-    footer {
-      text-align: center;
-      color: #999;
-      font-size: 0.85rem;
-    }
-    #theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(0,0,0,0.3);
-      color: var(--neon-blue);
-      border: none;
-      padding: 0.4rem 0.6rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .terminal-time {
-    font-size: 0.85rem;
-    margin-left: 1.2rem;
-    color: #33ff99;
-    white-space: nowrap;
-    }
-    @media (max-width: 768px) {
-  .nav-links a {
-    font-size: 0.85rem;
-    padding: 0.3rem 0.6rem;
-    background: rgba(0, 255, 225, 0.06);
-    border-radius: 4px;
-    box-shadow: 0 0 6px rgba(0, 255, 225, 0.1);
-  }
-
-  .nav-links a:hover {
-    background: rgba(255, 0, 204, 0.08);
-  }
-    }
-  </style>
 </head>
 <body>
   <div id="stars"></div>
@@ -138,21 +23,21 @@
     </div>
   </nav>
 
-  <header>
-    <h1>Ryan Dewey</h1>
+  <header class="visible">
+    <h1 class="glitch">Ryan Dewey</h1>
     <p class="tagline">Designing systems that evolve, languages that learn, and futures that remember us.</p>
   </header>
 
   <button id="theme-toggle">🌗 Toggle Theme</button>
-  <div id="terminal-clock-static"></div>
 
-  <footer>
+  <footer class="visible">
     ✨ This universe designed by Ryan Dewey © 2025
   </footer>
-  
+
   <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
-  
+
   <script>
+    // Animate fade-in elements
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -160,19 +45,19 @@
         }
       });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('header, footer').forEach(el => observer.observe(el));
 
+    // Toggle theme
     const themeToggle = document.getElementById("theme-toggle");
     const themes = ['theme-1', 'theme-2', 'theme-3'];
     let currentTheme = 0;
-
     themeToggle.addEventListener("click", () => {
       document.body.classList.remove(...themes);
       currentTheme = (currentTheme + 1) % themes.length;
       document.body.classList.add(themes[currentTheme]);
     });
 
+    // Init particles background
     particlesJS("particles-js", {
       particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -207,6 +92,8 @@
       },
       retina_detect: true
     });
+
+    // Clock logic
     const clock = document.getElementById("terminal-clock");
     setInterval(() => {
       const now = new Date();
