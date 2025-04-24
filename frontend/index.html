@@ -4,50 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ryan Dewey – Architect of Intelligence</title>
-  <link rel="stylesheet" href="styles/main.css" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-  <div id="stars"></div>
-  <div id="particles-js"></div>
+  <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
 
-  <nav class="top-nav">
-    <div class="nav-links">
-      <a href="/about.html">About</a>
-      <a href="/projects.html">Projects</a>
-      <a href="/skills.html">Skills</a>
-      <a href="/resume.html">Resume</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/blog/">Blog</a>
+  <!-- Content wrapper ABOVE particles -->
+  <div style="position: relative; z-index: 1;">
+    <nav class="top-nav">
+      <div class="nav-links">
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/skills.html">Skills</a>
+        <a href="/resume.html">Resume</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/blog/">Blog</a>
+      </div>
+    </nav>
+
+    <header class="visible" style="text-align: center;">
+      <h1 class="glitch" style="margin-top: 2rem;">Ryan Dewey</h1>
+      <p class="tagline">Designing systems that evolve, languages that learn, and futures that remember us.</p>
+    </header>
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <button id="theme-toggle">🌗 Toggle Theme</button>
     </div>
-  </nav>
 
-  <header class="visible">
-    <h1 class="glitch">Ryan Dewey</h1>
-    <p class="tagline">Designing systems that evolve, languages that learn, and futures that remember us.</p>
-  </header>
+    <footer class="visible" style="margin-top: 4rem;">
+      ✨ This universe designed by Ryan Dewey © 2025
+    </footer>
 
-  <button id="theme-toggle">🌗 Toggle Theme</button>
-
-  <footer class="visible">
-    ✨ This universe designed by Ryan Dewey © 2025
-  </footer>
-
-  <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
+    <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
+  </div>
 
   <script>
-    // Animate fade-in elements
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('header, footer').forEach(el => observer.observe(el));
+    // Clock
+    const clock = document.getElementById("terminal-clock");
+    setInterval(() => {
+      const now = new Date();
+      clock.textContent = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
+    }, 1000);
 
-    // Toggle theme
+    // Theme toggler
     const themeToggle = document.getElementById("theme-toggle");
     const themes = ['theme-1', 'theme-2', 'theme-3'];
     let currentTheme = 0;
@@ -57,7 +58,7 @@
       document.body.classList.add(themes[currentTheme]);
     });
 
-    // Init particles background
+    // Particles.js background
     particlesJS("particles-js", {
       particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -92,13 +93,6 @@
       },
       retina_detect: true
     });
-
-    // Clock logic
-    const clock = document.getElementById("terminal-clock");
-    setInterval(() => {
-      const now = new Date();
-      clock.textContent = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
-    }, 1000);
   </script>
 </body>
 </html>
