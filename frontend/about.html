@@ -15,7 +15,6 @@
   <script>
     const currentPath = window.location.pathname;
     const currentPage = currentPath.split('/').pop() || 'index.html';
-
     const navLinks = [
       { name: 'Home', href: '/' },
       { name: 'About', href: '/about.html' },
@@ -25,10 +24,8 @@
       { name: 'Contact', href: '/contact.html' },
       { name: 'Blog', href: '/blog/' }
     ];
-
     const nav = document.createElement('div');
     nav.className = 'nav-links';
-
     navLinks.forEach(link => {
       const isActive = currentPage === link.href.split('/').pop() || currentPath === link.href;
       if (!isActive) {
@@ -38,7 +35,6 @@
         nav.appendChild(a);
       }
     });
-
     document.getElementById('dynamic-nav')?.appendChild(nav);
   </script>
 
@@ -52,19 +48,42 @@
     <p>
       I don’t just write code — I design evolution. My work fuses AI, quantum computing, human augmentation, and decentralized systems into a unified intelligence engine.
     </p>
+  </section>
 
+  <section id="experience" class="content-section">
     <h2>🏆 Experience</h2>
-    <ul>
-      <li><strong>Cyber Security Analyst</strong> – Angelo State University, 2024</li>
-      <li><strong>AGM + IT Ops</strong> – Steak Express, 2019–Now</li>
-      <li><strong>Desktop Technician</strong> – Angelo State University, 2020</li>
-    </ul>
 
+    <div class="entry">
+      <div class="entry-title">Cyber Security Analyst – Angelo State University</div>
+      <div class="entry-sub">June 2024 – Oct 2024 · San Angelo, TX</div>
+      <div class="entry-desc">Monitored and analyzed security events to identify potential threats and vulnerabilities. Utilized SIEM tools for triage and response, conducted malware analysis, and delivered vulnerability assessments using custom scanning tools.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Assistant General Manager – Steak Express</div>
+      <div class="entry-sub">Jan 2019 – Present · San Angelo, TX</div>
+      <div class="entry-desc">Acted as de facto IT manager across all in-house technical systems including POS, networking, and endpoint devices. Implemented automation for scheduling/inventory using cloud solutions, maintained internal cybersecurity protocols, and coordinated vendor-level hardware support.</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">Desktop Technician – Angelo State University</div>
+      <div class="entry-sub">Sept 2020 – Jan 2021 · San Angelo, TX</div>
+      <div class="entry-desc">Provided hardware/software support for desktops and peripherals. Deployed corporate system images and resolved connectivity issues across secure wired and wireless networks.</div>
+    </div>
+  </section>
+
+  <section id="education" class="content-section">
     <h2>🎓 Education</h2>
-    <ul>
-      <li>B.S. in Cybersecurity & Computer Science – Angelo State University (2024)</li>
-      <li>A.S. in Computer Science – Howard College (2021)</li>
-    </ul>
+
+    <div class="entry">
+      <div class="entry-title">B.S. in Cybersecurity & Computer Science</div>
+      <div class="entry-sub">Angelo State University, Graduated Dec 2024</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-title">A.S. in Computer Science</div>
+      <div class="entry-sub">Howard College, Graduated Jan 2021</div>
+    </div>
   </section>
 
   <footer>© 2025 Ryan Dewey</footer>
