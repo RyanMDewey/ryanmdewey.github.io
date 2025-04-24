@@ -187,6 +187,32 @@ footer {
   color: #ff00cc;
 }
 
+/* ========== ENTRY BLOCKS (Experience / Education) ========== */
+.entry {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 255, 225, 0.03);
+  border-left: 3px solid var(--neon-blue);
+  border-radius: 8px;
+}
+
+.entry-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--neon-blue);
+}
+
+.entry-sub {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 0.2rem;
+}
+
+.entry-desc {
+  margin-top: 0.5rem;
+  line-height: 1.6;
+}
+
 /* ========== MOBILE ADJUSTMENTS ========== */
 @media (max-width: 768px) {
   .glitch {
