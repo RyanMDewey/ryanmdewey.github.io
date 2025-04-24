@@ -1,4 +1,4 @@
-/* ===== MAIN.CSS — Global Styling ===== */
+/* ===== EMAIL.CSS — Global Styling ===== */
 
 :root {
   --neon-blue: #00ffe1;
@@ -7,6 +7,10 @@
   --bg-dark: #0a0a0f;
   --text-light: #f4f4f8;
   --accent-glow: rgba(0, 255, 225, 0.3);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
@@ -35,10 +39,10 @@ body {
 }
 
 @keyframes glitch {
-  0% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
-  25% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
-  50% { text-shadow: 2px 0 var(--neon-orange), -2px 0 var(--neon-blue); }
-  75% { text-shadow: -2px 0 var(--neon-orange), 2px 0 var(--neon-blue); }
+  0%   { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
+  25%  { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-blue); }
+  50%  { text-shadow: 2px 0 var(--neon-orange), -2px 0 var(--neon-blue); }
+  75%  { text-shadow: -2px 0 var(--neon-orange), 2px 0 var(--neon-blue); }
   100% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-blue); }
 }
 
@@ -54,9 +58,49 @@ body {
   font-size: 0.95rem;
   margin-top: 1.2rem;
   color: #33ff99;
+  text-align: center;
 }
 
-/* ========== NAV BUTTONS ========== */
+/* ========== NAVIGATION ========== */
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 1rem 1rem;
+  border-bottom: 1px solid rgba(0, 255, 225, 0.2);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 6px rgba(0, 255, 225, 0.1);
+  background: rgba(0, 255, 225, 0.06);
+}
+
+.nav-links a:hover {
+  color: var(--neon-blue);
+  background: rgba(255, 0, 204, 0.08);
+}
+
+/* ========== BUTTONS ========== */
 
 .section-grid {
   display: grid;
@@ -87,49 +131,13 @@ body {
   box-shadow: 0 0 12px rgba(255, 0, 204, 0.3);
 }
 
-
-
 /* ========== FOOTER ========== */
 
 footer {
   text-align: center;
   font-size: 0.85rem;
   margin: 4rem 0 2rem;
-  
-  .top-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  padding: 1rem 1rem;
-  border-bottom: 1px solid rgba(0, 255, 225, 0.2);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.nav-links a {
-  color: #f4f4f8;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: var(--neon-blue);
-  background: rgba(0, 255, 225, 0.08);
-}color: #666;
+  color: #666;
 }
 
 /* ========== MOBILE ADJUSTMENTS ========== */
@@ -169,5 +177,11 @@ footer {
     padding: 1.5rem;
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+
+  .terminal-time {
+    font-size: 0.8rem;
+    margin: 1rem auto;
+    display: block;
   }
 }
