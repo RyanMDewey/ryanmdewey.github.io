@@ -225,15 +225,6 @@
         nav.appendChild(a);
       }
     });
-
-    document.getElementById('filter-sort-button').addEventListener('click', () => {
-    const options = document.getElementById('filter-options');
-    if (options.style.display === 'none') {
-      options.style.display = 'block';
-    } else {
-      options.style.display = 'none';
-    }
-  });
   </script>
     <div id="search-container">
       <input type="text" id="search-input" placeholder="Search posts...">
@@ -275,7 +266,16 @@
       const searchInput = document.getElementById("search-input");
       const searchResults = document.getElementById("search-results");
       const filterSelect = document.getElementById("filter-select");
-    
+
+      document.getElementById('filter-sort-button').addEventListener('click', () => {
+      const options = document.getElementById('filter-options');
+      if (options.style.display === 'none') {
+        options.style.display = 'block';
+      } else {
+        options.style.display = 'none';
+      }
+    });
+      
       const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
       const files = await response.json();
     
