@@ -241,18 +241,19 @@
     </div>
   </div>
 
-  <div style="margin: 1rem 0;">
-  <label for="filter-select" style="margin-right: 0.5rem;">🛠 Filter or Sort:</label>
-  <select id="filter-select">
-    <optgroup label="🗂 Categories">
-      <option value="all">All Categories</option>
-      <!-- Dynamic categories will be inserted here -->
-    </optgroup>
-    <optgroup label="🕰 Sort By">
-      <option value="sort-newest">Newest First</option>
-      <option value="sort-oldest">Oldest First</option>
-    </optgroup>
-  </select>
+  <div id="filter-sort-box">
+  <div id="filter-sort-button">Filter & Sort</div>
+  <div id="filter-options" style="display: none;">
+    <select id="filter-select">
+      <optgroup label="🗂 Categories">
+        <option value="all">All Categories</option>
+      </optgroup>
+      <optgroup label="🕰 Sort By">
+        <option value="sort-newest">Newest First</option>
+        <option value="sort-oldest">Oldest First</option>
+      </optgroup>
+    </select>
+  </div>
 </div>
   
   <h1>Ryan Dewey’s Blog</h1>
