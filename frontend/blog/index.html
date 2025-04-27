@@ -167,6 +167,13 @@
     </div>
   </div>
 
+  <div style="margin: 1rem 0;">
+  <label for="category-filter" style="margin-right: 0.5rem;">🗂 Filter by Category:</label>
+  <select id="category-filter">
+    <option value="all">All</option>
+  </select>
+</div>
+  
   <h1>🧠 Ryan Dewey’s Blog</h1>
   <p>Where I architect intelligence, decode quantum systems, and push code toward sentience.</p>
   <img src="banner.jpg" alt="ByteOfHeaven Banner" style="width: 100%; border-radius: 12px; margin: 1.5rem 0;">
@@ -220,6 +227,31 @@
 
       const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
 
+      allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+      renderPostsByCategory(allPosts);
+
+      // Build dynamic filter options
+      const categoryFilter = document.getElementById("category-filter");
+      const allCategories = [...new Set(allPosts.map(p => p.category))];
+      
+      allCategories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+      });
+      
+      categoryFilter.addEventListener("change", e => {
+        const selected = e.target.value;
+        if (selected === "all") {
+          renderPostsByCategory(allPosts);
+        } else {
+          renderPostsByCategory(allPosts.filter(post => post.category === selected));
+        }
+      });
+      
+      renderPostsByCategory(allPosts);
+      
       function renderPostsByCategory(posts) {
         blogContainer.innerHTML = "";
 
