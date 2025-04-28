@@ -125,33 +125,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   const files = await response.json();
 
   let allPosts = await Promise.all(
-    files
-      .filter(file => file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}/.test(file.name))
-      .map(async file => {
-        const name = file.name.replace(".html", "");
-        const [year, month, day, ...titleParts] = name.split("-");
-        const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-        const datePart = `${year}-${month}-${day}`;
+  files
+    .filter(file => file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}/.test(file.name))
+    .map(async file => { // <-- **YOU FORGOT THIS .map( )**
+      const name = file.name.replace(".html", "");
+      const [year, month, day, ...titleParts] = name.split("-");
+      const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+      const datePart = `${year}-${month}-${day}`;
 
-        const fileRes = await fetch(`https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/commits?path=frontend/blog/${file.name}`);
-        const fileCommits = await fileRes.json();
-        const commitTime = fileCommits.length > 0 ? fileCommits[fileCommits.length - 1].commit.author.date : `${datePart}T12:00:00`;
+      const fileRes = await fetch(`https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/commits?path=frontend/blog/${file.name}`);
+      const fileCommits = await fileRes.json();
+      const commitTime = fileCommits.length > 0 ? fileCommits[fileCommits.length - 1].commit.author.date : `${datePart}T12:00:00`;
 
-        const res = await fetch(`./${file.name}`);
-        const html = await res.text();
-        const textOnly = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-        const wordCount = textOnly.split(' ').length;
-        const readTime = Math.ceil(wordCount / 200);
+      const res = await fetch(`./${file.name}`);
+      const html = await res.text();
+      const textOnly = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+      const wordCount = textOnly.split(' ').length;
+      const readTime = Math.ceil(wordCount / 200);
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
-        const category = metaTag ? (metaTag.getAttribute("content") || metaTag.textContent.trim()) : "Uncategorized";
-        const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
+      const category = metaTag ? (metaTag.getAttribute("content") || metaTag.textContent.trim()) : "Uncategorized";
+      const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
-        return { title, date: datePart, file: file.name, preview, category, readTime, commitTime };
-      })
-  );
+      return { title, date: datePart, file: file.name, preview, category, readTime, commitTime };
+    }) // <<< THIS WHOLE THING was missing
+);
 
   const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
 
