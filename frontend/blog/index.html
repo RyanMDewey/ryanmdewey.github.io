@@ -94,80 +94,87 @@
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <script>
 document.addEventListener("DOMContentLoaded", async () => {
+  // === Grab the containers for blog, search, and filter ===
   const blogContainer = document.getElementById("blog-list");
   const searchInput = document.getElementById("search-input");
   const searchResults = document.getElementById("search-results");
   const filterSelect = document.getElementById("filter-select");
 
-// --- Helper to format the full "Published April 28, 2025 at 5:42 PM" text
+  // === Helper function to format the published display ===
+  // Merges the filename's true intended date with the commit time (hours/minutes)
+  function formatPublishedDisplay(fileDate, commitDateTime, readTime) {
+    const fileParts = fileDate.split("-").map(Number); // Break "2025-04-26" into [2025, 4, 26]
+    const commit = new Date(commitDateTime); // GitHub commit timestamp
 
+    // Merge the correct DAY (from filename) with the TIME (from GitHub)
+    const mergedDate = new Date(fileParts[0], fileParts[1] - 1, fileParts[2], commit.getHours(), commit.getMinutes());
 
-  // --- Toggle filter options
+    // Define how to pretty-print the date and time separately
+    const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+    const optionsTime = { hour: 'numeric', minute: '2-digit', hour12: true };
+
+    const prettyDate = mergedDate.toLocaleDateString(undefined, optionsDate); // "April 26, 2025"
+    const prettyTime = mergedDate.toLocaleTimeString(undefined, optionsTime); // "12:00 PM"
+
+    return `Published ${prettyDate} at ${prettyTime} • ${readTime} min read`;
+  }
+
+  // === Toggle visibility of the filter options box ===
   document.getElementById('filter-sort-button').addEventListener('click', () => {
     const options = document.getElementById('filter-options');
     options.style.display = (options.style.display === 'none') ? 'block' : 'none';
   });
 
-  // --- Fetch blog files
+  // === Fetch blog post files from GitHub ===
   const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
   const files = await response.json();
 
+  // === Process and extract blog metadata ===
   let allPosts = await Promise.all(
     files
-      .filter(file => file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}/.test(file.name))
-    
-  function formatPublishedDisplay(fileDate, commitDateTime, readTime) {
-   const fileParts = fileDate.split("-").map(Number); // [2025, 04, 26]
-   const commit = new Date(commitDateTime);
-
-   // Merge date from filename and time from GitHub
-   const mergedDate = new Date(fileParts[0], fileParts[1] - 1, fileParts[2], commit.getHours(), commit.getMinutes());
-
-   const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-   const optionsTime = { hour: 'numeric', minute: '2-digit', hour12: true };
-
-   const prettyDate = mergedDate.toLocaleDateString(undefined, optionsDate);
-   const prettyTime = mergedDate.toLocaleTimeString(undefined, optionsTime);
-
-   return `Published ${prettyDate} at ${prettyTime} • ${readTime} min read`; 
-  }
-  
-        .map(async file => {
-        const name = file.name.replace(".html", "");
+      .filter(file => file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}/.test(file.name)) // Only include properly named blog posts
+      .map(async file => {
+        const name = file.name.replace(".html", ""); // Remove ".html"
         const [year, month, day, ...titleParts] = name.split("-");
         const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
         const datePart = `${year}-${month}-${day}`;
 
-        // Get true time from GitHub commit history
+        // Fetch the GitHub commits for this file to get creation time
         const fileRes = await fetch(`https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/commits?path=frontend/blog/${file.name}`);
         const fileCommits = await fileRes.json();
         const commitTime = fileCommits.length > 0 ? fileCommits[fileCommits.length - 1].commit.author.date : `${datePart}T12:00:00`;
 
+        // Fetch the blog content to get preview and meta
         const res = await fetch(`./${file.name}`);
         const html = await res.text();
 
+        // Estimate word count and reading time
         const textOnly = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
         const wordCount = textOnly.split(' ').length;
         const readTime = Math.ceil(wordCount / 200);
 
+        // Parse category (if any)
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
         const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
         const category = metaTag ? (metaTag.getAttribute("content") || metaTag.textContent.trim()) : "Uncategorized";
 
+        // Grab a snippet from first <p> if available
         const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
+        // Return the processed blog post data
         return { title, date: datePart, file: file.name, preview, category, readTime, commitTime };
       })
   );
 
+  // === Initialize search with Fuse.js ===
   const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
 
-  // --- Render posts grouped by category
+  // === Render the blog posts grouped by category ===
   function renderPosts(posts) {
-    blogContainer.innerHTML = "";
+    blogContainer.innerHTML = ""; // Clear previous
 
-    const categories = [...new Set(posts.map(p => p.category))];
+    const categories = [...new Set(posts.map(p => p.category))]; // Unique categories
 
     categories.forEach(category => {
       const catHeader = document.createElement("h2");
@@ -180,13 +187,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       posts.filter(p => p.category === category).forEach(post => {
         const postElement = document.createElement("div");
         postElement.className = "post-preview fade-in";
+
         postElement.innerHTML = `
           <h3><a href="./${post.file}">${post.title}</a></h3>
           <p class="post-meta">${formatPublishedDisplay(post.date, post.commitTime, post.readTime)}</p>
           <p class="post-snippet">${post.preview}</p>
         `;
-        section.appendChild(postElement);
 
+        // Fade-in animation when entering viewport
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -197,13 +205,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         }, { threshold: 0.1 });
 
         observer.observe(postElement);
+        section.appendChild(postElement);
       });
 
       blogContainer.appendChild(section);
     });
   }
 
-  // --- Apply filter & sort
+  // === Apply filter (category) or sort (newest/oldest) ===
   function applyFilterAndSort() {
     const selected = filterSelect.value;
     let filteredPosts = [...allPosts];
@@ -221,7 +230,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPosts(filteredPosts);
   }
 
-  // --- Build category options dynamically
+  // === Build filter dropdown options dynamically ===
   const categoryGroup = filterSelect.querySelector('optgroup[label="🗂 Categories"]');
   const categories = [...new Set(allPosts.map(p => p.category))];
   categories.forEach(category => {
@@ -231,18 +240,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     categoryGroup.appendChild(option);
   });
 
-  // --- Initial sort & render
+  // === Initial render sorted by newest first ===
   allPosts.sort((a, b) => {
-  const aDate = new Date(a.date);
-  const bDate = new Date(b.date);
-  return bDate - aDate; // newest first
-});
+    const aDate = new Date(a.date);
+    const bDate = new Date(b.date);
+    return bDate - aDate;
+  });
   renderPosts(allPosts);
 
-  // --- Search functionality
+  // === Search typing interaction ===
   searchInput.addEventListener("input", e => {
     const results = fuse.search(e.target.value.trim());
     searchResults.innerHTML = "";
+
     if (results.length > 0) {
       searchResults.style.display = "block";
       results.slice(0, 5).forEach(r => {
@@ -261,6 +271,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  // === Filter event listener ===
   filterSelect.addEventListener("change", applyFilterAndSort);
 });
 </script>
