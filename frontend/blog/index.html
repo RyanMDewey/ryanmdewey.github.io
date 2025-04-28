@@ -100,17 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const filterSelect = document.getElementById("filter-select");
 
 // --- Helper to format the full "Published April 28, 2025 at 5:42 PM" text
-function formatPublishedDisplay(fileDate, commitDateTime) {
-  const d = new Date(commitDateTime);
 
-  const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-  const optionsTime = { hour: 'numeric', minute: '2-digit', hour12: true };
-
-  const prettyDate = new Date(fileDate).toLocaleDateString(undefined, optionsDate);
-  const prettyTime = d.toLocaleTimeString(undefined, optionsTime);
-
-  return `Published ${prettyDate} at ${prettyTime}`;
-}
 
   // --- Toggle filter options
   document.getElementById('filter-sort-button').addEventListener('click', () => {
@@ -125,7 +115,24 @@ function formatPublishedDisplay(fileDate, commitDateTime) {
   let allPosts = await Promise.all(
     files
       .filter(file => file.name.endsWith(".html") && /^\d{4}-\d{2}-\d{2}/.test(file.name))
-      .map(async file => {
+    
+  function formatPublishedDisplay(fileDate, commitDateTime, readTime) {
+   const fileParts = fileDate.split("-").map(Number); // [2025, 04, 26]
+   const commit = new Date(commitDateTime);
+
+   // Merge date from filename and time from GitHub
+   const mergedDate = new Date(fileParts[0], fileParts[1] - 1, fileParts[2], commit.getHours(), commit.getMinutes());
+
+   const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+   const optionsTime = { hour: 'numeric', minute: '2-digit', hour12: true };
+
+   const prettyDate = mergedDate.toLocaleDateString(undefined, optionsDate);
+   const prettyTime = mergedDate.toLocaleTimeString(undefined, optionsTime);
+
+   return `Published ${prettyDate} at ${prettyTime} • ${readTime} min read`; 
+  }
+  
+        .map(async file => {
         const name = file.name.replace(".html", "");
         const [year, month, day, ...titleParts] = name.split("-");
         const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
@@ -175,7 +182,7 @@ function formatPublishedDisplay(fileDate, commitDateTime) {
         postElement.className = "post-preview fade-in";
         postElement.innerHTML = `
           <h3><a href="./${post.file}">${post.title}</a></h3>
-          <p class="post-meta">${formatPublishedDisplay(post.date, post.commitTime)} • ${post.readTime} min read</p>
+          <p class="post-meta">${formatPublishedDisplay(post.date, post.commitTime, post.readTime)}</p>
           <p class="post-snippet">${post.preview}</p>
         `;
         section.appendChild(postElement);
