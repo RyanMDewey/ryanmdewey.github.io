@@ -118,8 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const fileRes = await fetch(`https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/commits?path=frontend/blog/${file.name}`);
         const fileCommits = await fileRes.json();
-        const publishTime = fileCommits.length > 0 ? fileCommits[fileCommits.length-1].commit.author.date : date;
-
+        // Fix: get the LAST item = OLDEST commit (true creation)
+        const publishTime = fileCommits.length > 0 ? fileCommits[fileCommits.length - 1].commit.author.date : date;
         const res = await fetch(`./${file.name}`);
         const html = await res.text();
 
