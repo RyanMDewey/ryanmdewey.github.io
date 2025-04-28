@@ -454,3 +454,94 @@ h2 {
   border-bottom: 1px solid rgba(0, 255, 225, 0.2);
   padding-bottom: 0.3rem;
 }
+
+/* --- Blog Page Structure --- */
+
+.blog-header {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.blog-header h1 {
+  font-size: 2.5rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.blog-header p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  opacity: 0.8;
+  margin-bottom: 2rem;
+}
+
+.blog-banner {
+  width: 100%;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  box-shadow: 0 0 12px rgba(0, 255, 225, 0.1);
+}
+
+/* --- Blog List Section --- */
+
+#blog-list {
+  margin-top: 2rem;
+}
+
+/* --- Blog Post Previews (Fixes) --- */
+
+.post-preview {
+  border: 1px solid rgba(0, 255, 225, 0.2);
+  background: rgba(0, 255, 225, 0.03);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 10px rgba(0, 255, 225, 0.05);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.post-preview.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.post-preview h3 {
+  margin-top: 0;
+}
+
+.post-preview h3 a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.post-preview h3 a:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+}
+
+/* --- Blog Snippet Text --- */
+
+.post-snippet {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+/* --- Footer --- */
+
+.footer {
+  margin-top: 4rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  opacity: 0.7;
+  padding-bottom: 2rem;
+}
