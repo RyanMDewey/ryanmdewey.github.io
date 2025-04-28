@@ -116,6 +116,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
         const date = `${year}-${month}-${day}`;
 
+        const fileRes = await fetch(`https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/commits?path=frontend/blog/${file.name}`);
+        const fileCommits = await fileRes.json();
+        const publishTime = fileCommits.length > 0 ? fileCommits[fileCommits.length-1].commit.author.date : date;
+
         const res = await fetch(`./${file.name}`);
         const html = await res.text();
 
@@ -130,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
-        return { title, date, file: file.name, preview, category, readTime };
+        return { title, date, file: file.name, preview, category, readTime, publishTime };
       })
   );
 
@@ -154,7 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         postElement.className = "post-preview fade-in";
         postElement.innerHTML = `
           <h3><a href="./${post.file}">${post.title}</a></h3>
-          <p class="post-meta">Published: ${post.date} | ~${post.readTime} min read</p>
+          <p class="post-meta">Published: ${new Date(post.publishTime).toLocaleString()} | ~${post.readTime} min read</p>
           <p class="post-snippet">${post.preview}</p>
         `;
         section.appendChild(postElement);
@@ -181,9 +185,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (selected.startsWith('sort-')) {
       if (selected === 'sort-newest') {
-        filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        filteredPosts.sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime));
       } else if (selected === 'sort-oldest') {
-        filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+        filteredPosts.sort((a, b) => new Date(a.publishTime) - new Date(b.publishTime));
       }
     } else if (selected !== "all") {
       filteredPosts = allPosts.filter(post => post.category === selected);
@@ -203,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // Initial sort + render
-  allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  allPosts.sort((a, b) => new Date(b.publishTime) - new Date(a.publishTime));
   renderPosts(allPosts);
 
   // Search
@@ -228,7 +232,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // Hook up filter+sort change
   filterSelect.addEventListener("change", applyFilterAndSort);
 });
 </script>
