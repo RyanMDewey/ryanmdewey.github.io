@@ -380,4 +380,70 @@
                   entry.target.classList.add("visible");
                   observer.unobserve(entry.target);
                 }
-              });
+      });
+      observer.observe(postElement);
+    });
+    blogContainer.appendChild(section);
+  });
+}
+
+function applyFilterAndSort() {
+  const selected = filterSelect.value;
+  let filteredPosts = [...allPosts];
+
+  if (selected.startsWith('sort-')) {
+    if (selected === 'sort-newest') {
+      filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (selected === 'sort-oldest') {
+      filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+  } else if (selected !== "all") {
+    filteredPosts = allPosts.filter(post => post.category === selected);
+  }
+
+  renderPosts(filteredPosts);
+}
+
+// Dynamically insert categories
+const categoryGroup = filterSelect.querySelector('optgroup[label="🗂 Categories"]');
+const categories = [...new Set(allPosts.map(p => p.category))];
+categories.forEach(category => {
+  const option = document.createElement("option");
+  option.value = category;
+  option.textContent = category;
+  categoryGroup.appendChild(option);
+});
+
+// Initial sort and render
+allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+renderPosts(allPosts);
+
+// Search functionality
+searchInput.addEventListener("input", e => {
+  const results = fuse.search(e.target.value.trim());
+  searchResults.innerHTML = "";
+  if (results.length > 0) {
+    searchResults.style.display = "block";
+    results.slice(0, 5).forEach(r => {
+      const resultItem = document.createElement("div");
+      resultItem.className = "search-result";
+      resultItem.textContent = r.item.title;
+      resultItem.onclick = () => window.location.href = `./${r.item.file}`;
+      searchResults.appendChild(resultItem);
+    });
+  } else {
+    searchResults.style.display = e.target.value ? "block" : "none";
+    const noMatch = document.createElement("div");
+    noMatch.className = "search-result";
+    noMatch.textContent = "No matches found.";
+    searchResults.appendChild(noMatch);
+  }
+});
+
+// Hook up filter+sort
+filterSelect.addEventListener("change", applyFilterAndSort);
+});
+    
+</script>
+</body>
+</html>
