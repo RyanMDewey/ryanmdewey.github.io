@@ -238,41 +238,9 @@
   <!-- ✅ CATEGORY FALLBACK (invisible to user) -->
   <p style="display: none;" id="fallback-category">AI</p>
 
-  <nav class="top-nav">
-    <div class="nav-container" id="dynamic-nav"></div>
-  </nav>
-
-  <script>
-    const currentPath = window.location.pathname;
-    const currentPage = currentPath.split('/').pop() || 'index.html';
-
-    const navLinks = [
-      { name: 'Home', href: '/' },
-      { name: 'About', href: '/about.html' },
-      { name: 'Projects', href: '/projects.html' },
-      { name: 'Skills', href: '/skills.html' },
-      { name: 'Resume', href: '/resume.html' },
-      { name: 'Contact', href: '/contact.html' },
-      { name: 'Blog', href: '/blog/' }
-    ];
-
-    const nav = document.createElement('div');
-    nav.className = 'nav-links';
-
-    navLinks.forEach(link => {
-      const isActive = currentPage === link.href.split('/').pop() || currentPath === link.href;
-      if (!isActive) {
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.name;
-        nav.appendChild(a);
-      }
-    });
-  </script>
     <div id="search-container">
       <input type="text" id="search-input" placeholder="Search posts...">
       <div id="search-results"></div>
-    </div>
   </div>
 
   <div id="filter-sort-box">
@@ -304,146 +272,144 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const blogContainer = document.getElementById("blog-list");
-      const searchInput = document.getElementById("search-input");
-      const searchResults = document.getElementById("search-results");
-      const filterSelect = document.getElementById("filter-select");
+document.addEventListener("DOMContentLoaded", async () => {
+  const blogContainer = document.getElementById("blog-list");
+  const searchInput = document.getElementById("search-input");
+  const searchResults = document.getElementById("search-results");
+  const filterSelect = document.getElementById("filter-select");
 
-      document.getElementById('filter-sort-button').addEventListener('click', () => {
-      const options = document.getElementById('filter-options');
-      if (options.style.display === 'none') {
-        options.style.display = 'block';
-      } else {
-        options.style.display = 'none';
-      }
-    });
-      
-      const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
-      const files = await response.json();
-    
-      let allPosts = await Promise.all(
-        files
-          .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
-          .map(async file => {
-            const name = file.name.replace(".html", "");
-            const [year, month, day, ...titleParts] = name.split("-");
-            const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-            const date = `${year}-${month}-${day}`;
-    
-            const res = await fetch(`./${file.name}`);
-            const html = await res.text();
-    
-            const textOnly = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-            const wordCount = textOnly.split(' ').length;
-            const readTime = Math.ceil(wordCount / 200);
-    
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-            const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
-            const category = metaTag ? (metaTag.getAttribute("content") || metaTag.textContent.trim()) : "Uncategorized";
-    
-            const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
-    
-            return { title, date, file: file.name, preview, category, readTime };
-          })
-      );
-    
-      const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
-    
-      function renderPosts(posts) {
-        blogContainer.innerHTML = "";
-    
-        const categories = [...new Set(posts.map(p => p.category))];
-    
-        categories.forEach(category => {
-          const catHeader = document.createElement("h2");
-          catHeader.textContent = category;
-          blogContainer.appendChild(catHeader);
-    
-          const section = document.createElement("div");
-          section.className = "category-group";
-    
-          posts.filter(p => p.category === category).forEach(post => {
-            const postElement = document.createElement("div");
-            postElement.className = "post-preview fade-in";
-            postElement.innerHTML = `
-              <h3><a href="./${post.file}">${post.title}</a></h3>
-              <p class="post-meta">Published: ${post.date} | ~${post.readTime} min read</p>
-              <p class="post-snippet">${post.preview}</p>
-            `;
-            section.appendChild(postElement);
-    
-            const observer = new IntersectionObserver(entries => {
-              entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("visible");
-                  observer.unobserve(entry.target);
-                }
-      });
-      observer.observe(postElement);
-    });
-    blogContainer.appendChild(section);
+  document.getElementById('filter-sort-button').addEventListener('click', () => {
+    const options = document.getElementById('filter-options');
+    options.style.display = (options.style.display === 'none') ? 'block' : 'none';
   });
-}
 
-function applyFilterAndSort() {
-  const selected = filterSelect.value;
-  let filteredPosts = [...allPosts];
+  const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
+  const files = await response.json();
 
-  if (selected.startsWith('sort-')) {
-    if (selected === 'sort-newest') {
-      filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    } else if (selected === 'sort-oldest') {
-      filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
-  } else if (selected !== "all") {
-    filteredPosts = allPosts.filter(post => post.category === selected);
-  }
+  let allPosts = await Promise.all(
+    files
+      .filter(file => file.name.endsWith(".html") && file.name.match(/^\d{4}-\d{2}-\d{2}/))
+      .map(async file => {
+        const name = file.name.replace(".html", "");
+        const [year, month, day, ...titleParts] = name.split("-");
+        const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        const date = `${year}-${month}-${day}`;
 
-  renderPosts(filteredPosts);
-}
+        const res = await fetch(`./${file.name}`);
+        const html = await res.text();
 
-// Dynamically insert categories
-const categoryGroup = filterSelect.querySelector('optgroup[label="🗂 Categories"]');
-const categories = [...new Set(allPosts.map(p => p.category))];
-categories.forEach(category => {
-  const option = document.createElement("option");
-  option.value = category;
-  option.textContent = category;
-  categoryGroup.appendChild(option);
-});
+        const textOnly = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+        const wordCount = textOnly.split(' ').length;
+        const readTime = Math.ceil(wordCount / 200);
 
-// Initial sort and render
-allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-renderPosts(allPosts);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const metaTag = doc.querySelector('meta[name="category"]') || doc.querySelector('#fallback-category');
+        const category = metaTag ? (metaTag.getAttribute("content") || metaTag.textContent.trim()) : "Uncategorized";
 
-// Search functionality
-searchInput.addEventListener("input", e => {
-  const results = fuse.search(e.target.value.trim());
-  searchResults.innerHTML = "";
-  if (results.length > 0) {
-    searchResults.style.display = "block";
-    results.slice(0, 5).forEach(r => {
-      const resultItem = document.createElement("div");
-      resultItem.className = "search-result";
-      resultItem.textContent = r.item.title;
-      resultItem.onclick = () => window.location.href = `./${r.item.file}`;
-      searchResults.appendChild(resultItem);
+        const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
+
+        return { title, date, file: file.name, preview, category, readTime };
+      })
+  );
+
+  const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
+
+  function renderPosts(posts) {
+    blogContainer.innerHTML = "";
+
+    const categories = [...new Set(posts.map(p => p.category))];
+
+    categories.forEach(category => {
+      const catHeader = document.createElement("h2");
+      catHeader.textContent = category;
+      blogContainer.appendChild(catHeader);
+
+      const section = document.createElement("div");
+      section.className = "category-group";
+
+      posts.filter(p => p.category === category).forEach(post => {
+        const postElement = document.createElement("div");
+        postElement.className = "post-preview fade-in";
+        postElement.innerHTML = `
+          <h3><a href="./${post.file}">${post.title}</a></h3>
+          <p class="post-meta">Published: ${post.date} | ~${post.readTime} min read</p>
+          <p class="post-snippet">${post.preview}</p>
+        `;
+        section.appendChild(postElement);
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        observer.observe(postElement);
+      });
+
+      blogContainer.appendChild(section);
     });
-  } else {
-    searchResults.style.display = e.target.value ? "block" : "none";
-    const noMatch = document.createElement("div");
-    noMatch.className = "search-result";
-    noMatch.textContent = "No matches found.";
-    searchResults.appendChild(noMatch);
   }
-});
 
-// Hook up filter+sort
-filterSelect.addEventListener("change", applyFilterAndSort);
+  function applyFilterAndSort() {
+    const selected = filterSelect.value;
+    let filteredPosts = [...allPosts];
+
+    if (selected.startsWith('sort-')) {
+      if (selected === 'sort-newest') {
+        filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+      } else if (selected === 'sort-oldest') {
+        filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+      }
+    } else if (selected !== "all") {
+      filteredPosts = allPosts.filter(post => post.category === selected);
+    }
+
+    renderPosts(filteredPosts);
+  }
+
+  // Populate dynamic categories
+  const categoryGroup = filterSelect.querySelector('optgroup[label="🗂 Categories"]');
+  const categories = [...new Set(allPosts.map(p => p.category))];
+  categories.forEach(category => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryGroup.appendChild(option);
+  });
+
+  // Initial sort + render
+  allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  renderPosts(allPosts);
+
+  // Search
+  searchInput.addEventListener("input", e => {
+    const results = fuse.search(e.target.value.trim());
+    searchResults.innerHTML = "";
+    if (results.length > 0) {
+      searchResults.style.display = "block";
+      results.slice(0, 5).forEach(r => {
+        const resultItem = document.createElement("div");
+        resultItem.className = "search-result";
+        resultItem.textContent = r.item.title;
+        resultItem.onclick = () => window.location.href = `./${r.item.file}`;
+        searchResults.appendChild(resultItem);
+      });
+    } else {
+      searchResults.style.display = e.target.value ? "block" : "none";
+      const noMatch = document.createElement("div");
+      noMatch.className = "search-result";
+      noMatch.textContent = "No matches found.";
+      searchResults.appendChild(noMatch);
+    }
+  });
+
+  // Hook up filter+sort change
+  filterSelect.addEventListener("change", applyFilterAndSort);
 });
-    
 </script>
 </body>
 </html>
