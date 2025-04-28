@@ -93,27 +93,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
   <script>
+  <script>
 document.addEventListener("DOMContentLoaded", async () => {
   const blogContainer = document.getElementById("blog-list");
   const searchInput = document.getElementById("search-input");
   const searchResults = document.getElementById("search-results");
   const filterSelect = document.getElementById("filter-select");
 
-  // Toggle filter options
+  // --- Helper to format only time (HH:MM)
+  function formatTime(fullDate) {
+    const d = new Date(fullDate);
+    return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+  }
+
+  // --- Toggle filter options
   document.getElementById('filter-sort-button').addEventListener('click', () => {
     const options = document.getElementById('filter-options');
     options.style.display = (options.style.display === 'none') ? 'block' : 'none';
   });
 
-  // Fetch blog files
+  // --- Fetch blog files
   const response = await fetch("https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/contents/frontend/blog");
   const files = await response.json();
-
-  function formatPublishTime(fullDate, fileNameDatePart) {
-    const [year, month, day] = fileNameDatePart.split("-").map(Number);
-    const d = new Date(fullDate);
-    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
-  }
 
   let allPosts = await Promise.all(
     files
@@ -124,10 +125,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         const title = titleParts.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
         const datePart = `${year}-${month}-${day}`;
 
-        // Fetch true GitHub commit (time)
+        // Get true time from GitHub commit history
         const fileRes = await fetch(`https://api.github.com/repos/RyanMDewey/ryanmdewey.github.io/commits?path=frontend/blog/${file.name}`);
         const fileCommits = await fileRes.json();
-        const commitDate = fileCommits.length > 0 ? fileCommits[fileCommits.length - 1].commit.author.date : `${datePart}T12:00:00`;
+        const commitTime = fileCommits.length > 0 ? fileCommits[fileCommits.length - 1].commit.author.date : `${datePart}T12:00:00`;
 
         const res = await fetch(`./${file.name}`);
         const html = await res.text();
@@ -143,12 +144,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const preview = html.split("<p>")[1]?.split("</p>")[0] || "";
 
-        return { title, date: datePart, file: file.name, preview, category, readTime, commitDate };
+        return { title, date: datePart, file: file.name, preview, category, readTime, commitTime };
       })
   );
 
   const fuse = new Fuse(allPosts, { keys: ["title", "preview"], threshold: 0.3 });
 
+  // --- Render posts grouped by category
   function renderPosts(posts) {
     blogContainer.innerHTML = "";
 
@@ -167,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         postElement.className = "post-preview fade-in";
         postElement.innerHTML = `
           <h3><a href="./${post.file}">${post.title}</a></h3>
-          <p class="post-meta">Published: ${formatPublishTime(post.commitDate, post.date)} | ~${post.readTime} min read</p>
+          <p class="post-meta">Published: ${post.date} ${formatTime(post.commitTime)} | ~${post.readTime} min read</p>
           <p class="post-snippet">${post.preview}</p>
         `;
         section.appendChild(postElement);
@@ -188,15 +190,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // --- Apply filter & sort
   function applyFilterAndSort() {
     const selected = filterSelect.value;
     let filteredPosts = [...allPosts];
 
     if (selected.startsWith('sort-')) {
       if (selected === 'sort-newest') {
-        filteredPosts.sort((a, b) => new Date(b.commitDate) - new Date(a.commitDate));
+        filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
       } else if (selected === 'sort-oldest') {
-        filteredPosts.sort((a, b) => new Date(a.commitDate) - new Date(b.commitDate));
+        filteredPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
       }
     } else if (selected !== "all") {
       filteredPosts = allPosts.filter(post => post.category === selected);
@@ -205,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPosts(filteredPosts);
   }
 
-  // Populate dynamic categories
+  // --- Build category options dynamically
   const categoryGroup = filterSelect.querySelector('optgroup[label="🗂 Categories"]');
   const categories = [...new Set(allPosts.map(p => p.category))];
   categories.forEach(category => {
@@ -215,11 +218,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     categoryGroup.appendChild(option);
   });
 
-  // Initial sort + render
-  allPosts.sort((a, b) => new Date(b.commitDate) - new Date(a.commitDate));
+  // --- Initial sort & render
+  allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
   renderPosts(allPosts);
 
-  // Search functionality
+  // --- Search functionality
   searchInput.addEventListener("input", e => {
     const results = fuse.search(e.target.value.trim());
     searchResults.innerHTML = "";
