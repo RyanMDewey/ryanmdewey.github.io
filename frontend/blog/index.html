@@ -99,11 +99,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   const searchResults = document.getElementById("search-results");
   const filterSelect = document.getElementById("filter-select");
 
-  // --- Helper to format only time (HH:MM)
-  function formatTime(fullDate) {
-    const d = new Date(fullDate);
-    return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
-  }
+// --- Helper to format the full "Published April 28, 2025 at 5:42 PM" text
+function formatPublishedDisplay(fileDate, commitDateTime) {
+  const d = new Date(commitDateTime);
+
+  const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+  const optionsTime = { hour: 'numeric', minute: '2-digit', hour12: true };
+
+  const prettyDate = new Date(fileDate).toLocaleDateString(undefined, optionsDate);
+  const prettyTime = d.toLocaleTimeString(undefined, optionsTime);
+
+  return `Published ${prettyDate} at ${prettyTime}`;
+}
 
   // --- Toggle filter options
   document.getElementById('filter-sort-button').addEventListener('click', () => {
@@ -168,7 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         postElement.className = "post-preview fade-in";
         postElement.innerHTML = `
           <h3><a href="./${post.file}">${post.title}</a></h3>
-          <p class="post-meta">Published: ${post.date} ${formatTime(post.commitTime)} | ~${post.readTime} min read</p>
+          <p class="post-meta">${formatPublishedDisplay(post.date, post.commitTime)} • ${post.readTime} min read</p>
           <p class="post-snippet">${post.preview}</p>
         `;
         section.appendChild(postElement);
