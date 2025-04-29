@@ -548,13 +548,13 @@ h2 {
 
 /* Featured Byte of the Day block */
 .featured-post {
-  background: linear-gradient(145deg, #1b1f23, #21262c);
-  border: 1px solid #00ffe1;
-  border-radius: 16px;
-  padding: 30px;
-  margin: 20px auto 40px auto;
+  background: rgba(16, 16, 16, 0.85); /* Slightly more transparent for contrast */
+  border-left: 4px solid #00ffe1;     /* Teal accent strip on left */
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin: 40px auto 60px auto;
   max-width: 800px;
-  box-shadow: 0 0 15px rgba(0, 255, 225, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 225, 0.35);
   animation: pulseGlow 4s infinite;
 }
 
@@ -564,19 +564,22 @@ h2 {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 /* Blog title inside featured */
 .featured-post h3 a {
+  display: inline-block;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #00ffe1;
+  font-weight: 600;
   text-decoration: none;
+  margin-bottom: 10px;
   transition: color 0.3s;
 }
 
 .featured-post h3 a:hover {
-  color: #00ffe1;
+  color: #ffffff;
 }
 
 /* Metadata line (Published...) */
@@ -592,6 +595,11 @@ h2 {
   color: #cccccc;
   margin-top: 15px;
   line-height: 1.6;
+}
+
+/* Separation between featured and next section */
+#featured-blog {
+  margin-bottom: 60px;
 }
 
 /* Subtle glowing animation */
