@@ -545,3 +545,64 @@ h2 {
   opacity: 0.7;
   padding-bottom: 2rem;
 }
+
+/* Featured Byte of the Day block */
+.featured-post {
+  background: linear-gradient(145deg, #1b1f23, #21262c);
+  border: 1px solid #00ffe1;
+  border-radius: 16px;
+  padding: 30px;
+  margin: 20px auto 40px auto;
+  max-width: 800px;
+  box-shadow: 0 0 15px rgba(0, 255, 225, 0.4);
+  animation: pulseGlow 4s infinite;
+}
+
+/* Title ("Byte of the Day") */
+.featured-post h2 {
+  color: #00ffe1;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Blog title inside featured */
+.featured-post h3 a {
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.featured-post h3 a:hover {
+  color: #00ffe1;
+}
+
+/* Metadata line (Published...) */
+.featured-post .post-meta {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+  margin: 10px 0;
+}
+
+/* Blog snippet preview */
+.featured-post .post-snippet {
+  font-size: 1rem;
+  color: #cccccc;
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+/* Subtle glowing animation */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 255, 225, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 225, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 255, 225, 0.3);
+  }
+}
