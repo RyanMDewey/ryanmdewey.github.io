@@ -98,7 +98,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const blogContainer = document.getElementById("blog-list");
   const featuredContainer = document.getElementById("featured-blog");
-  // const spinner = document.getElementById("spinner");
   const searchInput = document.getElementById("search-input");
   const searchResults = document.getElementById("search-results");
   const filterSelect = document.getElementById("filter-select");
@@ -243,8 +242,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const blogOfTheDay = allPosts.shift(); // Remove first (newest) blog for featured
   renderFeatured(blogOfTheDay);
   renderPosts(allPosts);
-
-  // spinner.style.display = "none"; // Hide spinner once loaded
 
   // === Search functionality ===
   searchInput.addEventListener("input", e => {
