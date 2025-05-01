@@ -164,45 +164,62 @@
     });
 
     // Load and Render Components
-    fetch('../data/drc-components.json')
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('components-container');
-        data.forEach(category => {
-          const section = document.createElement('section');
-          section.className = 'hero-box';
-          section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
-          section.setAttribute('aria-labelledby', `header-${section.id}`);
-          
-          const header = document.createElement('h2');
-          header.id = `header-${section.id}`;
-          header.className = 'section-title';
-          header.textContent = `${category.color} ${category.category}`;
-          section.appendChild(header);
+fetch('../data/drc-components.json')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('components-container');
 
-          const purpose = document.createElement('p');
-          purpose.textContent = `Purpose: ${category.purpose}`;
-          section.appendChild(purpose);
+    data.forEach(category => {
+      const section = document.createElement('section');
+      section.className = 'hero-box';
+      section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
+      section.setAttribute('aria-labelledby', `header-${section.id}`);
 
-          const componentDiv = document.createElement('div');
-          componentDiv.className = 'component';
-          category.components.forEach(comp => {
-            const details = document.createElement('details');
-            details.id = comp.id;
-            const summary = document.createElement('summary');
-            summary.textContent = `${comp.number} ${comp.name}`;
-            const desc = document.createElement('p');
-            desc.textContent = comp.description;
-            details.appendChild(summary);
-            details.appendChild(desc);
-            componentDiv.appendChild(details);
-          });
-          section.appendChild(componentDiv);
-          container.appendChild(section);
-        });
-      })
-      .catch(err => console.error('Error loading components:', err));
+      const header = document.createElement('h2');
+      header.id = `header-${section.id}`;
+      header.className = 'section-title';
+      header.textContent = `${category.color} ${category.category}`;
+      section.appendChild(header);
 
+      const purpose = document.createElement('p');
+      purpose.textContent = `Purpose: ${category.purpose}`;
+      section.appendChild(purpose);
+
+      const componentDiv = document.createElement('div');
+      componentDiv.className = 'component';
+
+      category.components.forEach(comp => {
+        const details = document.createElement('details');
+        details.id = comp.id;
+
+        const summary = document.createElement('summary');
+        summary.textContent = `${comp.number} ${comp.name}`;
+
+        const desc = document.createElement('p');
+        desc.textContent = comp.description;
+
+        details.appendChild(summary);
+        details.appendChild(desc);
+        componentDiv.appendChild(details);
+      });
+
+      section.appendChild(componentDiv);
+      container.appendChild(section);
+    });
+
+    // Scroll to section after load if hash is present
+    const hash = window.location.hash;
+    if (hash) {
+      setTimeout(() => {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  })
+  .catch(err => console.error('Error loading components:', err));
+    
     // Live Search
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', () => {
