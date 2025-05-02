@@ -16,11 +16,9 @@
       margin: 0;
       padding: 1rem;
     }
-
     h1, h2 {
       color: #00ffe1;
     }
-
     #search-input, #quick-nav {
       width: 300px;
       max-width: 90%;
@@ -32,7 +30,6 @@
       color: #f4f4f4;
       border-radius: 4px;
     }
-
     .component details {
       background: rgba(0, 255, 225, 0.05);
       border-left: 3px solid #00ffe1;
@@ -40,20 +37,17 @@
       margin-bottom: 1rem;
       border-radius: 8px;
     }
-
     summary {
       font-size: 1.1rem;
       cursor: pointer;
       color: #00ffe1;
     }
-
     pre {
       background: #111;
       padding: 0.5rem;
       border-radius: 4px;
       overflow-x: auto;
     }
-
     button {
       margin-top: 0.5rem;
       background: #00ffe1;
@@ -63,12 +57,10 @@
       color: #0b0b0b;
       cursor: pointer;
     }
-
     .code-output, .widget-output {
       margin-top: 0.5rem;
       color: #33ff99;
     }
-
     input[type="text"] {
       padding: 0.4rem;
       border-radius: 4px;
@@ -76,40 +68,33 @@
       background: #111;
       color: #f4f4f4;
     }
-
     .lesson {
       margin-top: 0.5rem;
       padding: 0.5rem;
       background: rgba(0, 255, 225, 0.03);
       border-radius: 4px;
     }
-
     .hero {
       text-align: center;
       margin-top: 1rem;
     }
-
     .hero-box {
       margin-bottom: 2rem;
     }
-
     .top-nav {
       margin-bottom: 1rem;
     }
-
     .nav-links a {
       margin: 0 0.6rem;
       color: #00ffe1;
       text-decoration: none;
     }
-
     .nav-links a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <!-- 🔧 Dynamic Nav Injection Target -->
   <div class="top-nav">
     <div class="nav-container" id="dynamic-nav"></div>
   </div>
@@ -148,7 +133,6 @@
     ✨ DRC Academy © 2025 Ryan Dewey
   </footer>
 
-  <!-- Dynamic Nav Script -->
   <script>
     const currentPath = window.location.pathname;
     const currentPage = currentPath.split('/').pop() || 'index.html';
@@ -165,7 +149,6 @@
 
     const nav = document.createElement('div');
     nav.className = 'nav-links';
-
     navLinks.forEach(link => {
       const isActive = currentPage === link.href.split('/').pop() || currentPath === link.href;
       if (!isActive) {
@@ -175,129 +158,144 @@
         nav.appendChild(a);
       }
     });
-
     document.getElementById('dynamic-nav')?.appendChild(nav);
-  </script>
 
-  <!-- Render Components -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('quick-nav').addEventListener('change', function () {
-      const target = document.querySelector(this.value);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('quick-nav').addEventListener('change', function () {
+        const target = document.querySelector(this.value);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
 
-    fetch('https://www.ryanmdewey.com/data/drc-components.json')
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('components-container');
-        data.forEach(category => {
-          const section = document.createElement('section');
-          section.className = 'hero-box';
-          section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
+      fetch('https://www.ryanmdewey.com/data/drc-components.json')
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById('components-container');
+          data.forEach(category => {
+            const section = document.createElement('section');
+            section.className = 'hero-box';
+            section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
 
-          const header = document.createElement('h2');
-          header.textContent = `${category.color} ${category.category}`;
-          section.appendChild(header);
+            const header = document.createElement('h2');
+            header.textContent = `${category.color} ${category.category}`;
+            section.appendChild(header);
 
-          const purpose = document.createElement('p');
-          purpose.textContent = `Purpose: ${category.purpose}`;
-          section.appendChild(purpose);
+            const purpose = document.createElement('p');
+            purpose.textContent = `Purpose: ${category.purpose}`;
+            section.appendChild(purpose);
 
-          const compContainer = document.createElement('div');
-          compContainer.className = 'component';
+            const compContainer = document.createElement('div');
+            compContainer.className = 'component';
 
-          category.components.forEach(comp => {
-            const details = document.createElement('details');
-            const summary = document.createElement('summary');
-            summary.textContent = `${comp.number} ${comp.name}`;
-            details.appendChild(summary);
+            category.components.forEach(comp => {
+              const details = document.createElement('details');
+              const summary = document.createElement('summary');
+              summary.textContent = `${comp.number} ${comp.name}`;
+              details.appendChild(summary);
 
-            const desc = document.createElement('p');
-            desc.textContent = comp.description;
-            details.appendChild(desc);
+              const desc = document.createElement('p');
+              desc.textContent = comp.description;
+              details.appendChild(desc);
 
-            if (comp.lesson) {
-              const lesson = document.createElement('div');
-              lesson.className = 'lesson';
-              lesson.textContent = comp.lesson;
-              details.appendChild(lesson);
-            }
+              if (comp.lesson) {
+                const lesson = document.createElement('div');
+                lesson.className = 'lesson';
 
-            if (comp.code_snippet) {
-              const codeDiv = document.createElement('div');
-              const pre = document.createElement('pre');
-              pre.textContent = comp.code_snippet;
-              codeDiv.appendChild(pre);
+                const lessonLink = document.createElement('a');
+                lessonLink.textContent = 'Read Full Lesson';
+                lessonLink.href = '#';
+                lessonLink.style.color = '#00ffe1';
+                lessonLink.style.display = 'inline-block';
+                lessonLink.style.marginTop = '0.3rem';
 
-              const runBtn = document.createElement('button');
-              runBtn.textContent = 'Run Code';
-              runBtn.onclick = () => {
-                try {
-                  const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n'));
+                lessonLink.onclick = async (e) => {
+                  e.preventDefault();
+                  try {
+                    const res = await fetch(`/lessons/${comp.id}.md`);
+                    if (!res.ok) throw new Error();
+                    const md = await res.text();
+                    lesson.innerHTML = marked.parse(md);
+                  } catch {
+                    lesson.textContent = comp.lesson;
+                  }
+                };
+
+                lesson.appendChild(lessonLink);
+                details.appendChild(lesson);
+              }
+
+              if (comp.code_snippet) {
+                const codeDiv = document.createElement('div');
+                const pre = document.createElement('pre');
+                pre.textContent = comp.code_snippet;
+                codeDiv.appendChild(pre);
+
+                const runBtn = document.createElement('button');
+                runBtn.textContent = 'Run Code';
+                runBtn.onclick = () => {
+                  try {
+                    const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n'));
+                    const output = document.createElement('div');
+                    output.className = 'code-output';
+                    output.textContent = `Output: ${result}`;
+                    codeDiv.appendChild(output);
+                  } catch (e) {
+                    const output = document.createElement('div');
+                    output.className = 'code-output';
+                    output.textContent = `Error: ${e.message}`;
+                    codeDiv.appendChild(output);
+                  }
+                };
+
+                codeDiv.appendChild(runBtn);
+                details.appendChild(codeDiv);
+              }
+
+              if (comp.interactive_widget) {
+                const widget = document.createElement('div');
+                widget.className = 'interactive-widget';
+                widget.textContent = comp.interactive_widget;
+
+                const input = document.createElement('input');
+                input.placeholder = 'Enter value...';
+
+                const button = document.createElement('button');
+                button.textContent = 'Run';
+                button.onclick = () => {
+                  const value = input.value;
                   const output = document.createElement('div');
-                  output.className = 'code-output';
-                  output.textContent = `Output: ${result}`;
-                  codeDiv.appendChild(output);
-                } catch (e) {
-                  const output = document.createElement('div');
-                  output.className = 'code-output';
-                  output.textContent = `Error: ${e.message}`;
-                  codeDiv.appendChild(output);
-                }
-              };
+                  output.className = 'widget-output';
+                  if (comp.id === 'drc-1') {
+                    output.textContent = `Result: ${value === '-1' ? 'NULL' : value === '0' ? 'FALSE' : 'TRUE'}`;
+                  } else if (comp.id === 'drc-2') {
+                    const nums = value.split(',').map(x => Number(x.trim()));
+                    const doubled = nums.map(n => n * 2);
+                    output.textContent = `Simulated: [${doubled.join(', ')}]`;
+                  } else {
+                    output.textContent = 'Interactive demo coming soon.';
+                  }
+                  widget.appendChild(output);
+                };
 
-              codeDiv.appendChild(runBtn);
-              details.appendChild(codeDiv);
-            }
+                widget.appendChild(input);
+                widget.appendChild(button);
+                details.appendChild(widget);
+              }
 
-            if (comp.interactive_widget) {
-              const widget = document.createElement('div');
-              widget.className = 'interactive-widget';
-              widget.textContent = comp.interactive_widget;
+              compContainer.appendChild(details);
+            });
 
-              const input = document.createElement('input');
-              input.placeholder = 'Enter value...';
-
-              const button = document.createElement('button');
-              button.textContent = 'Run';
-
-              button.onclick = () => {
-                const value = input.value;
-                const output = document.createElement('div');
-                output.className = 'widget-output';
-                if (comp.id === 'drc-1') {
-                  output.textContent = `Result: ${value === '-1' ? 'NULL' : value === '0' ? 'FALSE' : 'TRUE'}`;
-                } else if (comp.id === 'drc-2') {
-                  const nums = value.split(',').map(x => Number(x.trim()));
-                  const doubled = nums.map(n => n * 2);
-                  output.textContent = `Simulated: [${doubled.join(', ')}]`;
-                } else {
-                  output.textContent = 'Interactive demo coming soon.';
-                }
-                widget.appendChild(output);
-              };
-
-              widget.appendChild(input);
-              widget.appendChild(button);
-              details.appendChild(widget);
-            }
-
-            compContainer.appendChild(details);
+            section.appendChild(compContainer);
+            container.appendChild(section);
           });
+        });
 
-          section.appendChild(compContainer);
-          container.appendChild(section);
+      document.getElementById('search-input').addEventListener('input', () => {
+        const query = document.getElementById('search-input').value.toLowerCase();
+        document.querySelectorAll('.component details').forEach(detail => {
+          detail.style.display = detail.innerText.toLowerCase().includes(query) ? '' : 'none';
         });
       });
-
-    document.getElementById('search-input').addEventListener('input', () => {
-      const query = document.getElementById('search-input').value.toLowerCase();
-      document.querySelectorAll('.component details').forEach(detail => {
-        detail.style.display = detail.innerText.toLowerCase().includes(query) ? '' : 'none';
-      });
     });
-  });
-</script>
+  </script>
 </body>
 </html>
