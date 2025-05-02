@@ -974,4 +974,5 @@
                     "code_snippet": "function cliScript(command) {\n  return `CLI Output: ${command}`;\n}\nconsole.log(cliScript('run')); // Output: CLI Output: run",
                     "interactive_widget": "CLI Sandbox: Write and run a DRC-CLI script to automate a task."
                 }
-]
+            ]
+        ]
