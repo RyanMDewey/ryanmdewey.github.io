@@ -216,7 +216,7 @@
     });
 
     // Load and Render Components
-    fetch('/data/drc-components.json')
+    fetch('https://www.ryanmdewey.com/data/drc-components.json')
       .then(res => {
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         return res.json();
