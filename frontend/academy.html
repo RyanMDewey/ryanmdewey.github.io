@@ -169,7 +169,9 @@
     <input type="text" id="search-input" placeholder="Search components...">
   </nav>
 
-  <main id="components-container"></main>
+  <main id="components-container">
+    <p>Loading components...</p>
+  </main>
 
   <footer>
     ✨ DRC Academy © 2025 Ryan Dewey
@@ -188,7 +190,15 @@
       })
       .then(data => {
         const container = document.getElementById('components-container');
+        container.innerHTML = ''; // Clear the "Loading..." message
+        if (!Array.isArray(data)) {
+          throw new Error('JSON data is not an array');
+        }
         data.forEach(category => {
+          if (!category.components || !Array.isArray(category.components)) {
+            console.warn(`Category "${category.category}" has invalid components:`, category.components);
+            return; // Skip this category
+          }
           const section = document.createElement('section');
           section.className = 'hero-box';
           section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
@@ -323,7 +333,7 @@
       .catch(err => {
         console.error('Error fetching components:', err);
         const container = document.getElementById('components-container');
-        container.innerHTML = '<p style="color: red;">Error loading components. Please try again later.</p>';
+        container.innerHTML = `<p style="color: red;">Error loading components: ${err.message}. Please try again later.</p>`;
       });
 
     document.getElementById('search-input').addEventListener('input', () => {
