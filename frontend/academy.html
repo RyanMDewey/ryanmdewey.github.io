@@ -186,7 +186,7 @@
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 
-    fetch('/data/drc-components.json')
+    fetch('https://www.ryanmdewey.com/data/drc-components.json')
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById('components-container');
