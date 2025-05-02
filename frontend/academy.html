@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="DRC Academy: Learn the Dewey Run-time Core, a revolutionary stack for AI-driven, quantum-ready, autonomous systems." />
   <title>DRC Academy</title>
   <link rel="stylesheet" href="styles/main.css" />
@@ -74,6 +73,9 @@
       background: rgba(0, 255, 225, 0.03);
       border-radius: 4px;
     }
+    .lesson div {
+      margin-top: 0.5rem;
+    }
     .hero {
       text-align: center;
       margin-top: 1rem;
@@ -97,14 +99,10 @@
 <body>
   <div class="top-nav">
     <div class="nav-container" id="dynamic-nav"></div>
-  </div>
-
-  <header class="hero">
+  </div>  <header class="hero">
     <h1>DRC Academy</h1>
     <p>Master the Dewey Run-time Core: AI-native, quantum-aligned, self-healing systems.</p>
-  </header>
-
-  <nav>
+  </header>  <nav>
     <select id="quick-nav">
       <option value="">-- Jump to Category --</option>
       <option value="#core-execution">Core Execution</option>
@@ -125,15 +123,9 @@
       <option value="#high-level">High-Level</option>
     </select>
     <input type="text" id="search-input" placeholder="Search components...">
-  </nav>
-
-  <main id="components-container"></main>
-
-  <footer style="text-align:center; margin-top: 2rem;">
+  </nav>  <main id="components-container"></main>  <footer style="text-align:center; margin-top: 2rem;">
     ✨ DRC Academy © 2025 Ryan Dewey
-  </footer>
-
-  <script>
+  </footer>  <script>
     const currentPath = window.location.pathname;
     const currentPage = currentPath.split('/').pop() || 'index.html';
 
@@ -144,7 +136,8 @@
       { name: 'Skills', href: '/skills.html' },
       { name: 'Resume', href: '/resume.html' },
       { name: 'Contact', href: '/contact.html' },
-      { name: 'Blog', href: '/blog/' }
+      { name: 'Blog', href: '/blog/' },
+      { name: 'Academy', href: '/academy.html' }
     ];
 
     const nav = document.createElement('div');
@@ -205,17 +198,20 @@
                 lessonLink.href = '#';
                 lessonLink.style.color = '#00ffe1';
                 lessonLink.style.display = 'inline-block';
-                lessonLink.style.marginTop = '0.3rem';
-
                 lessonLink.onclick = async (e) => {
                   e.preventDefault();
                   try {
                     const res = await fetch(`/lessons/${comp.id}.md`);
                     if (!res.ok) throw new Error();
                     const md = await res.text();
-                    lesson.innerHTML = marked.parse(md);
+                    const rendered = document.createElement('div');
+                    rendered.innerHTML = marked.parse(md);
+                    lesson.appendChild(rendered);
+                    lessonLink.remove();
                   } catch {
-                    lesson.textContent = comp.lesson;
+                    const fallback = document.createElement('div');
+                    fallback.textContent = comp.lesson;
+                    lesson.appendChild(fallback);
                   }
                 };
 
@@ -253,7 +249,10 @@
               if (comp.interactive_widget) {
                 const widget = document.createElement('div');
                 widget.className = 'interactive-widget';
-                widget.textContent = comp.interactive_widget;
+
+                const prompt = document.createElement('p');
+                prompt.textContent = comp.interactive_widget;
+                widget.appendChild(prompt);
 
                 const input = document.createElement('input');
                 input.placeholder = 'Enter value...';
@@ -296,6 +295,5 @@
         });
       });
     });
-  </script>
-</body>
+  </script></body>
 </html>
