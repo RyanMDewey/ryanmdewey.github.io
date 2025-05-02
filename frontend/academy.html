@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="styles/main.css" />
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <style>
-    /* Minimal inline CSS for specific tweaks */
     .component details {
       margin: 1rem 0;
       padding: 0.5rem;
@@ -27,7 +26,60 @@
     .component p {
       font-size: 0.95rem;
       color: var(--text-light);
-      margin: 0.5rem 0 0;
+      margin: 0.5rem 0;
+    }
+    .lesson, .code-snippet, .interactive-widget {
+      margin: 0.5rem 0;
+    }
+    .lesson {
+      background: rgba(0, 255, 225, 0.05);
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    .code-snippet pre {
+      background: #1a1a2e;
+      padding: 0.5rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    .code-snippet button {
+      background: var(--neon-blue);
+      color: #0d0d1a;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.3rem;
+    }
+    .code-snippet button:hover {
+      box-shadow: 0 0 8px var(--neon-blue);
+    }
+    .code-output {
+      margin-top: 0.3rem;
+      color: #33ff99;
+    }
+    .interactive-widget input {
+      padding: 0.3rem;
+      margin-right: 0.5rem;
+      background: rgba(0, 255, 225, 0.05);
+      border: 1px solid var(--neon-blue);
+      color: var(--text-light);
+      border-radius: 4px;
+    }
+    .interactive-widget button {
+      background: var(--neon-blue);
+      color: #0d0d1a;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .interactive-widget button:hover {
+      box-shadow: 0 0 8px var(--neon-blue);
+    }
+    .widget-output {
+      margin-top: 0.3rem;
+      color: #33ff99;
     }
     #search-container, #category-select {
       text-align: center;
@@ -42,7 +94,6 @@
 <body class="theme-1">
   <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
 
-  <!-- Content wrapper ABOVE particles -->
   <div style="position: relative; z-index: 1;">
     <nav class="top-nav" role="navigation">
       <div class="nav-links">
@@ -164,62 +215,108 @@
     });
 
     // Load and Render Components
-fetch('/data/drc-components.json')
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('components-container');
+    fetch('/data/drc-components.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('components-container');
+        data.forEach(category => {
+          const section = document.createElement('section');
+          section.className = 'hero-box';
+          section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
+          section.setAttribute('aria-labelledby', `header-${section.id}`);
 
-    data.forEach(category => {
-      const section = document.createElement('section');
-      section.className = 'hero-box';
-      section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
-      section.setAttribute('aria-labelledby', `header-${section.id}`);
+          const header = document.createElement('h2');
+          header.id = `header-${section.id}`;
+          header.className = 'section-title';
+          header.textContent = `${category.color} ${category.category}`;
+          section.appendChild(header);
 
-      const header = document.createElement('h2');
-      header.id = `header-${section.id}`;
-      header.className = 'section-title';
-      header.textContent = `${category.color} ${category.category}`;
-      section.appendChild(header);
+          const purpose = document.createElement('p');
+          purpose.textContent = `Purpose: ${category.purpose}`;
+          section.appendChild(purpose);
 
-      const purpose = document.createElement('p');
-      purpose.textContent = `Purpose: ${category.purpose}`;
-      section.appendChild(purpose);
+          const componentDiv = document.createElement('div');
+          componentDiv.className = 'component';
+          category.components.forEach(comp => {
+            const details = document.createElement('details');
+            details.id = comp.id;
+            const summary = document.createElement('summary');
+            summary.textContent = `${comp.number} ${comp.name}`;
+            details.appendChild(summary);
 
-      const componentDiv = document.createElement('div');
-      componentDiv.className = 'component';
+            const desc = document.createElement('p');
+            desc.textContent = comp.description;
+            details.appendChild(desc);
 
-      category.components.forEach(comp => {
-        const details = document.createElement('details');
-        details.id = comp.id;
+            if (comp.lesson) {
+              const lesson = document.createElement('div');
+              lesson.className = 'lesson';
+              lesson.textContent = comp.lesson;
+              details.appendChild(lesson);
+            }
 
-        const summary = document.createElement('summary');
-        summary.textContent = `${comp.number} ${comp.name}`;
+            if (comp.code_snippet) {
+              const codeDiv = document.createElement('div');
+              codeDiv.className = 'code-snippet';
+              const pre = document.createElement('pre');
+              pre.textContent = comp.code_snippet;
+              codeDiv.appendChild(pre);
+              const runBtn = document.createElement('button');
+              runBtn.textContent = 'Run Code';
+              runBtn.onclick = () => {
+                try {
+                  const output = document.createElement('div');
+                  output.className = 'code-output';
+                  const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n')); // Exclude console.log for eval
+                  output.textContent = `Output: ${result}`;
+                  codeDiv.appendChild(output);
+                } catch (e) {
+                  const output = document.createElement('div');
+                  output.className = 'code-output';
+                  output.textContent = `Error: ${e.message}`;
+                  codeDiv.appendChild(output);
+                }
+              };
+              codeDiv.appendChild(runBtn);
+              details.appendChild(codeDiv);
+            }
 
-        const desc = document.createElement('p');
-        desc.textContent = comp.description;
+            if (comp.interactive_widget) {
+              const widgetDiv = document.createElement('div');
+              widgetDiv.className = 'interactive-widget';
+              widgetDiv.textContent = comp.interactive_widget;
+              const input = document.createElement('input');
+              input.type = 'text';
+              input.placeholder = 'Enter value...';
+              const runWidget = document.createElement('button');
+              runWidget.textContent = 'Run';
+              runWidget.onclick = () => {
+                const value = input.value;
+                const output = document.createElement('div');
+                output.className = 'widget-output';
+                if (comp.id === 'drc-1') {
+                  const result = value === '-1' ? 'NULL' : value === '0' ? 'FALSE' : 'TRUE';
+                  output.textContent = `Result: ${result}`;
+                } else if (comp.id === 'drc-2') {
+                  output.textContent = `Simulated: Vector processed [${value.split('').map(x => x * 2)}]`;
+                } else {
+                  output.textContent = 'Demo: Interactive feature coming soon!';
+                }
+                widgetDiv.appendChild(output);
+              };
+              widgetDiv.appendChild(input);
+              widgetDiv.appendChild(runWidget);
+              details.appendChild(widgetDiv);
+            }
 
-        details.appendChild(summary);
-        details.appendChild(desc);
-        componentDiv.appendChild(details);
-      });
+            componentDiv.appendChild(details);
+          });
+          section.appendChild(componentDiv);
+          container.appendChild(section);
+        });
+      })
+      .catch(err => console.error('Error loading components:', err));
 
-      section.appendChild(componentDiv);
-      container.appendChild(section);
-    });
-
-    // Scroll to section after load if hash is present
-    const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        const target = document.querySelector(hash);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  })
-  .catch(err => console.error('Error loading components:', err));
-    
     // Live Search
     const searchInput = document.getElementById('search-input');
     searchInput.addEventListener('input', () => {
@@ -227,7 +324,8 @@ fetch('/data/drc-components.json')
       document.querySelectorAll('.component details').forEach(detail => {
         const name = detail.querySelector('summary').textContent.toLowerCase();
         const desc = detail.querySelector('p').textContent.toLowerCase();
-        detail.style.display = (query === '' || name.includes(query) || desc.includes(query)) ? '' : 'none';
+        const lesson = detail.querySelector('.lesson')?.textContent.toLowerCase() || '';
+        detail.style.display = (query === '' || name.includes(query) || desc.includes(query) || lesson.includes(query)) ? '' : 'none';
       });
     });
   </script>
