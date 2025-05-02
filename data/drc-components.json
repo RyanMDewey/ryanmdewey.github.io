@@ -8,49 +8,73 @@
         "id": "drc-1",
         "number": "1️⃣",
         "name": "DRC-TRINARY",
-        "description": "Moves beyond binary with “NULL” (-1, 0, 1). Enables AI-based corrections and prevents lockups due to corrupted states."
+        "description": "Moves beyond binary with “NULL” (-1, 0, 1). Enables AI-based corrections and prevents lockups due to corrupted states.",
+        "lesson": "DRC-TRINARY introduces a trinary system (-1, 0, 1) to handle fault-tolerant execution. Unlike binary, this allows DRC to represent a 'NULL' state, enabling the AI to detect and correct errors before they cause system failures. In this lesson, you'll learn how to implement a simple trinary logic gate and see how it prevents lockups in a simulated environment.",
+        "code_snippet": "function trinaryLogic(input) {\n  if (input === -1) return 'NULL';\n  if (input === 0) return 'FALSE';\n  return 'TRUE';\n}\nconsole.log(trinaryLogic(-1)); // Output: NULL",
+        "interactive_widget": "Try a Trinary Logic Simulator: Enter a value (-1, 0, or 1) to see how DRC-TRINARY processes it and prevents lockups."
       },
       {
         "id": "drc-2",
         "number": "2️⃣",
         "name": "DRC-VECTOR CODE",
-        "description": "Executes instruction sets in parallel, inspired by GPU vector processing and quantum computing."
+        "description": "Executes instruction sets in parallel, inspired by GPU vector processing and quantum computing.",
+        "lesson": "DRC-VECTOR CODE allows parallel execution of instructions, similar to GPU vector processing. This lesson walks you through creating a vectorized instruction set and demonstrates how DRC can execute multiple tasks simultaneously, improving performance over serial execution.",
+        "code_snippet": "const vector = [1, 2, 3, 4];\nconst result = vector.map(x => x * 2);\nconsole.log(result); // Output: [2, 4, 6, 8]",
+        "interactive_widget": "Parallel Execution Demo: Run a vectorized instruction set and visualize the performance gain over serial execution."
       },
       {
         "id": "drc-3",
         "number": "3️⃣",
         "name": "DRC-SELF-HEALING EXECUTION",
-        "description": "AI monitors and corrects execution paths dynamically to prevent crashes and corrupted instructions."
+        "description": "AI monitors and corrects execution paths dynamically to prevent crashes and corrupted instructions.",
+        "lesson": "DRC-SELF-HEALING EXECUTION uses AI to monitor and fix execution errors in real-time. This lesson shows you how to simulate a faulty execution path and see how DRC’s AI corrects it to prevent a system crash.",
+        "code_snippet": "function simulateError() {\n  try {\n    throw new Error('Corrupted instruction');\n  } catch (e) {\n    return 'AI Correction: ' + e.message;\n  }\n}\nconsole.log(simulateError()); // Output: AI Correction: Corrupted instruction",
+        "interactive_widget": "Error Simulation: Trigger a simulated error and watch DRC-SELF-HEALING fix it in real-time."
       },
       {
         "id": "drc-4",
         "number": "4️⃣",
         "name": "DRC-MC",
-        "description": "Lowest-level instruction set optimized for CPUs, GPUs, AI accelerators, and quantum hardware."
+        "description": "Lowest-level instruction set optimized for CPUs, GPUs, AI accelerators, and quantum hardware.",
+        "lesson": "DRC-MC defines the machine code layer for DRC, optimized for various hardware types. In this lesson, you'll explore a simplified machine code instruction and see how it translates to hardware execution across different architectures.",
+        "code_snippet": "const instruction = 'MOV R1, #42';\nfunction parseMC(instr) {\n  return `Executing ${instr} on CPU`;\n}\nconsole.log(parseMC(instruction)); // Output: Executing MOV R1, #42 on CPU",
+        "interactive_widget": "Machine Code Explorer: Input a simple DRC-MC instruction and see how it executes on different hardware."
       },
       {
         "id": "drc-5",
         "number": "5️⃣",
         "name": "DRC-ASM",
-        "description": "Low-level human-readable instruction set bridging DRC-LANG and DRC-MC."
+        "description": "Low-level human-readable instruction set bridging DRC-LANG and DRC-MC.",
+        "lesson": "DRC-ASM provides a human-readable assembly language for DRC. This lesson teaches you how to write a basic DRC-ASM program that bridges high-level code and machine code, ensuring efficient execution.",
+        "code_snippet": "const asmCode = 'ADD R1, R2, #10';\nfunction translateASM(code) {\n  return `Translated to MC: ${code}`;\n}\nconsole.log(translateASM(asmCode)); // Output: Translated to MC: ADD R1, R2, #10",
+        "interactive_widget": "ASM Translator: Write a DRC-ASM instruction and see its translation to DRC-MC."
       },
       {
         "id": "drc-6",
         "number": "6️⃣",
         "name": "DRC-VM",
-        "description": "Universal runtime engine with JIT compilation for low-latency execution."
+        "description": "Universal runtime engine with JIT compilation for low-latency execution.",
+        "lesson": "DRC-VM is a runtime engine that executes DRC-ASM with Just-In-Time (JIT) compilation for speed. This lesson demonstrates how JIT compilation reduces latency by compiling code at runtime.",
+        "code_snippet": "function jitCompile(code) {\n  return `JIT Compiled: ${code}`;\n}\nconsole.log(jitCompile('ADD R1, R2')); // Output: JIT Compiled: ADD R1, R2",
+        "interactive_widget": "JIT Compilation Demo: Input a DRC-ASM instruction and see how DRC-VM compiles and executes it with low latency."
       },
       {
         "id": "drc-7",
         "number": "7️⃣",
         "name": "DRC-CC",
-        "description": "Adaptive compiler converting DRC-LANG to DRC-ASM with AI-driven optimization."
+        "description": "Adaptive compiler converting DRC-LANG to DRC-ASM dynamically.",
+        "lesson": "DRC-CC dynamically compiles DRC-LANG to DRC-ASM, optimizing execution paths. This lesson shows you how to write a simple DRC-LANG program and trace its compilation to DRC-ASM.",
+        "code_snippet": "const drcLang = 'x = 5 + 3';\nfunction compileToASM(code) {\n  return `ASM: ADD R1, #5, #3`;\n}\nconsole.log(compileToASM(drcLang)); // Output: ASM: ADD R1, #5, #3",
+        "interactive_widget": "Compiler Trace: Input a DRC-LANG statement and see its compiled DRC-ASM output."
       },
       {
         "id": "drc-8",
         "number": "8️⃣",
         "name": "DRC-AI",
-        "description": "Self-optimizing AI layer adjusting execution for speed, efficiency, and security."
+        "description": "Self-optimizing AI layer adjusting execution for speed, efficiency, and security.",
+        "lesson": "DRC-AI uses AI to optimize execution dynamically. In this lesson, you'll simulate a workload and see how DRC-AI adjusts execution paths to improve performance and security.",
+        "code_snippet": "function optimizeExecution(workload) {\n  return `Optimized: ${workload * 0.9}`;\n}\nconsole.log(optimizeExecution(100)); // Output: Optimized: 90",
+        "interactive_widget": "AI Optimization Simulator: Input a workload value and see how DRC-AI optimizes it for efficiency."
       }
     ]
   },
@@ -63,37 +87,55 @@
         "id": "drc-9",
         "number": "9️⃣",
         "name": "DRC-VERIFY",
-        "description": "Ensures AI optimizations are provably correct using formal verification methods."
+        "description": "Ensures AI optimizations are provably correct using formal verification methods.",
+        "lesson": "DRC-VERIFY uses formal verification to ensure AI optimizations are correct. This lesson introduces you to formal verification concepts and shows how DRC-VERIFY validates an AI optimization.",
+        "code_snippet": "function verifyOptimization(input) {\n  return input > 0 ? 'Verified' : 'Invalid';\n}\nconsole.log(verifyOptimization(5)); // Output: Verified",
+        "interactive_widget": "Verification Test: Input a value to see if DRC-VERIFY validates it as a correct optimization."
       },
       {
         "id": "drc-10",
         "number": "🔟",
         "name": "DRC-TEST",
-        "description": "AI-powered testing framework for DRC-ASM and DRC-LANG."
+        "description": "AI-powered testing framework for DRC-ASM and DRC-LANG.",
+        "lesson": "DRC-TEST provides an AI-driven testing framework for DRC code. This lesson teaches you how to write a unit test for a DRC-ASM instruction and see how the AI validates it.",
+        "code_snippet": "function testASM(input) {\n  return input === 'ADD R1, R2' ? 'Test Passed' : 'Test Failed';\n}\nconsole.log(testASM('ADD R1, R2')); // Output: Test Passed",
+        "interactive_widget": "Testing Framework: Write a DRC-ASM instruction and run a test to see if it passes."
       },
       {
         "id": "drc-11",
         "number": "1️⃣1️⃣",
         "name": "DRC-ZK",
-        "description": "Generates local zk-STARK proofs for execution correctness."
+        "description": "Generates local zk-STARK proofs for execution correctness.",
+        "lesson": "DRC-ZK uses zero-knowledge proofs (zk-STARKs) to verify execution locally. In this lesson, you'll learn the basics of zk-STARKs and simulate generating a proof for a simple computation.",
+        "code_snippet": "function generateZKProof(data) {\n  return `Proof for ${data}: Valid`;\n}\nconsole.log(generateZKProof(42)); // Output: Proof for 42: Valid",
+        "interactive_widget": "ZK Proof Generator: Input a value to generate a simulated zk-STARK proof for execution correctness."
       },
       {
         "id": "drc-12",
         "number": "1️⃣2️⃣",
         "name": "DRC-SENTINEL",
-        "description": "Detects anomalies and adversarial AI attacks in real-time."
+        "description": "Detects anomalies and adversarial AI attacks in real-time.",
+        "lesson": "DRC-SENTINEL monitors for security threats and anomalies. This lesson simulates an adversarial attack and shows how DRC-SENTINEL detects and mitigates it.",
+        "code_snippet": "function detectThreat(input) {\n  return input < 0 ? 'Threat Detected' : 'Safe';\n}\nconsole.log(detectThreat(-5)); // Output: Threat Detected",
+        "interactive_widget": "Threat Detection Demo: Input a value to simulate an attack and see if DRC-SENTINEL detects it."
       },
       {
         "id": "drc-13",
         "number": "1️⃣3️⃣",
         "name": "DRC-PRIVACY",
-        "description": "Encrypts AI computations and data at runtime for privacy."
+        "description": "Encrypts AI computations and data at runtime for privacy.",
+        "lesson": "DRC-PRIVACY ensures AI computations are encrypted. This lesson demonstrates how to encrypt a simple AI computation and verify its privacy.",
+        "code_snippet": "function encryptData(data) {\n  return `Encrypted: ${data * 2}`;\n}\nconsole.log(encryptData(10)); // Output: Encrypted: 20",
+        "interactive_widget": "Encryption Simulator: Input a value to encrypt and see how DRC-PRIVACY protects it."
       },
       {
         "id": "drc-14",
         "number": "1️⃣4️⃣",
         "name": "DRC-OBSIDIAN",
-        "description": "Zero-trust security model preventing unauthorized execution state changes."
+        "description": "Zero-trust security model preventing unauthorized execution state changes.",
+        "lesson": "DRC-OBSIDIAN implements a zero-trust model to secure execution. This lesson shows you how to simulate an unauthorized state change and see how DRC-OBSIDIAN prevents it.",
+        "code_snippet": "function checkAccess(state) {\n  return state === 'authorized' ? 'Access Granted' : 'Access Denied';\n}\nconsole.log(checkAccess('unauthorized')); // Output: Access Denied",
+        "interactive_widget": "Zero-Trust Simulator: Attempt to change the execution state and see if DRC-OBSIDIAN allows it."
       }
     ]
   },
@@ -106,40 +148,60 @@
         "id": "drc-15",
         "number": "1️⃣5️⃣",
         "name": "DRC-OS",
-        "description": "AI-optimized kernel managing process scheduling and memory allocation."
+        "description": "AI-optimized kernel managing process scheduling and memory allocation.",
+        "lesson": "DRC-OS is an AI-optimized kernel for managing system resources. In this lesson, you'll learn how to simulate process scheduling and see how DRC-OS allocates resources efficiently.",
+        "code_snippet": "function scheduleProcess(tasks) {\n  return tasks.map(t => `Scheduled: ${t}`);\n}\nconsole.log(scheduleProcess(['task1', 'task2'])); // Output: ['Scheduled: task1', 'Scheduled: task2']",
+        "interactive_widget": "Process Scheduler: Input a list of tasks to see how DRC-OS schedules them."
       },
       {
         "id": "drc-16",
         "number": "1️⃣6️⃣",
         "name": "DRC-RTOS",
-        "description": "Real-time kernel for low-latency AI execution in robotics and trading."
+        "description": "Real-time kernel for low-latency AI execution in robotics and trading.",
+        "lesson": "DRC-RTOS ensures low-latency execution for real-time applications. This lesson simulates a real-time task and demonstrates how DRC-RTOS handles it with minimal delay.",
+        "code_snippet": "function realTimeTask() {\n  return `Executed at: ${Date.now()}`;\n}\nconsole.log(realTimeTask()); // Output: Executed at: [timestamp]",
+        "interactive_widget": "Real-Time Demo: Run a simulated real-time task and measure its execution latency."
       },
       {
         "id": "drc-17",
         "number": "1️⃣7️⃣",
         "name": "DRC-TIME",
-        "description": "Precision clock synchronization for AI clusters."
+        "description": "Precision clock synchronization for AI clusters.",
+        "lesson": "DRC-TIME provides precise clock synchronization across AI clusters. This lesson shows you how to synchronize two simulated nodes and ensure their clocks align.",
+        "code_snippet": "function syncClocks(node1, node2) {\n  return `Synced: ${node1} with ${node2}`;\n}\nconsole.log(syncClocks('Node1', 'Node2')); // Output: Synced: Node1 with Node2",
+        "interactive_widget": "Clock Sync Simulator: Synchronize two nodes and verify their clock alignment."
       },
       {
         "id": "drc-18",
         "number": "1️⃣8️⃣",
         "name": "DRC-FS",
-        "description": "AI-optimized file system for fast, encrypted data access."
+        "description": "AI-optimized file system for fast, encrypted data access.",
+        "lesson": "DRC-FS manages fast and secure data access. In this lesson, you'll simulate writing and reading an encrypted file with DRC-FS.",
+        "code_snippet": "function writeFile(data) {\n  return `Encrypted and written: ${data}`;\n}\nconsole.log(writeFile('secret')); // Output: Encrypted and written: secret",
+        "interactive_widget": "File System Demo: Write and read a simulated encrypted file using DRC-FS."
       },
       {
         "id": "drc-19",
         "number": "1️⃣9️⃣",
         "name": "DRC-RESCUE",
-        "description": "AI-driven self-healing and fault tolerance for execution."
+        "description": "AI-driven self-healing and fault tolerance for execution.",
+        "lesson": "DRC-RESCUE prevents crashes by self-healing. This lesson simulates a system failure and shows how DRC-RESCUE recovers the task.",
+        "code_snippet": "function recoverTask() {\n  return 'Task Recovered';\n}\nconsole.log(recoverTask()); // Output: Task Recovered",
+        "interactive_widget": "Recovery Simulator: Trigger a failure and see how DRC-RESCUE recovers the task."
       },
       {
         "id": "drc-20",
         "number": "2️⃣0️⃣",
         "name": "DRC-LOCAL",
-        "description": "Ensures full offline execution with no network dependencies."
+        "description": "Ensures full offline execution with no network dependencies.",
+        "lesson": "DRC-LOCAL guarantees offline functionality. This lesson demonstrates how to execute a task locally without network access.",
+        "code_snippet": "function localExecution(task) {\n  return `Executed Locally: ${task}`;\n}\nconsole.log(localExecution('compute')); // Output: Executed Locally: compute",
+        "interactive_widget": "Offline Execution Demo: Run a task locally and verify it executes without network access."
       }
     ]
-  },
+  }
+]
+[
   {
     "category": "Hardware & Future-Proofing",
     "color": "🟡",
@@ -149,43 +211,64 @@
         "id": "drc-21",
         "number": "2️⃣1️⃣",
         "name": "DRC-HW",
-        "description": "Native support for AI accelerators, GPUs, TPUs, and quantum processors."
+        "description": "Native support for AI accelerators, GPUs, TPUs, and quantum processors.",
+        "lesson": "DRC-HW enables seamless execution on diverse hardware. This lesson shows you how to target a specific hardware type (e.g., GPU) with a DRC instruction.",
+        "code_snippet": "function targetHardware(type) {\n  return `Targeting: ${type}`;\n}\nconsole.log(targetHardware('GPU')); // Output: Targeting: GPU",
+        "interactive_widget": "Hardware Targeting: Select a hardware type and see how DRC-HW optimizes execution for it."
       },
       {
         "id": "drc-22",
         "number": "2️⃣2️⃣",
         "name": "DRC-ALLIANCE",
-        "description": "Hardware standard for AI, blockchain, and quantum integration."
+        "description": "Hardware standard for AI, blockchain, and quantum integration.",
+        "lesson": "DRC-ALLIANCE standardizes hardware integration. This lesson simulates integrating an AI chip with DRC and ensures compatibility.",
+        "code_snippet": "function integrateChip(chip) {\n  return `Integrated: ${chip}`;\n}\nconsole.log(integrateChip('AI Chip')); // Output: Integrated: AI Chip",
+        "interactive_widget": "Integration Simulator: Integrate a simulated AI chip with DRC-ALLIANCE standards."
       },
       {
         "id": "drc-23",
         "number": "2️⃣3️⃣",
         "name": "DRC-GREEN",
-        "description": "AI-driven energy optimization for power and cooling."
+        "description": "AI-driven energy optimization for power and cooling.",
+        "lesson": "DRC-GREEN optimizes energy usage. This lesson demonstrates how to adjust power consumption for a workload using DRC-GREEN.",
+        "code_snippet": "function optimizePower(workload) {\n  return `Power Optimized: ${workload * 0.8}`;\n}\nconsole.log(optimizePower(100)); // Output: Power Optimized: 80",
+        "interactive_widget": "Energy Optimization: Input a workload and see how DRC-GREEN reduces power usage."
       },
       {
         "id": "drc-24",
         "number": "2️⃣4️⃣",
         "name": "DRC-QUANTUM",
-        "description": "Native support for quantum algorithms and encryption."
+        "description": "Native support for quantum algorithms and encryption.",
+        "lesson": "DRC-QUANTUM enables quantum computing. This lesson simulates a quantum algorithm execution with DRC-QUANTUM.",
+        "code_snippet": "function runQuantumAlgo() {\n  return 'Quantum Result: Superposition';\n}\nconsole.log(runQuantumAlgo()); // Output: Quantum Result: Superposition",
+        "interactive_widget": "Quantum Demo: Run a simulated quantum algorithm and see the result."
       },
       {
         "id": "drc-25",
         "number": "2️⃣5️⃣",
         "name": "DRC-NEXT",
-        "description": "Compatibility with neuromorphic and bio-computing hardware."
+        "description": "Compatibility with neuromorphic and bio-computing hardware.",
+        "lesson": "DRC-NEXT ensures future hardware compatibility. This lesson explores how to execute a task on a simulated neuromorphic processor.",
+        "code_snippet": "function runOnNeuromorphic(task) {\n  return `Neuromorphic Execution: ${task}`;\n}\nconsole.log(runOnNeuromorphic('learn')); // Output: Neuromorphic Execution: learn",
+        "interactive_widget": "Neuromorphic Simulator: Execute a task on a simulated neuromorphic processor."
       },
       {
         "id": "drc-26",
         "number": "2️⃣6️⃣",
         "name": "DRC-CLUSTER",
-        "description": "Manages local AI workload distribution across devices."
+        "description": "Manages local AI workload distribution across devices.",
+        "lesson": "DRC-CLUSTER distributes workloads locally. This lesson shows you how to distribute a task across multiple devices using DRC-CLUSTER.",
+        "code_snippet": "function distributeTask(devices) {\n  return `Distributed to: ${devices.join(', ')}`;\n}\nconsole.log(distributeTask(['Device1', 'Device2'])); // Output: Distributed to: Device1, Device2",
+        "interactive_widget": "Cluster Distribution: Distribute a task across simulated devices and see the result."
       },
       {
         "id": "drc-27",
         "number": "2️⃣7️⃣",
         "name": "DRC-INTEROP",
-        "description": "Bridges DRC with legacy languages like Python and C++."
+        "description": "Bridges DRC with legacy languages like Python and C++.",
+        "lesson": "DRC-INTEROP allows integration with legacy languages. This lesson demonstrates how to call a Python function from DRC.",
+        "code_snippet": "function callPython(func) {\n  return `Python Result: ${func}`;\n}\nconsole.log(callPython('print(\"Hello\")')); // Output: Python Result: print(\"Hello\")",
+        "interactive_widget": "Interop Demo: Call a simulated Python function from DRC and see the output."
       }
     ]
   },
@@ -198,31 +281,46 @@
         "id": "drc-28",
         "number": "2️⃣8️⃣",
         "name": "DRC-GOV",
-        "description": "AI-driven governance for optimizing updates and evolution."
+        "description": "AI-driven governance for optimizing updates and evolution.",
+        "lesson": "DRC-GOV uses AI to manage updates. This lesson simulates an update decision and shows how DRC-GOV optimizes the process.",
+        "code_snippet": "function decideUpdate(version) {\n  return `Update Approved: v${version}`;\n}\nconsole.log(decideUpdate(2.0)); // Output: Update Approved: v2.0",
+        "interactive_widget": "Governance Simulator: Propose an update and see if DRC-GOV approves it."
       },
       {
         "id": "drc-29",
         "number": "2️⃣9️⃣",
         "name": "DRC-ETHICS",
-        "description": "Monitors AI for fairness, bias prevention, and ethical behavior."
+        "description": "Monitors AI for fairness, bias prevention, and ethical behavior.",
+        "lesson": "DRC-ETHICS ensures ethical AI behavior. This lesson simulates an AI decision and checks for bias using DRC-ETHICS.",
+        "code_snippet": "function checkBias(decision) {\n  return decision === 'fair' ? 'No Bias' : 'Bias Detected';\n}\nconsole.log(checkBias('fair')); // Output: No Bias",
+        "interactive_widget": "Bias Checker: Input an AI decision and see if DRC-ETHICS detects any bias."
       },
       {
         "id": "drc-30",
         "number": "3️⃣0️⃣",
         "name": "DRC-DOCS",
-        "description": "AI-generated documentation and versioning for updates."
+        "description": "AI-generated documentation and versioning for updates.",
+        "lesson": "DRC-DOCS automatically documents updates. This lesson shows you how to generate documentation for a DRC component update.",
+        "code_snippet": "function generateDocs(component) {\n  return `Documentation for ${component}`;\n}\nconsole.log(generateDocs('DRC-TRINARY')); // Output: Documentation for DRC-TRINARY",
+        "interactive_widget": "Documentation Generator: Generate documentation for a DRC component."
       },
       {
         "id": "drc-31",
         "number": "3️⃣1️⃣",
         "name": "DRC-SELF",
-        "description": "Autonomous AI evolution and self-patching for security."
+        "description": "Autonomous AI evolution and self-patching for security.",
+        "lesson": "DRC-SELF enables autonomous patching. This lesson simulates a security vulnerability and shows how DRC-SELF patches it.",
+        "code_snippet": "function applyPatch(vuln) {\n  return `Patched: ${vuln}`;\n}\nconsole.log(applyPatch('SQL Injection')); // Output: Patched: SQL Injection",
+        "interactive_widget": "Self-Patching Demo: Introduce a vulnerability and see how DRC-SELF patches it."
       },
       {
         "id": "drc-32",
         "number": "3️⃣2️⃣",
         "name": "DRC-ACADEMY",
-        "description": "AI-powered tutorials and sandbox for learning DRC."
+        "description": "AI-powered tutorials and sandbox for learning DRC.",
+        "lesson": "DRC-ACADEMY provides interactive learning. This lesson guides you through setting up a sandbox to experiment with DRC components.",
+        "code_snippet": "function setupSandbox() {\n  return 'Sandbox Ready';\n}\nconsole.log(setupSandbox()); // Output: Sandbox Ready",
+        "interactive_widget": "Sandbox Setup: Initialize a DRC sandbox and start experimenting."
       }
     ]
   },
@@ -235,43 +333,64 @@
         "id": "drc-33",
         "number": "3️⃣3️⃣",
         "name": "DRC-AUTON",
-        "description": "Fully autonomous AI execution with self-learning capabilities."
+        "description": "Fully autonomous AI execution with self-learning capabilities.",
+        "lesson": "DRC-AUTON enables autonomous execution. This lesson shows you how to set up an autonomous AI task and observe its self-learning behavior.",
+        "code_snippet": "function autonomousTask() {\n  return 'Learning: Task Optimized';\n}\nconsole.log(autonomousTask()); // Output: Learning: Task Optimized",
+        "interactive_widget": "Autonomous Execution: Run an AI task and watch it learn and optimize itself."
       },
       {
         "id": "drc-34",
         "number": "3️⃣4️⃣",
         "name": "DRC-STREAM",
-        "description": "High-speed AI data processing pipeline for real-time inference."
+        "description": "High-speed AI data processing pipeline for real-time inference.",
+        "lesson": "DRC-STREAM processes data in real-time. This lesson demonstrates how to stream data through DRC-STREAM for fast inference.",
+        "code_snippet": "function streamData(data) {\n  return `Processed: ${data}`;\n}\nconsole.log(streamData('input')); // Output: Processed: input",
+        "interactive_widget": "Streaming Demo: Stream data through DRC-STREAM and measure processing speed."
       },
       {
         "id": "drc-35",
         "number": "3️⃣5️⃣",
         "name": "DRC-ISOLATE",
-        "description": "Secure, isolated execution environments for AI tasks."
+        "description": "Secure, isolated execution environments for AI tasks.",
+        "lesson": "DRC-ISOLATE ensures secure task isolation. This lesson shows you how to isolate an AI task and prevent interference.",
+        "code_snippet": "function isolateTask(task) {\n  return `Isolated: ${task}`;\n}\nconsole.log(isolateTask('AI Model')); // Output: Isolated: AI Model",
+        "interactive_widget": "Isolation Demo: Isolate an AI task and verify it runs securely."
       },
       {
         "id": "drc-36",
         "number": "3️⃣6️⃣",
         "name": "DRC-SCHEDULER",
-        "description": "Prioritizes AI tasks based on real-time system demands."
+        "description": "Prioritizes AI tasks based on real-time system demands.",
+        "lesson": "DRC-SCHEDULER prioritizes tasks dynamically. This lesson simulates multiple AI tasks and shows how DRC-SCHEDULER prioritizes them.",
+        "code_snippet": "function prioritizeTask(tasks) {\n  return tasks.sort((a, b) => b.priority - a.priority);\n}\nconsole.log(prioritizeTask([{task: 'A', priority: 2}, {task: 'B', priority: 1}])); // Output: [{task: 'A', priority: 2}, {task: 'B', priority: 1}]",
+        "interactive_widget": "Task Prioritization: Input tasks with priorities and see how DRC-SCHEDULER orders them."
       },
       {
         "id": "drc-37",
         "number": "3️⃣7️⃣",
         "name": "DRC-KEYS",
-        "description": "Local cryptographic key management for AI authentication."
+        "description": "Local cryptographic key management for AI authentication.",
+        "lesson": "DRC-KEYS manages cryptographic keys locally. This lesson demonstrates how to generate and use a key for AI authentication.",
+        "code_snippet": "function generateKey() {\n  return 'Key: 12345';\n}\nconsole.log(generateKey()); // Output: Key: 12345",
+        "interactive_widget": "Key Generator: Generate a cryptographic key and authenticate an AI task."
       },
       {
         "id": "drc-38",
         "number": "3️⃣8️⃣",
         "name": "DRC-QUEUE",
-        "description": "Buffers and balances AI workloads to prevent overload."
+        "description": "Buffers and balances AI workloads to prevent overload.",
+        "lesson": "DRC-QUEUE manages task buffering. This lesson shows you how to queue AI tasks and balance the workload.",
+        "code_snippet": "function queueTasks(tasks) {\n  return `Queued: ${tasks.join(', ')}`;\n}\nconsole.log(queueTasks(['task1', 'task2'])); // Output: Queued: task1, task2",
+        "interactive_widget": "Queue Manager: Add tasks to a queue and see how DRC-QUEUE balances them."
       },
       {
         "id": "drc-39",
         "number": "3️⃣9️⃣",
         "name": "DRC-EXEC",
-        "description": "Central execution engine for managing AI workloads."
+        "description": "Central execution engine for managing AI workloads.",
+        "lesson": "DRC-EXEC coordinates AI workloads. This lesson demonstrates how to execute multiple AI tasks using DRC-EXEC.",
+        "code_snippet": "function executeWorkload(tasks) {\n  return `Executed: ${tasks.join(', ')}`;\n}\nconsole.log(executeWorkload(['task1', 'task2'])); // Output: Executed: task1, task2",
+        "interactive_widget": "Execution Engine: Run multiple AI tasks and see how DRC-EXEC manages them."
       }
     ]
   },
@@ -284,49 +403,73 @@
         "id": "drc-40",
         "number": "4️⃣0️⃣",
         "name": "DRC-ADAPT",
-        "description": "AI adjusts execution models for optimal performance over time."
+        "description": "AI adjusts execution models for optimal performance over time.",
+        "lesson": "DRC-ADAPT optimizes execution over time. This lesson shows how to simulate a workload and see how DRC-ADAPT improves performance.",
+        "code_snippet": "function adaptExecution(workload) {\n  return `Adapted: ${workload * 0.95}`;\n}\nconsole.log(adaptExecution(100)); // Output: Adapted: 95",
+        "interactive_widget": "Adaptation Demo: Input a workload and see how DRC-ADAPT optimizes it over time."
       },
       {
         "id": "drc-41",
         "number": "4️⃣1️⃣",
         "name": "DRC-FINALITY",
-        "description": "Ensures consistent and stable AI execution results."
+        "description": "Ensures consistent and stable AI execution results.",
+        "lesson": "DRC-FINALITY guarantees stable execution. This lesson simulates an AI task and ensures its result is consistent.",
+        "code_snippet": "function ensureFinality(result) {\n  return `Final Result: ${result}`;\n}\nconsole.log(ensureFinality(42)); // Output: Final Result: 42",
+        "interactive_widget": "Finality Check: Run an AI task and verify its result consistency with DRC-FINALITY."
       },
       {
         "id": "drc-42",
         "number": "4️⃣2️⃣",
         "name": "DRC-TRACE",
-        "description": "Real-time debugging and anomaly detection for AI execution."
+        "description": "Real-time debugging and anomaly detection for AI execution.",
+        "lesson": "DRC-TRACE enables real-time debugging. This lesson shows you how to trace an AI execution and detect anomalies.",
+        "code_snippet": "function traceExecution(step) {\n  return `Trace: ${step}`;\n}\nconsole.log(traceExecution('Step 1')); // Output: Trace: Step 1",
+        "interactive_widget": "Tracing Tool: Trace an AI execution step and detect any anomalies."
       },
       {
         "id": "drc-43",
         "number": "4️⃣3️⃣",
         "name": "DRC-COMPRESS",
-        "description": "Compresses AI models for faster inference and lower storage."
+        "description": "Compresses AI models for faster inference and lower storage.",
+        "lesson": "DRC-COMPRESS reduces AI model size. This lesson demonstrates how to compress a simulated AI model for faster inference.",
+        "code_snippet": "function compressModel(size) {\n  return `Compressed Size: ${size * 0.5}`;\n}\nconsole.log(compressModel(100)); // Output: Compressed Size: 50",
+        "interactive_widget": "Model Compression: Input a model size and see how DRC-COMPRESS reduces it."
       },
       {
         "id": "drc-44",
         "number": "4️⃣4️⃣",
         "name": "DRC-PREDICT",
-        "description": "Forecasts workloads to prevent execution bottlenecks."
+        "description": "Forecasts workloads to prevent execution bottlenecks.",
+        "lesson": "DRC-PREDICT forecasts system loads. This lesson shows you how to predict a workload and avoid bottlenecks.",
+        "code_snippet": "function predictWorkload(tasks) {\n  return `Predicted Load: ${tasks.length}`;\n}\nconsole.log(predictWorkload(['task1', 'task2'])); // Output: Predicted Load: 2",
+        "interactive_widget": "Workload Predictor: Input tasks and see DRC-PREDICT’s forecast to avoid bottlenecks."
       },
       {
         "id": "drc-45",
         "number": "4️⃣5️⃣",
         "name": "DRC-CACHE",
-        "description": "Caches frequent AI execution paths for faster response."
+        "description": "Caches frequent AI execution paths for faster response.",
+        "lesson": "DRC-CACHE speeds up execution with caching. This lesson demonstrates how to cache an AI execution path for faster access.",
+        "code_snippet": "function cachePath(path) {\n  return `Cached: ${path}`;\n}\nconsole.log(cachePath('path1')); // Output: Cached: path1",
+        "interactive_widget": "Caching Demo: Cache an execution path and see the speed improvement."
       },
       {
         "id": "drc-46",
         "number": "4️⃣6️⃣",
         "name": "DRC-ASYNC",
-        "description": "AI-optimized concurrency for parallel execution."
+        "description": "AI-optimized concurrency for parallel execution.",
+        "lesson": "DRC-ASYNC enables concurrent execution. This lesson shows you how to run multiple tasks asynchronously with DRC-ASYNC.",
+        "code_snippet": "async function runAsync(task) {\n  return `Async Result: ${task}`;\n}\nrunAsync('task1').then(console.log); // Output: Async Result: task1",
+        "interactive_widget": "Async Execution: Run multiple tasks concurrently and see the results."
       },
       {
         "id": "drc-47",
         "number": "4️⃣7️⃣",
         "name": "DRC-MMU",
-        "description": "Low-level memory management for AI execution efficiency."
+        "description": "Low-level memory management for AI execution efficiency.",
+        "lesson": "DRC-MMU optimizes memory usage. This lesson demonstrates how to allocate memory for an AI task with DRC-MMU.",
+        "code_snippet": "function allocateMemory(size) {\n  return `Allocated: ${size} MB`;\n}\nconsole.log(allocateMemory(50)); // Output: Allocated: 50 MB",
+        "interactive_widget": "Memory Allocator: Allocate memory for an AI task and see DRC-MMU in action."
       }
     ]
   },
@@ -339,52 +482,78 @@
         "id": "drc-48",
         "number": "4️⃣8️⃣",
         "name": "DRC-MODELS",
-        "description": "Structured repository for AI model storage and versioning."
+        "description": "Structured repository for AI model storage and versioning.",
+        "lesson": "DRC-MODELS manages AI models. This lesson shows you how to store and version an AI model in DRC-MODELS.",
+        "code_snippet": "function storeModel(model) {\n  return `Stored: ${model} v1.0`;\n}\nconsole.log(storeModel('ModelA')); // Output: Stored: ModelA v1.0",
+        "interactive_widget": "Model Storage: Store and version a simulated AI model with DRC-MODELS."
       },
       {
         "id": "drc-49",
         "number": "4️⃣9️⃣",
         "name": "DRC-DEPLOY",
-        "description": "Automates AI model deployment across environments."
+        "description": "Automates AI model deployment across environments.",
+        "lesson": "DRC-DEPLOY automates model deployment. This lesson demonstrates how to deploy an AI model to a simulated environment.",
+        "code_snippet": "function deployModel(model) {\n  return `Deployed: ${model}`;\n}\nconsole.log(deployModel('ModelA')); // Output: Deployed: ModelA",
+        "interactive_widget": "Deployment Tool: Deploy an AI model to a simulated environment with DRC-DEPLOY."
       },
       {
         "id": "drc-50",
         "number": "5️⃣0️⃣",
         "name": "DRC-DATA",
-        "description": "Secure, encrypted data management for AI pipelines."
+        "description": "Secure, encrypted data management for AI pipelines.",
+        "lesson": "DRC-DATA secures AI data. This lesson shows you how to encrypt and manage data for an AI pipeline.",
+        "code_snippet": "function manageData(data) {\n  return `Encrypted Data: ${data}`;\n}\nconsole.log(manageData('input')); // Output: Encrypted Data: input",
+        "interactive_widget": "Data Manager: Encrypt and manage data for an AI pipeline with DRC-DATA."
       },
       {
         "id": "drc-51",
         "number": "5️⃣1️⃣",
         "name": "DRC-ROLLBACK",
-        "description": "Instant checkpointing and recovery for AI execution."
+        "description": "Instant checkpointing and recovery for AI execution.",
+        "lesson": "DRC-ROLLBACK enables recovery from failures. This lesson simulates a failure and shows how to rollback to a checkpoint.",
+        "code_snippet": "function rollback() {\n  return 'Rolled Back to Checkpoint';\n}\nconsole.log(rollback()); // Output: Rolled Back to Checkpoint",
+        "interactive_widget": "Rollback Demo: Trigger a failure and rollback to a checkpoint with DRC-ROLLBACK."
       },
       {
         "id": "drc-52",
         "number": "5️⃣2️⃣",
         "name": "DRC-METRICS",
-        "description": "Monitors hardware utilization and AI execution performance."
+        "description": "Monitors hardware utilization and AI execution performance.",
+        "lesson": "DRC-METRICS tracks performance. This lesson shows you how to monitor CPU usage for an AI task.",
+        "code_snippet": "function monitorCPU() {\n  return 'CPU Usage: 75%';\n}\nconsole.log(monitorCPU()); // Output: CPU Usage: 75%",
+        "interactive_widget": "Performance Monitor: Monitor CPU usage for a simulated AI task."
       },
       {
         "id": "drc-53",
         "number": "5️⃣3️⃣",
         "name": "DRC-PREFETCH",
-        "description": "Preloads AI models for low-latency inference."
+        "description": "Preloads AI models for low-latency inference.",
+        "lesson": "DRC-PREFETCH speeds up inference by preloading models. This lesson demonstrates how to preload an AI model.",
+        "code_snippet": "function preloadModel(model) {\n  return `Preloaded: ${model}`;\n}\nconsole.log(preloadModel('ModelA')); // Output: Preloaded: ModelA",
+        "interactive_widget": "Prefetch Demo: Preload an AI model and measure the inference speed improvement."
       },
       {
         "id": "drc-54",
         "number": "5️⃣4️⃣",
         "name": "DRC-LOADBAL",
-        "description": "Distributes AI execution loads across hardware resources."
+        "description": "Distributes AI execution loads across hardware resources.",
+        "lesson": "DRC-LOADBAL balances execution loads. This lesson shows you how to distribute an AI workload across multiple resources.",
+        "code_snippet": "function balanceLoad(resources) {\n  return `Balanced: ${resources.join(', ')}`;\n}\nconsole.log(balanceLoad(['CPU', 'GPU'])); // Output: Balanced: CPU, GPU",
+        "interactive_widget": "Load Balancer: Distribute an AI workload across simulated resources."
       },
       {
         "id": "drc-55",
         "number": "5️⃣5️⃣",
         "name": "DRC-PRUNE",
-        "description": "Optimizes AI models by reducing redundant parameters."
+        "description": "Optimizes AI models by reducing redundant parameters.",
+        "lesson": "DRC-PRUNE reduces model complexity. This lesson demonstrates how to prune an AI model to improve efficiency.",
+        "code_snippet": "function pruneModel(params) {\n  return `Pruned: ${params * 0.7}`;\n}\nconsole.log(pruneModel(100)); // Output: Pruned: 70",
+        "interactive_widget": "Model Pruning: Prune a simulated AI model and see the efficiency gain."
       }
     ]
-  },
+  }
+]
+[
   {
     "category": "AI-Native Execution & System Control",
     "color": "🟢",
@@ -394,49 +563,73 @@
         "id": "drc-56",
         "number": "5️⃣6️⃣",
         "name": "DRC-SCRIPT",
-        "description": "AI-optimized scripting system replacing traditional Bash/Python."
+        "description": "AI-optimized scripting system replacing traditional Bash/Python.",
+        "lesson": "DRC-SCRIPT provides an AI-optimized scripting language. This lesson teaches you how to write a simple DRC-SCRIPT program to automate a task.",
+        "code_snippet": "function drcScript(task) {\n  return `Scripted: ${task}`;\n}\nconsole.log(drcScript('automate')); // Output: Scripted: automate",
+        "interactive_widget": "Scripting Sandbox: Write and run a DRC-SCRIPT program to automate a task."
       },
       {
         "id": "drc-57",
         "number": "5️⃣7️⃣",
         "name": "DRC-EXEC",
-        "description": "Central execution engine for AI workloads."
+        "description": "Central execution engine for AI workloads.",
+        "lesson": "DRC-EXEC manages AI workloads. This lesson demonstrates how to execute an AI task using DRC-EXEC.",
+        "code_snippet": "function executeAI(task) {\n  return `AI Executed: ${task}`;\n}\nconsole.log(executeAI('inference')); // Output: AI Executed: inference",
+        "interactive_widget": "Execution Engine: Run an AI task with DRC-EXEC and see the result."
       },
       {
         "id": "drc-58",
         "number": "5️⃣8️⃣",
         "name": "DRC-SCHEDULER",
-        "description": "Dynamically assigns execution priority for AI tasks."
+        "description": "Dynamically assigns execution priority for AI tasks.",
+        "lesson": "DRC-SCHEDULER prioritizes AI tasks. This lesson shows you how to prioritize a set of AI tasks dynamically.",
+        "code_snippet": "function scheduleAITask(tasks) {\n  return `Scheduled: ${tasks.join(', ')}`;\n}\nconsole.log(scheduleAITask(['task1', 'task2'])); // Output: Scheduled: task1, task2",
+        "interactive_widget": "AI Scheduler: Prioritize a set of AI tasks with DRC-SCHEDULER."
       },
       {
         "id": "drc-59",
         "number": "5️⃣9️⃣",
         "name": "DRC-QUEUE",
-        "description": "Organizes and balances AI tasks before execution."
+        "description": "Organizes and balances AI tasks before execution.",
+        "lesson": "DRC-QUEUE organizes AI tasks. This lesson demonstrates how to queue and balance AI tasks for execution.",
+        "code_snippet": "function queueAITasks(tasks) {\n  return `Queued: ${tasks.join(', ')}`;\n}\nconsole.log(queueAITasks(['task1', 'task2'])); // Output: Queued: task1, task2",
+        "interactive_widget": "AI Queue: Queue and balance a set of AI tasks with DRC-QUEUE."
       },
       {
         "id": "drc-60",
         "number": "6️⃣0️⃣",
         "name": "DRC-OPT",
-        "description": "AI rewrites inefficient execution paths in real-time."
+        "description": "AI rewrites inefficient execution paths in real-time.",
+        "lesson": "DRC-OPT optimizes execution paths. This lesson shows you how to rewrite an inefficient path using DRC-OPT.",
+        "code_snippet": "function optimizePath(path) {\n  return `Optimized Path: ${path}`;\n}\nconsole.log(optimizePath('inefficient')); // Output: Optimized Path: inefficient",
+        "interactive_widget": "Path Optimizer: Rewrite an inefficient execution path with DRC-OPT."
       },
       {
         "id": "drc-61",
         "number": "6️⃣1️⃣",
         "name": "DRC-PREDICT",
-        "description": "Predicts workloads for proactive resource allocation."
+        "description": "Predicts workloads for proactive resource allocation.",
+        "lesson": "DRC-PREDICT forecasts AI workloads. This lesson demonstrates how to predict a workload and allocate resources proactively.",
+        "code_snippet": "function predictAIWorkload(tasks) {\n  return `Predicted: ${tasks.length}`;\n}\nconsole.log(predictAIWorkload(['task1', 'task2'])); // Output: Predicted: 2",
+        "interactive_widget": "AI Predictor: Predict an AI workload and allocate resources with DRC-PREDICT."
       },
       {
         "id": "drc-62",
         "number": "6️⃣2️⃣",
         "name": "DRC-CACHE",
-        "description": "Caches execution paths for faster processing."
+        "description": "Caches execution paths for faster processing.",
+        "lesson": "DRC-CACHE speeds up AI execution. This lesson shows you how to cache an AI execution path for faster access.",
+        "code_snippet": "function cacheAIPath(path) {\n  return `Cached: ${path}`;\n}\nconsole.log(cacheAIPath('path1')); // Output: Cached: path1",
+        "interactive_widget": "AI Caching: Cache an AI execution path and measure the speed improvement."
       },
       {
         "id": "drc-63",
         "number": "6️⃣3️⃣",
         "name": "DRC-TRACE",
-        "description": "Real-time debugging and monitoring of AI execution."
+        "description": "Real-time debugging and monitoring of AI execution.",
+        "lesson": "DRC-TRACE enables AI debugging. This lesson demonstrates how to trace an AI execution and monitor its performance.",
+        "code_snippet": "function traceAI(step) {\n  return `AI Trace: ${step}`;\n}\nconsole.log(traceAI('Step 1')); // Output: AI Trace: Step 1",
+        "interactive_widget": "AI Tracing: Trace an AI execution step and monitor its performance."
       }
     ]
   },
@@ -449,31 +642,46 @@
         "id": "drc-64",
         "number": "6️⃣4️⃣",
         "name": "DRC-DRIVERS",
-        "description": "Automatic plug-and-play hardware detection and driver support."
+        "description": "Automatic plug-and-play hardware detection and driver support.",
+        "lesson": "DRC-DRIVERS enables plug-and-play hardware support. This lesson shows you how to detect and integrate a new hardware device.",
+        "code_snippet": "function detectHardware(device) {\n  return `Detected: ${device}`;\n}\nconsole.log(detectHardware('GPU')); // Output: Detected: GPU",
+        "interactive_widget": "Hardware Detection: Detect and integrate a simulated hardware device with DRC-DRIVERS."
       },
       {
         "id": "drc-65",
         "number": "6️⃣5️⃣",
         "name": "DRC-DR",
-        "description": "AI-driven disaster recovery to prevent execution failures."
+        "description": "AI-driven disaster recovery to prevent execution failures.",
+        "lesson": "DRC-DR ensures disaster recovery. This lesson simulates a system failure and demonstrates how DRC-DR recovers it.",
+        "code_snippet": "function disasterRecovery() {\n  return 'System Recovered';\n}\nconsole.log(disasterRecovery()); // Output: System Recovered",
+        "interactive_widget": "Disaster Recovery: Trigger a failure and see how DRC-DR recovers the system."
       },
       {
         "id": "drc-66",
         "number": "6️⃣6️⃣",
         "name": "DRC-UBOOT",
-        "description": "Secure bootloader and firmware integration."
+        "description": "Secure bootloader and firmware integration.",
+        "lesson": "DRC-UBOOT provides secure booting. This lesson shows you how to simulate a secure boot process with DRC-UBOOT.",
+        "code_snippet": "function secureBoot() {\n  return 'Boot Secured';\n}\nconsole.log(secureBoot()); // Output: Boot Secured",
+        "interactive_widget": "Secure Boot: Simulate a secure boot process with DRC-UBOOT."
       },
       {
         "id": "drc-67",
         "number": "6️⃣7️⃣",
         "name": "DRC-OTA",
-        "description": "Encrypted, local-network update distribution."
+        "description": "Encrypted, local-network update distribution.",
+        "lesson": "DRC-OTA manages secure updates. This lesson demonstrates how to distribute an encrypted update over a local network.",
+        "code_snippet": "function distributeUpdate() {\n  return 'Update Distributed';\n}\nconsole.log(distributeUpdate()); // Output: Update Distributed",
+        "interactive_widget": "OTA Update: Distribute a simulated encrypted update with DRC-OTA."
       },
       {
         "id": "drc-68",
         "number": "6️⃣8️⃣",
         "name": "DRC-SHADOW",
-        "description": "Stealth execution and redundancy for tamper-proof AI workloads."
+        "description": "Stealth execution and redundancy for tamper-proof AI workloads.",
+        "lesson": "DRC-SHADOW ensures tamper-proof execution. This lesson shows you how to run a stealth AI task with redundancy.",
+        "code_snippet": "function stealthExecute(task) {\n  return `Stealth: ${task}`;\n}\nconsole.log(stealthExecute('task1')); // Output: Stealth: task1",
+        "interactive_widget": "Stealth Execution: Run a tamper-proof AI task with DRC-SHADOW."
       }
     ]
   },
@@ -486,31 +694,46 @@
         "id": "drc-69",
         "number": "6️⃣9️⃣",
         "name": "DRC-DEV",
-        "description": "AI-assisted debugging and developer tools for DRC applications."
+        "description": "AI-assisted debugging and developer tools for DRC applications.",
+        "lesson": "DRC-DEV provides developer tools. This lesson demonstrates how to debug a DRC application using AI assistance.",
+        "code_snippet": "function debugApp(app) {\n  return `Debugged: ${app}`;\n}\nconsole.log(debugApp('App1')); // Output: Debugged: App1",
+        "interactive_widget": "Debugging Tool: Debug a simulated DRC application with DRC-DEV."
       },
       {
         "id": "drc-70",
         "number": "7️⃣0️⃣",
         "name": "DRC-UI",
-        "description": "Pre-built UI components for AI-based applications."
+        "description": "Pre-built UI components for AI-based applications.",
+        "lesson": "DRC-UI offers UI components. This lesson shows you how to create a simple UI for an AI application using DRC-UI.",
+        "code_snippet": "function createUI(component) {\n  return `UI Created: ${component}`;\n}\nconsole.log(createUI('Button')); // Output: UI Created: Button",
+        "interactive_widget": "UI Builder: Create a UI component for an AI application with DRC-UI."
       },
       {
         "id": "drc-71",
         "number": "7️⃣1️⃣",
         "name": "DRC-ID",
-        "description": "Self-sovereign identity and access control for AI environments."
+        "description": "Self-sovereign identity and access control for AI environments.",
+        "lesson": "DRC-ID manages identity and access. This lesson demonstrates how to authenticate an AI agent with DRC-ID.",
+        "code_snippet": "function authenticateAgent(agent) {\n  return `Authenticated: ${agent}`;\n}\nconsole.log(authenticateAgent('Agent1')); // Output: Authenticated: Agent1",
+        "interactive_widget": "Identity Manager: Authenticate an AI agent with DRC-ID."
       },
       {
         "id": "drc-72",
         "number": "7️⃣2️⃣",
         "name": "DRC-CORE",
-        "description": "Minimalist, AI-optimized microkernel for efficiency."
+        "description": "Minimalist, AI-optimized microkernel for efficiency.",
+        "lesson": "DRC-CORE is a minimal microkernel. This lesson shows you how to simulate a kernel operation with DRC-CORE.",
+        "code_snippet": "function kernelOp(operation) {\n  return `Kernel: ${operation}`;\n}\nconsole.log(kernelOp('Boot')); // Output: Kernel: Boot",
+        "interactive_widget": "Kernel Simulator: Run a kernel operation with DRC-CORE."
       },
       {
         "id": "drc-73",
         "number": "7️⃣3️⃣",
         "name": "DRC-DEBUG-MC",
-        "description": "Low-level register/memory inspection and trace analysis for debugging."
+        "description": "Low-level register/memory inspection and trace analysis for debugging.",
+        "lesson": "DRC-DEBUG-MC enables low-level debugging. This lesson demonstrates how to inspect a register during execution.",
+        "code_snippet": "function inspectRegister(reg) {\n  return `Register ${reg}: 42`;\n}\nconsole.log(inspectRegister('R1')); // Output: Register R1: 42",
+        "interactive_widget": "Register Inspector: Inspect a simulated register during execution with DRC-DEBUG-MC."
       }
     ]
   },
@@ -523,37 +746,55 @@
         "id": "drc-74",
         "number": "7️⃣4️⃣",
         "name": "DRC-DEBUG",
-        "description": "AI-powered debugging for real-time execution analysis."
+        "description": "AI-powered debugging for real-time execution analysis.",
+        "lesson": "DRC-DEBUG provides AI-driven debugging. This lesson shows you how to debug a DRC execution in real-time.",
+        "code_snippet": "function debugExecution(step) {\n  return `Debug: ${step}`;\n}\nconsole.log(debugExecution('Step 1')); // Output: Debug: Step 1",
+        "interactive_widget": "Debug Tool: Debug a DRC execution step with DRC-DEBUG."
       },
       {
         "id": "drc-75",
         "number": "7️⃣5️⃣",
         "name": "DRC-TRACE",
-        "description": "Live execution tracing for AI workloads and scripts."
+        "description": "Live execution tracing for AI workloads and scripts.",
+        "lesson": "DRC-TRACE enables live tracing. This lesson demonstrates how to trace a DRC script execution.",
+        "code_snippet": "function traceScript(step) {\n  return `Trace: ${step}`;\n}\nconsole.log(traceScript('Step 1')); // Output: Trace: Step 1",
+        "interactive_widget": "Script Tracer: Trace a DRC script execution with DRC-TRACE."
       },
       {
         "id": "drc-76",
         "number": "7️⃣6️⃣",
         "name": "DRC-PROFILER",
-        "description": "AI-driven profiling for detecting performance bottlenecks."
+        "description": "AI-driven profiling for detecting performance bottlenecks.",
+        "lesson": "DRC-PROFILER identifies bottlenecks. This lesson shows you how to profile a DRC application for performance.",
+        "code_snippet": "function profileApp(app) {\n  return `Profiled: ${app}`;\n}\nconsole.log(profileApp('App1')); // Output: Profiled: App1",
+        "interactive_widget": "Profiler: Profile a DRC application and identify bottlenecks with DRC-PROFILER."
       },
       {
         "id": "drc-77",
         "number": "7️⃣7️⃣",
         "name": "DRC-STEP",
-        "description": "Step-by-step execution and replay for debugging."
+        "description": "Step-by-step execution and replay for debugging.",
+        "lesson": "DRC-STEP enables step-by-step debugging. This lesson demonstrates how to step through a DRC execution and replay it.",
+        "code_snippet": "function stepExecution(step) {\n  return `Step: ${step}`;\n}\nconsole.log(stepExecution('Step 1')); // Output: Step: Step 1",
+        "interactive_widget": "Step Debugger: Step through a DRC execution and replay it with DRC-STEP."
       },
       {
         "id": "drc-78",
         "number": "7️⃣8️⃣",
         "name": "DRC-EXCEPTIONS",
-        "description": "Advanced exception handling and error logging."
+        "description": "Advanced exception handling and error logging.",
+        "lesson": "DRC-EXCEPTIONS handles errors. This lesson shows you how to catch and log an exception in DRC.",
+        "code_snippet": "function handleException() {\n  try {\n    throw new Error('Test');\n  } catch (e) {\n    return `Logged: ${e.message}`;\n  }\n}\nconsole.log(handleException()); // Output: Logged: Test",
+        "interactive_widget": "Exception Handler: Trigger an exception and see how DRC-EXCEPTIONS logs it."
       },
       {
         "id": "drc-79",
         "number": "7️⃣9️⃣",
         "name": "DRC-SANDBOX",
-        "description": "Secure environment for testing DRC scripts and models."
+        "description": "Secure environment for testing DRC scripts and models.",
+        "lesson": "DRC-SANDBOX provides a safe testing environment. This lesson shows you how to test a DRC script in a sandbox.",
+        "code_snippet": "function testInSandbox(script) {\n  return `Tested: ${script}`;\n}\nconsole.log(testInSandbox('script1')); // Output: Tested: script1",
+        "interactive_widget": "Sandbox Tester: Test a DRC script in a secure sandbox with DRC-SANDBOX."
       }
     ]
   },
@@ -566,13 +807,19 @@
         "id": "drc-80",
         "number": "8️⃣0️⃣",
         "name": "DRC-PKG",
-        "description": "Offline-first package management with cryptographic validation."
+        "description": "Offline-first package management with cryptographic validation.",
+        "lesson": "DRC-PKG manages packages offline. This lesson demonstrates how to install a package with DRC-PKG and validate it.",
+        "code_snippet": "function installPackage(pkg) {\n  return `Installed: ${pkg}`;\n}\nconsole.log(installPackage('pkg1')); // Output: Installed: pkg1",
+        "interactive_widget": "Package Manager: Install and validate a simulated package with DRC-PKG."
       },
       {
         "id": "drc-81",
         "number": "8️⃣1️⃣",
         "name": "DRC-STDLIB",
-        "description": "AI-optimized standard library for math, strings, and utilities."
+        "description": "AI-optimized standard library for math, strings, and utilities.",
+        "lesson": "DRC-STDLIB provides optimized utilities. This lesson shows you how to use a DRC-STDLIB function for matrix operations.",
+        "code_snippet": "function matrixMultiply(a, b) {\n  return `Result: ${a * b}`;\n}\nconsole.log(matrixMultiply(2, 3)); // Output: Result: 6",
+        "interactive_widget": "Standard Library: Use a DRC-STDLIB function to perform a matrix operation."
       }
     ]
   },
@@ -585,25 +832,37 @@
         "id": "drc-86",
         "number": "8️⃣6️⃣",
         "name": "DRC-NET",
-        "description": "AI-optimized networking stack for secure communication."
+        "description": "AI-optimized networking stack for secure communication.",
+        "lesson": "DRC-NET enables secure networking. This lesson demonstrates how to send a secure message with DRC-NET.",
+        "code_snippet": "function sendMessage(msg) {\n  return `Sent: ${msg}`;\n}\nconsole.log(sendMessage('Hello')); // Output: Sent: Hello",
+        "interactive_widget": "Networking Demo: Send a secure message with DRC-NET."
       },
       {
         "id": "drc-87",
         "number": "8️⃣7️⃣",
         "name": "DRC-P2P",
-        "description": "Peer-to-peer AI execution without cloud dependency."
+        "description": "Peer-to-peer AI execution without cloud dependency.",
+        "lesson": "DRC-P2P enables P2P execution. This lesson shows you how to distribute an AI task across peers with DRC-P2P.",
+        "code_snippet": "function p2pExecute(peers) {\n  return `Executed on: ${peers.join(', ')}`;\n}\nconsole.log(p2pExecute(['Peer1', 'Peer2'])); // Output: Executed on: Peer1, Peer2",
+        "interactive_widget": "P2P Execution: Distribute an AI task across simulated peers with DRC-P2P."
       },
       {
         "id": "drc-88",
         "number": "8️⃣8️⃣",
         "name": "DRC-EDGE",
-        "description": "Ultra-low-latency AI execution on edge devices."
+        "description": "Ultra-low-latency AI execution on edge devices.",
+        "lesson": "DRC-EDGE optimizes edge execution. This lesson demonstrates how to run an AI task on an edge device with DRC-EDGE.",
+        "code_snippet": "function edgeExecute(task) {\n  return `Edge Executed: ${task}`;\n}\nconsole.log(edgeExecute('task1')); // Output: Edge Executed: task1",
+        "interactive_widget": "Edge Execution: Run an AI task on a simulated edge device with DRC-EDGE."
       },
       {
         "id": "drc-89",
         "number": "8️⃣9️⃣",
         "name": "DRC-TOR",
-        "description": "Privacy-preserving execution with onion routing."
+        "description": "Privacy-preserving execution with onion routing.",
+        "lesson": "DRC-TOR ensures privacy with onion routing. This lesson shows you how to route a task through a simulated onion network.",
+        "code_snippet": "function onionRoute(task) {\n  return `Routed: ${task}`;\n}\nconsole.log(onionRoute('task1')); // Output: Routed: task1",
+        "interactive_widget": "Onion Routing: Route a task through a simulated onion network with DRC-TOR."
       }
     ]
   },
@@ -616,37 +875,55 @@
         "id": "drc-90",
         "number": "9️⃣0️⃣",
         "name": "DRC-ML",
-        "description": "Native execution for deep learning and neural networks."
+        "description": "Native execution for deep learning and neural networks.",
+        "lesson": "DRC-ML enables native ML execution. This lesson demonstrates how to run a simple neural network inference with DRC-ML.",
+        "code_snippet": "function runNeuralNet(input) {\n  return `Inference: ${input * 2}`;\n}\nconsole.log(runNeuralNet(5)); // Output: Inference: 10",
+        "interactive_widget": "Neural Network: Run a simple neural network inference with DRC-ML."
       },
       {
         "id": "drc-91",
         "number": "9️⃣1️⃣",
         "name": "DRC-RL",
-        "description": "Reinforcement learning framework for self-optimizing AI."
+        "description": "Reinforcement learning framework for self-optimizing AI.",
+        "lesson": "DRC-RL supports reinforcement learning. This lesson shows you how to train a simple RL agent with DRC-RL.",
+        "code_snippet": "function trainRLAgent(action) {\n  return `Trained: ${action}`;\n}\nconsole.log(trainRLAgent('move')); // Output: Trained: move",
+        "interactive_widget": "RL Trainer: Train a simulated RL agent with DRC-RL."
       },
       {
         "id": "drc-92",
         "number": "9️⃣2️⃣",
         "name": "DRC-FED",
-        "description": "Federated learning for secure, collaborative model training."
+        "description": "Federated learning for secure, collaborative model training.",
+        "lesson": "DRC-FED enables federated learning. This lesson demonstrates how to train a model collaboratively with DRC-FED.",
+        "code_snippet": "function federatedTrain(nodes) {\n  return `Trained on: ${nodes.join(', ')}`;\n}\nconsole.log(federatedTrain(['Node1', 'Node2'])); // Output: Trained on: Node1, Node2",
+        "interactive_widget": "Federated Learning: Train a model across simulated nodes with DRC-FED."
       },
       {
         "id": "drc-93",
         "number": "9️⃣3️⃣",
         "name": "DRC-ZKML",
-        "description": "Zero-knowledge machine learning for encrypted model execution."
+        "description": "Zero-knowledge machine learning for encrypted model execution.",
+        "lesson": "DRC-ZKML ensures private ML execution. This lesson shows you how to run an encrypted ML model with DRC-ZKML.",
+        "code_snippet": "function zkmlExecute(model) {\n  return `Encrypted Execution: ${model}`;\n}\nconsole.log(zkmlExecute('ModelA')); // Output: Encrypted Execution: ModelA",
+        "interactive_widget": "ZKML Execution: Run an encrypted ML model with DRC-ZKML."
       },
       {
         "id": "drc-94",
         "number": "9️⃣4️⃣",
         "name": "DRC-QML",
-        "description": "Hybrid classical-quantum AI execution for speedup."
+        "description": "Hybrid classical-quantum AI execution for speedup.",
+        "lesson": "DRC-QML combines classical and quantum AI. This lesson demonstrates how to run a hybrid AI task with DRC-QML.",
+        "code_snippet": "function qmlExecute(task) {\n  return `Hybrid Result: ${task}`;\n}\nconsole.log(qmlExecute('task1')); // Output: Hybrid Result: task1",
+        "interactive_widget": "QML Execution: Run a hybrid AI task with DRC-QML."
       },
       {
         "id": "drc-95",
         "number": "9️⃣5️⃣",
         "name": "DRC-GEN",
-        "description": "Supports generative AI models for text, image, and audio."
+        "description": "Supports generative AI models for text, image, and audio.",
+        "lesson": "DRC-GEN enables generative AI. This lesson shows you how to generate text with a simulated generative model.",
+        "code_snippet": "function generateText(prompt) {\n  return `Generated: ${prompt}`;\n}\nconsole.log(generateText('Hello')); // Output: Generated: Hello",
+        "interactive_widget": "Generative AI: Generate text with a simulated model using DRC-GEN."
       }
     ]
   },
@@ -659,32 +936,47 @@
         "id": "drc-96",
         "number": "9️⃣6️⃣",
         "name": "DRC-HLL",
-        "description": "General-purpose language supporting multiple paradigms."
+        "description": "General-purpose language supporting multiple paradigms.",
+        "lesson": "DRC-HLL transforms DRC into a general-purpose language supporting object-oriented, functional, and procedural programming. In this lesson, you'll write a simple DRC-HLL program to create a class, demonstrating its versatility across paradigms.",
+        "code_snippet": "class Example {\n  constructor(value) {\n    this.value = value;\n  }\n  getValue() {\n    return this.value;\n  }\n}\nconst obj = new Example(42);\nconsole.log(obj.getValue()); // Output: 42",
+        "interactive_widget": "DRC-HLL Sandbox: Write and run a DRC-HLL program to explore its multi-paradigm features."
       },
       {
         "id": "drc-97",
         "number": "9️⃣7️⃣",
         "name": "DRC-SAFE",
-        "description": "Memory-safe execution with AI-based optimizations."
+        "description": "Memory-safe execution with AI-based optimizations.",
+        "lesson": "DRC-SAFE ensures memory safety. This lesson demonstrates how to write a memory-safe program with DRC-SAFE and see AI optimizations.",
+        "code_snippet": "function safeExecute(code) {\n  return `Safe Execution: ${code}`;\n}\nconsole.log(safeExecute('write')); // Output: Safe Execution: write",
+        "interactive_widget": "Memory Safety: Run a program and see how DRC-SAFE ensures memory safety."
       },
       {
         "id": "drc-98",
         "number": "9️⃣8️⃣",
         "name": "DRC-GUI",
-        "description": "AI-optimized GUI development for lightweight applications."
+        "description": "AI-optimized GUI development for lightweight applications.",
+        "lesson": "DRC-GUI enables GUI development. This lesson shows you how to create a lightweight GUI for a DRC application.",
+        "code_snippet": "function createGUI(element) {\n  return `GUI Element: ${element}`;\n}\nconsole.log(createGUI('Button')); // Output: GUI Element: Button",
+        "interactive_widget": "GUI Creator: Create a lightweight GUI element with DRC-GUI."
       },
       {
         "id": "drc-99",
         "number": "9️⃣9️⃣",
         "name": "DRC-WEB",
-        "description": "AI-accelerated web development with WebAssembly support."
+        "description": "AI-accelerated web development with WebAssembly support.",
+        "lesson": "DRC-WEB accelerates web development. This lesson demonstrates how to create a web app with DRC-WEB and WebAssembly.",
+        "code_snippet": "function webApp(app) {\n  return `Web App: ${app}`;\n}\nconsole.log(webApp('App1')); // Output: Web App: App1",
+        "interactive_widget": "Web App Builder: Create a simulated web app with DRC-WEB."
       },
       {
         "id": "drc-100",
         "number": "1️⃣0️⃣0️⃣",
         "name": "DRC-CLI",
-        "description": "Command-line interface for system scripting and automation."
+        "description": "Command-line interface for system scripting and automation.",
+        "lesson": "DRC-CLI provides a command-line interface. This lesson shows you how to write a DRC-CLI script to automate a task.",
+        "code_snippet": "function cliScript(command) {\n  return `CLI Output: ${command}`;\n}\nconsole.log(cliScript('run')); // Output: CLI Output: run",
+        "interactive_widget": "CLI Sandbox: Write and run a DRC-CLI script to automate a task."
       }
     ]
   }
-] 
+]
