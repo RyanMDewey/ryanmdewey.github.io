@@ -551,7 +551,6 @@
         ]
     },
     {
-        {
             "category": "AI-Native Execution & System Control",
             "color": "🟢",
             "purpose": "Defines DRC’s autonomous, AI-driven execution model.",
