@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/main.css" />
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     .component details {
       margin: 1rem 0;
@@ -216,7 +217,10 @@
 
     // Load and Render Components
     fetch('/data/drc-components.json')
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json();
+      })
       .then(data => {
         const container = document.getElementById('components-container');
         data.forEach(category => {
@@ -240,6 +244,7 @@
           category.components.forEach(comp => {
             const details = document.createElement('details');
             details.id = comp.id;
+            details.setAttribute('open', ''); // Open by default
             const summary = document.createElement('summary');
             summary.textContent = `${comp.number} ${comp.name}`;
             details.appendChild(summary);
@@ -252,6 +257,28 @@
               const lesson = document.createElement('div');
               lesson.className = 'lesson';
               lesson.textContent = comp.lesson;
+              const lessonLink = document.createElement('a');
+              lessonLink.href = '#';
+              lessonLink.textContent = 'Read Full Lesson';
+              lessonLink.style.color = 'var(--neon-blue)';
+              lessonLink.style.marginLeft = '1rem';
+              lessonLink.onclick = async (event) => {
+                event.preventDefault();
+                try {
+                  const response = await fetch(`/lessons/${comp.id}.md`);
+                  if (!response.ok) throw new Error('Lesson not found');
+                  const markdown = await response.text();
+                  const fullLesson = document.createElement('div');
+                  fullLesson.innerHTML = marked.parse(markdown);
+                  details.appendChild(fullLesson);
+                } catch (e) {
+                  const errorDiv = document.createElement('div');
+                  errorDiv.textContent = `Error loading lesson: ${e.message}`;
+                  errorDiv.style.color = 'red';
+                  details.appendChild(errorDiv);
+                }
+              };
+              lesson.appendChild(lessonLink);
               details.appendChild(lesson);
             }
 
@@ -267,7 +294,7 @@
                 try {
                   const output = document.createElement('div');
                   output.className = 'code-output';
-                  const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n')); // Exclude console.log for eval
+                  const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n'));
                   output.textContent = `Output: ${result}`;
                   codeDiv.appendChild(output);
                 } catch (e) {
@@ -298,7 +325,9 @@
                   const result = value === '-1' ? 'NULL' : value === '0' ? 'FALSE' : 'TRUE';
                   output.textContent = `Result: ${result}`;
                 } else if (comp.id === 'drc-2') {
-                  output.textContent = `Simulated: Vector processed [${value.split('').map(x => x * 2)}]`;
+                  const numbers = value.split(',').map(x => Number(x.trim()));
+                  const processed = numbers.map(x => x * 2);
+                  output.textContent = `Simulated: Vector processed [${processed.join(',')}]`;
                 } else {
                   output.textContent = 'Demo: Interactive feature coming soon!';
                 }
