@@ -186,11 +186,17 @@
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('quick-nav').addEventListener('change', function () {
+      const target = document.querySelector(this.value);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+
     fetch('https://www.ryanmdewey.com/data/drc-components.json')
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById('components-container');
-
         data.forEach(category => {
           const section = document.createElement('section');
           section.className = 'hero-box';
@@ -297,6 +303,7 @@
         detail.style.display = detail.innerText.toLowerCase().includes(query) ? '' : 'none';
       });
     });
-  </script>
+  });
+</script>
 </body>
 </html>
