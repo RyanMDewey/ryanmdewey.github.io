@@ -550,7 +550,7 @@
             }
         ]
     },
-    [
+    {
         {
             "category": "AI-Native Execution & System Control",
             "color": "🟢",
