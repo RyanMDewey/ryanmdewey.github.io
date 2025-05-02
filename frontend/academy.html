@@ -3,235 +3,200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="DRC Academy: Learn the Dewey Run-time Core, a revolutionary stack for AI-driven, quantum-ready, autonomous systems. Explore 100 components across execution, security, and more." />
-  <meta name="keywords" content="DRC, Dewey Run-time Core, AI, quantum computing, autonomous systems, learning academy" />
-  <title>DRC Academy – Learn the Dewey Run-time Core</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <meta name="description" content="DRC Academy: Learn the Dewey Run-time Core, a revolutionary stack for AI-driven, quantum-ready, autonomous systems." />
+  <title>DRC Academy</title>
   <link rel="stylesheet" href="styles/main.css" />
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    .component details {
-      margin: 1rem 0;
-      padding: 0.5rem;
-      background: rgba(0, 255, 225, 0.03);
-      border-left: 3px solid var(--neon-blue);
-      border-radius: 8px;
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0b0b0b;
+      color: #f4f4f4;
+      margin: 0;
+      padding: 1rem;
     }
-    .component summary {
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: var(--neon-blue);
-      text-shadow: 0 0 8px var(--neon-blue);
+
+    h1, h2 {
+      color: #00ffe1;
     }
-    .component p {
-      font-size: 0.95rem;
-      color: var(--text-light);
-      margin: 0.5rem 0;
-    }
-    .lesson, .code-snippet, .interactive-widget {
-      margin: 0.5rem 0;
-    }
-    .lesson {
-      background: rgba(0, 255, 225, 0.05);
-      padding: 0.5rem;
+
+    #search-input, #quick-nav {
+      width: 300px;
+      max-width: 90%;
+      padding: 0.4rem;
+      margin: 1rem auto;
+      display: block;
+      background: #111;
+      border: 1px solid #00ffe1;
+      color: #f4f4f4;
       border-radius: 4px;
     }
-    .code-snippet pre {
-      background: #1a1a2e;
+
+    .component details {
+      background: rgba(0, 255, 225, 0.05);
+      border-left: 3px solid #00ffe1;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+
+    summary {
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #00ffe1;
+    }
+
+    pre {
+      background: #111;
       padding: 0.5rem;
       border-radius: 4px;
       overflow-x: auto;
     }
-    .code-snippet button {
-      background: var(--neon-blue);
-      color: #0d0d1a;
+
+    button {
+      margin-top: 0.5rem;
+      background: #00ffe1;
       border: none;
-      padding: 0.3rem 0.6rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 4px;
-      cursor: pointer;
-      margin-top: 0.3rem;
-    }
-    .code-snippet button:hover {
-      box-shadow: 0 0 8px var(--neon-blue);
-    }
-    .code-output {
-      margin-top: 0.3rem;
-      color: #33ff99;
-    }
-    .interactive-widget input {
-      padding: 0.3rem;
-      margin-right: 0.5rem;
-      background: rgba(0, 255, 225, 0.05);
-      border: 1px solid var(--neon-blue);
-      color: var(--text-light);
-      border-radius: 4px;
-    }
-    .interactive-widget button {
-      background: var(--neon-blue);
-      color: #0d0d1a;
-      border: none;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
+      color: #0b0b0b;
       cursor: pointer;
     }
-    .interactive-widget button:hover {
-      box-shadow: 0 0 8px var(--neon-blue);
-    }
-    .widget-output {
-      margin-top: 0.3rem;
+
+    .code-output, .widget-output {
+      margin-top: 0.5rem;
       color: #33ff99;
     }
-    #search-container, #category-select {
+
+    input[type="text"] {
+      padding: 0.4rem;
+      border-radius: 4px;
+      border: 1px solid #00ffe1;
+      background: #111;
+      color: #f4f4f4;
+    }
+
+    .lesson {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      background: rgba(0, 255, 225, 0.03);
+      border-radius: 4px;
+    }
+
+    .hero {
       text-align: center;
-      margin: 1.5rem 0;
+      margin-top: 1rem;
     }
-    #search-input, #category-select select {
-      width: 300px;
-      max-width: 90%;
+
+    .hero-box {
+      margin-bottom: 2rem;
+    }
+
+    .top-nav {
+      margin-bottom: 1rem;
+    }
+
+    .nav-links a {
+      margin: 0 0.6rem;
+      color: #00ffe1;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
-<body class="theme-1">
-  <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
-
-  <div style="position: relative; z-index: 1;">
-    <nav class="top-nav" role="navigation">
-      <div class="nav-links">
-        <a href="#core-execution">Core Execution</a>
-        <a href="#ai-validation">AI Validation</a>
-        <a href="#os-layer">OS Layer</a>
-        <a href="#hardware">Hardware</a>
-        <a href="#governance">Governance</a>
-        <a href="#resource-control">Resource Control</a>
-        <a href="#performance">Performance</a>
-        <a href="#model-management">Model Management</a>
-        <a href="#native-execution">Native Execution</a>
-        <a href="#system-integration">System Integration</a>
-        <a href="#final-components">Final Components</a>
-        <a href="#debugging">Debugging</a>
-        <a href="#software-infra">Software Infra</a>
-        <a href="#network">Network</a>
-        <a href="#machine-learning">Machine Learning</a>
-        <a href="#high-level">High-Level</a>
-      </div>
-    </nav>
-
-    <header class="hero">
-      <h1 class="glitch">DRC Academy</h1>
-      <p class="tagline">Master the Dewey Run-time Core: A revolutionary stack for AI-driven, quantum-ready, autonomous systems.</p>
-    </header>
-
-    <div style="text-align: center; margin-top: 1.5rem;">
-      <button id="theme-toggle">🌗 Toggle Theme</button>
-    </div>
-
-    <div id="search-container">
-      <input type="text" id="search-input" placeholder="Search components..." />
-    </div>
-    <div id="category-select">
-      <select onchange="window.location.href=this.value">
-        <option value="">Jump to Category</option>
-        <option value="#core-execution">Core Execution Layer</option>
-        <option value="#ai-validation">AI Validation & Security Layer</option>
-        <option value="#os-layer">Operating System Layer</option>
-        <option value="#hardware">Hardware & Future-Proofing</option>
-        <option value="#governance">Governance & Documentation</option>
-        <option value="#resource-control">AI Resource & Execution Control</option>
-        <option value="#performance">AI Performance & Optimization</option>
-        <option value="#model-management">AI Model Management & Deployment</option>
-        <option value="#native-execution">AI-Native Execution & System Control</option>
-        <option value="#system-integration">System Integration & Reliability</option>
-        <option value="#final-components">Final Components</option>
-        <option value="#debugging">Debugging & Execution Monitoring</option>
-        <option value="#software-infra">Software Infrastructure</option>
-        <option value="#network">Network & Distributed Computation</option>
-        <option value="#machine-learning">Machine Learning & AI Model Execution</option>
-        <option value="#high-level">High-Level Language Integration</option>
-      </select>
-    </div>
-
-    <main>
-      <div id="components-container"></div>
-    </main>
-
-    <footer class="footer">
-      ✨ DRC Academy designed by Ryan Dewey © 2025
-    </footer>
-
-    <div class="terminal-time" id="terminal-clock">📌 Loading...</div>
+<body>
+  <!-- 🔧 Dynamic Nav Injection Target -->
+  <div class="top-nav">
+    <div class="nav-container" id="dynamic-nav"></div>
   </div>
 
+  <header class="hero">
+    <h1>DRC Academy</h1>
+    <p>Master the Dewey Run-time Core: AI-native, quantum-aligned, self-healing systems.</p>
+  </header>
+
+  <nav>
+    <select id="quick-nav">
+      <option value="">-- Jump to Category --</option>
+      <option value="#core-execution">Core Execution</option>
+      <option value="#ai-validation">AI Validation</option>
+      <option value="#os-layer">OS Layer</option>
+      <option value="#hardware">Hardware</option>
+      <option value="#governance">Governance</option>
+      <option value="#resource-control">Resource Control</option>
+      <option value="#performance">Performance</option>
+      <option value="#model-management">Model Management</option>
+      <option value="#native-execution">Native Execution</option>
+      <option value="#system-integration">System Integration</option>
+      <option value="#final-components">Final Components</option>
+      <option value="#debugging">Debugging</option>
+      <option value="#software-infra">Software Infra</option>
+      <option value="#network">Network</option>
+      <option value="#machine-learning">Machine Learning</option>
+      <option value="#high-level">High-Level</option>
+    </select>
+    <input type="text" id="search-input" placeholder="Search components...">
+  </nav>
+
+  <main id="components-container"></main>
+
+  <footer style="text-align:center; margin-top: 2rem;">
+    ✨ DRC Academy © 2025 Ryan Dewey
+  </footer>
+
+  <!-- Dynamic Nav Script -->
   <script>
-    // Clock
-    const clock = document.getElementById("terminal-clock");
-    setInterval(() => {
-      const now = new Date();
-      clock.textContent = `📌 ${now.toLocaleDateString(undefined, { weekday: 'long' })} | 📅 ${now.toLocaleDateString()} | 🕒 ${now.toLocaleTimeString()}`;
-    }, 1000);
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
 
-    // Theme Toggle
-    let themeIndex = 0;
-    const themes = ['theme-1', 'theme-2', 'theme-3'];
-    document.getElementById('theme-toggle').onclick = () => {
-      document.body.classList.remove(...themes);
-      themeIndex = (themeIndex + 1) % themes.length;
-      document.body.classList.add(themes[themeIndex]);
-    };
+    const navLinks = [
+      { name: 'Home', href: '/' },
+      { name: 'Experience', href: '/experience.html' },
+      { name: 'Projects', href: '/projects.html' },
+      { name: 'Skills', href: '/skills.html' },
+      { name: 'Resume', href: '/resume.html' },
+      { name: 'Contact', href: '/contact.html' },
+      { name: 'Blog', href: '/blog/' }
+    ];
 
-    // Particles.js background
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#00ffe1" },
-        shape: { type: "circle" },
-        opacity: { value: 0.2 },
-        size: { value: 2.5 },
-        line_linked: {
-          enable: true,
-          distance: 100,
-          color: "#00ffe1",
-          opacity: 0.3,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 1.2,
-          direction: "none",
-          out_mode: "out"
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: { enable: true, mode: "grab" },
-          onclick: { enable: true, mode: "push" }
-        },
-        modes: {
-          grab: { distance: 140, line_linked: { opacity: 0.4 } },
-          push: { particles_nb: 2 }
-        }
-      },
-      retina_detect: true
+    const nav = document.createElement('div');
+    nav.className = 'nav-links';
+
+    navLinks.forEach(link => {
+      const isActive = currentPage === link.href.split('/').pop() || currentPath === link.href;
+      if (!isActive) {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.name;
+        nav.appendChild(a);
+      }
     });
 
-    // Load and Render Components
+    document.getElementById('dynamic-nav')?.appendChild(nav);
+  </script>
+
+  <!-- Render Components -->
+  <script>
+    document.getElementById('quick-nav').addEventListener('change', function () {
+      const target = document.querySelector(this.value);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+
     fetch('https://www.ryanmdewey.com/data/drc-components.json')
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-        return res.json();
-      })
+      .then(res => res.json())
       .then(data => {
         const container = document.getElementById('components-container');
+
         data.forEach(category => {
           const section = document.createElement('section');
           section.className = 'hero-box';
           section.id = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
-          section.setAttribute('aria-labelledby', `header-${section.id}`);
 
           const header = document.createElement('h2');
-          header.id = `header-${section.id}`;
-          header.className = 'section-title';
           header.textContent = `${category.color} ${category.category}`;
           section.appendChild(header);
 
@@ -239,12 +204,11 @@
           purpose.textContent = `Purpose: ${category.purpose}`;
           section.appendChild(purpose);
 
-          const componentDiv = document.createElement('div');
-          componentDiv.className = 'component';
+          const compContainer = document.createElement('div');
+          compContainer.className = 'component';
+
           category.components.forEach(comp => {
             const details = document.createElement('details');
-            details.id = comp.id;
-            details.setAttribute('open', ''); // Open by default
             const summary = document.createElement('summary');
             summary.textContent = `${comp.number} ${comp.name}`;
             details.appendChild(summary);
@@ -257,44 +221,22 @@
               const lesson = document.createElement('div');
               lesson.className = 'lesson';
               lesson.textContent = comp.lesson;
-              const lessonLink = document.createElement('a');
-              lessonLink.href = '#';
-              lessonLink.textContent = 'Read Full Lesson';
-              lessonLink.style.color = 'var(--neon-blue)';
-              lessonLink.style.marginLeft = '1rem';
-              lessonLink.onclick = async (event) => {
-                event.preventDefault();
-                try {
-                  const response = await fetch(`/lessons/${comp.id}.md`);
-                  if (!response.ok) throw new Error('Lesson not found');
-                  const markdown = await response.text();
-                  const fullLesson = document.createElement('div');
-                  fullLesson.innerHTML = marked.parse(markdown);
-                  details.appendChild(fullLesson);
-                } catch (e) {
-                  const errorDiv = document.createElement('div');
-                  errorDiv.textContent = `Error loading lesson: ${e.message}`;
-                  errorDiv.style.color = 'red';
-                  details.appendChild(errorDiv);
-                }
-              };
-              lesson.appendChild(lessonLink);
               details.appendChild(lesson);
             }
 
             if (comp.code_snippet) {
               const codeDiv = document.createElement('div');
-              codeDiv.className = 'code-snippet';
               const pre = document.createElement('pre');
               pre.textContent = comp.code_snippet;
               codeDiv.appendChild(pre);
+
               const runBtn = document.createElement('button');
               runBtn.textContent = 'Run Code';
               runBtn.onclick = () => {
                 try {
+                  const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n'));
                   const output = document.createElement('div');
                   output.className = 'code-output';
-                  const result = eval(comp.code_snippet.split('\n').slice(0, -1).join('\n'));
                   output.textContent = `Output: ${result}`;
                   codeDiv.appendChild(output);
                 } catch (e) {
@@ -304,57 +246,55 @@
                   codeDiv.appendChild(output);
                 }
               };
+
               codeDiv.appendChild(runBtn);
               details.appendChild(codeDiv);
             }
 
             if (comp.interactive_widget) {
-              const widgetDiv = document.createElement('div');
-              widgetDiv.className = 'interactive-widget';
-              widgetDiv.textContent = comp.interactive_widget;
+              const widget = document.createElement('div');
+              widget.className = 'interactive-widget';
+              widget.textContent = comp.interactive_widget;
+
               const input = document.createElement('input');
-              input.type = 'text';
               input.placeholder = 'Enter value...';
-              const runWidget = document.createElement('button');
-              runWidget.textContent = 'Run';
-              runWidget.onclick = () => {
+
+              const button = document.createElement('button');
+              button.textContent = 'Run';
+
+              button.onclick = () => {
                 const value = input.value;
                 const output = document.createElement('div');
                 output.className = 'widget-output';
                 if (comp.id === 'drc-1') {
-                  const result = value === '-1' ? 'NULL' : value === '0' ? 'FALSE' : 'TRUE';
-                  output.textContent = `Result: ${result}`;
+                  output.textContent = `Result: ${value === '-1' ? 'NULL' : value === '0' ? 'FALSE' : 'TRUE'}`;
                 } else if (comp.id === 'drc-2') {
-                  const numbers = value.split(',').map(x => Number(x.trim()));
-                  const processed = numbers.map(x => x * 2);
-                  output.textContent = `Simulated: Vector processed [${processed.join(',')}]`;
+                  const nums = value.split(',').map(x => Number(x.trim()));
+                  const doubled = nums.map(n => n * 2);
+                  output.textContent = `Simulated: [${doubled.join(', ')}]`;
                 } else {
-                  output.textContent = 'Demo: Interactive feature coming soon!';
+                  output.textContent = 'Interactive demo coming soon.';
                 }
-                widgetDiv.appendChild(output);
+                widget.appendChild(output);
               };
-              widgetDiv.appendChild(input);
-              widgetDiv.appendChild(runWidget);
-              details.appendChild(widgetDiv);
+
+              widget.appendChild(input);
+              widget.appendChild(button);
+              details.appendChild(widget);
             }
 
-            componentDiv.appendChild(details);
+            compContainer.appendChild(details);
           });
-          section.appendChild(componentDiv);
+
+          section.appendChild(compContainer);
           container.appendChild(section);
         });
-      })
-      .catch(err => console.error('Error loading components:', err));
+      });
 
-    // Live Search
-    const searchInput = document.getElementById('search-input');
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase();
+    document.getElementById('search-input').addEventListener('input', () => {
+      const query = document.getElementById('search-input').value.toLowerCase();
       document.querySelectorAll('.component details').forEach(detail => {
-        const name = detail.querySelector('summary').textContent.toLowerCase();
-        const desc = detail.querySelector('p').textContent.toLowerCase();
-        const lesson = detail.querySelector('.lesson')?.textContent.toLowerCase() || '';
-        detail.style.display = (query === '' || name.includes(query) || desc.includes(query) || lesson.includes(query)) ? '' : 'none';
+        detail.style.display = detail.innerText.toLowerCase().includes(query) ? '' : 'none';
       });
     });
   </script>
