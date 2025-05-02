@@ -6,116 +6,268 @@
   <meta name="description" content="DRC Academy: Learn the Dewey Run-time Core, a revolutionary stack for AI-driven, quantum-ready, autonomous systems." />
   <title>DRC Academy</title>
   <link rel="stylesheet" href="styles/main.css" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    body {
-      font-family: 'JetBrains Mono', monospace;
-      background-color: #0b0b0b;
-      color: #f4f4f4;
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 1rem;
+      padding: 0;
     }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0b0b0b 0%, #1a1a1a 100%);
+      color: #e0e0e0;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
     h1, h2 {
-      color: #00ffe1;
+      color: #00d4ff;
+      font-weight: 600;
     }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #b0b0b0;
+    }
+
     #search-input, #quick-nav {
-      width: 300px;
-      max-width: 90%;
-      padding: 0.4rem;
+      width: 100%;
+      max-width: 350px;
+      padding: 0.75rem;
       margin: 1rem auto;
       display: block;
-      background: #111;
-      border: 1px solid #00ffe1;
-      color: #f4f4f4;
-      border-radius: 4px;
+      background: #1f1f1f;
+      border: 1px solid #00d4ff;
+      border-radius: 8px;
+      color: #e0e0e0;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
+
+    #search-input:focus, #quick-nav:focus {
+      outline: none;
+      border-color: #00b0ff;
+      box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
     .component details {
-      background: rgba(0, 255, 225, 0.05);
-      border-left: 3px solid #00ffe1;
+      background: #1f1f1f;
+      border: 1px solid #333;
+      border-radius: 8px;
       padding: 1rem;
       margin-bottom: 1rem;
-      border-radius: 8px;
+      transition: border-color 0.3s ease, transform 0.2s ease;
     }
+
+    .component details:hover {
+      border-color: #00d4ff;
+      transform: translateY(-2px);
+    }
+
     summary {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
+      font-weight: 500;
       cursor: pointer;
-      color: #00ffe1;
+      color: #00d4ff;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
+
+    summary:hover {
+      background-color: rgba(0, 212, 255, 0.1);
+    }
+
     pre {
-      background: #111;
-      padding: 0.5rem;
-      border-radius: 4px;
+      background: #151515;
+      padding: 1rem;
+      border-radius: 8px;
       overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #e0e0e0;
+      border: 1px solid #333;
     }
+
     button {
-      margin-top: 0.5rem;
-      background: #00ffe1;
+      margin-top: 0.75rem;
+      background: linear-gradient(45deg, #00d4ff, #00b0ff);
       border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      color: #0b0b0b;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: 500;
       cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
+
     button:hover {
-      box-shadow: 0 0 8px #00ffe1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 212, 255, 0.4);
     }
+
     .code-output, .widget-output {
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
       color: #33ff99;
-    }
-    input[type="text"] {
-      padding: 0.4rem;
-      margin-right: 0.5rem;
-      border-radius: 4px;
-      border: 1px solid #00ffe1;
-      background: #111;
-      color: #f4f4f4;
-    }
-    .lesson {
-      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      background: #151515;
       padding: 0.5rem;
-      background: rgba(0, 255, 225, 0.03);
-      border-radius: 4px;
-      border-left: 2px solid #00ffe1;
+      border-radius: 6px;
     }
+
+    input[type="text"] {
+      padding: 0.75rem;
+      margin-right: 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #00d4ff;
+      background: #1f1f1f;
+      color: #e0e0e0;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #00b0ff;
+      box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+    }
+
+    .lesson {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(0, 212, 255, 0.05);
+      border-radius: 6px;
+      border-left: 3px solid #00d4ff;
+      font-size: 0.95rem;
+    }
+
     .lesson a {
-      color: #00ffe1;
+      color: #00d4ff;
       text-decoration: none;
-      margin-left: 0.5rem;
+      font-weight: 500;
+      margin-left: 0.75rem;
+      transition: color 0.3s ease;
     }
+
     .lesson a:hover {
+      color: #00b0ff;
       text-decoration: underline;
     }
+
     .lesson div {
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
+      color: #e0e0e0;
     }
+
     .interactive-widget p {
-      margin: 0 0 0.5rem 0;
+      margin: 0 0 0.75rem 0;
+      color: #b0b0b0;
     }
+
     .hero {
       text-align: center;
-      margin-top: 1rem;
+      margin: 2rem 0;
     }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #b0b0b0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     .hero-box {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      padding: 1rem;
+      background: #151515;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
+
     .top-nav {
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       text-align: center;
+      background: #151515;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
+
     .nav-links a {
-      margin: 0 0.6rem;
-      color: #00ffe1;
+      margin: 0 1rem;
+      color: #00d4ff;
       text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
+
     .nav-links a:hover {
-      text-decoration: underline;
+      color: #00b0ff;
+      transform: translateY(-2px);
+      display: inline-block;
     }
+
     footer {
       text-align: center;
-      margin-top: 2rem;
-      color: #f4f4f4;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #333;
+      color: #b0b0b0;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00d4ff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      color: #00b0ff;
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .nav-links a {
+        margin: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .top-nav {
+        padding: 0.5rem;
+      }
+
+      .hero-box {
+        padding: 0.5rem;
+      }
     }
   </style>
 </head>
@@ -174,7 +326,7 @@
   </main>
 
   <footer>
-    ✨ DRC Academy © 2025 Ryan Dewey
+    <p>✨ DRC Academy © 2025 <a href="https://www.ryanmdewey.com">Ryan Dewey</a></p>
   </footer>
 
   <script>
@@ -216,7 +368,7 @@
 
           category.components.forEach(comp => {
             const details = document.createElement('details');
-            details.setAttribute('open', ''); // Open by default
+            // Removed: details.setAttribute('open', ''); // Now closed by default
             const summary = document.createElement('summary');
             summary.textContent = `${comp.number} ${comp.name}`;
             details.appendChild(summary);
@@ -232,8 +384,6 @@
               const lessonLink = document.createElement('a');
               lessonLink.textContent = 'Read Full Lesson';
               lessonLink.href = '#';
-              lessonLink.style.color = '#00ffe1';
-              lessonLink.style.display = 'inline-block';
               lessonLink.onclick = async (e) => {
                 e.preventDefault();
                 try {
