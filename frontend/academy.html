@@ -242,6 +242,102 @@
       text-decoration: underline;
     }
 
+    /* Styling for Markdown-rendered content */
+    .lesson-content h1 {
+      font-size: 2rem;
+      color: #00d4ff;
+      margin: 2rem 0 1rem;
+    }
+
+    .lesson-content h2 {
+      font-size: 1.5rem;
+      color: #00d4ff;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .lesson-content h3 {
+      font-size: 1.25rem;
+      color: #00d4ff;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .lesson-content p {
+      font-size: 1rem;
+      color: #e0e0e0;
+      margin-bottom: 1rem;
+    }
+
+    .lesson-content ul, .lesson-content ol {
+      margin: 1rem 0;
+      padding-left: 2rem;
+      color: #e0e0e0;
+    }
+
+    .lesson-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-content code {
+      background: #151515;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #33ff99;
+    }
+
+    .lesson-content pre {
+      background: #151515;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #e0e0e0;
+      border: 1px solid #333;
+      margin: 1rem 0;
+    }
+
+    .lesson-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      color: #e0e0e0;
+    }
+
+    .lesson-content th, .lesson-content td {
+      padding: 0.75rem;
+      border: 1px solid #333;
+      text-align: left;
+    }
+
+    .lesson-content th {
+      background: #1f1f1f;
+      color: #00d4ff;
+      font-weight: 600;
+    }
+
+    .lesson-content td {
+      background: #151515;
+    }
+
+    .lesson-content strong {
+      color: #e0e0e0;
+      font-weight: 600;
+    }
+
+    .lesson-content a {
+      color: #00d4ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .lesson-content a:hover {
+      color: #00b0ff;
+      text-decoration: underline;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       body {
@@ -267,6 +363,18 @@
 
       .hero-box {
         padding: 0.5rem;
+      }
+
+      .lesson-content h1 {
+        font-size: 1.75rem;
+      }
+
+      .lesson-content h2 {
+        font-size: 1.25rem;
+      }
+
+      .lesson-content h3 {
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -391,6 +499,7 @@
                   if (!res.ok) throw new Error('Lesson not found');
                   const md = await res.text();
                   const rendered = document.createElement('div');
+                  rendered.className = 'lesson-content'; // Add class for styling
                   rendered.innerHTML = marked.parse(md);
                   lesson.appendChild(rendered);
                   lessonLink.remove();
