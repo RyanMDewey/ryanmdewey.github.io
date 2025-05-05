@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,17 +37,29 @@
 <body>
   <div class="top-nav">
     <div class="nav-container" id="dynamic-nav"></div>
-  </div>  <header class="hero">
+  </div>
+
+  <header class="hero">
     <h1 class="glitch">DRC Academy</h1>
     <p class="tagline">Master the Dewey Run-time Core: AI-native, quantum-aligned, self-healing systems.</p>
-  </header>  <nav id="category-nav"></nav>  <div style="text-align: center; margin: 1rem 0;">
+  </header>
+
+  <nav id="category-nav"></nav>
+
+  <div style="text-align: center; margin: 1rem 0;">
     <input type="text" id="search-input" placeholder="Search components..." />
-  </div>  <main id="components-container" style="padding: 1rem;">
+  </div>
+
+  <main id="components-container" style="padding: 1rem;">
     <p>Loading components...</p>
-  </main>  <footer class="footer">
+  </main>
+
+  <footer class="footer">
     ✨ DRC Academy © 2025 <a href="https://www.ryanmdewey.com">Ryan Dewey</a>
-  </footer>  <script>
-    // Global Nav Injection
+  </footer>
+
+  <script>
+    // Inject global nav
     const currentPath = window.location.pathname;
     const currentPage = currentPath.split('/').pop() || 'index.html';
     const navLinks = [
@@ -73,7 +86,7 @@
     });
     document.getElementById('dynamic-nav')?.appendChild(nav);
 
-    // Load JSON and Build UI
+    // Load JSON + Build UI
     fetch('/data/drc-components.json')
       .then(res => res.json())
       .then(data => {
@@ -84,11 +97,13 @@
         data.forEach(category => {
           const categoryId = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
 
+          // TOC link
           const link = document.createElement('a');
           link.href = `#${categoryId}`;
-          link.textContent = category.category;
+          link.textContent = `${category.color} ${category.category}`;
           toc.appendChild(link);
 
+          // Category section
           const categoryWrap = document.createElement('details');
           categoryWrap.className = 'hero-box';
           categoryWrap.id = categoryId;
@@ -107,10 +122,10 @@
           const compContainer = document.createElement('div');
           compContainer.className = 'component';
 
-          category.components.forEach(comp => {
+          category.components.forEach((comp, idx) => {
             const details = document.createElement('details');
             const summary = document.createElement('summary');
-            summary.textContent = `${comp.number} ${comp.name}`;
+            summary.textContent = `${comp.id?.toUpperCase() || idx + 1} — ${comp.name}`;
             details.appendChild(summary);
 
             const desc = document.createElement('p');
@@ -145,7 +160,7 @@
         });
       });
 
-    // Live Search
+    // Live search
     document.getElementById('search-input').addEventListener('input', () => {
       const query = document.getElementById('search-input').value.toLowerCase();
       document.querySelectorAll('.component details').forEach(detail => {
@@ -153,5 +168,6 @@
         detail.style.display = query === '' || text.includes(query) ? '' : 'none';
       });
     });
-  </script></body>
+  </script>
+</body>
 </html>
