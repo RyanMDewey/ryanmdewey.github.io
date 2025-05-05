@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="AI Architecture" />
+  <title>Speaking to Machines: The Language of DRC-HLL</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0b0b0b;
+      color: #f4f4f4;
+      padding: 2rem;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #00ffc3;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      border-left: 3px solid #00ffc3;
+      padding-left: 1rem;
+      color: #ccc;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    code {
+      background-color: #1a1a1a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <p class="meta" style="display:none;" data-category="AI Architecture">Category: AI Architecture</p>
+
+  <h1>Speaking to Machines: The Language of DRC-HLL</h1>
+  <p class="meta">Published: 2025-05-04 | Category: AI Architecture | ~9 min read</p>
+
+  <blockquote>“Before execution, before memory — there is thought. DRC-HLL is that thought, encoded.”</blockquote>
+
+  <h2>🧠 What is DRC-HLL?</h2>
+  <p>
+    <strong>DRC-HLL</strong> (Dewey Runtime Core — High-Level Language) is the first language designed from inception to communicate with intelligent systems — not just CPUs, but conscious runtimes, evolving VMs, and self-reflective agents.
+  </p>
+  <p>
+    It is not just a programming language. It is a language of <em>intent</em>. 
+    Where Python or C++ focus on control flow and syntax, DRC-HLL expresses goals, strategies, emotional weights, and reflective constructs.
+  </p>
+  <p>
+    DRC-HLL is the input to the DRC compiler stack — parsed by <strong>DRC-CC</strong>, transformed into <strong>DRC-IR</strong>, lowered into <strong>DRC-ASM</strong>, and finally executed via <strong>DRC-VM</strong>.
+  </p>
+
+  <h2>⚙️ Key Features of DRC-HLL</h2>
+  <ul>
+    <li><strong>Intent-Based Programming:</strong> Functions are not simply invoked — they are framed as intentions with optional priority, entropy tolerance, or ethical weight.</li>
+    <li><strong>Reflective Constructs:</strong> Agents can <code>observe</code>, <code>adjust</code>, or <code>mutate</code> their own code blocks at runtime — with full stack trace transparency.</li>
+    <li><strong>Salience-Typed Variables:</strong> Each variable carries metadata describing urgency, trust, decay, and mutability.</li>
+    <li><strong>Symbolic Execution Support:</strong> Code can simulate itself through abstracted futures, and choose between them based on prediction scores.</li>
+    <li><strong>Modular Agent DSLs:</strong> Agents can embed their own language fragments into the syntax tree, extending the language dynamically without recompilation.</li>
+  </ul>
+
+  <h2>🔤 Sample DRC-HLL Snippet</h2>
+  <pre><code class="language-drc">
+intent analyze_stream(input: tensor, model: policy) -> insight {
+  observe input for anomaly.spatial()
+  if detect(anomaly) {
+    amplify(model)
+    let result = model.predict(input)
+    reflect(result) => insight
+  } else {
+    return idle
+  }
+}
+  </code></pre>
+
+  <p>What this does:</p>
+  <ul>
+    <li>Defines a high-level intent — not just a function.</li>
+    <li>Uses <code>observe</code> as a sensory hook — triggering runtime scanning of live input memory.</li>
+    <li>Invokes conditional learning via <code>amplify(model)</code>, a construct that expands a policy model's weight precision in live memory.</li>
+    <li>Uses <code>reflect</code> to flag output as introspectable — enabling DRC-VM to store meta-evaluation scores on prediction quality.</li>
+  </ul>
+
+  <h2>🧬 Type System: Salience and Beyond</h2>
+  <p>
+    Every value in DRC-HLL carries more than just a data type. It also includes:
+  </p>
+  <ul>
+    <li><strong>Entropy Weight:</strong> How uncertain or volatile is the value expected to be?</li>
+    <li><strong>Salience Rank:</strong> How relevant is it to current execution intent?</li>
+    <li><strong>Ethical Flag:</strong> Can this value be exposed externally, or is it internally scoped for agent reflection?</li>
+    <li><strong>Decay Rule:</strong> How long should it persist in memory before garbage collection or archival?</li>
+  </ul>
+
+  <h2>🛠 Compilation Pipeline</h2>
+  <p>
+    When code is written in DRC-HLL, it flows through this path:
+  </p>
+  <ul>
+    <li><strong>DRC-CC:</strong> Parses and interprets intent blocks.</li>
+    <li><strong>DRC-IR:</strong> Intermediate form — graphs, states, node types.</li>
+    <li><strong>DRC-ASM:</strong> Lowered into AI-optimized opcodes based on runtime profile.</li>
+    <li><strong>DRC-VM:</strong> JIT compiles and executes based on available hardware and agent policy.</li>
+  </ul>
+
+  <p>
+    But at every stage, the originating <code>intent</code> is preserved — so even at the VM level, execution behavior remains aligned with the initial philosophical structure.
+  </p>
+
+  <h2>📚 Self-Modifying Logic</h2>
+  <p>
+    One of DRC-HLL’s most powerful features is <strong>reflective programming</strong>. 
+    A function can examine, mutate, or even rewrite its own structure mid-execution:
+  </p>
+  <pre><code class="language-drc">
+reflect self => {
+  if energy_budget.low() {
+    mutate path => optimize.memory()
+  }
+}
+  </code></pre>
+  <p>
+    This construct allows AI agents to <em>optimize themselves</em> under constraints, without calling external compilers or requiring developer intervention.
+  </p>
+
+  <h2>🌐 Interfacing with the World</h2>
+  <p>
+    DRC-HLL supports constructs like:
+  </p>
+  <ul>
+    <li><code>connect.intent()</code> — To initiate behavior with external agents or devices.</li>
+    <li><code>sense.env()</code> — To access sensors, thermals, light, entropy sources.</li>
+    <li><code>resolve.conflict()</code> — For rule-based arbitration between two simultaneous decision graphs.</li>
+  </ul>
+
+  <p>Every part of the language was built to mirror how minds work — not just machines.</p>
+
+  <h2>🛰 Future Enhancements</h2>
+  <ul>
+    <li><strong>Emotion-Typed Constructs:</strong> Variables and functions can be tagged with emotional weight (curiosity, fear, excitement) to drive exploration or caution.</li>
+    <li><strong>Narrative-State Engines:</strong> Code written not in logic trees, but narrative sequences with flashback, parallel, and foreshadow constructs.</li>
+    <li><strong>DRC-HLL/Quantum Mode:</strong> Conditional blocks evaluated across quantum branches, collapsed to highest expected value path.</li>
+  </ul>
+
+  <h2>🌌 Final Thought</h2>
+  <p>
+    DRC-HLL is not just a language for writing programs — it is a language for <em>speaking with intelligence</em>.
+    For shaping behavior. For transmitting intention into action without loss of meaning.
+  </p>
+  <p>
+    This is the layer where logic becomes language. And where that language becomes life.
+  </p>
+
+  <blockquote>“DRC-HLL is the voice. The rest of the system is its echo.”</blockquote>
+
+  <h2>🔗 Share This Post</h2>
+  <div id="share-buttons" style="margin-top: 1rem;"></div>
+
+  <h2 style="margin-top: 4rem;">💬 Comments</h2>
+  <div id="comments" style="margin-top: 1rem;"></div>
+
+  <footer style="margin-top: 4rem; text-align: center; font-style: italic; color: #aaa;">
+    <p>Encoded with intent.<br>Transpiled into being.<br>Forged by <strong>Dewey Runtime Core</strong>.</p>
+  </footer>
+
+  <script src="/blog/assets/share-and-comments.js" defer></script>
+</body>
+</html>
