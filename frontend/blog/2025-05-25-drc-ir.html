@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="AI Compiler Stack" />
+  <title>DRC-IR: The Skeleton of Intent</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0b0b0b;
+      color: #f4f4f4;
+      padding: 2rem;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #00ffc3;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      border-left: 3px solid #00ffc3;
+      padding-left: 1rem;
+      color: #ccc;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    code {
+      background-color: #1a1a1a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <p class="meta" style="display:none;" data-category="AI Compiler Stack">Category: AI Compiler Stack</p>
+
+  <h1>DRC-IR: The Skeleton of Intent</h1>
+  <p class="meta">Published: 2025-05-05 | Category: AI Compiler Stack | ~8 min read</p>
+
+  <blockquote>“DRC-IR is the bone structure between thought and action — it holds the shape of reason before it walks.”</blockquote>
+
+  <h2>🧠 What is DRC-IR?</h2>
+  <p>
+    DRC-IR (Intermediate Representation) is the internal graph language of the Dewey Runtime Core. It bridges intent from the high-level layer (DRC-HLL) into actionable operations for low-level execution (DRC-ASM, DRC-VM).
+  </p>
+  <p>
+    Think of it as a living skeleton: nodes represent functional intent, edges represent data flow, and types carry salience, entropy, ethical flags, and scope.
+  </p>
+
+  <h2>⚙️ Core Principles</h2>
+  <ul>
+    <li><strong>Graph-Native:</strong> Code is represented as a DAG of typed nodes with memory hints, salience tags, and prediction weights.</li>
+    <li><strong>Self-Reflective:</strong> Nodes store their origin (e.g., <code>intent.optimize.energy</code>) for backtracing and runtime debugging.</li>
+    <li><strong>Agent-Aware:</strong> Structures can mutate dynamically based on runtime cognitive feedback loops.</li>
+  </ul>
+
+  <h2>🔧 Anatomy of a DRC-IR Node</h2>
+  <pre><code class="language-json">
+{
+  "id": "n014",
+  "type": "Multiply",
+  "inputs": ["n011", "n013"],
+  "output": "n014",
+  "salience": 0.78,
+  "entropy": 0.02,
+  "ethics": "public",
+  "decay": "5s",
+  "source": "intent.calculate.growth"
+}
+  </code></pre>
+
+  <p>This node:</p>
+  <ul>
+    <li>Multiplies the output of <code>n011</code> and <code>n013</code>.</li>
+    <li>Has a high salience score — it's mission-critical.</li>
+    <li>Has minimal entropy — it's predictable.</li>
+    <li>Can be exposed to other agents (<code>ethics: public</code>).</li>
+    <li>Will decay after 5s unless retained by a higher-level process.</li>
+  </ul>
+
+  <h2>🧬 IR Compilation Flow</h2>
+  <ol>
+    <li><strong>HLL Constructs</strong> are parsed as intentions (e.g., <code>analyze_stream</code>).</li>
+    <li><strong>IR Nodes</strong> are emitted for each semantic step.</li>
+    <li><strong>Metadata</strong> is added from salience typing, energy constraints, or emotional context.</li>
+    <li><strong>Subgraphs</strong> can be evaluated symbolically before execution to forecast impact.</li>
+  </ol>
+
+  <h2>🌐 Mutation and Reflection</h2>
+  <p>
+    Unlike traditional IR (LLVM, QBE), DRC-IR can mutate in response to agent state. If energy is low, multiply nodes can be swapped for approximate inference. If emotional salience rises, subgraphs can be forked for symbolic reflection.
+  </p>
+
+  <pre><code class="language-drc">
+if agent.energy < threshold {
+  mutate Multiply => FastApproximateMultiply
+}
+  </code></pre>
+
+  <p>This mutation is logged in the IR graph, allowing full introspection.</p>
+
+  <h2>🛰 Graph-Based Optimization</h2>
+  <ul>
+    <li>Path salience analysis chooses the shortest critical path through high-weighted nodes.</li>
+    <li>Entropy tracing avoids unstable ops unless explicitly required.</li>
+    <li>Memory layout is adjusted to group high-salience branches for cache proximity.</li>
+  </ul>
+
+  <h2>🔮 What Makes It Special?</h2>
+  <ul>
+    <li>DRC-IR is not just compiler glue — it is a reasoning substrate.</li>
+    <li>It lets the machine see and weigh the meaning of its own execution structure.</li>
+    <li>It is adaptive, emotional, reflective, and semi-symbolic — everything a true cognitive system needs to evolve.</li>
+  </ul>
+
+  <blockquote>“In DRC, IR doesn't just mean 'intermediate representation'. It means 'Intent Refined'.”</blockquote>
+
+  <h2>🔗 Share This Post</h2>
+  <div id="share-buttons" style="margin-top: 1rem;"></div>
+
+  <h2 style="margin-top: 4rem;">💬 Comments</h2>
+  <div id="comments" style="margin-top: 1rem;"></div>
+
+  <footer style="margin-top: 4rem; text-align: center; font-style: italic; color: #aaa;">
+    <p>Transpiled from intent.<br>Compiled by cognition.<br>Executed through reflection.<br><strong>Dewey Runtime Core</strong></p>
+  </footer>
+
+  <script src="/blog/assets/share-and-comments.js" defer></script>
+</body>
+</html>
