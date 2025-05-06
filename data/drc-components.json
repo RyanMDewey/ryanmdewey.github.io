@@ -1427,5 +1427,55 @@
     "code_snippet": "DRC.HotReload.watch('src/**/*.{drc,js,css}');\nawait DRC.HotReload.start();",
     "interactive_widget": "Live Preview: Edit code in your IDE and see instant updates—state preserved—inside a running DRC-powered app.",
     "linked_components": ["drc-112", "drc-70"]
+  },
+  {
+    "id": "drc-155",
+    "name": "DRC-TYPES",
+    "layer": "Type System & Language",
+    "description": "Adds dependent types, structural subtyping, and advanced type inference to DRC-HLL.",
+    "lesson": "DRC-TYPES teaches you how to define dependent types and leverage type inference for safer, more expressive code. In this lesson, you'll declare a generic `Vector<n>` type and see the compiler verify bounds at compile time.",
+    "code_snippet": "type Vector<n, T> = [T; n];\nfunction length<V extends Vector<n, any>>(v: V): n {\n  return v.length as n;\n}\nconst v: Vector<3, number> = [1,2,3];\nconsole.log(length(v)); // 3",
+    "interactive_widget": "Type Explorer: Define your own dependent types and watch the inference and structural checks live.",
+    "linked_components": ["drc-96", "drc-105"]
+  },
+  {
+    "id": "drc-156",
+    "name": "DRC-SMART",
+    "layer": "Blockchain & Web3",
+    "description": "Enables writing, testing, and deploying smart contracts within DRC on-chain environments.",
+    "lesson": "DRC-SMART guides you through authoring a simple ERC-20 style token contract and deploying it to a simulated blockchain with zero-knowledge proof verification.",
+    "code_snippet": "contract MyToken {\n  balance: Map<Address, u128>;\n  function mint(to: Address, amt: u128) {\n    this.balance[to] += amt;\n  }\n}\nconsole.log(deployContract(MyToken)); // Output: Contract deployed at 0xABC…",
+    "interactive_widget": "Smart-Contract IDE: Write, compile, and deploy DRC smart contracts, then interact with them in a sandboxed chain.",
+    "linked_components": ["drc-11", "drc-22"]
+  },
+  {
+    "id": "drc-157",
+    "name": "DRC-FNLESS",
+    "layer": "Serverless & Functions",
+    "description": "Provides a serverless runtime for DRC functions with auto-scaling, cold-start management, and per-invocation billing.",
+    "lesson": "DRC-FNLESS shows you how to package an async function as a FaaS endpoint and invoke it on demand, complete with simulated metrics and cost estimation.",
+    "code_snippet": "export async function handler(event) {\n  return { statusCode: 200, body: `Hello, ${event.name}!` };\n}\n// deploy as drc-fnless handler\nconsole.log(invoke('handler', { name: 'Alice' })); // { body: \"Hello, Alice!\" }",
+    "interactive_widget": "Serverless Playground: Drag in a function, set triggers (HTTP, queue), and see invocations, logs, and billing live.",
+    "linked_components": ["drc-116"]
+  },
+  {
+    "id": "drc-158",
+    "name": "DRC-NLP",
+    "layer": "AI Tools & NLP",
+    "description": "Provides tokenization, named-entity recognition, sentiment analysis, and transformer-based pipelines.",
+    "lesson": "DRC-NLP walks you through tokenizing a user comment, extracting entities, and running a sentiment classifier, all via a single high-level API.",
+    "code_snippet": "const pipeline = drcNLP.pipeline(['tokenize','ner','sentiment']);\nconsole.log(pipeline.run(\"OpenAI's GPT models rock!\"));\n// { tokens: [...], entities: [...], sentiment: 'positive' }",
+    "interactive_widget": "NLP Demo: Type any text, choose analyses (NER, sentiment, summarization) and see results streamed in real time.",
+    "linked_components": ["drc-90", "drc-95"]
+  },
+  {
+    "id": "drc-159",
+    "name": "DRC-ARVR",
+    "layer": "UI & Media",
+    "description": "Integrates with WebXR, ARKit, and VR headsets to enable immersive AR/VR experiences.",
+    "lesson": "DRC-ARVR guides you through creating a simple AR overlay that attaches 3D models to real-world markers, and a VR scene navigable by headset controls.",
+    "code_snippet": "await xrSession.requestReferenceSpace('local');\nconst scene = drcARVR.createScene();\nscene.addModel('dragon.glb', { position: [0,0,-2] });\nscene.render();\n// Enjoy your dragon in AR!",
+    "interactive_widget": "AR/VR Simulator: Toggle between AR (camera feed + overlay) and VR (entire 3D world), then manipulate objects with gaze or controllers.",
+    "linked_components": ["drc-137", "drc-70"]
   }
 ]
