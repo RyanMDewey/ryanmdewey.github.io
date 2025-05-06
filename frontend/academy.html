@@ -58,7 +58,7 @@
     ✨ DRC Academy © 2025 <a href="https://www.ryanmdewey.com">Ryan Dewey</a>
   </footer>
 
-  <script>
+  <script type="module">
     // Inject global nav
     const currentPath = window.location.pathname;
     const currentPage = currentPath.split('/').pop() || 'index.html';
@@ -86,7 +86,7 @@
     });
     document.getElementById('dynamic-nav')?.appendChild(nav);
 
-    // Load JSON + Build UI
+    // Load JSON and render UI
     fetch('/data/drc-components.json')
       .then(res => res.json())
       .then(data => {
@@ -97,13 +97,13 @@
         data.forEach(category => {
           const categoryId = category.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
 
-          // TOC link
+          // TOC
           const link = document.createElement('a');
           link.href = `#${categoryId}`;
           link.textContent = `${category.color} ${category.category}`;
           toc.appendChild(link);
 
-          // Category section
+          // Category
           const categoryWrap = document.createElement('details');
           categoryWrap.className = 'hero-box';
           categoryWrap.id = categoryId;
@@ -160,7 +160,7 @@
         });
       });
 
-    // Live search
+    // Search
     document.getElementById('search-input').addEventListener('input', () => {
       const query = document.getElementById('search-input').value.toLowerCase();
       document.querySelectorAll('.component details').forEach(detail => {
