@@ -1017,5 +1017,45 @@
         "code_snippet": "function runOnEdge(binary) {\n  return `EDGE Executed: ${binary}`;\n}\nconsole.log(runOnEdge('MOV R1, #1')); // Output: EDGE Executed: MOV R1, #1",
         "interactive_widget": "Edge Execution Demo: Simulate an embedded runtime and observe JIT caching behavior.",
         "linked_components": ["drc-6", "drc-20"]
-   }
+  },
+  {
+    "id": "drc-114",
+    "name": "DRC-HAL",
+    "layer": "Hardware Abstraction",
+    "description": "Provides a uniform, AI-friendly API atop diverse hardware (CPU, GPU, NPU, QPU, FPGA, neuromorphic).",
+    "lesson": "DRC-HAL abstracts hardware differences, exposing a consistent interface for AI workloads. In this lesson, you'll target multiple hardware backends with a single DRC instruction sequence, demonstrating seamless portability and optimization across devices.",
+    "code_snippet": "function targetDevice(task, deviceType) {\n  return `Executed ${task} on ${deviceType} via HAL`;\n}\nconsole.log(targetDevice('alignment', 'GPU')); // Output: Executed alignment on GPU via HAL",
+    "interactive_widget": "Hardware Abstraction Demo: Select a device type and run a DRC task to see HAL handling the execution.",
+    "linked_components": ["drc-4", "drc-6"]
+  },
+  {
+    "id": "drc-115",
+    "name": "DRC-SBX",
+    "layer": "Security & Sandboxing",
+    "description": "Sandbox and verifier for safe simulation, formal proofs, and zk-STARK playback.",
+    "lesson": "DRC-SBX provides a secure sandbox for testing and formally verifying assembled binaries. You'll assemble a DRC-COREASM program, run it in the sandbox, and generate a zk-STARK proof to validate correctness before deployment.",
+    "code_snippet": "function sandboxVerify(binary) {\n  return `Sandboxed and Verified: ${binary}`;\n}\nconsole.log(sandboxVerify('module.drcobj')); // Output: Sandboxed and Verified: module.drcobj",
+    "interactive_widget": "Sandbox Demo: Drop a DRC object file and observe live verification logs and proof generation.",
+    "linked_components": ["drc-101", "drc-104"]
+  },
+  {
+    "id": "drc-116",
+    "name": "DRC-ORCH",
+    "layer": "Orchestration & Deployment",
+    "description": "Coordinates multi-node, multi-VM AI deployments with rolling updates, health checks, and autoscaling.",
+    "lesson": "DRC-ORCH orchestrates distributed DRC clusters, handling deployment, scaling, and recovery. This lesson walks you through deploying a multi-node inference service, simulating node failures, and observing automated failover and scaling.",
+    "code_snippet": "function deployService(nodes) {\n  return `Service deployed on: ${nodes.join(', ')}`;\n}\nconsole.log(deployService(['node1','node2'])); // Output: Service deployed on: node1, node2",
+    "interactive_widget": "Orchestration Demo: Drag-and-drop nodes to form a cluster, then simulate load and failures to see ORCH in action.",
+    "linked_components": ["drc-26", "drc-54"]
+  },
+  {
+    "id": "drc-117",
+    "name": "DRC-PKGMGR",
+    "layer": "Package Management",
+    "description": "Dependency resolution, version pinning, and cross-component compatibility for DRC packages.",
+    "lesson": "DRC-PKGMGR extends the offline-first package manager with dependency graphs, semantic versioning, and compatibility analysis. In this lesson, you'll install a component with nested dependencies and resolve a version conflict automatically.",
+    "code_snippet": "function installComponent(name, version) {\n  return `Installed ${name}@${version} with resolved dependencies`;\n}\nconsole.log(installComponent('DRC-UI','1.2.3')); // Output: Installed DRC-UI@1.2.3 with resolved dependencies",
+    "interactive_widget": "Package Manager Demo: Select components and versions, then watch PKGMGR resolve and install them automatically.",
+    "linked_components": ["drc-80", "drc-81", "drc-100"]
+  }
 ]
