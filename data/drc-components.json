@@ -1057,5 +1057,65 @@
     "code_snippet": "function installComponent(name, version) {\n  return `Installed ${name}@${version} with resolved dependencies`;\n}\nconsole.log(installComponent('DRC-UI','1.2.3')); // Output: Installed DRC-UI@1.2.3 with resolved dependencies",
     "interactive_widget": "Package Manager Demo: Select components and versions, then watch PKGMGR resolve and install them automatically.",
     "linked_components": ["drc-80", "drc-81", "drc-100"]
+  },
+  {
+    "id": "drc-118",
+    "name": "DRC-I18N",
+    "layer": "Localization & Internationalization",
+    "description": "Framework for multi-language support, Unicode handling, and regional formatting.",
+    "lesson": "DRC-I18N enables global-ready applications by managing locale-specific strings, date/time formats, and number conventions. In this lesson, you'll load a localized resource bundle and render UI text in multiple languages.",
+    "code_snippet": "function translate(key, locale) {\n  return DRC_I18N.getString(locale, key);\n}\nconsole.log(translate('welcome', 'fr-FR')); // Output: 'Bienvenue'",
+    "interactive_widget": "Locale Switcher: Select a locale and see UI text, dates, and numbers update accordingly.",
+    "linked_components": ["drc-70", "drc-96"]
+  },
+  {
+    "id": "drc-119",
+    "name": "DRC-STDIO",
+    "layer": "Device & I/O",
+    "description": "Unified API for standard input/output and peripheral device communication.",
+    "lesson": "DRC-STDIO abstracts console I/O, keyboard, display, and generic device streams. In this lesson, you'll read user input, write formatted output, and communicate with a simulated sensor via the same API.",
+    "code_snippet": "async function echo() {\n  const line = await DRC_STDIO.readLine();\n  DRC_STDIO.writeLine(`You typed: ${line}`);\n}\necho();",
+    "interactive_widget": "I/O Console: Type into a console widget and see your input echoed back, plus simulate a device read/write.",
+    "linked_components": ["drc-64", "drc-66"]
+  },
+  {
+    "id": "drc-120",
+    "name": "DRC-SERIAL",
+    "layer": "Data & Serialization",
+    "description": "Handles JSON, XML, ProtoBuf and custom data formats for interoperability.",
+    "lesson": "DRC-SERIAL provides serializers and deserializers for common formats. In this lesson, you'll parse a JSON message, transform it, and re-serialize to XML and ProtoBuf.",
+    "code_snippet": "const obj = DRC_SERIAL.parseJSON('{\"x\":42}');\nconst xml = DRC_SERIAL.toXML(obj);\nconsole.log(xml); // Output: '<root><x>42</x></root>'",
+    "interactive_widget": "Serializer Playground: Paste JSON, inspect the object, and convert to XML or ProtoBuf.",
+    "linked_components": ["drc-50", "drc-90"]
+  },
+  {
+    "id": "drc-121",
+    "name": "DRC-NETPROTO",
+    "layer": "Network & Communication",
+    "description": "Support for TCP/IP, HTTP(s), WebSocket, and other standard protocols.",
+    "lesson": "DRC-NETPROTO adds out-of-the-box support for REST, streaming, and socket-based communication. In this lesson, you'll perform an HTTP GET, open a WebSocket, and exchange messages over TCP.",
+    "code_snippet": "async function fetchData(url) {\n  const resp = await DRC_NETPROTO.http.get(url);\n  console.log(await resp.text());\n}\nfetchData('https://api.example.com/data');",
+    "interactive_widget": "Protocol Tester: Enter a URL or WebSocket endpoint and observe request/response or message frames.",
+    "linked_components": ["drc-118", "drc-86"]
+  },
+  {
+    "id": "drc-122",
+    "name": "DRC-GC",
+    "layer": "Memory Management",
+    "description": "Garbage collection subsystem for automatic reclamation of unused memory.",
+    "lesson": "DRC-GC implements generational and incremental GC strategies. In this lesson, you'll allocate objects in a loop, trigger a collection manually, and inspect heap usage before and after.",
+    "code_snippet": "for (let i=0; i<1e6; i++) new Object();\nconsole.log('Before GC:', DRC_GC.heapUsage());\nDRC_GC.collect();\nconsole.log('After GC:', DRC_GC.heapUsage());",
+    "interactive_widget": "Heap Visualizer: Allocate and drop objects, then run GC to watch live memory graphs.",
+    "linked_components": ["drc-97", "drc-47"]
+  },
+  {
+    "id": "drc-123",
+    "name": "DRC-UTILS",
+    "layer": "Standard Library",
+    "description": "Common utilities: filesystem helpers, regex, date/time, math, and string extensions.",
+    "lesson": "DRC-UTILS bundles everyday routines. In this lesson, you'll perform file I/O, regex searches, date formatting, and advanced string manipulation.",
+    "code_snippet": "const files = DRC_UTILS.fs.listDir('/logs');\nconst today = DRC_UTILS.time.format(new Date(), 'YYYY-MM-DD');\nconsole.log(files, today);",
+    "interactive_widget": "Utility Suite: Try out file listing, regex replaces, date formatting, and more in an interactive REPL.",
+    "linked_components": ["drc-18", "drc-50", "drc-119"]
   }
 ]
