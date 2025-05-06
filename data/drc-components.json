@@ -1187,5 +1187,75 @@
     "code_snippet": "const http = mock(DRC.HTTP);\nhttp.get.when('/api').returns({status: 200, body: 'OK'});\n\nawait DRC.Test('apiTest', async () => {\n  const res = await DRC.HTTP.get('/api');\n  assert.equal(res.body, 'OK');\n  snapshot(res);\n});\n\nDRC.Test.runAll();\nDRC.Test.reportCoverage();",
     "interactive_widget": "Test Runner UI: Toggle mocks, run individual tests, view assertion failures, snapshots, and coverage heatmaps.",
     "linked_components": ["drc-10", "drc-76"]
+  },
+  {
+    "id": "drc-131",
+    "name": "DRC-PLATFORM",
+    "layer": "Cross-Platform Support",
+    "description": "Uniform abstractions for OS-specific differences (paths, environment variables, process spawning) on Windows, macOS, and Linux.",
+    "lesson": "DRC-PLATFORM provides a consistent API for file paths, environment, and subprocesses across operating systems. In this lesson, you'll write code that reads a config file and spawns a helper process on any OS without changing your source.",
+    "code_snippet": "const cfgPath = DRC.Platform.join('config', 'settings.json');\nconst env = DRC.Platform.env('NODE_ENV');\nawait DRC.Platform.spawn('helper', ['--mode', env]);",
+    "interactive_widget": "OS Simulator: Switch between Windows/macOS/Linux modes and observe how DRC-PLATFORM normalizes behavior.",
+    "linked_components": ["drc-99", "drc-100"]
+  },
+  {
+    "id": "drc-132",
+    "name": "DRC-OBSERVE",
+    "layer": "Profiling & Observability",
+    "description": "Integrated metrics collection, distributed tracing, and structured logging with OpenTelemetry/Prometheus compatibility.",
+    "lesson": "DRC-OBSERVE instruments your code with metrics, spans, and logs. In this lesson, you’ll add counter and histogram metrics, create trace spans around async operations, and export everything to a Prometheus endpoint.",
+    "code_snippet": "const reqCounter = DRC.Observe.counter('http_requests_total');\nconst span = DRC.Observe.startSpan('process_request');\nreqCounter.inc();\nawait handleRequest();\nspan.end();",
+    "interactive_widget": "Trace Viewer: Visualize spans and metrics in a flame graph and metric dashboards.",
+    "linked_components": ["drc-76", "drc-89"]
+  },
+  {
+    "id": "drc-133",
+    "name": "DRC-AUDIT",
+    "layer": "Security & Compliance",
+    "description": "Static analysis, vulnerability scanning, and compliance checks (GDPR, SOC2) integrated into build/test pipeline.",
+    "lesson": "DRC-AUDIT runs lint, dependency vulnerability checks, and policy enforcement. In this lesson, you’ll scan your codebase for CVEs, enforce encryption-at-rest policies, and generate a compliance report.",
+    "code_snippet": "await DRC.Audit.scanVulnerabilities();\nawait DRC.Audit.checkPolicy('gdpr');\nDRC.Audit.report('audit-report.json');",
+    "interactive_widget": "Audit Dashboard: Explore detected issues, filter by severity, and drill into remediation steps.",
+    "linked_components": ["drc-9", "drc-115"]
+  },
+  {
+    "id": "drc-134",
+    "name": "DRC-DI",
+    "layer": "Dependency Injection & Modularity",
+    "description": "Framework for registering and resolving services/components with scopes, lifetimes, and injection annotations.",
+    "lesson": "DRC-DI lets you declare injectable classes and wire them up at runtime. In this lesson, you’ll create a `DatabaseService`, annotate it for singleton scope, and inject it into your `UserController` automatically.",
+    "code_snippet": "class DatabaseService {}\nDRC.DI.registerSingleton(DatabaseService);\n\nclass UserController {\n  constructor(@Inject(DatabaseService) db) {\n    this.db = db;\n  }\n}\n\nconst ctrl = DRC.DI.resolve(UserController);",
+    "interactive_widget": "DI Graph: Visualize service registrations, lifetimes, and injection paths.",
+    "linked_components": ["drc-32", "drc-126"]
+  },
+  {
+    "id": "drc-135",
+    "name": "DRC-FFI",
+    "layer": "Native Interop",
+    "description": "Foreign Function Interface for calling C/C++ (or other native libraries) and embedding DRC as a scripting engine in host apps.",
+    "lesson": "DRC-FFI allows binding native libraries and exposing them to DRC code. In this lesson, you’ll bind a simple C math library and call its functions from DRC-LANG, then embed a DRC script inside a host application.",
+    "code_snippet": "const lib = DRC.FFI.load('libmath.so');\nconst res = lib.call('add', 2, 3);\nconsole.log(`2 + 3 = ${res}`);\n\n// Embedding:\nconst engine = DRC.FFI.embed();\nengine.runScript('print(\"Hello from DRC\")');",
+    "interactive_widget": "FFI Explorer: Load different native libraries, inspect symbols, and call functions live.",
+    "linked_components": ["drc-27", "drc-101"]
+  },
+  {
+    "id": "drc-136",
+    "name": "DRC-REPL",
+    "layer": "Developer Experience",
+    "description": "Interactive Read–Eval–Print Loop with history, multiline editing, and live code introspection.",
+    "lesson": "DRC-REPL boots an interactive shell where you can experiment with DRC-LANG, inspect variables, and call any API on the fly. In this lesson, you’ll start the REPL, define functions, and access previous session history.",
+    "code_snippet": "$ drc-repl\nDRC> let x = 10;\nDRC> x * 2\n20\nDRC> .history\n1: let x = 10;\n2: x * 2",
+    "interactive_widget": "REPL Window: Type commands, review history, and see live evaluation results.",
+    "linked_components": ["drc-100", "drc-7"]
+  },
+  {
+    "id": "drc-137",
+    "name": "DRC-MEDIA",
+    "layer": "Graphics & Multimedia",
+    "description": "2D/3D rendering, audio playback/processing, and video encoding/decoding APIs for game and multimedia applications.",
+    "lesson": "DRC-MEDIA gives you canvas drawing, 3D scenes, and audio/video pipelines. In this lesson, you’ll draw shapes on a 2D canvas, play an audio track, and load plus play a video stream.",
+    "code_snippet": "const ctx = DRC.Media.canvas('screen');\nctx.fillRect(10, 10, 100, 50);\n\nconst player = new DRC.Media.AudioPlayer('song.mp3');\nplayer.play();\n\nconst video = new DRC.Media.Video('clip.mp4', 'videoElem');\nvideo.play();",
+    "interactive_widget": "Media Sandbox: Draw shapes, play audio/video, and apply real-time effects.",
+    "linked_components": ["drc-70", "drc-95"]
   }
 ]
