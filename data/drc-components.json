@@ -1257,5 +1257,175 @@
     "code_snippet": "const ctx = DRC.Media.canvas('screen');\nctx.fillRect(10, 10, 100, 50);\n\nconst player = new DRC.Media.AudioPlayer('song.mp3');\nplayer.play();\n\nconst video = new DRC.Media.Video('clip.mp4', 'videoElem');\nvideo.play();",
     "interactive_widget": "Media Sandbox: Draw shapes, play audio/video, and apply real-time effects.",
     "linked_components": ["drc-70", "drc-95"]
+  },
+  {
+    "id": "drc-138",
+    "name": "DRC-ACCESSIBILITY",
+    "layer": "UI & Accessibility",
+    "description": "Built-in support for screen readers, keyboard navigation, ARIA roles and dynamic content updates to ensure inclusive user interfaces.",
+    "lesson": "DRC-ACCESSIBILITY provides components and utilities to mark up interactive elements, manage focus, and announce dynamic changes. In this lesson you'll build a form with ARIA labels, keyboard traps, and live region announcements.",
+    "code_snippet": "const btn = DRC.UI.button('Submit');\nDRC.Accessibility.ariaLabel(btn, 'Submit your response');\nDRC.Accessibility.liveRegion('status').announce('Form submitted successfully');",
+    "interactive_widget": "Accessibility Checker: Audit a sample UI for contrast, roles, focus order, and live-region announcements.",
+    "linked_components": ["drc-70", "drc-27"]
+  },
+  {
+    "id": "drc-139",
+    "name": "DRC-RATELIMIT",
+    "layer": "Security & Reliability",
+    "description": "Rate-limiting and throttling middleware for API endpoints, network requests, and resource usage quotas.",
+    "lesson": "DRC-RATELIMIT lets you define per-user or per-endpoint rules. In this lesson you'll protect an API route by allowing only 10 requests per minute per user, with customizable backoff and headers.",
+    "code_snippet": "DRC.RateLimit.configure({ windowMs: 60000, max: 10 });\napp.get('/api/data', DRC.RateLimit.middleware(), (req, res) => res.send(data));",
+    "interactive_widget": "Throttle Simulator: Fire bursts of requests and watch rate-limit counters, headers, and retries in action.",
+    "linked_components": ["drc-86", "drc-38"]
+  },
+  {
+    "id": "drc-140",
+    "name": "DRC-TIMEZONE",
+    "layer": "Localization & Time",
+    "description": "Comprehensive time-zone and daylight-saving support, calendar conversions, and locale-aware formatting.",
+    "lesson": "DRC-TIMEZONE handles global time correctly. In this lesson you'll convert UTC to multiple zones, handle DST transitions, and format dates in localized styles.",
+    "code_snippet": "const utc = DRC.Timezone.parse('2025-11-01T01:30:00Z');\nconsole.log(utc.toZone('America/New_York').format()); // Handles DST correctly",
+    "interactive_widget": "Time-Zone Converter: Pick two zones and timestamps, then visualize offsets and DST rules on a timeline.",
+    "linked_components": ["drc-17", "drc-50"]
+  },
+  {
+    "id": "drc-141",
+    "name": "DRC-FORMAT",
+    "layer": "Developer Tools",
+    "description": "Pluggable code formatter and linter with customizable style rules for DRC-LANG, DRC-COREASM, and JSON/Markdown.",
+    "lesson": "DRC-FORMAT enforces consistent style. In this lesson you'll configure indentation, line-length, naming conventions, and run both formatter and linter as pre-commit hooks.",
+    "code_snippet": "DRC.Format.configure({ indent: 2, maxLineLength: 80 });\nawait DRC.Format.run('src/**/*.drc');\nawait DRC.Format.lint('src/**/*.drc');",
+    "interactive_widget": "Formatter Playground: Type unformatted code, see live formatting, and toggle style rules.",
+    "linked_components": ["drc-115", "drc-30"]
+  },
+  {
+    "id": "drc-142",
+    "name": "DRC-JOBS",
+    "layer": "Runtime & Scheduling",
+    "description": "General-purpose background jobs and cron-style scheduling for tasks like emails, cleanups, and batch processing.",
+    "lesson": "DRC-JOBS lets you schedule one-off, delayed, or recurring tasks. In this lesson you'll create a daily report job at 2 AM, queue ad-hoc jobs, and monitor their status.",
+    "code_snippet": "DRC.Jobs.schedule('dailyReport', '0 2 * * *', () => generateReport());\nDRC.Jobs.enqueue('sendEmail', { to: 'user@example.com' });",
+    "interactive_widget": "Job Dashboard: View upcoming runs, success/failure logs, and manually retry or cancel jobs.",
+    "linked_components": ["drc-36", "drc-115"]
+  },
+  {
+    "id": "drc-143",
+    "name": "DRC-ARCHIVE",
+    "layer": "Memory & Storage",
+    "description": "High-performance compression and archive support (ZIP, GZIP, TAR) for files and streams.",
+    "lesson": "DRC-ARCHIVE compresses and extracts data. In this lesson you'll bundle a directory into a ZIP, stream a GZIP-ped file for download, and list archive contents without extraction.",
+    "code_snippet": "await DRC.Archive.zip('logs/', 'logs.zip');\nawait DRC.Archive.extract('bundle.tar.gz', 'out/');",
+    "interactive_widget": "Archive Tool: Drag files into a virtual folder and see live compression ratios and archive previews.",
+    "linked_components": ["drc-18", "drc-50"]
+  },
+  {
+    "id": "drc-144",
+    "name": "DRC-PLUGIN",
+    "layer": "Extensibility & Plugins",
+    "description": "Plugin framework for discovering, loading, and sandboxing third-party extensions at runtime.",
+    "lesson": "DRC-PLUGIN lets you add new commands, formatters, or UI widgets dynamically. In this lesson you'll write a basic plugin that registers a new CLI command and installs it without restarting the host process.",
+    "code_snippet": "DRC.Plugin.register('myPlugin', ({ cli, events }) => {\n  cli.command('hello').action(() => console.log('Hello from plugin'));  \n});\nawait DRC.Plugin.loadAll('plugins/');",
+    "interactive_widget": "Plugin Explorer: Install/uninstall community plugins and watch hooks fire in real time.",
+    "linked_components": ["drc-100", "drc-REPL"]
+  },
+  {
+    "id": "drc-145",
+    "name": "DRC-FTSEARCH",
+    "layer": "Data & Indexing",
+    "description": "Built-in full-text search engine with tokenization, stemming, ranking, and faceting for DRC-DB and document stores.",
+    "lesson": "DRC-FTSEARCH lets you index text fields and perform advanced queries. In this lesson you’ll index a product catalog, run ranked search with filters, and tune relevance weights.",
+    "code_snippet": "await DRC.FTSearch.index('products', ['name', 'description']);\nconst results = await DRC.FTSearch.query('products', 'wireless headphones', { facet: 'brand' });",
+    "interactive_widget": "Search Studio: Upload sample documents, build an index, then try keyword, phrase, and fuzzy searches with live ranking tweaks.",
+    "linked_components": ["drc-50", "drc-90"]
+  },
+  {
+    "id": "drc-146",
+    "name": "DRC-GEO",
+    "layer": "Data & Services",
+    "description": "Geospatial data support with GIS operations, spatial indexes, geo-queries, and map projections.",
+    "lesson": "DRC-GEO enables spatial queries. In this lesson you’ll store points and polygons, run radius and bounding-box queries, and project coordinates between systems.",
+    "code_snippet": "await DRC.Geo.createIndex('locations', 'coordinates');\nconst nearby = await DRC.Geo.queryRadius('locations', [ -122.4194, 37.7749 ], 5000);",
+    "interactive_widget": "Map Explorer: Drop markers and shapes on a map, then run spatial queries and visualize results in real time.",
+    "linked_components": ["drc-21", "drc-52"]
+  },
+  {
+    "id": "drc-147",
+    "name": "DRC-SERVE",
+    "layer": "ML & AI Services",
+    "description": "Scalable model-serving infrastructure with REST/gRPC endpoints, batching, A/B testing, and monitoring.",
+    "lesson": "DRC-SERVE helps you deploy models at scale. In this lesson you’ll serve a trained DRC-ML model behind an HTTP API, configure auto-batching, and collect performance metrics.",
+    "code_snippet": "const server = DRC.Serve.create({ modelPath: 'models/classifier.drcml', port: 8080 });\nawait server.start();",
+    "interactive_widget": "Serving Dashboard: Upload a model, configure endpoints, then send sample payloads and watch latency, throughput, and version rollouts.",
+    "linked_components": ["drc-90", "drc-ORCH"]
+  },
+  {
+    "id": "drc-148",
+    "name": "DRC-PAY",
+    "layer": "Commerce & Transactions",
+    "description": "International payment and currency conversion with built-in support for major gateways, exchange rates, and multi-currency ledgers.",
+    "lesson": "DRC-PAY manages global transactions. In this lesson you’ll configure Stripe and PayPal connectors, create multi-currency invoices, and apply live exchange-rate conversions.",
+    "code_snippet": "await DRC.Pay.configure({ stripeKey: 'sk_test_…', baseCurrency: 'USD' });\nconst charge = await DRC.Pay.createCharge({ amount: 100, currency: 'EUR', customer: custId });",
+    "interactive_widget": "Transaction Simulator: Choose gateway, currency, and amount—then simulate payments, refunds, and ledger entries with FX events.",
+    "linked_components": ["drc-50", "drc-54"]
+  },
+  {
+    "id": "drc-149",
+    "name": "DRC-SIGN",
+    "layer": "Security & Trust",
+    "description": "Code-signing and binary verification toolkit supporting public/private keys, certificate chains, and timestamping.",
+    "lesson": "DRC-SIGN signs and verifies artifacts. In this lesson you’ll generate a keypair, sign a DRC-OBJFMT binary, embed a timestamp, and verify the signature chain.",
+    "code_snippet": "await DRC.Sign.generateKeys('dev-key');\nawait DRC.Sign.signFile('app.drcobj', 'dev-key');\nconst valid = await DRC.Sign.verifyFile('app.drcobj.sig', 'dev-key.pub');",
+    "interactive_widget": "Signing Workshop: Create keys, sign various binaries, and see signature metadata, certificate details, and validation steps.",
+    "linked_components": ["drc-107", "drc-115"]
+  },
+  {
+    "id": "drc-150",
+    "name": "DRC-VCS",
+    "layer": "Developer Tools",
+    "description": "First-class version control integration for Git, with commit history browsing, diff/merge tools, and branch management APIs.",
+    "lesson": "DRC-VCS interfaces directly with Git. In this lesson you’ll stage files, create branches, resolve merge conflicts via the API, and visualize commit graphs.",
+    "code_snippet": "await DRC.VCS.init('.');\nawait DRC.VCS.commit('Initial DRC project');\nconst branches = await DRC.VCS.listBranches();",
+    "interactive_widget": "Git UI: Stage/unstage files, view diffs, switch branches, and resolve conflicts through an interactive graph view.",
+    "linked_components": ["drc-100", "drc-30"]
+  },
+  {
+    "id": "drc-151",
+    "name": "DRC-EXPLAIN",
+    "layer": "AI Transparency",
+    "description": "Model explainability tools for DRC-ML, including feature importance, SHAP/LIME approximations, and decision-tree visualization.",
+    "lesson": "DRC-EXPLAIN introspects model decisions. In this lesson you’ll run a classifier, compute SHAP values for a sample, and visualize the top contributing features.",
+    "code_snippet": "const explainer = new DRC.Explain.SHAP(model);\nconst shapValues = await explainer.explain(instance);\nconsole.log(shapValues.topFeatures(5));",
+    "interactive_widget": "Explain Panel: Upload a model and data point, then inspect feature contributions, local vs. global explanations, and interactive plots.",
+    "linked_components": ["drc-90", "drc-39"]
+  },
+  {
+    "id": "drc-152",
+    "name": "DRC-API",
+    "layer": "Network & Protocols",
+    "description": "Automated REST and GraphQL API generation from DRC-LANG schema definitions, with OpenAPI and GraphiQL support.",
+    "lesson": "DRC-API scaffolds endpoints from types. In this lesson you’ll define a DRC-LANG type, generate REST and GraphQL schemas, and test queries in-browser.",
+    "code_snippet": "DRC.API.defineType('User', { id: 'string', name: 'string', email: 'string' });\nawait DRC.API.generate();",
+    "interactive_widget": "API Explorer: View generated OpenAPI docs, launch GraphiQL, and send sample operations against live resolvers.",
+    "linked_components": ["drc-86", "drc-39"]
+  },
+  {
+    "id": "drc-153",
+    "name": "DRC-WORKFLOW",
+    "layer": "Orchestration & Automation",
+    "description": "Directed-acyclic-graph workflow engine for long-running tasks, with dependencies, retries, and visual orchestration.",
+    "lesson": "DRC-WORKFLOW manages complex pipelines. In this lesson you’ll define a multi-step ETL job, configure success/failure retries, and monitor run status in a DAG view.",
+    "code_snippet": "const wf = new DRC.Workflow('ETL');\nwf.addTask('extract', extractFn).after('start');\nwf.addTask('transform', transformFn).after('extract');\nwf.addTask('load', loadFn).after('transform');\nawait wf.run();",
+    "interactive_widget": "Workflow Studio: Drag tasks into a graph, link dependencies, start runs, and watch live progress and logs.",
+    "linked_components": ["drc-115", "drc-36"]
+  },
+  {
+    "id": "drc-154",
+    "name": "DRC-HOTRELOAD",
+    "layer": "Developer Tools",
+    "description": "Live code reloading for DRC-LANG and front-end assets, enabling instant update in running applications without restart.",
+    "lesson": "DRC-HOTRELOAD updates code on the fly. In this lesson you’ll enable hot reload in a web app, modify a component, and see changes reflect immediately in the browser.",
+    "code_snippet": "DRC.HotReload.watch('src/**/*.{drc,js,css}');\nawait DRC.HotReload.start();",
+    "interactive_widget": "Live Preview: Edit code in your IDE and see instant updates—state preserved—inside a running DRC-powered app.",
+    "linked_components": ["drc-112", "drc-70"]
   }
 ]
