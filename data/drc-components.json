@@ -1117,5 +1117,75 @@
     "code_snippet": "const files = DRC_UTILS.fs.listDir('/logs');\nconst today = DRC_UTILS.time.format(new Date(), 'YYYY-MM-DD');\nconsole.log(files, today);",
     "interactive_widget": "Utility Suite: Try out file listing, regex replaces, date formatting, and more in an interactive REPL.",
     "linked_components": ["drc-18", "drc-50", "drc-119"]
+  },
+  {
+    "id": "drc-124",
+    "name": "DRC-SYNC",
+    "layer": "Concurrency & Coordination",
+    "description": "High-level concurrency primitives: semaphores, mutexes, and channel-based communication for safe inter-thread/task synchronization.",
+    "lesson": "DRC-SYNC introduces structured concurrency with semaphores, mutex locks, and channels. In this lesson, you'll implement a producer/consumer pipeline using channels and see how semaphores guard shared resources.",
+    "code_snippet": "async function producer(chan) {\n  for (let i = 0; i < 5; i++) {\n    await chan.send(i);\n  }\n}\n\nasync function consumer(chan) {\n  for await (const item of chan) {\n    console.log(`Consumed: ${item}`);\n  }\n}\n\nconst chan = new DRC.Channel();\nDRC.spawn(producer, chan);\nDRC.spawn(consumer, chan);",
+    "interactive_widget": "Channel Simulator: Wire up producers and consumers, adjust semaphore counts, and watch tasks synchronize in real time.",
+    "linked_components": ["drc-46", "drc-36"]
+  },
+  {
+    "id": "drc-125",
+    "name": "DRC-EVENT",
+    "layer": "Event-Driven Architecture",
+    "description": "Event loop, timers, and reactive streams for building GUIs, servers, and any event-driven application.",
+    "lesson": "DRC-EVENT provides a single-threaded event loop with support for timers, I/O events, and reactive subscriptions. In this lesson, you’ll build a basic HTTP server that responds to incoming requests and emits custom events to subscribers.",
+    "code_snippet": "const loop = new DRC.EventLoop();\nloop.on('request', req => {\n  req.respond(200, 'Hello world');\n});\n\nloop.timer(1000, () => console.log('Tick every second'));\nloop.run();",
+    "interactive_widget": "Event Flow Visualizer: Register listeners, emit events, and trace the event queue and handler execution.",
+    "linked_components": ["drc-70", "drc-89"]
+  },
+  {
+    "id": "drc-126",
+    "name": "DRC-DB",
+    "layer": "Data & Persistence",
+    "description": "Built-in drivers for SQL/NoSQL databases, connection pooling, and a minimal ORM for structured queries.",
+    "lesson": "DRC-DB allows you to define models and run queries against relational and document databases. In this lesson, you’ll define a `User` model, insert records, and query them with both raw SQL and ORM syntax.",
+    "code_snippet": "const User = DRC.DB.model('users', {\n  id: 'int',\n  name: 'string',\n  email: 'string'\n});\n\nawait DRC.DB.connect('postgres://...');\nawait User.create({name: 'Alice', email: 'alice@example.com'});\nconsole.log(await User.findAll({where: {name: 'Alice'}}));",
+    "interactive_widget": "DB Explorer: Switch between SQL and ORM views, run live queries, and watch connection pool metrics.",
+    "linked_components": ["drc-50", "drc-53"]
+  },
+  {
+    "id": "drc-127",
+    "name": "DRC-BUILD",
+    "layer": "Build & Tooling",
+    "description": "Declarative build graphs, task automation, file watchers, and an integrated test runner.",
+    "lesson": "DRC-BUILD unifies compilation, bundling, testing, and deployment steps under a simple graph-based config. In this lesson, you’ll author a `build.drc` file that compiles your HLL code, bundles assets, runs tests, and packages an artifact.",
+    "code_snippet": "task('compile', () => DRC.compile('src', 'out'))\n  .dependsOn('clean');\ntask('test', () => DRC.test('out'));\ntask('bundle', () => DRC.bundle('out', 'dist'))\n  .dependsOn('compile');\n\nDRC.build('bundle');",
+    "interactive_widget": "Build Graph Visualizer: Define tasks, draw dependencies, trigger builds, and see task outputs and timings.",
+    "linked_components": ["drc-100", "drc-52"]
+  },
+  {
+    "id": "drc-128",
+    "name": "DRC-RESULT",
+    "layer": "Error Handling",
+    "description": "Structured `Result<T,E>` / `Option<T>` types for composable, type-safe error propagation instead of unchecked exceptions.",
+    "lesson": "DRC-RESULT encourages explicit error handling. In this lesson, you’ll call a function that returns `Result<number,string>` and use pattern-matching to handle success and failure paths cleanly.",
+    "code_snippet": "function parseNumber(s: string): DRC.Result<number,string> {\n  const n = Number(s);\n  return isNaN(n) ? DRC.Err('invalid') : DRC.Ok(n);\n}\n\nconst r = parseNumber('42');\nr.match({\n  Ok: v => console.log(`Got ${v}`),\n  Err: e => console.error(`Error: ${e}`)\n});",
+    "interactive_widget": "Result Inspector: Compose multiple `Result`-returning calls, chain them, and visualize happy vs. error paths.",
+    "linked_components": ["drc-78", "drc-9"]
+  },
+  {
+    "id": "drc-129",
+    "name": "DRC-COMMENT",
+    "layer": "Docs & API",
+    "description": "Syntax for inline doc-comments (`///`), code examples, and an extractor that produces Markdown or HTML API references.",
+    "lesson": "DRC-COMMENT parses `///` annotations above declarations. In this lesson, you’ll comment a function, run the doc generator, and view the formatted API docs with live examples.",
+    "code_snippet": "/// Adds two numbers\n/// @param a first addend\n/// @param b second addend\n/// @returns sum of a and b\nfunction add(a: number, b: number): number {\n  return a + b;\n}\n\nDRC.Docgen.generate('src', 'docs');",
+    "interactive_widget": "Doc Previewer: Hover over code, see rendered Markdown, and click through cross-references.",
+    "linked_components": ["drc-30", "drc-32"]
+  },
+  {
+    "id": "drc-130",
+    "name": "DRC-MOCK",
+    "layer": "Testing & QA",
+    "description": "Advanced testing utilities: function mocking/stubbing, rich assertions, snapshot tests, and coverage reporting.",
+    "lesson": "DRC-MOCK extends `DRC-TEST` with mocks and coverage. In this lesson, you’ll write a unit test that mocks an HTTP client, asserts calls and responses, takes a snapshot of output, and view a coverage report.",
+    "code_snippet": "const http = mock(DRC.HTTP);\nhttp.get.when('/api').returns({status: 200, body: 'OK'});\n\nawait DRC.Test('apiTest', async () => {\n  const res = await DRC.HTTP.get('/api');\n  assert.equal(res.body, 'OK');\n  snapshot(res);\n});\n\nDRC.Test.runAll();\nDRC.Test.reportCoverage();",
+    "interactive_widget": "Test Runner UI: Toggle mocks, run individual tests, view assertion failures, snapshots, and coverage heatmaps.",
+    "linked_components": ["drc-10", "drc-76"]
   }
 ]
