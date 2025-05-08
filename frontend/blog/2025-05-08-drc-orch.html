@@ -146,62 +146,98 @@ DRC.ORCH.deploy(agent).then(() => console.log('Agent deployed'));
 
   <h2>📈 Visual System Map</h2>
 <figure>
-  <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" style="background-color: #0b0b0b; border: 1px solid #00ffc3; border-radius: 4px;">
+  <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+    <!-- Gradient Background -->
+    <defs>
+      <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" style="stop-color:#0b0b0b;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      </radialGradient>
+      <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+        <stop offset="0%" style="stop-color:#00ffc3;stop-opacity:0.8" />
+        <stop offset="100%" style="stop-color:#00ffc3;stop-opacity:0" />
+      </radialGradient>
+    </defs>
+    <rect width="600" height="400" fill="url(#bgGradient)" />
     <!-- Title -->
-    <text x="300" y="30" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="16" text-anchor="middle">DRC-ORCH System Map</text>
+    <text x="300" y="30" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="18" font-weight="bold" text-anchor="middle">DRC-ORCH System Architecture</text>
     <!-- Node Pool (CPU, GPU, QPU, Edge) -->
     <g id="node-pool">
-      <circle cx="150" cy="150" r="40" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2"/>
-      <text x="150" y="155" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">CPU</text>
-      <circle cx="300" cy="100" r="40" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2"/>
-      <text x="300" y="105" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">GPU</text>
-      <circle cx="450" cy="150" r="40" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2"/>
-      <text x="450" y="155" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">QPU</text>
-      <circle cx="300" cy="250" r="40" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2"/>
-      <text x="300" y="255" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="12" text-anchor="middle">Edge</text>
+      <circle cx="200" cy="150" r="50" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2" opacity="0.9"/>
+      <circle cx="200" cy="150" r="60" fill="url(#nodeGlow)" opacity="0.3"/>
+      <text x="200" y="155" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">CPU Node</text>
+      <circle cx="400" cy="150" r="50" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2" opacity="0.9"/>
+      <circle cx="400" cy="150" r="60" fill="url(#nodeGlow)" opacity="0.3"/>
+      <text x="400" y="155" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">GPU Node</text>
+      <circle cx="300" cy="300" r="50" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2" opacity="0.9"/>
+      <circle cx="300" cy="300" r="60" fill="url(#nodeGlow)" opacity="0.3"/>
+      <text x="300" y="305" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">QPU Node</text>
+      <circle cx="300" cy="80" r="50" fill="#1a1a1a" stroke="#00ffc3" stroke-width="2" opacity="0.9"/>
+      <circle cx="300" cy="80" r="60" fill="url(#nodeGlow)" opacity="0.3"/>
+      <text x="300" y="85" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">Edge Node</text>
     </g>
-    <!-- Interop Links (Lines connecting nodes) -->
-    <g id="interop-links" stroke="#00ffc3" stroke-width="1" stroke-opacity="0.7">
-      <line x1="150" y1="150" x2="300" y2="100" />
-      <text x="225" y="125" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Python</text>
-      <line x1="300" y1="100" x2="450" y2="150" />
-      <text x="375" y="125" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">DRC-native</text>
-      <line x1="450" y1="150" x2="300" y2="250" />
-      <text x="375" y="200" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Rust</text>
-      <line x1="300" y1="250" x2="150" y2="150" />
-      <text x="225" y="200" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">WASM</text>
+    <!-- Interop Links (Animated dashed lines with labels) -->
+    <g id="interop-links">
+      <path d="M200,150 Q300,100 400,150" fill="none" stroke="#00ffc3" stroke-width="2" stroke-dasharray="5,5">
+        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <rect x="280" y="110" width="40" height="20" fill="#1a1a1a" stroke="#00ffc3" stroke-width="1"/>
+      <text x="300" y="125" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Python</text>
+      <path d="M400,150 Q350,225 300,300" fill="none" stroke="#00ffc3" stroke-width="2" stroke-dasharray="5,5">
+        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <rect x="340" y="210" width="60" height="20" fill="#1a1a1a" stroke="#00ffc3" stroke-width="1"/>
+      <text x="370" y="225" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">DRC-native</text>
+      <path d="M300,300 Q300,190 300,80" fill="none" stroke="#00ffc3" stroke-width="2" stroke-dasharray="5,5">
+        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <rect x="280" y="170" width="40" height="20" fill="#1a1a1a" stroke="#00ffc3" stroke-width="1"/>
+      <text x="300" y="185" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Rust</text>
+      <path d="M300,80 Q250,115 200,150" fill="none" stroke="#00ffc3" stroke-width="2" stroke-dasharray="5,5">
+        <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+      </path>
+      <rect x="230" y="100" width="40" height="20" fill="#1a1a1a" stroke="#00ffc3" stroke-width="1"/>
+      <text x="250" y="115" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">WASM</text>
     </g>
-    <!-- AI Agent Swarm (Animated dots moving between nodes) -->
+    <!-- AI Agent Swarm (Orbiting particles with trails) -->
     <g id="ai-agent-swarm">
-      <circle cx="150" cy="150" r="5" fill="#ff007a">
-        <animate attributeName="cx" values="150;300" dur="3s" repeatCount="indefinite"/>
-        <animate attributeName="cy" values="150;100" dur="3s" repeatCount="indefinite"/>
+      <circle r="5" fill="#ff007a">
+        <animateMotion dur="4s" repeatCount="indefinite">
+          <mpath href="#cpu-orbit"/>
+        </animateMotion>
       </circle>
-      <circle cx="300" cy="100" r="5" fill="#ff007a">
-        <animate attributeName="cx" values="300;450" dur="3s" repeatCount="indefinite"/>
-        <animate attributeName="cy" values="100;150" dur="3s" repeatCount="indefinite"/>
+      <path id="cpu-orbit" d="M200,150 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" fill="none"/>
+      <circle r="5" fill="#ff007a">
+        <animateMotion dur="4s" repeatCount="indefinite">
+          <mpath href="#gpu-orbit"/>
+        </animateMotion>
       </circle>
-      <circle cx="450" cy="150" r="5" fill="#ff007a">
-        <animate attributeName="cx" values="450;300" dur="3s" repeatCount="indefinite"/>
-        <animate attributeName="cy" values="150;250" dur="3s" repeatCount="indefinite"/>
+      <path id="gpu-orbit" d="M400,150 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" fill="none"/>
+      <circle r="5" fill="#ff007a">
+        <animateMotion dur="4s" repeatCount="indefinite">
+          <mpath href="#qpu-orbit"/>
+        </animateMotion>
       </circle>
-      <circle cx="300" cy="250" r="5" fill="#ff007a">
-        <animate attributeName="cx" values="300;150" dur="3s" repeatCount="indefinite"/>
-        <animate attributeName="cy" values="250;150" dur="3s" repeatCount="indefinite"/>
+      <path id="qpu-orbit" d="M300,300 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" fill="none"/>
+      <circle r="5" fill="#ff007a">
+        <animateMotion dur="4s" repeatCount="indefinite">
+          <mpath href="#edge-orbit"/>
+        </animateMotion>
       </circle>
+      <path id="edge-orbit" d="M300,80 m-30,0 a30,30 0 1,0 60,0 a30,30 0 1,0 -60,0" fill="none"/>
     </g>
     <!-- Legend -->
     <g id="legend">
-      <rect x="10" y="320" width="180" height="70" fill="#1a1a1a" stroke="#00ffc3" stroke-width="1"/>
-      <text x="20" y="340" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="12">Legend:</text>
-      <circle cx="30" cy="360" r="5" fill="#ff007a"/>
-      <text x="40" y="365" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10">AI Agent</text>
-      <line x1="120" y1="360" x2="150" y2="360" stroke="#00ffc3" stroke-width="1"/>
-      <text x="160" y="365" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10">Interop Link</text>
+      <rect x="10" y="340" width="200" height="50" fill="#1a1a1a" stroke="#00ffc3" stroke-width="1" opacity="0.9"/>
+      <text x="20" y="355" fill="#00ffc3" font-family="JetBrains Mono, monospace" font-size="12">Legend</text>
+      <circle cx="30" cy="375" r="5" fill="#ff007a"/>
+      <text x="40" y="380" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10">AI Agent Swarm</text>
+      <path d="M120,375 H150" fill="none" stroke="#00ffc3" stroke-width="2" stroke-dasharray="5,5"/>
+      <text x="160" y="380" fill="#f4f4f4" font-family="JetBrains Mono, monospace" font-size="10">Interop Link</text>
     </g>
   </svg>
   <figcaption style="color: #f4f4f4; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; text-align: center;">
-    System map illustrating DRC-ORCH node pool, AI agent swarm, and interop links.
+    System architecture map illustrating DRC-ORCH’s node pool, AI agent swarm, and interop links across hardware and languages.
   </figcaption>
 </figure>
 
