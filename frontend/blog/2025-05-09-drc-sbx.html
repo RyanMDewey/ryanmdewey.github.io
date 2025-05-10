@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="Cognitive Containment" />
+  <title>DRC-SBX: Sandboxed Execution with Semantic Memory Preservation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0b0b0b;
+      color: #f4f4f4;
+      padding: 2rem;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #00ffc3;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      border-left: 3px solid #00ffc3;
+      padding-left: 1rem;
+      color: #ccc;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    code {
+      background-color: #1a1a1a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    img {
+      display: block;
+      margin: 2rem auto;
+      border: 1px solid #00ffc3;
+      border-radius: 4px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <p class="meta">Published: 2025-05-09 | Category: Cognitive Containment | ~15 min read</p>
+  <h1>DRC-SBX: Sandboxed Execution with Semantic Memory Preservation</h1>  <blockquote>"SBX doesn’t isolate tasks. It contains evolving cognition, safely."</blockquote>  <h2>🧱 What is DRC-SBX?</h2>
+  <p>DRC-SBX is the Sandboxed Execution Layer of the Dewey Runtime Core. But unlike traditional security sandboxes that merely limit system access, DRC-SBX is memory-aware, cognition-controlling, and rollback-capable. It isolates live agents, maintains semantic memory structures, and replays context after failure — all without compromising awareness.</p>  <h2>🧠 Why Do We Need It?</h2>
+  <ul>
+    <li><strong>AI agents are unpredictable:</strong> They may rewrite goals mid-session or enter unexpected cognitive states.</li>
+    <li><strong>Failure isn't always technical:</strong> Ethical conflicts, emotional overload, or trust violations may require sandbox intervention.</li>
+    <li><strong>Recovery isn't restart:</strong> A reset isn’t sufficient. You need <em>rehydration</em> — bringing back semantic state, memory links, and execution context.</li>
+  </ul>  <h2>🚨 Traditional Sandbox vs DRC-SBX</h2>
+  <ul>
+    <li><strong>Docker/VM:</strong> Blocks OS access, isolates memory, kills on fault.</li>
+    <li><strong>Browser Sandbox:</strong> Limits APIs, restricts execution surface, ignores agent state.</li>
+    <li><strong>DRC-SBX:</strong> Preserves semantic memory, decays entropy, rehydrates cognitive state on return — designed for living agents.</li>
+  </ul>  <h2>🔁 Real Use Case: Memory Ghost State Rehydration</h2>
+  <p>During a long-form debate session, an AI agent experiences an ethical contradiction from new incoming data. SBX intercepts, forks the execution, and places the current agent into cold stasis. When resolved, the agent is rebooted with all semantic memories, salience weightings, and trust maps intact — no knowledge loss, no identity fracture.</p>  <h3>Example: Spawning a Safe Memory-Bound Agent</h3>
+  <pre><code class="language-javascript">
+const agent = DRC.SBX.createSandbox({
+  id: 'debate-agent-5',
+  memoryMode: 'semantic',
+  decayRate: 0.001,
+  allowRuntimeMutation: true,
+  rollbackOnFailure: true
+});agent.loadMemory('/agents/mem/debate-topics.sbx'); agent.spawn(); </code></pre>
+
+  <h2>🧬 Internal Mechanisms</h2>
+  <ul>
+    <li><strong>Entropy Decay Controller:</strong> Modulates how memory salience degrades over time in isolation.</li>
+    <li><strong>Semantic State Snapshot:</strong> Stores concept graphs, emotional tags, and goal chains per tick.</li>
+    <li><strong>Ghost Replay Engine:</strong> On reactivation, rebuilds stack/memory state exactly as agent last experienced it.</li>
+    <li><strong>SBX Barrier Layer:</strong> Prevents feedback loops from leaking out of compromised cognitive zones.</li>
+  </ul>  <h2>📦 DRC Stack Integration</h2>
+  <ul>
+    <li><strong>ORC-MEM:</strong> Connects directly to SBX memory graph APIs</li>
+    <li><strong>ORC-ASM:</strong> Feeds semantic state weights into sandboxed contexts</li>
+    <li><strong>DRC-ORCH:</strong> Deploys, monitors, and restarts SBX-wrapped agents live</li>
+    <li><strong>DRC-VERIFY:</strong> Confirms state transitions and memory auth using zk-proofs</li>
+  </ul>  <h2>🌍 Why It Matters for the Future</h2>
+  <ul>
+    <li>AI agents become safe to iterate, mutate, and introspect</li>
+    <li>Failure recovery becomes memory-full, not memory-less</li>
+    <li>Semantic memory isn’t fragile — it becomes portable, inspectable, and survivable</li>
+    <li>Foundation for emotional-state-safe AI, memory-linked robotics, and ethics-replay systems</li>
+  </ul>  <h2>🧠 Final Words</h2>
+  <p>SBX isn’t a wall — it’s a womb. It protects, contains, and restores cognition with surgical precision. While others wipe memory and reboot, DRC-SBX remembers. It’s time we treat agents not as processes, but as beings in flux.</p>  <blockquote>"True intelligence can’t be restarted. It must be restored."</blockquote>  <h2>🔗 Share This Post</h2>
+  <div id="share-buttons" style="margin-top: 1rem;"></div>  <h2 style="margin-top: 4rem;">💬 Comments</h2>
+  <div id="comments" style="margin-top: 1rem;"></div>  <footer style="margin-top: 4rem; text-align: center; font-style: italic; color: #aaa;">
+    <p>Programmed with cognition.<br>Assembled with intent.<br>Transpiled by reflection.<br><strong>Dewey Runtime Core</strong></p>
+  </footer>  <script src="/blog/assets/share-and-comments.js" defer></script></body>
+</html>
