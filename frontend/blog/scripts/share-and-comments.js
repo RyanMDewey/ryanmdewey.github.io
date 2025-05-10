@@ -1,4 +1,3 @@
-<script defer>
 window.addEventListener("DOMContentLoaded", () => {
   const pageUrl = encodeURIComponent(window.location.href);
   const pageTitle = document.title;
@@ -205,4 +204,3 @@ window.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(overlay);
   }
 });
-</script>
