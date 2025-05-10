@@ -3,46 +3,17 @@ window.addEventListener("DOMContentLoaded", () => {
   const pageTitle = document.title;
 
   const shareOptions = [
-    {
-      name: "X",
-      url: `https://x.com/intent/tweet?text=${pageTitle}&url=${pageUrl}`
-    },
-    {
-      name: "LinkedIn",
-      url: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`
-    },
-    {
-      name: "Reddit",
-      url: `https://reddit.com/submit?url=${pageUrl}`
-    },
-    {
-      name: "Email",
-      url: `mailto:?subject=${pageTitle}&body=${pageUrl}`
-    },
-    {
-      name: "Telegram",
-      url: `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`
-    },
-    {
-      name: "Messenger",
-      url: `fb-messenger://share/?link=${pageUrl}`
-    },
-    {
-      name: "Messages",
-      url: `sms:&body=${pageTitle}%20${pageUrl}`
-    },
-    {
-      name: "Copy Link",
-      action: "copy"
-    },
-    {
-      name: "QR Code",
-      action: "qrcode"
-    },
-    {
-      name: "Long Screenshot",
-      action: "screenshot"
-    }
+    { name: "X", url: `https://x.com/intent/tweet?text=${pageTitle}&url=${pageUrl}` },
+    { name: "LinkedIn", url: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}` },
+    { name: "Reddit", url: `https://reddit.com/submit?url=${pageUrl}` },
+    { name: "Email", url: `mailto:?subject=${pageTitle}&body=${pageUrl}` },
+    { name: "Telegram", url: `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}` },
+    { name: "Messenger", url: `fb-messenger://share/?link=${pageUrl}` },
+    { name: "Messages", url: `sms:&body=${pageTitle}%20${pageUrl}` },
+    { name: "Copy Link", action: "copy" },
+    { name: "QR Code", action: "qrcode" },
+    { name: "Long Screenshot", action: "screenshot" },
+    { name: "More", action: "systemshare" }
   ];
 
   function getIcon(name) {
@@ -56,7 +27,8 @@ window.addEventListener("DOMContentLoaded", () => {
       "Messages": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M2 4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14l-4-4H4a2 2 0 0 1-2-2V4z"/></svg>`,
       "Copy Link": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M3.9 12c0-1.1.9-2 2-2h6v-2H5.9A4 4 0 0 0 2 12a4 4 0 0 0 3.9 4H12v-2H5.9c-1.1 0-2-.9-2-2zm16.2 0a4 4 0 0 0-3.9-4H12v2h4.1c1.1 0 2 .9 2 2s-.9 2-2 2H12v2h4.1a4 4 0 0 0 3.9-4z"/></svg>`,
       "QR Code": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8 0h2v2h-2V5zm-4 8h2v2H9v-2zm0-4h2v2H9V9zm4 0h2v2h-2V9zm0 4h2v2h-2v-2zm6-10h2v2h-2V3zm0 4h2v2h-2V7zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zM3 15h6v6H3v-6zm2 2v2h2v-2H5z"/></svg>`,
-      "Long Screenshot": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 3h14a2 2 0 0 1 2 2v4h-2V5H5v14h14v-4h2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 8v8h6V8H9z"/></svg>`
+      "Long Screenshot": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 3h14a2 2 0 0 1 2 2v4h-2V5H5v14h14v-4h2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 8v8h6V8H9z"/></svg>`,
+      "More": `<svg viewBox="0 0 24 24" width="16" height="16"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`
     };
     return icons[name] || "";
   }
@@ -131,18 +103,29 @@ window.addEventListener("DOMContentLoaded", () => {
       } else if (opt.action === "qrcode") {
         el.onclick = e => {
           e.preventDefault();
-          const qr = window.open(`https://api.qrserver.com/v1/create-qr-code/?data=${pageUrl}&size=200x200`, "_blank");
-          qr.focus();
+          window.open(`https://api.qrserver.com/v1/create-qr-code/?data=${pageUrl}&size=200x200`, "_blank");
         };
       } else if (opt.action === "screenshot") {
         el.onclick = async e => {
           e.preventDefault();
-          const target = document.body;
-          const canvas = await html2canvas(target, { scale: 2, useCORS: true });
+          const canvas = await html2canvas(document.body, { scale: 2, useCORS: true });
           const link = document.createElement("a");
           link.download = "screenshot.png";
           link.href = canvas.toDataURL("image/png");
           link.click();
+        };
+      } else if (opt.action === "systemshare") {
+        el.onclick = async e => {
+          e.preventDefault();
+          if (navigator.share) {
+            await navigator.share({
+              title: pageTitle,
+              text: pageTitle,
+              url: window.location.href
+            });
+          } else {
+            alert("Your device doesn't support native sharing.");
+          }
         };
       } else {
         el.href = opt.url;
