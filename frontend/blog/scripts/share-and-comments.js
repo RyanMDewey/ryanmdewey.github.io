@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
     { name: "More…", action: "systemshare" }
   ];
 
-  // Inject styles for share UI and screenshot overlay
+  // Inject styles
   const style = document.createElement("style");
   style.textContent = `
     .share-container { position: relative; margin-top: 1rem; }
@@ -41,38 +41,32 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     .screenshot-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 10000; display: flex; justify-content: center; align-items: center;
-      flex-direction: column;
+      background: rgba(0, 0, 0, 0.85); z-index: 10000;
+      display: flex; justify-content: center; align-items: center; flex-direction: column;
     }
     .screenshot-preview {
-      position: relative;
-      overflow-y: scroll;
-      border: 2px solid #00ffc3;
-      max-height: 90vh;
-      width: 90vw;
+      position: relative; overflow-y: scroll;
+      border: 2px solid #00ffc3; max-height: 90vh; width: 90vw;
     }
     .screenshot-dragbar {
-      position: absolute;
-      height: 2px;
-      background: #00ffc3;
-      width: 100%;
-      cursor: ns-resize;
-      z-index: 10001;
+      position: absolute; height: 2px; width: 100%;
+      cursor: ns-resize; background: #00ffc3;
+    }
+    .screenshot-top::after, .screenshot-bottom::after {
+      content: "↕"; color: black;
+      display: block; background: #00ffc3;
+      font-size: 1.2rem; text-align: center;
+      width: 100%; padding: 2px 0;
     }
     .screenshot-top { top: 0; }
     .screenshot-bottom { bottom: 0; }
     .screenshot-controls {
-      margin-top: 1rem;
-      display: flex; gap: 1rem;
+      margin-top: 1rem; display: flex; gap: 1rem;
     }
     .screenshot-controls button {
-      padding: 0.5rem 1rem;
-      font-weight: bold;
-      border-radius: 8px;
-      border: none;
-      font-size: 1.1rem;
-      cursor: pointer;
+      padding: 0.5rem 1rem; font-weight: bold;
+      border-radius: 8px; border: none;
+      font-size: 1.1rem; cursor: pointer;
     }
     .screenshot-capture { background: #00ffc3; color: #000; }
     .screenshot-cancel { background: #f44336; color: white; }
@@ -87,6 +81,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const mainBtn = document.createElement("button");
     mainBtn.className = "main-share-btn";
     mainBtn.textContent = "Share";
+    mainBtn.id = "main-share-btn";
     wrapper.appendChild(mainBtn);
 
     const dropdown = document.createElement("div");
@@ -96,7 +91,6 @@ window.addEventListener("DOMContentLoaded", () => {
       const el = opt.action ? document.createElement("button") : document.createElement("a");
       el.textContent = opt.name;
 
-      // Assign click behavior
       if (opt.action === "copy") {
         el.onclick = e => {
           e.preventDefault();
@@ -139,7 +133,6 @@ window.addEventListener("DOMContentLoaded", () => {
     container.appendChild(wrapper);
   }
 
-  // Comments loader
   const commentContainer = document.getElementById("comments");
   if (commentContainer) {
     const script = document.createElement("script");
@@ -153,7 +146,7 @@ window.addEventListener("DOMContentLoaded", () => {
     commentContainer.appendChild(script);
   }
 
-  // Screenshot capture overlay + logic
+  // Screenshot logic
   async function launchScreenshotUI() {
     const overlay = document.createElement("div");
     overlay.className = "screenshot-overlay";
@@ -161,8 +154,11 @@ window.addEventListener("DOMContentLoaded", () => {
     const preview = document.createElement("div");
     preview.className = "screenshot-preview";
 
-    const contentClone = document.body.cloneNode(true);
-    preview.appendChild(contentClone);
+    const clone = document.body.cloneNode(true);
+    const shareBtn = clone.querySelector("#main-share-btn");
+    if (shareBtn) shareBtn.style.display = "none";
+
+    preview.appendChild(clone);
 
     const topBar = document.createElement("div");
     const bottomBar = document.createElement("div");
@@ -179,18 +175,17 @@ window.addEventListener("DOMContentLoaded", () => {
     const cancelBtn = document.createElement("button");
     cancelBtn.className = "screenshot-cancel";
     cancelBtn.textContent = "✖ Cancel";
+    cancelBtn.onclick = () => overlay.remove();
 
     const confirmBtn = document.createElement("button");
     confirmBtn.className = "screenshot-capture";
     confirmBtn.textContent = "✓ Capture";
-
-    cancelBtn.onclick = () => overlay.remove();
-
     confirmBtn.onclick = async () => {
       overlay.remove();
       const canvas = await html2canvas(document.body, {
         scale: 2,
-        useCORS: true
+        useCORS: true,
+        ignoreElements: el => el.id === "main-share-btn"
       });
       const link = document.createElement("a");
       link.download = "screenshot.png";
