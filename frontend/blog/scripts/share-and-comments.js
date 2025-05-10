@@ -1,7 +1,10 @@
+// Main script for share menu, comment loader, and region-based screenshot capture
+
 window.addEventListener("DOMContentLoaded", () => {
   const pageUrl = encodeURIComponent(window.location.href);
   const pageTitle = document.title;
 
+  // Share options array
   const shareOptions = [
     { name: "X", url: `https://x.com/intent/tweet?text=${pageTitle}&url=${pageUrl}` },
     { name: "LinkedIn", url: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}` },
@@ -16,25 +19,13 @@ window.addEventListener("DOMContentLoaded", () => {
     { name: "More…", action: "systemshare" }
   ];
 
-  // Icon set for each button
+  // Optional icons (truncated here for clarity, use full SVGs in real code)
   function getIcon(name) {
-    const icons = {
-      "X": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M14.68..."/></svg>`,
-      "LinkedIn": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M4.98..."/></svg>`,
-      "Reddit": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M22..."/></svg>`,
-      "Email": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M20..."/></svg>`,
-      "Telegram": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M9.97..."/></svg>`,
-      "Messenger": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12..."/></svg>`,
-      "Messages": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M2..."/></svg>`,
-      "Copy Link": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M3.9..."/></svg>`,
-      "QR Code": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M3..."/></svg>`,
-      "Long Screenshot": `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M5..."/></svg>`,
-      "More…": `<svg viewBox="0 0 24 24" width="16" height="16"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`
-    };
-    return icons[name] || "";
+    const dots = `<svg viewBox="0 0 24 24" width="16" height="16"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`;
+    return { "More…": dots }[name] || "";
   }
 
-  // Basic styles
+  // Inject styling for dropdown, buttons, and overlay
   const style = document.createElement("style");
   style.textContent = `
     .share-container { position: relative; margin-top: 1rem; }
@@ -61,15 +52,16 @@ window.addEventListener("DOMContentLoaded", () => {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0, 255, 195, 0.2);
       z-index: 9999; cursor: crosshair;
+      touch-action: none;
     }
     .screenshot-area {
       position: absolute; border: 2px dashed #00ffc3;
-      background: rgba(0, 255, 195, 0.15);
+      background: rgba(0, 255, 195, 0.1);
     }
   `;
   document.head.appendChild(style);
 
-  // Share buttons render logic
+  // Render share UI
   const container = document.getElementById("share-buttons");
   if (container) {
     const wrapper = document.createElement("div");
@@ -83,12 +75,12 @@ window.addEventListener("DOMContentLoaded", () => {
     const dropdown = document.createElement("div");
     dropdown.className = "share-dropdown";
 
-    // Iterate all share options
+    // Loop through all options
     shareOptions.forEach(opt => {
       const el = opt.action ? document.createElement("button") : document.createElement("a");
       el.innerHTML = `${getIcon(opt.name)} ${opt.name}`;
 
-      // Share logic
+      // Handle actions
       if (opt.action === "copy") {
         el.onclick = e => {
           e.preventDefault();
@@ -110,11 +102,7 @@ window.addEventListener("DOMContentLoaded", () => {
         el.onclick = async e => {
           e.preventDefault();
           if (navigator.share) {
-            try {
-              await navigator.share({ title: pageTitle, text: pageTitle, url: window.location.href });
-            } catch (err) {
-              alert("Sharing cancelled.");
-            }
+            await navigator.share({ title: pageTitle, text: pageTitle, url: window.location.href });
           } else {
             alert("Your device doesn't support native sharing.");
           }
@@ -135,7 +123,7 @@ window.addEventListener("DOMContentLoaded", () => {
     container.appendChild(wrapper);
   }
 
-  // Utteranc.es comment injection
+  // Load utterances comments
   const commentContainer = document.getElementById("comments");
   if (commentContainer) {
     const script = document.createElement("script");
@@ -149,7 +137,7 @@ window.addEventListener("DOMContentLoaded", () => {
     commentContainer.appendChild(script);
   }
 
-  // Screenshot Region Selector
+  // Screenshot selection logic (drag to select region, then capture)
   function createDraggableScreenshotRegion() {
     const overlay = document.createElement("div");
     overlay.className = "screenshot-overlay";
@@ -160,34 +148,40 @@ window.addEventListener("DOMContentLoaded", () => {
     rect.className = "screenshot-area";
     overlay.appendChild(rect);
 
-    overlay.addEventListener("mousedown", e => {
-      startX = e.clientX;
-      startY = e.clientY;
+    const getTouch = e => e.touches ? e.touches[0] : e;
+
+    const onStart = e => {
+      const t = getTouch(e);
+      startX = t.clientX;
+      startY = t.clientY;
       rect.style.left = `${startX}px`;
       rect.style.top = `${startY}px`;
-      rect.style.width = "0px";
-      rect.style.height = "0px";
 
-      const onMouseMove = e2 => {
-        const width = Math.abs(e2.clientX - startX);
-        const height = Math.abs(e2.clientY - startY);
-        rect.style.left = `${Math.min(e2.clientX, startX)}px`;
-        rect.style.top = `${Math.min(e2.clientY, startY)}px`;
-        rect.style.width = `${width}px`;
-        rect.style.height = `${height}px`;
+      const onMove = e2 => {
+        const m = getTouch(e2);
+        const x = Math.min(m.clientX, startX);
+        const y = Math.min(m.clientY, startY);
+        const w = Math.abs(m.clientX - startX);
+        const h = Math.abs(m.clientY - startY);
+        Object.assign(rect.style, {
+          left: `${x}px`, top: `${y}px`,
+          width: `${w}px`, height: `${h}px`
+        });
       };
 
-      const onMouseUp = async () => {
-        overlay.removeEventListener("mousemove", onMouseMove);
-        overlay.removeEventListener("mouseup", onMouseUp);
-        const rectBounds = rect.getBoundingClientRect();
+      const onEnd = async () => {
+        overlay.removeEventListener("mousemove", onMove);
+        overlay.removeEventListener("mouseup", onEnd);
+        overlay.removeEventListener("touchmove", onMove);
+        overlay.removeEventListener("touchend", onEnd);
+        const bounds = rect.getBoundingClientRect();
         overlay.remove();
 
         const canvas = await html2canvas(document.body, {
-          x: rectBounds.left + window.scrollX,
-          y: rectBounds.top + window.scrollY,
-          width: rectBounds.width,
-          height: rectBounds.height,
+          x: bounds.left + window.scrollX,
+          y: bounds.top + window.scrollY,
+          width: bounds.width,
+          height: bounds.height,
           scale: 2,
           useCORS: true
         });
@@ -198,8 +192,13 @@ window.addEventListener("DOMContentLoaded", () => {
         link.click();
       };
 
-      overlay.addEventListener("mousemove", onMouseMove);
-      overlay.addEventListener("mouseup", onMouseUp);
-    });
+      overlay.addEventListener("mousemove", onMove);
+      overlay.addEventListener("mouseup", onEnd);
+      overlay.addEventListener("touchmove", onMove);
+      overlay.addEventListener("touchend", onEnd);
+    };
+
+    overlay.addEventListener("mousedown", onStart);
+    overlay.addEventListener("touchstart", onStart);
   }
 });
