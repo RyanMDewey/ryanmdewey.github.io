@@ -1,10 +1,7 @@
-// Main script for share menu, comment loader, and region-based screenshot capture
-
 window.addEventListener("DOMContentLoaded", () => {
   const pageUrl = encodeURIComponent(window.location.href);
   const pageTitle = document.title;
 
-  // Share options array
   const shareOptions = [
     { name: "X", url: `https://x.com/intent/tweet?text=${pageTitle}&url=${pageUrl}` },
     { name: "LinkedIn", url: `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}` },
@@ -19,13 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
     { name: "More…", action: "systemshare" }
   ];
 
-  // Optional icons (truncated here for clarity, use full SVGs in real code)
-  function getIcon(name) {
-    const dots = `<svg viewBox="0 0 24 24" width="16" height="16"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>`;
-    return { "More…": dots }[name] || "";
-  }
-
-  // Inject styling for dropdown, buttons, and overlay
+  // Basic styling for overlay
   const style = document.createElement("style");
   style.textContent = `
     .share-container { position: relative; margin-top: 1rem; }
@@ -48,20 +39,41 @@ window.addEventListener("DOMContentLoaded", () => {
     .share-dropdown a:hover, .share-dropdown button:hover {
       background-color: rgba(0,255,195,0.1);
     }
-    .screenshot-overlay {
+
+    /* Screenshot Preview Mode */
+    .screenshot-preview {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 255, 195, 0.2);
-      z-index: 9999; cursor: crosshair;
-      touch-action: none;
+      background: rgba(0, 0, 0, 0.85); z-index: 9999;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center;
+      padding: 1rem;
     }
-    .screenshot-area {
-      position: absolute; border: 2px dashed #00ffc3;
-      background: rgba(0, 255, 195, 0.1);
+    .screenshot-preview img {
+      max-height: 80vh; border: 2px solid #00ffc3;
+      border-radius: 4px;
+    }
+    .screenshot-controls {
+      margin-top: 1rem;
+      display: flex; gap: 1rem;
+    }
+    .screenshot-controls button {
+      font-size: 1.25rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .screenshot-confirm {
+      background: #00ffc3; color: #0b0b0b;
+    }
+    .screenshot-cancel {
+      background: #ff0033; color: white;
     }
   `;
   document.head.appendChild(style);
 
-  // Render share UI
+  // Share logic
   const container = document.getElementById("share-buttons");
   if (container) {
     const wrapper = document.createElement("div");
@@ -75,18 +87,16 @@ window.addEventListener("DOMContentLoaded", () => {
     const dropdown = document.createElement("div");
     dropdown.className = "share-dropdown";
 
-    // Loop through all options
     shareOptions.forEach(opt => {
       const el = opt.action ? document.createElement("button") : document.createElement("a");
-      el.innerHTML = `${getIcon(opt.name)} ${opt.name}`;
+      el.textContent = opt.name;
 
-      // Handle actions
       if (opt.action === "copy") {
         el.onclick = e => {
           e.preventDefault();
           navigator.clipboard.writeText(window.location.href);
           el.textContent = "✅ Copied!";
-          setTimeout(() => el.innerHTML = `${getIcon(opt.name)} ${opt.name}`, 1500);
+          setTimeout(() => el.textContent = opt.name, 1500);
         };
       } else if (opt.action === "qrcode") {
         el.onclick = e => {
@@ -96,13 +106,15 @@ window.addEventListener("DOMContentLoaded", () => {
       } else if (opt.action === "screenshot") {
         el.onclick = e => {
           e.preventDefault();
-          createDraggableScreenshotRegion();
+          longScreenshot();
         };
       } else if (opt.action === "systemshare") {
         el.onclick = async e => {
           e.preventDefault();
           if (navigator.share) {
-            await navigator.share({ title: pageTitle, text: pageTitle, url: window.location.href });
+            try {
+              await navigator.share({ title: pageTitle, text: pageTitle, url: window.location.href });
+            } catch { alert("Sharing cancelled."); }
           } else {
             alert("Your device doesn't support native sharing.");
           }
@@ -123,7 +135,43 @@ window.addEventListener("DOMContentLoaded", () => {
     container.appendChild(wrapper);
   }
 
-  // Load utterances comments
+  // Long Screenshot w/ preview and confirmation
+  function longScreenshot() {
+    html2canvas(document.body, { scale: 1.5, useCORS: true }).then(canvas => {
+      const preview = document.createElement("div");
+      preview.className = "screenshot-preview";
+
+      const img = document.createElement("img");
+      img.src = canvas.toDataURL("image/png");
+      preview.appendChild(img);
+
+      const controls = document.createElement("div");
+      controls.className = "screenshot-controls";
+
+      const confirm = document.createElement("button");
+      confirm.textContent = "✓";
+      confirm.className = "screenshot-confirm";
+      confirm.onclick = () => {
+        const link = document.createElement("a");
+        link.download = "long-screenshot.png";
+        link.href = img.src;
+        link.click();
+        preview.remove();
+      };
+
+      const cancel = document.createElement("button");
+      cancel.textContent = "✕";
+      cancel.className = "screenshot-cancel";
+      cancel.onclick = () => preview.remove();
+
+      controls.appendChild(confirm);
+      controls.appendChild(cancel);
+      preview.appendChild(controls);
+      document.body.appendChild(preview);
+    });
+  }
+
+  // Comment thread
   const commentContainer = document.getElementById("comments");
   if (commentContainer) {
     const script = document.createElement("script");
@@ -135,70 +183,5 @@ window.addEventListener("DOMContentLoaded", () => {
     script.setAttribute("crossorigin", "anonymous");
     script.async = true;
     commentContainer.appendChild(script);
-  }
-
-  // Screenshot selection logic (drag to select region, then capture)
-  function createDraggableScreenshotRegion() {
-    const overlay = document.createElement("div");
-    overlay.className = "screenshot-overlay";
-    document.body.appendChild(overlay);
-
-    let startX = 0, startY = 0;
-    const rect = document.createElement("div");
-    rect.className = "screenshot-area";
-    overlay.appendChild(rect);
-
-    const getTouch = e => e.touches ? e.touches[0] : e;
-
-    const onStart = e => {
-      const t = getTouch(e);
-      startX = t.clientX;
-      startY = t.clientY;
-      rect.style.left = `${startX}px`;
-      rect.style.top = `${startY}px`;
-
-      const onMove = e2 => {
-        const m = getTouch(e2);
-        const x = Math.min(m.clientX, startX);
-        const y = Math.min(m.clientY, startY);
-        const w = Math.abs(m.clientX - startX);
-        const h = Math.abs(m.clientY - startY);
-        Object.assign(rect.style, {
-          left: `${x}px`, top: `${y}px`,
-          width: `${w}px`, height: `${h}px`
-        });
-      };
-
-      const onEnd = async () => {
-        overlay.removeEventListener("mousemove", onMove);
-        overlay.removeEventListener("mouseup", onEnd);
-        overlay.removeEventListener("touchmove", onMove);
-        overlay.removeEventListener("touchend", onEnd);
-        const bounds = rect.getBoundingClientRect();
-        overlay.remove();
-
-        const canvas = await html2canvas(document.body, {
-          x: bounds.left + window.scrollX,
-          y: bounds.top + window.scrollY,
-          width: bounds.width,
-          height: bounds.height,
-          scale: 2,
-          useCORS: true
-        });
-
-        const link = document.createElement("a");
-        link.download = "region-screenshot.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-      };
-
-      overlay.addEventListener("mousemove", onMove);
-      overlay.addEventListener("mouseup", onEnd);
-      overlay.addEventListener("touchmove", onMove);
-      overlay.addEventListener("touchend", onEnd);
-    };
-
-    overlay.addEventListener("mousedown", onStart);
-    overlay.addEventListener("touchstart", onStart);
   }
 });
