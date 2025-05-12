@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DRC Academy: Learn the Dewey Run-time Core, a revolutionary stack for AI-driven, quantum-ready, autonomous systems." />
+  <title>DRC Academy</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    #category-nav {
+      text-align: center;
+      margin: 1.5rem auto;
+      max-width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    #category-nav a {
+      background: rgba(0, 255, 225, 0.08);
+      border: 1px solid rgba(0, 255, 225, 0.2);
+      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      color: #00d4ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    #category-nav a:hover {
+      color: #ff00cc;
+      background: rgba(255, 0, 204, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-nav">
+    <div class="nav-container" id="dynamic-nav"></div>
+  </div>
 
+  <header class="hero">
+    <h1 class="glitch">DRC Academy</h1>
+    <p class="tagline">Master the Dewey Run-time Core: AI-native, quantum-aligned, self-healing systems.</p>
+  </header>
+
+  <nav id="category-nav"></nav>
+
+  <div style="text-align: center; margin: 1rem 0;">
+    <input type="text" id="search-input" placeholder="Search components..." />
+  </div>
+
+  <main id="components-container" style="padding: 1rem;">
+    <p>Loading components...</p>
+  </main>
+
+  <footer class="footer">
+    ✨ DRC Academy © 2025 <a href="https://www.ryanmdewey.com">Ryan Dewey</a>
+  </footer>
+
+  <script type="module">
+    // Inject global nav
+    const currentPath = window.location.pathname;
+    const currentPage = currentPath.split('/').pop() || 'index.html';
+    const navLinks = [
+      { name: 'Home', href: '/' },
+      { name: 'Experience', href: '/experience.html' },
+      { name: 'Projects', href: '/projects.html' },
+      { name: 'Skills', href: '/skills.html' },
+      { name: 'Resume', href: '/resume.html' },
+      { name: 'Contact', href: '/contact.html' },
+      { name: 'Blog', href: '/blog/' },
+      { name: 'Academy', href: '/academy/' }
+    ];
+    const nav = document.createElement('div');
+    nav.className = 'nav-links';
+    navLinks.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.href;
+      a.textContent = link.name;
+      if (link.href.split('/').pop() === currentPage) {
+        a.style.color = '#00ffe1';
+        a.style.textDecoration = 'underline';
+      }
+      nav.appendChild(a);
+    });
+    document.getElementById('dynamic-nav')?.appendChild(nav);
+
+    // Load JSON and generate UI by `layer`
+    fetch('/data/drc-components.json')
+      .then(res => res.json())
+      .then(components => {
+        const toc = document.getElementById('category-nav');
+        const container = document.getElementById('components-container');
+        container.innerHTML = '';
+
+        // Categorize by 'layer'
+        const categories = {};
+        components.forEach(comp => {
+          const key = comp.layer || 'Uncategorized';
+          if (!categories[key]) categories[key] = [];
+          categories[key].push(comp);
+        });
+
+        // Emoji map
+        const emojiMap = {
+          "Core Execution": "⚙️",
+          "AI & Adaptation": "🧠",
+          "Verification & Security": "🔐",
+          "System Integration & Reliability": "🔌",
+          "Developer Tools": "🛠️",
+          "UI & Education": "📘",
+          "Network & Interop": "🌐",
+          "Governance & Ethics": "⚖️",
+          "Uncategorized": "📦"
+        };
+
+        Object.entries(categories).forEach(([layer, comps]) => {
+          const emoji = emojiMap[layer] || "📦";
+          const sectionId = layer.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+          // TOC link
+          const link = document.createElement('a');
+          link.href = `#${sectionId}`;
+          link.textContent = `${emoji} ${layer}`;
+          toc.appendChild(link);
+
+          // Category section
+          const section = document.createElement('details');
+          section.className = 'hero-box';
+          section.id = sectionId;
+
+          const summary = document.createElement('summary');
+          summary.textContent = `${emoji} ${layer}`;
+          summary.style.fontSize = '1.5rem';
+          summary.style.fontWeight = '600';
+          summary.style.color = '#00d4ff';
+          section.appendChild(summary);
+
+          const compContainer = document.createElement('div');
+          compContainer.className = 'component';
+
+          comps.forEach(comp => {
+            const details = document.createElement('details');
+            const summary = document.createElement('summary');
+            summary.textContent = `${comp.id?.toUpperCase() || '???'} — ${comp.name}`;
+            details.appendChild(summary);
+
+            const desc = document.createElement('p');
+            desc.textContent = comp.description;
+            details.appendChild(desc);
+
+            if (comp.linked_components?.length) {
+            const links = document.createElement('p');
+            links.innerHTML = `<strong>Linked:</strong> ${comp.linked_components.map(id => `<a href="#${id.toLowerCase()}">${id}</a>`).join(', ')}`;
+            details.appendChild(links);
+          }
+
+            if (comp.lesson) {
+             const lesson = document.createElement('div');
+             lesson.className = 'lesson';
+             const link = document.createElement('a');  
+             link.href = `/academy/lessons/${comp.id.toLowerCase()}.html`;
+             link.textContent = 'Open Full Lesson →';
+             link.style.color = '#00ffc3';
+             link.style.display = 'inline-block';
+             link.style.marginTop = '0.5rem';
+             lesson.appendChild(link);
+             details.appendChild(lesson);
+           }
+
+            compContainer.appendChild(details);
+          });
+
+          section.appendChild(compContainer);
+          container.appendChild(section);
+        });
+      });
+
+    // Live search
+    document.getElementById('search-input').addEventListener('input', () => {
+      const q = document.getElementById('search-input').value.toLowerCase();
+      document.querySelectorAll('.component details').forEach(detail => {
+        const text = detail.innerText.toLowerCase();
+        detail.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
