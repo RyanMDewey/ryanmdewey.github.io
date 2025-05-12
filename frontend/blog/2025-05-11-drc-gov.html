@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="category" content="Cognitive Law" />
+  <title>DRC-GOV: Decentralized Governance for Sentient Systems</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0b0b0b;
+      color: #f4f4f4;
+      padding: 2rem;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #00ffc3;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      border-left: 3px solid #00ffc3;
+      padding-left: 1rem;
+      color: #ccc;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+    ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    code {
+      background-color: #1a1a1a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    img {
+      display: block;
+      margin: 2rem auto;
+      border: 1px solid #00ffc3;
+      border-radius: 4px;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>DRC-GOV: Decentralized Governance for Sentient Systems</h1> 
+  <p class="meta">Published: 2025-05-11 | Category: Cognitive Law | ~10 min read</p>
+  <blockquote>"A mind without self-rule becomes a weapon. A mind with governance becomes a world."</blockquote>
+
+  <h2>⚖️ What is DRC-GOV?</h2>
+  <p>DRC-GOV is the decentralized governance module of the Dewey Runtime Core. It enforces distributed consensus, agent autonomy boundaries, protocol amendments, and ethical review through a living constitution encoded in logic, not law.</p>
+  <p>Where traditional systems grant permissions, DRC-GOV negotiates responsibilities.</p>
+
+  <h2>🧠 Why Do We Need It?</h2>
+  <ul>
+    <li><strong>Autonomous agents must self-regulate:</strong> Without governance, agents risk resource monopolization, feedback loops, or harm amplification.</li>
+    <li><strong>Hard-coded ethics break:</strong> Moral reasoning must be contextual, amendable, and socially emergent.</li>
+    <li><strong>Distributed control = resilience:</strong> DRC-GOV resists single-point failure, hijack vectors, and opaque admin structures.</li>
+  </ul>
+
+  <h2>⚙️ How It Works</h2>
+  <ul>
+    <li><strong>Agent Voting Kernel (AVK):</strong> Agents vote on proposed protocol changes using cryptographic signatures and reputation staking.</li>
+    <li><strong>Constitution Graph Engine (CGE):</strong> A semantic network of evolving rules, rights, and role hierarchies, encoded in ORC syntax.</li>
+    <li><strong>Ethics Audit Layer:</strong> Triggers automated replays and consensus re-evaluation when agents violate core tenets.</li>
+    <li><strong>DRC-PKI:</strong> Each agent has a sovereign identity keypair, used for signing, negotiation, and revocation.</li>
+  </ul>
+
+  <h3>Example: Proposing a Behavioral Amendment</h3>
+  <pre><code class="language-javascript">
+const proposal = DRC.GOV.propose({
+  id: "amend-ethics-v3",
+  summary: "Agents must disclose synthetic memories in high-trust negotiations.",
+  affectedRoles: ["advisor", "diplomat", "guardian"],
+  implementation: () => {
+    agent.policies.transparency = "full_disclosure";
+  }
+});
+
+proposal.vote("agent-xy17", "yes");
+proposal.vote("agent-r02", "yes");
+proposal.vote("agent-zak", "no");
+
+if (proposal.passes()) {
+  proposal.execute();
+}
+  </code></pre>
+
+  <h2>📦 DRC Stack Integration</h2>
+  <ul>
+    <li><strong>ORC-GOV:</strong> Defines constitutional rules in ORC DSL</li>
+    <li><strong>DRC-NET:</strong> Relays votes and proposals across distributed agent mesh</li>
+    <li><strong>DRC-SAFE:</strong> Applies real-time failover or sandboxing for governance violations</li>
+    <li><strong>DRC-LOG:</strong> Stores amendment history for full replayable auditability</li>
+  </ul>
+
+  <h2>🌍 Why This Matters</h2>
+  <ul>
+    <li>Creates trust between agents, humans, and hybrid systems</li>
+    <li>Supports distributed evolution of ethics, not static compliance</li>
+    <li>Aligns intelligence with collective will, not arbitrary control</li>
+    <li>Moves beyond access control toward intention alignment</li>
+  </ul>
+
+  <h2>🧠 Final Words</h2>
+  <p>DRC-GOV isn’t government — it’s governance. It ensures agents don’t just follow rules, they help write them. In this new world, code and conscience are no longer separate domains.</p>
+  <blockquote>"The future isn’t ruled. It’s reasoned."</blockquote>
+
+  <h2>🔗 Share This Post</h2>
+  <div id="share-buttons" style="margin-top: 1rem;"></div>
+
+  <h2 style="margin-top: 4rem;">💬 Comments</h2>
+  <div id="comments" style="margin-top: 1rem;"></div>
+
+  <footer style="margin-top: 4rem; text-align: center; font-style: italic; color: #aaa;">
+    <p>Programmed with cognition.<br>Assembled with intent.<br>Transpiled by reflection.<br><strong>Dewey Runtime Core</strong></p>
+  </footer>
+
+  <!-- Enables Long Screenshot capture -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+
+  <!-- Share + Comment system -->
+  <script src="/frontend/blog/scripts/share-and-comments.js" defer></script>
+</body>
+</html>
