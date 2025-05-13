@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DRC-TRINARY Quiz – DRC Academy</title>
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #0b0b0b;
+      color: #f4f4f4;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #00ffc3;
+      text-align: center;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #1a1a1a;
+      border: 1px solid #00ffc3;
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .question-block {
+      margin-bottom: 2rem;
+    }
+    .question-block h3 {
+      color: #00d4ff;
+    }
+    .options label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
+    .btn {
+      display: block;
+      margin: 2rem auto;
+      background: #00ffc3;
+      color: #0b0b0b;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff00cc;
+    }
+  </style>
+</head>
+<body>
+  <h1>DRC-TRINARY Lesson Quiz</h1>
+  <div class="quiz-container" id="quiz">
+    <div class="question-block" data-answer="b">
+      <h3>1. What are the three possible states in DRC-TRINARY?</h3>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> 0, 1, 2</label>
+        <label><input type="radio" name="q1" value="b"> -1, 0, 1</label>
+        <label><input type="radio" name="q1" value="c"> FALSE, MAYBE, TRUE</label>
+        <label><input type="radio" name="q1" value="d"> NULL, 1, 2</label>
+      </div>
+    </div>
 
+    <div class="question-block" data-answer="c">
+      <h3>2. What does the value -1 represent in DRC-TRINARY?</h3>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> Overflow</label>
+        <label><input type="radio" name="q2" value="b"> TRUE</label>
+        <label><input type="radio" name="q2" value="c"> NULL or undefined state</label>
+        <label><input type="radio" name="q2" value="d"> Execution halt</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-answer="a">
+      <h3>3. What happens when DRC-TRINARY detects a NULL state?</h3>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> The AI applies correction logic</label>
+        <label><input type="radio" name="q3" value="b"> System enters lockup</label>
+        <label><input type="radio" name="q3" value="c"> Execution halts permanently</label>
+        <label><input type="radio" name="q3" value="d"> It’s ignored</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-answer="d">
+      <h3>4. What would a trinary AND gate return if either input is -1?</h3>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> TRUE</label>
+        <label><input type="radio" name="q4" value="b"> FALSE</label>
+        <label><input type="radio" name="q4" value="c"> 0</label>
+        <label><input type="radio" name="q4" value="d"> NULL</label>
+      </div>
+    </div>
+
+    <div class="question-block" data-answer="b">
+      <h3>5. Why is trinary logic important for quantum systems?</h3>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a"> It uses electricity more efficiently</label>
+        <label><input type="radio" name="q5" value="b"> It allows representation of undefined/superposed states</label>
+        <label><input type="radio" name="q5" value="c"> It makes logic gates obsolete</label>
+        <label><input type="radio" name="q5" value="d"> It’s simpler than binary logic</label>
+      </div>
+    </div>
+
+    <button class="btn" onclick="gradeQuiz()">Submit Quiz</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function gradeQuiz() {
+      let correct = 0;
+      const total = 5;
+      const blocks = document.querySelectorAll('.question-block');
+
+      blocks.forEach((block, index) => {
+        const correctAnswer = block.getAttribute('data-answer');
+        const selected = block.querySelector('input[type="radio"]:checked');
+
+        if (selected && selected.value === correctAnswer) {
+          correct++;
+          selected.parentElement.style.color = "#00ffc3";
+        } else if (selected) {
+          selected.parentElement.style.color = "#f44336";
+        }
+      });
+
+      const result = document.getElementById("result");
+      if (correct === total) {
+        result.innerHTML = `✅ Perfect! You got all ${total} correct.`;
+      } else {
+        result.innerHTML = `You scored ${correct} / ${total}. Review the lesson and try again.`;
+      }
+    }
+  </script>
+</body>
+</html>
