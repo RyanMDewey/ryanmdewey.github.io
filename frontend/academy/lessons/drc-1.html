@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DRC-TRINARY Lesson | DRC Academy</title>
+  <meta name="description" content="Lesson 1 – Mastering Trinary Logic for Fault-Tolerant Execution in the Dewey Run-time Core" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #0b0b0b;
+      color: #f4f4f4;
+      padding: 2rem;
+      line-height: 1.75;
+    }
+    h1, h2, h3 {
+      color: #00ffc3;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1rem;
+    }
+    blockquote {
+      border-left: 3px solid #00ffc3;
+      padding-left: 1rem;
+      color: #ccc;
+      font-style: italic;
+      margin: 1.5rem 0;
+    }
+    code {
+      background-color: #1a1a1a;
+      padding: 0.25rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+    }
+    pre code {
+      display: block;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    a {
+      color: #00ffc3;
+    }
+    .quiz-link {
+      display: inline-block;
+      background: #00ffc3;
+      color: #000;
+      font-weight: bold;
+      padding: 0.6rem 1.2rem;
+      margin-top: 2rem;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>DRC-TRINARY: Mastering Trinary Logic for Fault-Tolerant Execution</h1>
+  <p class="meta">Component: DRC-1 | Published: 2025-05-13 | Estimated Read Time: 18 minutes</p>  <blockquote>
+    "DRC-TRINARY doesn’t just prevent errors — it teaches your system to learn from them."
+  </blockquote>  <h2>Overview</h2>
+  <p>DRC-TRINARY introduces a trinary logic model — `-1` (NULL), `0` (FALSE), and `1` (TRUE) — into the Dewey Run-time Core, enabling systems to handle corrupted states gracefully using AI-driven correction. This lesson will teach you why binary fails in edge cases, how DRC-TRINARY solves it, and how to simulate it in code.</p>  <ul>
+    <li>Understand the limits of binary logic</li>
+    <li>Explore NULL as a corrective state</li>
+    <li>Build a trinary AND/OR/NOT gate in JS</li>
+    <li>See how DRC-TRINARY integrates with DRC-AI and DRC-VM</li>
+    <li>Apply what you learn in a quiz</li>
+  </ul>  <h2>Section 1: Why Binary Breaks Down</h2>
+  <p>Binary systems collapse in ambiguity. Stuck bits, undefined sensor noise, or transient memory faults can lead to irrecoverable failures — often seen in autonomous systems where uptime is critical. Binary has no graceful fallback. It either <code>0</code> or <code>1</code>s itself into a corner.</p>  <p><strong>DRC-TRINARY</strong> fixes this by explicitly recognizing <code>-1</code> as NULL — not a failure, but a <em>recoverable</em> unknown. This allows the DRC-AI runtime to take action.</p>  <h2>Section 2: Core Logic Table</h2>
+  <pre><code class="language-js">// Trinary AND Logic
+function trinaryAND(a, b) {
+  if (a === -1 || b === -1) return 'NULL';
+  if (a === 0 || b === 0) return 'FALSE';
+  return 'TRUE';
+}console.log(trinaryAND(1, 1));   // TRUE console.log(trinaryAND(-1, 0)); // NULL</code></pre>
+
+  <h3>DRC Rule</h3>
+  <p><code>-1</code> always propagates upward until resolved. It’s not an error — it’s a sign the system is watching.</p>  <h2>Section 3: Simulation Lab</h2>
+  <p>Try building a <strong>Trinary OR Gate</strong> using this logic model:</p>
+  <pre><code class="language-js">function trinaryOR(a, b) {
+  if (a === -1 || b === -1) return 'NULL';
+  if (a === 1 || b === 1) return 'TRUE';
+  return 'FALSE';
+}</code></pre>  <h2>Section 4: DRC-VM + NULL Correction</h2>
+  <ul>
+    <li><strong>DRC-VM:</strong> detects NULL in runtime states and invokes <code>DRC-AI.analyzeFault()</code></li>
+    <li><strong>DRC-AI:</strong> re-routes execution, corrects memory, or logs incidents for validation</li>
+    <li><strong>DRC-VERIFY:</strong> hashes fault trace and correction path for future audits</li>
+  </ul>  <h2>Section 5: Exercises</h2>
+  <h3>1. AI Correction Simulation</h3>
+  <pre><code class="language-js">function trinaryLogicWithCorrection(input) {
+  if (input === -1) {
+    console.log('AI Correction: Resetting NULL to FALSE');
+    return 'FALSE';
+  }
+  return input === 1 ? 'TRUE' : 'FALSE';
+}</code></pre>  <h3>2. Build a Trinary NOT Gate</h3>
+  <pre><code class="language-js">function trinaryNOT(input) {
+  if (input === -1) return 'NULL';
+  if (input === 0) return 'TRUE';
+  return 'FALSE';
+}</code></pre>  <h2>Section 6: Real-World Application</h2>
+  <p><strong>Autonomous Drones:</strong> Encountering magnetic interference, the gyroscope returns <code>-1</code>. DRC-TRINARY logs NULL, freezes motion, and reroutes decision logic to a fallback gyro. The drone stabilizes mid-flight without crashing.</p>  <p><strong>Quantum Interfaces:</strong> When linked with <code>DRC-QUANTUM</code>, NULL forms the semantic bridge between classical and indeterminate quantum states — allowing trinary logic to parse probabilistic qubits.</p>  <h2>Section 7: Reflection</h2>
+  <p>DRC-TRINARY is not just a logic gate — it's a philosophy. A system that <em>expects the unknown</em> and has a plan. Null is not failure. Null is <strong>preemptive adaptation</strong>.</p><a class="quiz-link" href="/academy/quizzes/drc-1-quiz.html">→ Take the DRC-TRINARY Quiz</a>
+
+  <footer style="margin-top: 4rem; text-align: center; font-style: italic; color: #888;">
+    Lesson 1 of the DRC Academy. Rendered with trinary awareness.<br>
+    Dewey Runtime Core © 2025
+  </footer>
+</body>
+</html>
