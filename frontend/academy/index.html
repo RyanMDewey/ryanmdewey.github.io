@@ -80,8 +80,10 @@
     a.href = link.href;
     a.textContent = link.name;
 
-     // Fix: Hide or style current page based on exact match or prefix
-    const isActive = currentPath === link.href || currentPath.startsWith(link.href);
+    const isActive =
+    (link.href === '/' && currentPath === '/') ||
+    (link.href !== '/' && currentPath.startsWith(link.href));
+
     if (!isActive) {
     nav.appendChild(a);
     }
