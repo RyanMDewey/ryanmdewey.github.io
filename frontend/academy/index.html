@@ -76,14 +76,15 @@
     const nav = document.createElement('div');
     nav.className = 'nav-links';
     navLinks.forEach(link => {
-      const a = document.createElement('a');
-      a.href = link.href;
-      a.textContent = link.name;
-      if (link.href.split('/').pop() === currentPage || currentPath === link.href) {
-        a.style.color = '#00ffe1';
-        a.style.textDecoration = 'underline';
-      }
-      nav.appendChild(a);
+    const a = document.createElement('a');
+    a.href = link.href;
+    a.textContent = link.name;
+
+     // Fix: Hide or style current page based on exact match or prefix
+    const isActive = currentPath === link.href || currentPath.startsWith(link.href);
+    if (!isActive) {
+    nav.appendChild(a);
+    }
     });
     document.getElementById('dynamic-nav')?.appendChild(nav);
 
