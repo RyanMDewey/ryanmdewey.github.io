@@ -1,32 +1,44 @@
 services:
   - type: web
     name: ryanmdewey-site
-    env: static
-    rootDir: frontend         # Tells Render to only build/deploy from this folder
-    buildCommand: ""          # No build step needed (unless you later add one)
-    staticPublishPath: .      # Serve the HTML/CSS directly from here
+    env: node
+    rootDir: .                # Root of your repo (or change to "client" or "src" if needed)
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    staticPublishPath: build
+    buildFilter:
+      paths:
+        - package.json
+        - src/**/*
+        - public/index.html
+
+    autoDeploy: true
+
     routes:
       - type: rewrite
-        source: /blog/(.*)
-        destination: /blog/$1
-      - type: rewrite
         source: /blog
-        destination: /blog/index.html
+        destination: /
       - type: rewrite
-        source: /projects
-        destination: /projects.html
-      - type: rewrite
-        source: /about
-        destination: /about.html
-      - type: rewrite
-        source: /skills
-        destination: /skills.html
+        source: /academy
+        destination: /
       - type: rewrite
         source: /resume
-        destination: /resume.html
+        destination: /
       - type: rewrite
         source: /contact
-        destination: /contact.html
+        destination: /
+      - type: rewrite
+        source: /skills
+        destination: /
+      - type: rewrite
+        source: /projects
+        destination: /
+      - type: rewrite
+        source: /experience
+        destination: /
       - type: rewrite
         source: /
-        destination: /index.html
+        destination: /
+      - type: rewrite
+      source: /.*     # catch-all fallback
+      destination: /
