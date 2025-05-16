@@ -7,4 +7,4 @@ const Blog: React.FC = () => (
   </main>
 );
 
-export default Blog
+export default Blog;
