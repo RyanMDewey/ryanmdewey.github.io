@@ -4,4 +4,4 @@ export default function Footer() {
       © {new Date().getFullYear()} Ryan Dewey – Powered by the Dewey Runtime Core.
     </footer>
   );
-}
+
