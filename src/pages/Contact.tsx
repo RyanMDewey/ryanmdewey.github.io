@@ -15,4 +15,4 @@ const Contact: React.FC = () => (
   </main>
 );
 
-export default Contact
+export default Contact;
