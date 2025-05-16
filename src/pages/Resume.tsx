@@ -21,4 +21,4 @@ const Resume: React.FC = () => (
   </main>
 );
 
-export default Resume
+export default Resume;
