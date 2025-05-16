@@ -19,4 +19,4 @@ const Skills: React.FC = () => (
   </main>
 );
 
-export default Skills
+export default Skills;
