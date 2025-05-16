@@ -26,4 +26,4 @@ const Experience: React.FC = () => (
   </main>
 );
 
-export default Experience;
+export default Experience
