@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Contact from '../pages/Contact';
@@ -8,7 +9,7 @@ import Experience from '../pages/Experience';
 import Blog from '../pages/Blog';
 import Academy from '../pages/Academy';
 
-const AppRoutes = () => (
+const AppRoutes: React.FC = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/contact" element={<Contact />} />
