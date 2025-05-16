@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  background: #0b0b0b;
+  color: #f4f4f4;
+}
+
+a {
+  text-decoration: none;
+  color: #00ffe1;
+  margin: 0 0.75rem;
+}
+
+a.active {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.nav-links {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+}
