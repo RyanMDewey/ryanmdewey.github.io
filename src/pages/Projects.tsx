@@ -15,4 +15,4 @@ const Projects: React.FC = () => (
   </main>
 );
 
-export default Projects
+export default Projects;
