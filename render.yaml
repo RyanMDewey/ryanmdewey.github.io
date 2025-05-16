@@ -40,5 +40,5 @@ services:
         source: /
         destination: /
       - type: rewrite
-      source: /.*     # catch-all fallback
-      destination: /
+        source: /.*     # catch-all fallback
+        destination: /
