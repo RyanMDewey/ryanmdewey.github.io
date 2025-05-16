@@ -1,32 +1,19 @@
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Experience', path: '/experience' },
-  { name: 'Projects', path: '/projects' },
-  { name: 'Skills', path: '/skills' },
-  { name: 'Resume', path: '/resume' },
-  { name: 'Contact', path: '/contact' },
-  { name: 'Blog', path: '/blog' },
-  { name: 'Academy', path: '/academy' },
-];
-
-export default function Header() {
-  const location = useLocation();
-
-  return (
-    <nav className="top-nav">
-      <div className="nav-links">
-        {navLinks.map(link => (
-          <Link
-            key={link.path}
-            to={link.path}
-            className={location.pathname === link.path ? 'active' : ''}
-          >
-            {link.name}
-          </Link>
-        ))}
-      </div>
+const Header: React.FC = () => (
+  <header className="top-nav">
+    <nav className="nav-links">
+      <Link to="/">Home</Link>
+      <Link to="/experience">Experience</Link>
+      <Link to="/projects">Projects</Link>
+      <Link to="/skills">Skills</Link>
+      <Link to="/resume">Resume</Link>
+      <Link to="/contact">Contact</Link>
+      <Link to="/blog">Blog</Link>
+      <Link to="/academy">Academy</Link>
     </nav>
-  );
-}
+  </header>
+);
+
+export default Header;
