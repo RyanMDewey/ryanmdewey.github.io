@@ -4,14 +4,13 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  root: 'src', // <–– Tell Vite your source files are in /src
   build: {
-    outDir: '../build', // output outside /src
-    emptyOutDir: true,
+    outDir: 'build',
+    rollupOptions: {
+      input: path.resolve(__dirname, 'src/index.tsx'), // <== FIX: Vite knows your real entry point
+    }
   },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
+  server: {
+    port: 3000
+  }
 });
