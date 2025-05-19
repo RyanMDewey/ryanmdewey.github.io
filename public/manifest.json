@@ -1,0 +1,22 @@
+{
+  "name": "Ryan Dewey Portfolio",
+  "short_name": "RyanDewey",
+  "description": "Ryan Dewey's professional portfolio. Designing systems that evolve, languages that learn, and futures that remember us.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
