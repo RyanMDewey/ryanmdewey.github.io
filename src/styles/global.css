@@ -25,6 +25,37 @@ body {
   align-items: center;
   padding-top: 2rem;
   margin-bottom: 2.2rem;
+  bacbody {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
+  color: #23272f;
+  min-height: 100vh;
+  transition: background 0.3s;
+}
+
+/* =========================
+   THEMES (cycle with .theme-1, .theme-2, .theme-3)
+   ========================= */
+.theme-1 {
+  background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
+}
+.theme-2 {
+  background: linear-gradient(135deg, #101f2e 0%, #2e495d 100%);
+}
+.theme-3 {
+  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+.top-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  margin-bottom: 2.2rem;
   background: transparent;
   z-index: 2;
 }
@@ -51,54 +82,71 @@ body {
   color: #1e40af;
 }
 
-/* Gradient Text for Main Title */
+/* =========================
+   GRADIENT TEXT (HEADERS)
+   ========================= */
 .gradient-text {
-  background: linear-gradient(90deg, #2563eb 30%, #38bdf8 100%);
+  background: linear-gradient(90deg, #2563eb 20%, #38bdf8 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
-  font-weight: 800;
-  letter-spacing: -1px;
+  font-weight: 900;
+  font-size: 2.5rem;
+  letter-spacing: -1.5px;
+  text-shadow: 0 2px 24px #2563eb33, 0 1.5px 0 #fff;
 }
 
-/* Pop-in Animation for Section Titles */
+/* =========================
+   SECTION TITLES & ANIMATION
+   ========================= */
 @keyframes dws-pop {
-  0% { opacity: 0; transform: scale(0.96) translateY(18px);}
+  0% { opacity: 0; transform: scale(0.96) translateY(16px);}
   80% { opacity: 1; transform: scale(1.03) translateY(-2px);}
   100% { opacity: 1; transform: scale(1) translateY(0);}
 }
 
-/* Section Title Gradient and Subtle Glow */
 .section-title {
   background: linear-gradient(90deg, #2563eb 40%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 700;
-  font-size: 1.18rem;
+  font-size: 1.17rem;
   margin-bottom: 1.1rem;
-  text-shadow: 0 2px 8px #38bdf866, 0 0 1px #2563ebbb;
-  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px #38bdf855;
+  letter-spacing: 0.01em;
   display: inline-block;
   animation: dws-pop 0.7s cubic-bezier(.4,1.7,.56,1) both;
 }
 
-/* Card Styles */
+/* =========================
+   GLASSMORPHIC CARD STYLE
+   ========================= */
 .hero-box {
-  background: rgba(255,255,255,0.93);
-  border-radius: 24px;
-  box-shadow: 0 8px 40px #2563eb12, 0 2px 16px #38bdf844;
-  border: 1.5px solid #c7d2fe66;
-  padding: 2rem 1.5rem;
-  max-width: 700px;
+  background: rgba(255,255,255,0.72);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px #2563eb18, 0 2px 12px #38bdf855;
+  border: 1.5px solid #e0e7ff88;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  padding: 2.1rem 1.5rem;
+  max-width: 690px;
   margin: 2rem auto 0 auto;
   text-align: center;
   position: relative;
-  transition: box-shadow 0.2s, border 0.2s, background 0.25s;
+  transition: background 0.25s, box-shadow 0.2s, border 0.2s;
 }
 
-/* Card Content Readability */
+/* For dark theme, slightly darker glass effect */
+.theme-2 .hero-box, .theme-3 .hero-box {
+  background: rgba(32, 36, 48, 0.77);
+  border: 1.5px solid #2563eb33;
+}
+
+/* =========================
+   CARD CONTENT READABILITY
+   ========================= */
 .hero-box .desc {
   color: #334155;
   font-size: 1.08rem;
@@ -106,12 +154,17 @@ body {
   text-shadow: none;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
+.theme-2 .hero-box .desc, .theme-3 .hero-box .desc {
+  color: #f3f4fa;
+}
 .hero-box .desc.mono {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.02rem;
 }
 
-/* HERO / CARD STYLES (legacy, override above if needed) */
+/* =========================
+   LEGACY / OTHER CARDS
+   ========================= */
 .dws-card {
   background: linear-gradient(120deg, #f8fafc 90%, #e0e7ff 100%);
   border-radius: 28px;
@@ -123,14 +176,18 @@ body {
   position: relative;
 }
 
-/* HEADER */
+/* =========================
+   HEADER / TAGLINE
+   ========================= */
 .tagline {
   font-size: 1.13rem;
   color: #475569;
   margin-bottom: 0.5rem;
 }
 
-/* LINKS */
+/* =========================
+   LINKS
+   ========================= */
 a {
   color: #2563eb;
   text-decoration: none;
@@ -141,7 +198,9 @@ a:hover {
   text-decoration: underline;
 }
 
-/* TERMINAL CLOCK */
+/* =========================
+   TERMINAL CLOCK
+   ========================= */
 .terminal-time {
   position: fixed;
   bottom: 12px;
@@ -156,25 +215,29 @@ a:hover {
   z-index: 20;
 }
 
-/* Responsive */
+/* =========================
+   RESPONSIVE
+   ========================= */
 @media (max-width: 700px) {
   .hero-box,
   .dws-card {
-    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    padding: 1.1rem 0.5rem 1rem 0.5rem;
     max-width: 97vw;
   }
   .gradient-text {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
   }
   .section-title {
-    font-size: 1.1rem;
+    font-size: 1.08rem;
   }
   .hero-box .desc {
     font-size: 1rem;
   }
 }
 
-/* Particles background fixes */
+/* =========================
+   PARTICLES BACKGROUND
+   ========================= */
 #particles-js {
   pointer-events: none;
   z-index: 0 !important;
