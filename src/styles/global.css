@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
-  color: #23272f; /* changed from #e1e7f7 for better contrast */
+  color: #23272f;
   min-height: 100vh;
   transition: background 0.3s;
 }
@@ -51,7 +51,67 @@ body {
   color: #1e40af;
 }
 
-/* DWS "glassmorphic" card for main content */
+/* Gradient Text for Main Title */
+.gradient-text {
+  background: linear-gradient(90deg, #2563eb 30%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+/* Pop-in Animation for Section Titles */
+@keyframes dws-pop {
+  0% { opacity: 0; transform: scale(0.96) translateY(18px);}
+  80% { opacity: 1; transform: scale(1.03) translateY(-2px);}
+  100% { opacity: 1; transform: scale(1) translateY(0);}
+}
+
+/* Section Title Gradient and Subtle Glow */
+.section-title {
+  background: linear-gradient(90deg, #2563eb 40%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 1.18rem;
+  margin-bottom: 1.1rem;
+  text-shadow: 0 2px 8px #38bdf866, 0 0 1px #2563ebbb;
+  letter-spacing: 0.02em;
+  display: inline-block;
+  animation: dws-pop 0.7s cubic-bezier(.4,1.7,.56,1) both;
+}
+
+/* Card Styles */
+.hero-box {
+  background: rgba(255,255,255,0.93);
+  border-radius: 24px;
+  box-shadow: 0 8px 40px #2563eb12, 0 2px 16px #38bdf844;
+  border: 1.5px solid #c7d2fe66;
+  padding: 2rem 1.5rem;
+  max-width: 700px;
+  margin: 2rem auto 0 auto;
+  text-align: center;
+  position: relative;
+  transition: box-shadow 0.2s, border 0.2s, background 0.25s;
+}
+
+/* Card Content Readability */
+.hero-box .desc {
+  color: #334155;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  text-shadow: none;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+.hero-box .desc.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.02rem;
+}
+
+/* HERO / CARD STYLES (legacy, override above if needed) */
 .dws-card {
   background: linear-gradient(120deg, #f8fafc 90%, #e0e7ff 100%);
   border-radius: 28px;
@@ -63,66 +123,7 @@ body {
   position: relative;
 }
 
-/* HERO / CARD STYLES */
-.hero-box {
-  background: linear-gradient(120deg, #f8fafc 80%, #dbeafe 100%);
-  border-radius: 28px;
-  box-shadow: 0 8px 40px #2563eb18, 0 1.5px 0 #c7d2fe inset;
-  padding: 2.5rem 2.1rem 2rem 2.1rem;
-  max-width: 680px;
-  margin: 2.2rem auto 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-}
-
-/* Title and headline styles */
-h1, .main-title {
-  color: #2563eb;
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.7rem;
-  background: linear-gradient(90deg, #2563eb 40%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.section-title {
-  color: #38bdf8;
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 1.2rem;
-  text-shadow: 0 0 18px #38bdf8bb, 0 2px 8px #a5b4fc66;
-}
-
-.dws-glow {
-  color: #00ffe1 !important;
-  text-shadow: 0 0 18px #00ffe1, 0 2px 8px #38bdf899;
-}
-
-/* Description text */
-.dws-desc {
-  font-size: 1.13rem;
-  color: #334155;
-  text-shadow: 0 0 8px #38bdf855;
-  margin-bottom: 0.5rem;
-}
-.dws-desc.mono {
-  font-family: 'JetBrains Mono', monospace !important;
-  color: #f4f4f8;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  text-shadow: 0 0 10px #00ffe1;
-}
-
 /* HEADER */
-.glitch {
-  font-size: 2.7rem;
-  font-weight: 800;
-  letter-spacing: -2px;
-  color: #2563eb;
-  text-shadow: 0 0 16px #38bdf8cc, 0 2px 12px #1e40af44;
-}
 .tagline {
   font-size: 1.13rem;
   color: #475569;
@@ -138,17 +139,6 @@ a {
 a:hover {
   color: #1e40af;
   text-decoration: underline;
-}
-
-/* FOOTER */
-footer.visible {
-  text-align: center;
-  font-size: 1rem;
-  color: #64748b;
-  padding: 2.2rem 0 0 0;
-  margin-top: 3rem;
-  opacity: 0.93;
-  z-index: 2;
 }
 
 /* TERMINAL CLOCK */
@@ -173,13 +163,13 @@ footer.visible {
     padding: 1.2rem 0.5rem 1rem 0.5rem;
     max-width: 97vw;
   }
-  .glitch {
+  .gradient-text {
     font-size: 1.5rem;
   }
   .section-title {
     font-size: 1.1rem;
   }
-  .dws-desc {
+  .hero-box .desc {
     font-size: 1rem;
   }
 }
@@ -188,44 +178,4 @@ footer.visible {
 #particles-js {
   pointer-events: none;
   z-index: 0 !important;
-}
-.gradient-text {
-  background: linear-gradient(90deg, #2563eb 20%, #38bdf8 80%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-}
-
-.hero-box {
-  background: rgba(255, 255, 255, 0.93);
-  border-radius: 24px;
-  box-shadow: 0 4px 32px #2563eb18, 0 1.5px 0 #c7d2fe inset;
-  padding: 2rem 1.5rem;
-  max-width: 700px;
-  margin: 2rem auto 0 auto;
-  text-align: center;
-  position: relative;
-  transition: background 0.25s;
-}
-
-.section-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 1.1rem;
-  color: #2563eb;
-  background: linear-gradient(90deg, #2563eb 30%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 8px #a5b4fc33;
-}
-
-.hero-box .desc {
-  font-size: 1.05rem;
-  color: #334155;
-  text-shadow: none;
-  margin-bottom: 0.5rem;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
