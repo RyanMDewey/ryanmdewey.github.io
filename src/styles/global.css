@@ -6,126 +6,162 @@ body {
   min-height: 100vh;
 }
 
-/* Navigation */
-.nav-links {
-  width: 100%;
+/* Navigation bar */
+.nav-bar {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem 0 1.5rem 0;
+  justify-content: space-between;
   background: #fff;
-  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 4px 24px #0001;
+  padding: 0 2rem;
+  height: 64px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
 }
 
-.nav-links a {
-  text-decoration: none;
-  color: #2563eb;
-  font-size: 1.1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: color 0.2s, background 0.2s;
-}
-
-.nav-links a:hover, .nav-links a.active {
-  color: #1e40af;
-  background: #e0e7ff;
-  font-weight: 600;
-}
-
-/* Main App Wrapper */
-.app-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Main content (centered) */
-main {
-  flex: 1;
-  padding: 3rem 1.5rem 2rem 1.5rem;
-  max-width: 700px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Hero / Card */
-.hero-box {
-  background: #ffffffcc;
-  border-radius: 18px;
-  box-shadow: 0 6px 32px #0001;
-  padding: 2.5rem 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-/* Typography */
-.main-title {
-  font-size: 2.8rem;
+.nav-brand {
   font-weight: 700;
-  letter-spacing: -2px;
-  color: #1e40af;
-  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  color: #2563eb;
+  letter-spacing: -1px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-btn, .nav-avatar {
+  background: #f8fafc;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #2563eb;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #2563eb14;
+  transition: background 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-btn:hover {
+  background: #e0e7ff;
+  box-shadow: 0 4px 16px #2563eb22;
+}
+
+/* Card/Section container ("glassmorphism" style) */
+.card, .hero-box, .section-box {
+  background: linear-gradient(120deg, #f8fafc 80%, #dbeafe 100%);
+  border-radius: 30px;
+  box-shadow: 0 8px 40px #2563eb18, 0 1.5px 0 #c7d2fe inset;
+  padding: 3rem 2rem 2.5rem 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  text-align: center;
+  position: relative;
+}
+
+/* Main title and subtitle */
+.main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2563eb 40%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.7rem;
 }
 .subtitle {
-  font-size: 1.4rem;
-  color: #2563eb;
-  font-weight: 500;
-  margin-top: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-.tagline {
   font-size: 1.2rem;
-  color: #475569;
+  color: #334155;
   margin-bottom: 1.5rem;
 }
 
-.hero-details p {
-  color: #334155;
-  line-height: 1.6;
-  margin: 0.5rem 0;
-}
-
-/* Links */
-a {
+/* Badge/Pill styles */
+.pill {
+  display: inline-block;
+  background: #e0e7ff;
   color: #2563eb;
-  text-decoration: none;
-  transition: color 0.2s;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  font-size: 1rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 2px 8px #2563eb18;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
 }
-a:hover, a.active {
-  color: #1e40af;
-  font-weight: bold;
+.pill-icon {
+  margin-right: 0.5em;
+  font-size: 1.2em;
+  vertical-align: middle;
 }
 
-/* Footer */
+/* Feature icons and labels row */
+.feature-row {
+  display: flex;
+  justify-content: center;
+  gap: 2.2rem;
+  margin-top: 2rem;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #2563eb;
+  font-size: 0.98rem;
+}
+.feature-icon {
+  font-size: 2.1rem;
+  margin-bottom: 0.3rem;
+  opacity: 0.85;
+}
+
+/* Glowing/active button for selected card/option */
+.glow-btn {
+  background: #fff;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  color: #2563eb;
+  box-shadow: 0 0 16px 0 #38bdf866, 0 1.5px 0 #c7d2fe inset;
+  padding: 0.7rem 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1.3rem;
+  transition: box-shadow 0.2s;
+}
+.glow-btn.active, .glow-btn:focus {
+  box-shadow: 0 0 24px 3px #38bdf8bb, 0 2px 0 #2563eb22 inset;
+  background: #e0e7ff;
+}
+
+/* Section spacing */
+.section-box {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 footer {
   text-align: center;
   font-size: 1rem;
   color: #64748b;
-  padding: 2rem 0 0 0;
+  padding: 2.2rem 0 0 0;
   margin-top: 3rem;
+  opacity: 0.93;
 }
 
-/* Responsive adjustments */
-@media (max-width: 700px) {
-  main {
-    padding: 2rem 0.5rem 2rem 0.5rem;
-    max-width: 95vw;
-  }
-  .hero-box {
-    padding: 1.5rem 0.5rem;
-  }
-  .nav-links {
-    gap: 1rem;
-    font-size: 1rem;
-    padding: 1rem 0;
+/* Responsive layout */
+@media (max-width: 900px) {
+  .card, .hero-box, .section-box {
+    padding: 2rem 0.5rem 1.5rem 0.5rem;
+    max-width: 98vw;
   }
   .main-title {
     font-size: 2rem;
+  }
+  .nav-bar {
+    padding: 0 1rem;
   }
 }
