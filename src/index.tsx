@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+]import React, { useEffect } from "react";
 import "./styles/global.css";
 
 export default function App() {
