@@ -1,22 +1,4 @@
 import React, { useEffect } from "react";
-declare global { interface Window { particlesJS: any; }}
-
-export default function Home() {
-  useEffect(() => {
-    // particles.js setup
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
-    script.async = true;
-    script.onload = () => {
-      if (window.particlesJS) {
-        window.particlesJS("particles-js", {
-          particles: {/* ...same as before... */},
-          interactivity: {/* ... */},
-          retina_detect: true,
-        });
-      }
-    };
-    document.body.appendChild(script);
 
     // Clock
     const clock = document.getElementById("terminal-clock");
@@ -59,9 +41,6 @@ export default function Home() {
 
   return (
     <>
-      <div id="particles-js" style={{
-        position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 0,
-      }} />
       <div style={{ position: "relative", zIndex: 1 }}>
         <header className="visible" style={{ textAlign: "center" }}>
           <h1 className="gradient-text" style={{ marginTop: "2rem", fontSize: "2.5rem" }}>
@@ -79,7 +58,7 @@ export default function Home() {
             <span role="img" aria-label="brain">🧠</span> NEXUSARC: Engineered Evolution
           </div>
           <div className="desc">
-            Founder of a multidisciplinary tech ecosystem advancing AI, quantum computing, blockchain, robotics, human augmentation, and post-silicon fabrication. Creator of ORC — a full-stack language and execution environment powering Oracle Ledger and next-gen systems for decentralized intelligence, hardware acceleration, and human–machine symbiosis.
+            Founder of a multidisciplinary tech ecosystem advancing AI, quantum computing, blockchain, robotics, human augmentation, and post-silicon fabrication. Creator of DRC — a full-stack language and execution environment powering Dewey Ledger and next-gen systems for decentralized intelligence, hardware acceleration, and human–machine symbiosis.
           </div>
         </section>
         <section className="hero-box">
