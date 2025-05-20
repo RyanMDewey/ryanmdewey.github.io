@@ -7,33 +7,6 @@ body {
   transition: background 0.3s;
 }
 
-/* THEMES (cycle with .theme-1, .theme-2, .theme-3) */
-.theme-1 {
-  background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
-}
-.theme-2 {
-  background: linear-gradient(135deg, #101f2e 0%, #2e495d 100%);
-}
-.theme-3 {
-  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
-}
-
-/* NAVIGATION */
-.top-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
-  margin-bottom: 2.2rem;
-  bacbody {
-  margin: 0;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
-  color: #23272f;
-  min-height: 100vh;
-  transition: background 0.3s;
-}
-
 /* =========================
    THEMES (cycle with .theme-1, .theme-2, .theme-3)
    ========================= */
@@ -62,7 +35,7 @@ body {
 .nav-links {
   display: flex;
   gap: 1.5rem;
-  background: rgba(255,255,255,0.13);
+  background: rgba(255, 255, 255, 0.13);
   border-radius: 18px;
   box-shadow: 0 2px 16px #2563eb11;
   padding: 0.7rem 1.7rem;
@@ -101,9 +74,9 @@ body {
    SECTION TITLES & ANIMATION
    ========================= */
 @keyframes dws-pop {
-  0% { opacity: 0; transform: scale(0.96) translateY(16px);}
-  80% { opacity: 1; transform: scale(1.03) translateY(-2px);}
-  100% { opacity: 1; transform: scale(1) translateY(0);}
+  0% { opacity: 0; transform: scale(0.96) translateY(16px); }
+  80% { opacity: 1; transform: scale(1.03) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .section-title {
@@ -117,14 +90,14 @@ body {
   text-shadow: 0 2px 8px #38bdf855;
   letter-spacing: 0.01em;
   display: inline-block;
-  animation: dws-pop 0.7s cubic-bezier(.4,1.7,.56,1) both;
+  animation: dws-pop 0.7s cubic-bezier(.4, 1.7, .56, 1) both;
 }
 
 /* =========================
    GLASSMORPHIC CARD STYLE
    ========================= */
 .hero-box {
-  background: rgba(255,255,255,0.72);
+  background: rgba(255, 255, 255, 0.72);
   border-radius: 22px;
   box-shadow: 0 8px 32px #2563eb18, 0 2px 12px #38bdf855;
   border: 1.5px solid #e0e7ff88;
@@ -139,7 +112,8 @@ body {
 }
 
 /* For dark theme, slightly darker glass effect */
-.theme-2 .hero-box, .theme-3 .hero-box {
+.theme-2 .hero-box,
+.theme-3 .hero-box {
   background: rgba(32, 36, 48, 0.77);
   border: 1.5px solid #2563eb33;
 }
@@ -154,7 +128,8 @@ body {
   text-shadow: none;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }
-.theme-2 .hero-box .desc, .theme-3 .hero-box .desc {
+.theme-2 .hero-box .desc,
+.theme-3 .hero-box .desc {
   color: #f3f4fa;
 }
 .hero-box .desc.mono {
@@ -180,9 +155,36 @@ body {
    HEADER / TAGLINE
    ========================= */
 .tagline {
-  font-size: 1.13rem;
-  color: #475569;
+  font-size: 0.95rem; /* Adjusted to match the smaller tagline font */
+  color: #64748b; /* Slightly lighter color to match the website */
   margin-bottom: 0.5rem;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #2563eb 20%, #38bdf8 80%);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px #2563eb55;
+}
+.btn.secondary {
+  background: transparent;
+  border: 1.5px solid #2563eb;
+  color: #2563eb;
+}
+.btn.secondary:hover {
+  background: #e0e7ff55;
+  box-shadow: 0 4px 16px #2563eb33;
 }
 
 /* =========================
