@@ -237,10 +237,4 @@ a:hover {
   }
 }
 
-/* =========================
-   PARTICLES BACKGROUND
-   ========================= */
-#particles-js {
-  pointer-events: none;
-  z-index: 0 !important;
-}
+
