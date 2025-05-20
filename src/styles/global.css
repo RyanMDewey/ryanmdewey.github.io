@@ -2,166 +2,157 @@ body {
   margin: 0;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
-  color: #23272f;
+  color: #e1e7f7;
   min-height: 100vh;
+  transition: background 0.3s;
 }
 
-/* Navigation bar */
-.nav-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fff;
-  box-shadow: 0 4px 24px #0001;
-  padding: 0 2rem;
-  height: 64px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+/* THEMES (cycle with .theme-1, .theme-2, .theme-3) */
+.theme-1 {
+  background: linear-gradient(135deg, #e3f0ff 0%, #f8fafc 100%);
+}
+.theme-2 {
+  background: linear-gradient(135deg, #101f2e 0%, #2e495d 100%);
+}
+.theme-3 {
+  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
 }
 
-.nav-brand {
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: #2563eb;
-  letter-spacing: -1px;
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.nav-btn, .nav-avatar {
-  background: #f8fafc;
-  border: none;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: #2563eb;
-  cursor: pointer;
-  box-shadow: 0 2px 8px #2563eb14;
-  transition: background 0.2s, box-shadow 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.nav-btn:hover {
-  background: #e0e7ff;
-  box-shadow: 0 4px 16px #2563eb22;
-}
-
-/* Card/Section container ("glassmorphism" style) */
-.card, .hero-box, .section-box {
-  background: linear-gradient(120deg, #f8fafc 80%, #dbeafe 100%);
-  border-radius: 30px;
-  box-shadow: 0 8px 40px #2563eb18, 0 1.5px 0 #c7d2fe inset;
-  padding: 3rem 2rem 2.5rem 2rem;
-  max-width: 700px;
-  margin: 2rem auto;
-  text-align: center;
-  position: relative;
-}
-
-/* Main title and subtitle */
-.main-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #2563eb 40%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 0.7rem;
-}
-.subtitle {
-  font-size: 1.2rem;
-  color: #334155;
-  margin-bottom: 1.5rem;
-}
-
-/* Badge/Pill styles */
-.pill {
-  display: inline-block;
-  background: #e0e7ff;
-  color: #2563eb;
-  font-weight: 600;
-  border-radius: 999px;
-  padding: 0.4rem 1.2rem;
-  font-size: 1rem;
-  margin-bottom: 1.1rem;
-  box-shadow: 0 2px 8px #2563eb18;
-  letter-spacing: 0.03em;
-  vertical-align: middle;
-}
-.pill-icon {
-  margin-right: 0.5em;
-  font-size: 1.2em;
-  vertical-align: middle;
-}
-
-/* Feature icons and labels row */
-.feature-row {
+/* NAVIGATION */
+.top-nav {
   display: flex;
   justify-content: center;
-  gap: 2.2rem;
-  margin-top: 2rem;
-}
-.feature {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  padding-top: 2rem;
+  margin-bottom: 2.2rem;
+  background: transparent;
+  z-index: 2;
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.13);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #2563eb11;
+  padding: 0.7rem 1.7rem;
+}
+.nav-links a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-size: 1.07rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 8px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover {
+  background: #e0e7ff55;
+  color: #1e40af;
+}
+
+/* HERO / CARD STYLES */
+.hero-box {
+  background: linear-gradient(120deg, #f8fafc 80%, #dbeafe 100%);
+  border-radius: 28px;
+  box-shadow: 0 8px 40px #2563eb18, 0 1.5px 0 #c7d2fe inset;
+  padding: 2.5rem 2.1rem 2rem 2.1rem;
+  max-width: 680px;
+  margin: 2.2rem auto 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.03em;
+  color: #38bdf8;
+  /* blue glow, matches DWS cards */
+  text-shadow: 0 0 18px #38bdf8bb, 0 2px 8px #a5b4fc66;
+}
+
+.dws-glow {
+  color: #00ffe1 !important;
+  text-shadow: 0 0 18px #00ffe1, 0 2px 8px #38bdf899;
+}
+
+/* Description text */
+.dws-desc {
+  font-size: 1.13rem;
+  color: #334155;
+  text-shadow: 0 0 8px #38bdf855;
+  margin-bottom: 0.5rem;
+}
+.dws-desc.mono {
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #f4f4f8;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  text-shadow: 0 0 10px #00ffe1;
+}
+
+/* HEADER */
+.glitch {
+  font-size: 2.7rem;
+  font-weight: 800;
+  letter-spacing: -2px;
   color: #2563eb;
-  font-size: 0.98rem;
+  text-shadow: 0 0 16px #38bdf8cc, 0 2px 12px #1e40af44;
 }
-.feature-icon {
-  font-size: 2.1rem;
-  margin-bottom: 0.3rem;
-  opacity: 0.85;
-}
-
-/* Glowing/active button for selected card/option */
-.glow-btn {
-  background: #fff;
-  border-radius: 12px;
-  border: none;
-  font-size: 1.1rem;
-  color: #2563eb;
-  box-shadow: 0 0 16px 0 #38bdf866, 0 1.5px 0 #c7d2fe inset;
-  padding: 0.7rem 2.5rem;
-  font-weight: 600;
-  margin-bottom: 1.3rem;
-  transition: box-shadow 0.2s;
-}
-.glow-btn.active, .glow-btn:focus {
-  box-shadow: 0 0 24px 3px #38bdf8bb, 0 2px 0 #2563eb22 inset;
-  background: #e0e7ff;
+.tagline {
+  font-size: 1.13rem;
+  color: #475569;
+  margin-bottom: 0.5rem;
 }
 
-/* Section spacing */
-.section-box {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
-footer {
+/* FOOTER */
+footer.visible {
   text-align: center;
   font-size: 1rem;
   color: #64748b;
   padding: 2.2rem 0 0 0;
   margin-top: 3rem;
   opacity: 0.93;
+  z-index: 2;
 }
 
-/* Responsive layout */
-@media (max-width: 900px) {
-  .card, .hero-box, .section-box {
-    padding: 2rem 0.5rem 1.5rem 0.5rem;
-    max-width: 98vw;
+/* TERMINAL CLOCK */
+.terminal-time {
+  position: fixed;
+  bottom: 12px;
+  right: 22px;
+  background: rgba(34, 40, 56, 0.88);
+  color: #00ffe1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.09rem;
+  border-radius: 9px;
+  padding: 0.7rem 1.3rem;
+  box-shadow: 0 2px 12px #00ffe1bb, 0 1.5px 0 #c7d2fe inset;
+  z-index: 20;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .hero-box {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    max-width: 97vw;
   }
-  .main-title {
-    font-size: 2rem;
+  .glitch {
+    font-size: 1.5rem;
   }
-  .nav-bar {
-    padding: 0 1rem;
+  .section-title {
+    font-size: 1.1rem;
   }
+  .dws-desc {
+    font-size: 1rem;
+  }
+}
+
+/* Particles background fixes */
+#particles-js {
+  pointer-events: none;
+  z-index: 0 !important;
 }
