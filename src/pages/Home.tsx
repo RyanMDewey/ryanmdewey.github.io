@@ -89,7 +89,6 @@ export default function Home() {
       if (particlesContainer) {
         particlesContainer.innerHTML = "";
       }
-      // Remove dynamically injected script
       document.body.removeChild(script);
     };
   }, []);
@@ -109,7 +108,14 @@ export default function Home() {
       ></div>
       <div style={{ position: "relative", zIndex: 1 }}>
         <header className="visible" style={{ textAlign: "center" }}>
-          <h1 className="glitch" style={{ marginTop: "2rem" }}>
+          <h1
+            className="gradient-text"
+            style={{
+              marginTop: "2rem",
+              fontSize: "2.5rem",
+              fontWeight: 700,
+            }}
+          >
             Ryan Dewey
           </h1>
           <p className="tagline">
@@ -122,30 +128,19 @@ export default function Home() {
         </div>
 
         <section className="hero-box">
-          <div className="section-title dws-glow">
+          <div className="section-title">
             🧠 NEXUSARC: Engineered Evolution
           </div>
-          <div
-            className="dws-desc"
-            style={{ color: "#f4f4f8", textShadow: "0 0 12px #00ffe1" }}
-          >
+          <div className="desc">
             Founder of a multidisciplinary tech ecosystem advancing AI, quantum computing, blockchain, robotics, human augmentation, and post-silicon fabrication. Creator of ORC — a full-stack language and execution environment powering Oracle Ledger and next-gen systems for decentralized intelligence, hardware acceleration, and human–machine symbiosis.
           </div>
         </section>
 
         <section className="hero-box">
-          <div className="section-title dws-glow">
+          <div className="section-title">
             📖 Architect of Intelligence
           </div>
-          <p
-            style={{
-              lineHeight: 1.75,
-              fontSize: "1.05rem",
-              textShadow: "0 0 10px #00ffe1",
-              color: "#f4f4f8",
-              fontFamily: "'JetBrains Mono', monospace",
-            }}
-          >
+          <p className="desc" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
             I don’t just write code — I design evolution. My work fuses artificial intelligence, quantum computing, human augmentation, and decentralized infrastructure into a single unified system. From building compilers that think to ledgers that defend themselves, I engineer frameworks that adapt, self-optimize, and scale beyond human input. Every layer I touch — from low-level hardware to high-level logic — is part of a living architecture aimed at reshaping how intelligence and autonomy exist in the world. This isn’t about tools. This is about rewriting the fabric of reality — one system at a time.
           </p>
         </section>
