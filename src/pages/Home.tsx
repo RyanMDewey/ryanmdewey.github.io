@@ -41,6 +41,18 @@ import React, { useEffect } from "react";
 
   return (
     <>
+      <div
+        id="particles-js"
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+          width: "100%",
+          height: "100%",
+          opacity: 0.45,
+        }}
+      />
       <div style={{ position: "relative", zIndex: 1 }}>
         <header className="visible" style={{ textAlign: "center" }}>
           <h1 className="gradient-text" style={{ marginTop: "2rem", fontSize: "2.5rem" }}>

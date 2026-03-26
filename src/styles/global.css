@@ -7,6 +7,20 @@ body {
   transition: background 0.3s;
 }
 
+#particles-js {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  background: transparent;
+}
+
+#particles-js canvas {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
 /* =========================
    THEMES (cycle with .theme-1, .theme-2, .theme-3)
    ========================= */
