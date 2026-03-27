@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Experience: React.FC = () => (
-  <main className="experience-page">
+  <>
     <h1 className="glitch">Experience & Education</h1>
     <p className="tagline">Engineering intelligence with soul.</p>
 
@@ -21,9 +21,7 @@ const Experience: React.FC = () => (
         <li>A.S. in Computer Science – Howard College</li>
       </ul>
     </section>
-
-    <footer>© 2025 Ryan Dewey</footer>
-  </main>
+  </>
 );
 
 export default Experience;
