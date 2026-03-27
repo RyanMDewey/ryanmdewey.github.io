@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+export default function Home() {
+  useEffect(() => {
     // Clock
     const clock = document.getElementById("terminal-clock");
     const updateClock = () => {
