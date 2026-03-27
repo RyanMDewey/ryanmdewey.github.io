@@ -37,7 +37,6 @@ export default function Home() {
       if (particlesContainer) {
         particlesContainer.innerHTML = "";
       }
-      document.body.removeChild(script);
     };
   }, []);
 
