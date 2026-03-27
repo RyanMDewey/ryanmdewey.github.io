@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 const Resume: React.FC = () => {
   const candidates = [
-    '/resume/Ryan_Dewey_Resume.pdf.pdf',
     '/Ryan_Dewey_Resume.pdf.pdf',
+    '/resume/Ryan_Dewey_Resume.pdf.pdf',
     '/resume/RyanDeweyResume.pdf',
     '/RyanDeweyResume.pdf',
-    '/resume/Ryan_Dewey_Resume.pdf',
-    '/Ryan_Dewey_Resume.pdf',
   ];
 
   const [resumePath, setResumePath] = useState<string | null>(null);
@@ -62,7 +60,7 @@ const Resume: React.FC = () => {
             <iframe
               src={resumePath}
               width="100%"
-              height="800px"
+              height="3000px"
               style={{ border: '1px solid #444', borderRadius: '8px' }}
               title="Resume Preview"
               loading="lazy"
@@ -71,12 +69,6 @@ const Resume: React.FC = () => {
             <a className="glow-btn" href={resumePath} download>
               📄 Download Resume
             </a>
-            <p>
-              If this does not display, verify your static file exists at one of:
-              {candidates.map((c) => (
-                <span key={c}> <code>{c}</code></span>
-              ))}
-            </p>
           </>
         )}
       </section>
