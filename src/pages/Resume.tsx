@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Resume: React.FC = () => {
-  const resumePath = '/resume/RyanDeweyResume.pdf.pdf';
+const Resume: React.FC = () => {const resumePath = '/resume/Ryan_Dewey_Resume.pdf.pdf';
 
   return (
     <>
