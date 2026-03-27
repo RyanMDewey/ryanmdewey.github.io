@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Resume: React.FC = () => {
-  const resumePath = '/resume/RyanDeweyResume.pdf';
+  const resumePath = '/resume/RyanDeweyResume.pdf.pdf';
 
   return (
     <>
