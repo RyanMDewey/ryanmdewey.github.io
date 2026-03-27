@@ -2,9 +2,6 @@ import React from 'react';
 
 const Resume: React.FC = () => (
   <main className="resume-page">
-    <h1 className="glitch">Resume</h1>
-    <p className="tagline">Tap into the neural résumé.</p>
-
     <section className="content-section">
       <h2>Resume Preview</h2>
       <iframe
