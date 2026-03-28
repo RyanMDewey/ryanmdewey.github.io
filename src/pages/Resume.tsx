@@ -57,14 +57,23 @@ const Resume: React.FC = () => {
 
         {resumePath && (
           <>
-            <iframe
-              src={resumePath}
-              width="100%"
-              height="3000px"
-              style={{ border: '1px solid #444', borderRadius: '8px' }}
-              title="Resume Preview"
-              loading="lazy"
-            />
+            <div style={{ 
+              width: '100%', 
+              height: '90vh',
+              minHeight: '600px',
+              border: '1px solid #444', 
+              borderRadius: '8px',
+              overflow: 'hidden'
+            }}>
+              <iframe
+                src={resumePath}
+                width="100%"
+                height="100%"
+                style={{ border: 'none' }}
+                title="Resume Preview"
+                loading="lazy"
+              />
+            </div>
             <br />
             <a className="glow-btn" href={resumePath} download>
               📄 Download Resume
