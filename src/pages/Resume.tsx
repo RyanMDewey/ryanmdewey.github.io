@@ -57,22 +57,29 @@ const Resume: React.FC = () => {
 
         {resumePath && (
           <>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
+                📄 Resume Preview — Works best on desktop
+              </p>
+              <a className="glow-btn" href={resumePath} download style={{ marginRight: '1rem' }}>
+                📥 Download PDF
+              </a>
+              <a className="glow-btn" href={resumePath} target="_blank" rel="noopener noreferrer">
+                🔗 Open in Browser
+              </a>
+            </div>
             <iframe
-              src={resumePath}
+              src={resumePath + '#view=FitH'}
               style={{ 
                 width: '100%', 
-                height: '4000px',
-                border: '1px solid #444', 
+                height: '70vh',
+                minHeight: '800px',
+                border: '2px solid #38bdf8', 
                 borderRadius: '8px',
                 display: 'block'
               }}
               title="Resume Preview"
-              loading="lazy"
             />
-            <br />
-            <a className="glow-btn" href={resumePath} download>
-              📄 Download Resume
-            </a>
           </>
         )}
       </section>
