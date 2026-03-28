@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Resume: React.FC = () => {
   const candidates = [
@@ -10,6 +13,8 @@ const Resume: React.FC = () => {
 
   const [resumePath, setResumePath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [numPages, setNumPages] = useState<number>(0);
+  const [containerWidth, setContainerWidth] = useState<number>(Math.min(window.innerWidth - 24, 1024));
 
   useEffect(() => {
     let canceled = false;
@@ -39,10 +44,18 @@ const Resume: React.FC = () => {
 
     detectPath();
 
+    const updateWidth = () => setContainerWidth(Math.min(window.innerWidth - 24, 1024));
+    window.addEventListener('resize', updateWidth);
+
     return () => {
       canceled = true;
+      window.removeEventListener('resize', updateWidth);
     };
   }, []);
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+  };
 
   return (
     <main className="resume-page">
@@ -57,10 +70,7 @@ const Resume: React.FC = () => {
 
         {resumePath && (
           <>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>
-                📄 Resume Preview — Works best on desktop
-              </p>
+            <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
               <a className="glow-btn" href={resumePath} download style={{ marginRight: '1rem' }}>
                 📥 Download PDF
               </a>
@@ -68,18 +78,32 @@ const Resume: React.FC = () => {
                 🔗 Open in Browser
               </a>
             </div>
-            <iframe
-              src={resumePath + '#view=FitH'}
-              style={{ 
-                width: '100%', 
-                height: '70vh',
-                minHeight: '800px',
-                border: '2px solid #38bdf8', 
-                borderRadius: '8px',
-                display: 'block'
-              }}
-              title="Resume Preview"
-            />
+
+            <div style={{
+              width: '100%',
+              maxWidth: '1024px',
+              margin: '0 auto',
+              background: '#111',
+              padding: '1rem',
+              borderRadius: '8px',
+            }}>
+              <Document
+                file={resumePath}
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={<p>Loading PDF…</p>}
+                error={<p style={{ color: 'red' }}>Unable to render PDF preview. Use download/open buttons instead.</p>}
+              >
+                {Array.from(new Array(numPages), (el, index) => (
+                  <Page key={`page_${index + 1}`} pageNumber={index + 1} width={containerWidth} />
+                ))}
+              </Document>
+            </div>
+
+            {numPages > 0 && (
+              <p style={{ marginTop: '1rem', color: '#ccc' }}>
+                Displaying {numPages} page{numPages === 1 ? '' : 's'}.
+              </p>
+            )}
           </>
         )}
       </section>
