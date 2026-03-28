@@ -61,8 +61,7 @@ const Resume: React.FC = () => {
               src={resumePath}
               style={{ 
                 width: '100%', 
-                height: 'auto',
-                minHeight: '800px',
+                height: '4000px',
                 border: '1px solid #444', 
                 borderRadius: '8px',
                 display: 'block'
