@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Resume: React.FC = () => {
   const candidates = [
@@ -13,8 +10,6 @@ const Resume: React.FC = () => {
 
   const [resumePath, setResumePath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [numPages, setNumPages] = useState<number>(0);
-  const [containerWidth, setContainerWidth] = useState<number>(Math.min(window.innerWidth - 24, 1024));
 
   useEffect(() => {
     let canceled = false;
@@ -44,18 +39,10 @@ const Resume: React.FC = () => {
 
     detectPath();
 
-    const updateWidth = () => setContainerWidth(Math.min(window.innerWidth - 24, 1024));
-    window.addEventListener('resize', updateWidth);
-
     return () => {
       canceled = true;
-      window.removeEventListener('resize', updateWidth);
     };
   }, []);
-
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    setNumPages(numPages);
-  };
 
   return (
     <main className="resume-page">
@@ -83,27 +70,30 @@ const Resume: React.FC = () => {
               width: '100%',
               maxWidth: '1024px',
               margin: '0 auto',
-              background: '#111',
-              padding: '1rem',
+              minHeight: '850px',
               borderRadius: '8px',
+              overflow: 'hidden',
+              border: '2px solid #38bdf8',
             }}>
-              <Document
-                file={resumePath}
-                onLoadSuccess={onDocumentLoadSuccess}
-                loading={<p>Loading PDF…</p>}
-                error={<p style={{ color: 'red' }}>Unable to render PDF preview. Use download/open buttons instead.</p>}
+              <object
+                data={resumePath}
+                type="application/pdf"
+                width="100%"
+                height="100%"
+                style={{ minHeight: '850px' }}
               >
-                {Array.from(new Array(numPages), (el, index) => (
-                  <Page key={`page_${index + 1}`} pageNumber={index + 1} width={containerWidth} />
-                ))}
-              </Document>
+                <p style={{ padding: '1rem', color: '#fff' }}>
+                  This browser does not support inline PDF viewing. 
+                  <a href={resumePath} target="_blank" rel="noopener noreferrer" style={{ color: '#0ff' }}>
+                    Open PDF in browser
+                  </a>{' '}
+                  or{' '}
+                  <a href={resumePath} download style={{ color: '#0ff' }}>
+                    download the file
+                  </a>.
+                </p>
+              </object>
             </div>
-
-            {numPages > 0 && (
-              <p style={{ marginTop: '1rem', color: '#ccc' }}>
-                Displaying {numPages} page{numPages === 1 ? '' : 's'}.
-              </p>
-            )}
           </>
         )}
       </section>
